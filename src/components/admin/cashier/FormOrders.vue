@@ -93,7 +93,7 @@ export default {
                 this.visibleLoader = false
             }
 
-            console.log('rest', rest)
+            // console.log('rest', rest)
         },
     }
 }

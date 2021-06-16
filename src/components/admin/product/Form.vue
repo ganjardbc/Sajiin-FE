@@ -322,7 +322,7 @@ export default {
                         is_pinned: props.product.is_pinned,
                         is_available: props.product.is_available,
                         status: props.product.status,
-                        category_id: props.product.ctr_id
+                        category_id: props.product.category_id
                     },
                     images: [
                         ...props.images

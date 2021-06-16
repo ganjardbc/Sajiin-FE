@@ -99,7 +99,7 @@ export default {
             
             const rest = await axios.post('/api/category/getAll', payload, { headers: { Authorization: token } })
 
-            console.log('getDataCategory', rest)
+            // console.log('getDataCategory', rest)
 
             if (rest && rest.status === 200) {
                 const newData = rest.data.data
@@ -124,9 +124,9 @@ export default {
             const payload = {
                 limit: limit,
                 offset: offset,
-                shop_id: this.dataShop ? this.dataShop.id : ''
+                status: 'active'
             }
-            const rest = await axios.post('/api/catalog/getAll', payload, { headers: { Authorization: token } })
+            const rest = await axios.post('/api/product/getAll', payload, { headers: { Authorization: token } })
 
             if (rest && rest.status === 200) {
                 const newData = rest.data.data
@@ -138,7 +138,7 @@ export default {
                 this.datas = data 
                 this.visibleLoader = false 
 
-                console.log('newData', newData)
+                // console.log('newData', newData)
 
                 if (newData.length > 0) {
                     this.offset += this.limit
@@ -153,7 +153,7 @@ export default {
                 this.visibleLoader = false 
             }
 
-            console.log('getData', rest)
+            // console.log('getData', rest)
         },
     }
 }

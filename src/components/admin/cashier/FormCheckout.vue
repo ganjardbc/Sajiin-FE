@@ -46,7 +46,7 @@
                             <AddQtyField 
                                 :maximumValue="'10'" 
                                 :value="dt.quantity" 
-                                :id="dt.id" 
+                                :id="i" 
                                 :onChange="(data) => onTotal(data, i)" 
                                 :disable="dt.disableButton"
                                 style="width: 120px;" />

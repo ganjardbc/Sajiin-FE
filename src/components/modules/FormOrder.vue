@@ -25,14 +25,6 @@
                     {{ data.order.created_at | moment("dddd, MMMM Do YYYY hh:mm") }}
                 </div>
             </div>
-            <div v-if="data && data.customer" style="margin-bottom: 15px;">
-                <div class="fonts fonts-10 grey">
-                    Customer
-                </div>
-                <div class="fonts fonts-10 black semibold orange">
-                    {{ data.customer.name }}
-                </div>
-            </div>
             <div style="margin-bottom: 15px;">
                 <div class="fonts fonts-10 grey">
                     Note
@@ -113,7 +105,7 @@
                         <div class="fonts fonts-10 black">Payment Method</div>
                     </div>
                     <div class="width width-30">
-                        <div class="fonts fonts-10 black semibold">{{ data.payment && data.payment.name }}</div>
+                        <div class="fonts fonts-10 black semibold">{{ data.order.payment_name }}</div>
                     </div>
                 </div>
             </div>
@@ -151,30 +143,36 @@
                 </div>
             </div>
 
-            <div v-if="data.table" class="border-top" style="padding-top: 15px;">
+            <div class="border-top" style="padding-top: 15px; padding-bottom: 0;">
                 <div class="display-flex space-between" style="margin-bottom: 10px;">
                     <div class="width width-70">
-                        <div class="fonts fonts-10 grey">Table</div>
+                        <div class="fonts fonts-10 grey">More</div>
                     </div>
                     <div class="width width-30"></div>
                 </div>
-                <div class="display-flex space-between">
-                    <div class="width width-70 display-flex">
-                        <div style="width: 60px; margin-right: 15px;">
-                            <div class="image image-padding">
-                                <img :src="tableImageThumbnailUrl + data.table.image" alt="" class="post-center">
-                            </div>
-                        </div>
-                        <div style="width: calc(100% - 75px);">
-                            <div class="fonts fonts-11 semibold black">
-                                {{ data.table.name }}
-                            </div>
-                            <div class="fonts fonts-9 grey">
-                                {{ data.table.code }} | {{ data.table.description }}
-                            </div>
-                        </div>
+                <div v-if="data && data.order.shop_name" class="display-flex space-between" style="margin-bottom: 5px;">
+                    <div class="width width-70">
+                        <div class="fonts fonts-10 black">Shop</div>
                     </div>
-                    <div class="width width-30"></div>
+                    <div class="width width-30">
+                        <div class="fonts fonts-10 semibold">{{ data.order.shop_name }}</div>
+                    </div>
+                </div>
+                <div v-if="data && data.order.table_name" class="display-flex space-between" style="margin-bottom: 5px;">
+                    <div class="width width-70">
+                        <div class="fonts fonts-10 black">Table</div>
+                    </div>
+                    <div class="width width-30">
+                        <div class="fonts fonts-10 semibold">{{ data.order.table_name }}</div>
+                    </div>
+                </div>
+                <div v-if="data && data.order.customer_name" class="display-flex space-between" style="margin-bottom: 0;">
+                    <div class="width width-70">
+                        <div class="fonts fonts-10 black">Customer</div>
+                    </div>
+                    <div class="width width-30">
+                        <div class="fonts fonts-10 black semibold">{{ data.order.customer_name }}</div>
+                    </div>
                 </div>
             </div>
         </div>

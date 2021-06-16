@@ -4,7 +4,7 @@
             <div class="bg-white box-shadow">
                 <div class="display-flex row space-between padding padding-10-px" style="height: 40px;">
                     <div>
-                        <h1 class="fonts small black">TOPPINGS</h1>
+                        <h1 class="fonts small black">NOTIFICATIONS</h1>
                         <p class="fonts micro grey no-line-height">controll your datas</p>
                     </div>
                     <div class="display-flex">
@@ -12,11 +12,8 @@
                             :icon="'fa fa-lw fa-filter'"
                             :button="'btn btn-icon btn-white'"
                             :onChange="(data) => onChangeMenu(data)" 
-                            :data="[{label: 'By ID'}, {label: 'By Name'}, {label: 'By Status'}]" />
-                        <button class="btn btn-white btn-icon btn-radius" @click="onShow('CREATE')">
-                            <i class="fa fa-lw fa-plus" />
-                        </button>
-                        <SearchField :placeholder="'Search topings ..'" :enableResponsive="true" style="margin-left: 5px;" />
+                            :data="[{label: 'By ID'}, {label: 'By Title'}, {label: 'By Status'}]" />
+                        <SearchField :placeholder="'Search notifications ..'" :enableResponsive="true" style="margin-left: 5px;" />
                     </div>
                 </div>
                 
@@ -26,26 +23,25 @@
                             <div class="display-flex space-between" style="padding-top: 5px; padding-bottom: 5px;">
                                 <div style="width: 60px; margin-right: 15px;">
                                     <div class="image image-padding border border-full">
-                                        <img v-if="dt.image" :src="topingImageThumbnailUrl + dt.image" alt="" class="post-center">
-                                        <i v-else class="post-middle-absolute icn fa fa-lg fa-list-alt"></i>
+                                        <img v-if="dt.image" :src="notificationImageThumbnailUrl + dt.image" alt="" class="post-center">
+                                        <i v-else class="post-middle-absolute icn fa fa-lg fa-bell"></i>
                                     </div>
                                 </div>
                                 <div style="width: calc(100% - 185px);">
                                     <div class="display-flex" style="margin-bottom: 5px;">
-                                        <div class="fonts fonts-11 semibold" style="margin-top: 3px;">{{ dt.name }}</div>
+                                        <div class="fonts fonts-11 semibold" style="margin-top: 3px;">{{ dt.title }}</div>
                                         <div 
                                             :class="'card-capsule ' + (
-                                            dt.status === 'active' 
+                                            dt.is_read 
                                                 ? 'active' 
                                                 : ''
                                             )" 
                                             style="margin-left: 10px; text-transform: capitalize;">
-                                            {{ dt.status }}
+                                            {{ dt.is_read ? 'Read' : 'Unread' }}
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="fonts fonts-11 orange semibold" style="margin-bottom: 3px;">Rp. {{ dt.price }}</div>
-                                        <div class="fonts fonts-10 grey">{{ dt.description }}</div>
+                                        <div class="fonts fonts-10 grey">{{ dt.subtitle }}</div>
                                     </div>
                                 </div>
                                 <div class="display-flex column space-between" style="width: 100px;">
@@ -80,8 +76,6 @@
                 :data.sync="selectedData"
                 :message.sync="selectedMessage"
                 :title="formTitle" 
-                :uploadImage="(data) => uploadImage(data)"
-                :removeImage="removeImage"
                 :onSave="(data) => onFormSave(data)"
                 :onClose="onClose">
             </Form>
@@ -105,7 +99,7 @@
 
 <script>
 import axios from 'axios'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import AppLoader from '../../modules/AppLoader'
 import AppAlert from '../../modules/AppAlert'
 import SearchField from '../../modules/SearchField'
@@ -157,8 +151,11 @@ export default {
         })
     },
     methods: {
+        ...mapActions({
+            getCountNotif: 'notification/getCount'
+        }),
         onChangeMenu (index) {
-            console.log('onChange', index)
+            // console.log('onChange', index)
         },
         nameLength (row) {
             return row.key.length
@@ -198,75 +195,21 @@ export default {
             this.onShowHideSave()
             this.selectedData = data ? data : null
         },
-        onChangeImage (data) {
-            this.selectedData = {
-                ...this.selectedData,
-                image: data
-            }
-        },
-        async uploadImage (data) {
-            this.visibleLoaderAction = true
-
+        getLocalNotifCount () {
             const token = 'Bearer '.concat(this.$cookies.get('token'))
-            const payload = this.selectedData
-            const url = '/api/toping/uploadImage' 
-
-            let formData = new FormData();
-            formData.append('toping_id', payload.toping_id);
-            formData.append('image', data);
-
-            const rest = await axios.post(url, formData, { headers: { Authorization: token, 'Content-Type': 'multipart/form-data' } })
-
-            if (rest && rest.status === 200) {
-                this.visibleLoaderAction = false
-
-                const data = rest.data.data
-                if (data && data.image) {
-                    this.onChangeImage(data && data.image)
-                    this.getData(this.limit, 0)
-                    this.selectedMessage = []
-                } else {
-                    this.selectedMessage = rest.data.message
-                }
-            } else {
-                alert('Proceed failed')
-            }
-        },
-        async removeImage () {
-            this.visibleLoaderAction = true
-
-            const token = 'Bearer '.concat(this.$cookies.get('token'))
-            const payload = this.selectedData
-            const url = '/api/toping/removeImage' 
-
-            let formData = new FormData();
-            formData.append('toping_id', payload.toping_id);
-
-            var a = confirm('remove this image ?')
-            if (a) {
-                const rest = await axios.post(url, formData, { headers: { Authorization: token, 'Content-Type': 'multipart/form-data' } })
-
-                if (rest && rest.status === 200) {
-                    this.visibleLoaderAction = false
-
-                    const data = rest.data.data
-                    this.onChangeImage(data && data.image)
-                    this.getData(this.limit, 0)
-                } else {
-                    alert('Proceed failed')
-                }
-            }
+            this.getCountNotif(token)
         },
         async removeData () {
             this.visibleLoaderAction = true
 
             const token = 'Bearer '.concat(this.$cookies.get('token'))
-            const id = this.onSearchData(this.selectedIndex).toping_id
+            const id = this.onSearchData(this.selectedIndex).notification_id
             const payload = {
-                toping_id: id
+                notification_id: id
             }
 
-            const rest = await axios.post('/api/toping/delete', payload, { headers: { Authorization: token } })
+            const rest = await axios.post('/api/notification/delete', payload, { headers: { Authorization: token } })
+            // console.log('rest', rest)
 
             if (rest && rest.status === 200) {
                 this.onShowHideDelete()
@@ -276,6 +219,7 @@ export default {
                 const data = rest.data
                 if (data.status === 'ok') {
                     this.getData(this.limit, 0)
+                    this.getLocalNotifCount()
                 } else {
                     alert('Proceed failed')
                 }
@@ -289,7 +233,7 @@ export default {
 
             const token = 'Bearer '.concat(this.$cookies.get('token'))
             const payload = this.selectedData
-            const url = this.formTitle === 'CREATE' ? '/api/toping/post' : '/api/toping/update' 
+            const url = this.formTitle === 'CREATE' ? '/api/notification/post' : '/api/notification/update' 
 
             const rest = await axios.post(url, payload, { headers: { Authorization: token } })
 
@@ -301,6 +245,7 @@ export default {
                 if (data.length !== 0) {
                     this.onClose()
                     this.getData(this.limit, 0)
+                    this.getLocalNotifCount()
                 } else {
                     this.selectedMessage = rest.data.message
                 }
@@ -321,15 +266,12 @@ export default {
             }
 
             const token = 'Bearer '.concat(this.$cookies.get('token'))
-            const payload = this.dataUser.role_name === 'admin' ? {
+            const payload = {
                 limit: limit,
                 offset: offset
-            } : {
-                limit: limit,
-                offset: offset,
-                user_id: this.dataUser.id
             }
-            const rest = await axios.post('/api/toping/getAll', payload, { headers: { Authorization: token } })
+            
+            const rest = await axios.post('/api/notification/getAll', payload, { headers: { Authorization: token } })
 
             if (rest && rest.status === 200) {
                 const newData = rest.data.data
@@ -340,6 +282,8 @@ export default {
 
                 this.datas = data 
                 this.visibleLoader = false 
+
+                console.log('newdata', newData)
 
                 if (newData.length > 0) {
                     this.offset += this.limit
