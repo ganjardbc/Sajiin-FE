@@ -226,7 +226,13 @@ const payloadOrder = {
         status: 'unconfirmed',
         type: 'personal',
         note: '',
+        customer_name: '',
+        shop_name: '',
+        table_name: '',
+        payment_name: '',
+        shipment_name: '',
         config_id: null,
+        shop_id: '',
         customer_id: '',
         table_id: '',
         address_id: '',
@@ -239,6 +245,7 @@ const payloadOrder = {
     address: null,
     shipment: null,
     payment: null,
+    shop: null,
     config: null
 }
 
@@ -259,9 +266,7 @@ export default {
             visibleCheckOut: false,
             formClass: false,
             items: [],
-            order: {
-                ...payloadOrder
-            },
+            order: {...payloadOrder},
             formMessage: null,
 
             // payment
@@ -270,7 +275,11 @@ export default {
 
             // table
             selectedTable: null ,
-            dataTable: []
+            dataTable: [],
+
+            // shop
+            dataShop: null,
+            dataUser: null
         }
     },
     mounted () {
@@ -281,7 +290,12 @@ export default {
         const cart = this.cartItems ? this.cartItems : order ? order : []
         this.items = cart && cart.details ? cart.details : []
         this.selectedTable = cart && cart.table ? cart.table : null 
-        this.selectedPayment = cart && cart.payment ? cart.payment : null 
+        this.selectedPayment = cart && cart.payment ? cart.payment : null
+        this.order = order ? order : payloadOrder
+        this.dataUser = this.$cookies.get('user')
+        this.dataShop = this.$cookies.get('shop')
+
+        console.log('order history', this.order)
     },
     components: {
         CardPayment,
@@ -347,9 +361,13 @@ export default {
                 order: {
                     ...this.order.order,
                     order_id: 'ODR-' + time.toString(),
-                    status: 'confirmed'
+                    status: 'confirmed',
+                    shop_id: this.dataShop.id,
+                    shop_name: this.dataShop.name 
                 }
             }
+
+            console.log('payload', data)
             
             const rest = await axios.post('/api/order/postAdmin', data, { headers: { Authorization: token } })
 
@@ -452,7 +470,8 @@ export default {
                 ...this.order,
                 order: {
                     ...this.order.order,
-                    table_id: data.id
+                    table_id: data.id,
+                    table_name: data.name
                 },
                 table: data
             }
@@ -474,7 +493,8 @@ export default {
                 ...this.order,
                 order: {
                     ...this.order.order,
-                    payment_id: data.id
+                    payment_id: data.id,
+                    payment_name: data.name
                 },
                 payment: data
             }

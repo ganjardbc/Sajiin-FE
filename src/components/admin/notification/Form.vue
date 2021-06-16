@@ -5,7 +5,7 @@
             :enableSaveButton="this.title !== 'VIEW' ? true : false"
             :onSave="onButtonSave"
             :onClose="onClose">
-            <div v-if="this.title !== 'CREATE' ? true : false" class="field-group margin margin-bottom-15-px">
+            <!-- <div v-if="this.title !== 'CREATE' ? true : false" class="field-group margin margin-bottom-15-px">
                 <div class="field-label">IMAGE</div>
                 <AppImage 
                     :image.sync="image"
@@ -16,7 +16,7 @@
                 <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
                     {{ formMessage && formMessage.image && formMessage.image[0] }}
                 </div>
-            </div>
+            </div> -->
             <div class="field-group margin margin-bottom-15-px">
                 <div class="field-label">ID</div>
                 <input 
@@ -29,50 +29,62 @@
                     readonly>
             </div>
             <div class="field-group margin margin-bottom-15-px">
-                <div class="field-label">TOPING ID</div>
+                <div class="field-label">NOTIFICATION ID</div>
                 <input 
                     type="text" 
                     placeholder="" 
                     class="field field-sekunder" 
-                    name="toping_id" 
-                    id="toping_id" 
-                    v-model="formData.toping_id"
+                    name="notification_id" 
+                    id="notification_id" 
+                    v-model="formData.notification_id"
                     readonly>
                 <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
-                    {{ formMessage && formMessage.toping_id && formMessage.toping_id[0] }}
+                    {{ formMessage && formMessage.notification_id && formMessage.notification_id[0] }}
                 </div>
             </div>
             <div class="field-group margin margin-bottom-15-px">
-                <div class="field-label">NAME</div>
+                <div class="field-label">TITLE</div>
                 <input 
                     type="text" 
                     placeholder="" 
                     class="field field-sekunder" 
-                    name="name" 
-                    id="name" 
-                    v-model="formData.name"
-                    :readonly="this.title === 'VIEW' ? true : false">
+                    name="title" 
+                    id="title" 
+                    v-model="formData.title"
+                    readonly>
                 <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
-                    {{ formMessage && formMessage.name && formMessage.name[0] }}
+                    {{ formMessage && formMessage.title && formMessage.title[0] }}
                 </div>
             </div>
             <div class="field-group margin margin-bottom-15-px">
-                <div class="field-label">PRICE</div>
+                <div class="field-label">LINK</div>
                 <input 
                     type="text" 
                     placeholder="" 
                     class="field field-sekunder" 
-                    name="price" 
-                    id="price" 
-                    v-model="formData.price"
-                    :readonly="this.title === 'VIEW' ? true : false">
+                    name="link" 
+                    id="link" 
+                    v-model="formData.link"
+                    readonly>
                 <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
-                    {{ formMessage && formMessage.price && formMessage.price[0] }}
+                    {{ formMessage && formMessage.link && formMessage.link[0] }}
                 </div>
             </div>
             <div class="field-group margin margin-bottom-15-px">
+                <div class="field-label">SUBTITLE</div>
+                <textarea 
+                    name="subtitle" 
+                    id="subtitle" 
+                    class="field field-sekunder field-textarea" 
+                    v-model="formData.subtitle"
+                    readonly></textarea>
+                <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
+                    {{ formMessage && formMessage.subtitle && formMessage.subtitle[0] }}
+                </div>
+            </div>
+            <!-- <div class="field-group margin margin-bottom-25-px">
                 <div class="field-label">STATUS</div>
-                <div class="display-flex">
+                <div v-if="this.title !== 'VIEW'" class="display-flex">
                     <label class="radio">
                         <input 
                             type="radio" 
@@ -101,38 +113,44 @@
                         </span>
                     </label>
                 </div>
+                <input 
+                    v-else
+                    type="text" 
+                    placeholder="" 
+                    class="field field-sekunder" 
+                    name="status" 
+                    id="status" 
+                    :value="formData.status"
+                    readonly>
                 <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
                     {{ formMessage && formMessage.status && formMessage.status[0] }}
                 </div>
-            </div>
+            </div> -->
             <div class="field-group margin margin-bottom-15-px">
-                <div class="field-label">AVAILABLE</div>
-                <div class="display-flex space-between">
-                    <div class="fonts micro black">Is this toping still available ?</div>
+                <div class="field-label">READ</div>
+                <div v-if="this.title !== 'VIEW'" class="display-flex space-between">
+                    <div class="fonts micro black">Mark as read ?</div>
                     <label class="switch green">
                         <input 
                             type="checkbox" 
-                            name="is_available" 
-                            id="is_available" 
-                            v-model="formData.is_available"
+                            name="is_read" 
+                            id="is_read" 
+                            v-model="formData.is_read"
                             :readonly="this.title === 'VIEW' ? true : false" />
                         <span class="slider round" />
                     </label>
                 </div>
+                <input 
+                    v-else
+                    type="text" 
+                    placeholder="" 
+                    class="field field-sekunder" 
+                    name="is_read" 
+                    id="is_read" 
+                    :value="formData.status ? 'Read' : 'Unread'"
+                    readonly>
                 <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
-                    {{ formMessage && formMessage.is_available && formMessage.is_available[0] }}
-                </div>
-            </div>
-            <div class="field-group margin margin-bottom-15-px">
-                <div class="field-label">DESCRIPTION</div>
-                <textarea 
-                    name="description" 
-                    id="description" 
-                    class="field field-sekunder field-textarea" 
-                    v-model="formData.description"
-                    :readonly="this.title === 'VIEW' ? true : false"></textarea>
-                <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
-                    {{ formMessage && formMessage.description && formMessage.description[0] }}
+                    {{ formMessage && formMessage.is_read && formMessage.is_read[0] }}
                 </div>
             </div>
         </AppSideForm>
@@ -147,13 +165,13 @@ const time = new Date().getTime()
 
 const payload = {
     id: '',
-    toping_id: 'PT-' + time,
+    notification_id: 'CT-' + time,
     image: '',
-    name: '',
-    price: '',
-    is_available: '',
+    title: '',
+    link: '',
     status: '',
-    description: ''
+    subtitle: '',
+    is_read: 0
 }
 
 export default {
@@ -170,8 +188,8 @@ export default {
         this.formData = {...payload}
     },
     components: {
-        AppImage,
-        AppSideForm
+        AppSideForm: AppSideForm,
+        AppImage: AppImage
     },
     props: {
         data: {
@@ -183,14 +201,6 @@ export default {
         title: {
             type: String,
             required: true
-        },
-        uploadImage: {
-            type: Function,
-            required: false,
-        },
-        removeImage: {
-            type: Function,
-            required: false,
         },
         onSave: {
             type: Function,
@@ -213,15 +223,15 @@ export default {
                 this.formData = {
                     ...this.formData,
                     id: props.id,
-                    toping_id: props.toping_id,
+                    notification_id: props.notification_id,
                     image: props.image,
-                    name: props.name,
-                    price: props.price,
-                    is_available: props.is_available,
+                    title: props.title,
+                    link: props.link,
                     status: props.status,
-                    description: props.description
+                    subtitle: props.subtitle,
+                    is_read: props.is_read
                 }
-                this.image = props.image ? this.topingImageThumbnailUrl + props.image : ''
+                this.image = props.image ? this.categoryImageThumbnailUrl + props.image : ''
             } else {
                 this.formData = {...payload}
                 this.image = ''

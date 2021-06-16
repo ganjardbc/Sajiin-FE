@@ -9,6 +9,7 @@ import customer from './customer'
 import table from './table'
 import store from './store'
 import toastmessage from './toastmessage'
+import notification from './notification'
 
 Vue.use(Vuex)
 
@@ -22,6 +23,7 @@ export default new Vuex.Store({
     customer,
     table,
     store,
-    toastmessage
+    toastmessage,
+    notification
   }
 })

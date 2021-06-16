@@ -14,7 +14,7 @@
                     </div>
 
                     <AppButtonQR 
-                        v-if="dataUser.role_name !== 'customer'"
+                        v-if="dataUser && dataUser.role_name !== 'customer'"
                         :buttonFull="true"
                         :code="code"
                         title="Show QR Restaurant" 
@@ -201,7 +201,7 @@ export default {
             image: this.dataUser.image
         }
         this.image = this.dataUser.image ? this.adminImageThumbnailUrl + this.dataUser.image : ''
-        this.code = this.deployUrl + (this.$router.mode === 'hash' ? '#' : '') + '/generate-customer/' + (this.dataShop ? this.dataShop.shop_id : token)
+        this.code = this.deployUrl + (this.$router.mode === 'hash' ? '#' : '') + '/generate-customer/' + token
 
         console.log('user', this.dataUser)
     },

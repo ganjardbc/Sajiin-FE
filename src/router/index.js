@@ -5,6 +5,7 @@ import AdminLayout from '@/components/layouts/Admin.vue';
 import WebLayout from '@/components/layouts/Web.vue';
 import CustomerLayout from '@/components/layouts/Customer.vue';
 import ShopLayout from '@/components/layouts/Shop.vue';
+import ProductLayout from '@/components/layouts/Product.vue';
 
 // admin
 import Dashboard from '@/components/admin/Index.vue';
@@ -48,11 +49,13 @@ import Profile from '@/components/admin/profile/Index.vue';
 import TableList from '@/components/admin/tables/Index.vue';
 import VisitorList from '@/components/admin/visitors/Index.vue';
 import Cashier from '@/components/admin/cashier/Index.vue';
-import Shops from '@/components/admin/shops/Index.vue';
+// import Shops from '@/components/admin/shops/Index.vue';
+import ShopForm from '@/components/admin/shops/IndexForm.vue';
 import CatalogList from '@/components/admin/catalog/Index.vue';
-import PositionList from '@/components/admin/position/Index.vue';
+// import PositionList from '@/components/admin/position/Index.vue';
 import EmployeeList from '@/components/admin/employee/Index.vue';
 import ShiftList from '@/components/admin/shift/Index.vue';
+import Notification from '@/components/admin/notification/Index.vue';
 
 // customer
 import CustomerMain from '@/components/customer/Index.vue';
@@ -174,6 +177,11 @@ export const routes = [
 
             // admin
             {
+                name: 'shop',
+                path: '/admin-form-shop',
+                component: ShopForm
+            },
+            {
                 name: 'cashier',
                 path: '/admin-cashier',
                 component: Cashier
@@ -254,11 +262,6 @@ export const routes = [
                 component: VisitorList
             },
             {
-                name: 'catalog',
-                path: '/admin-catalogs',
-                component: CatalogList
-            },
-            {
                 name: 'employee',
                 path: '/admin-employee',
                 component: EmployeeList
@@ -267,6 +270,21 @@ export const routes = [
                 name: 'shift',
                 path: '/admin-shift',
                 component: ShiftList
+            },
+            {
+                name: 'shipment',
+                path: '/admin-shipments',
+                component: Shipment
+            },
+            {
+                name: 'payment',
+                path: '/admin-payments',
+                component: Payment
+            },
+            {
+                name: 'notification',
+                path: '/admin-notifications',
+                component: Notification
             },
 
             // info
@@ -278,16 +296,11 @@ export const routes = [
 
             // layout
             {
-                name: 'admin-shop',
-                path: '/admin-shop',
-                component: ShopLayout,
-                redirect: '/admin-shop/shops',
+                name: 'admin-product',
+                path: '/admin-product',
+                component: ProductLayout,
+                redirect: '/admin-product/listings',
                 children: [
-                    {
-                        name: 'shops',
-                        path: 'shops',
-                        component: Shops
-                    },
                     {
                         name: 'category',
                         path: 'categories',
@@ -300,26 +313,49 @@ export const routes = [
                     },
                     {
                         name: 'listing',
-                        path: 'listing',
+                        path: 'listings',
                         component: ProductAdmin
                     },
                     {
-                        name: 'position',
-                        path: 'positions',
-                        component: PositionList
-                    },
-                    {
-                        name: 'shipment',
-                        path: 'shipments',
-                        component: Shipment
-                    },
-                    {
-                        name: 'payment',
-                        path: 'payments',
-                        component: Payment
-                    },
+                        name: 'catalog',
+                        path: 'catalogs',
+                        component: CatalogList
+                    }
                 ]
-            }
+            },
+            // {
+            //     name: 'admin-shop',
+            //     path: '/admin-shop',
+            //     component: ShopLayout,
+            //     redirect: '/admin-shop/shops',
+            //     children: [
+            //         {
+            //             name: 'shops',
+            //             path: 'shops',
+            //             component: Shops
+            //         },
+            //         {
+            //             name: 'category',
+            //             path: 'categories',
+            //             component: Category
+            //         },
+            //         {
+            //             name: 'toping',
+            //             path: 'topings',
+            //             component: Toping
+            //         },
+            //         {
+            //             name: 'listing',
+            //             path: 'listing',
+            //             component: ProductAdmin
+            //         },
+            //         {
+            //             name: 'position',
+            //             path: 'positions',
+            //             component: PositionList
+            //         }
+            //     ]
+            // }
         ]
     },
 

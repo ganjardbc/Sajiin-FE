@@ -224,7 +224,7 @@ import FormShop from '../shops/FormShop'
 
 const tabs = [
     {label: 'Data', status: 'active'},
-    {label: 'Shops', status: ''}
+    {label: 'Shop', status: ''}
 ]
 
 const time = new Date().getTime()
