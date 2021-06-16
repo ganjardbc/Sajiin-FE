@@ -25,14 +25,18 @@
                         <div v-for="(dt, i) in datas" :key="i" class="card box-shadow" style="margin-top: 15px; margin-bottom: 15px; overflow: unset;">
                             <div class="display-flex space-between" style="padding-top: 5px; padding-bottom: 5px;">
                                 <div style="width: 60px; margin-right: 15px;">
-                                    <div class="image image-padding border border-full">
-                                        <img v-if="dt.images[0] && dt.images[0].image" :src="productImageThumbnailUrl + dt.images[0].image" alt="" class="post-center">
-                                        <i v-else class="post-middle-absolute icn fa fa-lg fa-image"></i>
-                                    </div>
+                                    <!-- <router-link :to="{name: 'product', params: {id: dt.product.product_id}}"> -->
+                                        <div class="image image-padding border border-full">
+                                            <img v-if="dt.images[0] && dt.images[0].image" :src="productImageThumbnailUrl + dt.images[0].image" alt="" class="post-center">
+                                            <i v-else class="post-middle-absolute icn fa fa-lg fa-image"></i>
+                                        </div>
+                                    <!-- </router-link> -->
                                 </div>
                                 <div style="width: calc(100% - 185px);">
                                     <div class="display-flex" style="margin-bottom: 5px;">
-                                        <div class="fonts fonts-11 semibold" style="margin-top: 3px;">{{ dt.product.name }}</div>
+                                        <div class="fonts fonts-11 semibold" style="margin-top: 3px;">
+                                            {{ dt.product.name }}
+                                        </div>
                                         <div 
                                             :class="'card-capsule ' + (
                                             dt.product.status === 'active' 
@@ -46,6 +50,7 @@
                                     <div>
                                         <div class="fonts fonts-10 grey">{{ dt.product.ctr_name }}</div>
                                         <div class="fonts fonts-10 grey">{{ dt.product.description.substring(0, 50) }} ...</div>
+                                        <div class="fonts fonts-10 grey">{{ dt.product.created_at | moment("from", "now") }}</div>
                                     </div>
                                 </div>
                                 <div class="display-flex column space-between" style="width: 100px;">

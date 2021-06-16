@@ -45,7 +45,7 @@
                                     </div>
                                     <div>
                                         <div class="fonts fonts-11 orange semibold" style="margin-bottom: 3px;">Rp. {{ dt.price }}</div>
-                                        <div class="fonts fonts-10 grey">{{ dt.description }}</div>
+                                        <div class="fonts fonts-10 grey">{{ dt.created_at | moment("from", "now") }}</div>
                                     </div>
                                 </div>
                                 <div class="display-flex column space-between" style="width: 100px;">

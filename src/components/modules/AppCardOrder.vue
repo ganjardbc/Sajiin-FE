@@ -30,7 +30,7 @@
                         )"
                         :onChange="(data) => onChangeStatus(data, dt.order.order_id, 'status')" 
                         :data="bizparCapsule"
-                        style="margin-left: 5px;"
+                        style="margin-left: 5px; text-transform: capitalize;"
                     />
                 </div>
                 <div v-else class="display-flex">
@@ -101,7 +101,8 @@
                 </div>
                 <div class="display-flex">
                     <button 
-                        @click="onButtonDetail(dt)"
+                        v-if="dt.order.payment_status ? false : true"
+                        @click="onCheckOut(dt.order.id)"
                         class="btn btn-main"
                         style="margin-right: 15px;">
                         Check Out Order
@@ -181,6 +182,10 @@ export default {
             required: false
         },
         onEdit: {
+            type: Function,
+            required: false
+        },
+        onCheckOut: {
             type: Function,
             required: false
         },

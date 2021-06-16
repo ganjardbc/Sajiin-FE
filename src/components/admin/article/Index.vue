@@ -45,6 +45,7 @@
                                     </div>
                                     <div>
                                         <div class="fonts fonts-10 grey">{{ dt.subtitle }}</div>
+                                        <div class="fonts fonts-10 grey">{{ dt.created_at | moment("from", "now") }}</div>
                                     </div>
                                 </div>
                                 <div class="display-flex column space-between" style="width: 100px;">

@@ -32,7 +32,7 @@
                                 </div>
                                 <div style="width: calc(100% - 185px);">
                                     <div class="display-flex" style="margin-bottom: 5px;">
-                                        <div class="fonts fonts-11 semibold" style="margin-top: 3px;">{{ dt.table.name }}</div>
+                                        <div class="fonts fonts-11 semibold" style="margin-top: 3px;">{{ dt.table.name }} | {{ dt.table.code }}</div>
                                         <div 
                                             :class="'card-capsule ' + (
                                             dt.table.status === 'active' 
@@ -44,8 +44,8 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="fonts fonts-10 grey">{{ dt.table.code }} | {{ dt.table.description }}</div>
                                         <div class="fonts fonts-10 grey">{{ dt.shop.name }}</div>
+                                        <div class="fonts fonts-10 grey">{{ dt.table.created_at | moment("from", "now") }}</div>
                                     </div>
                                 </div>
                                 <div class="display-flex column space-between" style="width: 100px;">

@@ -36,6 +36,7 @@
                             :type="'owner'" 
                             :onView="(id) => onShow('VIEW', id)"
                             :onEdit="(id) => onShow('EDIT', id)"
+                            :onCheckOut="(id) => onShow('CHECKOUT', id)"
                             :onDelete="(id) => onShowHideDelete(id)"
                             :onChangeStatus="(data, id, status) => onChangeStatus(data, id, status)" 
                         />
@@ -53,6 +54,7 @@
 
         <div class="right">
             <Form 
+                v-if="!isCheckOut"
                 :data.sync="selectedData"
                 :message.sync="selectedMessage"
                 :bizparOrder.sync="bizparOrder"
@@ -61,6 +63,14 @@
                 :onSave="(data) => onFormSave(data)"
                 :onClose="onClose">
             </Form>
+
+            <FormCheckout
+                v-else
+                :data.sync="selectedData"
+                :message.sync="selectedMessage"
+                :onSave="(data) => onFormSave(data)"
+                :onClose="onClose">
+            </FormCheckout>
         </div>
 
         <AppAlert 
@@ -104,11 +114,13 @@ import AppButtonMenu from '../../modules/AppButtonMenu'
 import AppCapsuleMenu from '../../modules/AppCapsuleMenu'
 import AppCardOrder from '../../modules/AppCardOrder'
 import Form from './Form'
+import FormCheckout from './FormCheckout'
 
 export default {
     name: 'App',
     data () {
         return {
+            isCheckOut: false,
             visibleAlertPayment: false,
             visibleLoaderPayment: false,
             visibleAlertOrder: false,
@@ -163,6 +175,7 @@ export default {
         AppCapsuleMenu,
         AppButtonMenu,
         SearchField,
+        FormCheckout,
         Form
     },
     computed: {
@@ -234,10 +247,12 @@ export default {
         },
         onClose () {
             this.formClass = false
+            this.isCheckOut = false
         },
         onShow (title, index = null) {
             this.formClass = true
             this.formTitle = title
+            this.isCheckOut = title === 'CHECKOUT' ? true : false
             this.selectedData = index >= 0 ? this.onSearchData(index) : null
             this.selectedMessage = null 
         },
@@ -309,6 +324,7 @@ export default {
             if (rest && rest.status === 200) {
                 this.onChangeTabs(this.selectedTabIndex)
                 this.onShowHideOrder()
+                this.getLocalOrderCount()
                 this.visibleLoaderOrder = false 
             } else {
                 this.onShowHideOrder()

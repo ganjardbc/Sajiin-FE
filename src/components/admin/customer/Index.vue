@@ -44,8 +44,8 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="fonts fonts-10 grey">{{ dt.customer.email }}</div>
                                         <div class="fonts fonts-10 grey">{{ dt.customer.about }}</div>
+                                        <div class="fonts fonts-10 grey">{{ dt.customer.created_at | moment("from", "now") }}</div>
                                     </div>
                                 </div>
                                 <div class="display-flex column space-between" style="width: 100px;">
