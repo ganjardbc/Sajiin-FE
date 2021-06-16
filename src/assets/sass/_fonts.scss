@@ -1,0 +1,72 @@
+.fonts {
+    line-height: 1.5;
+    font-size: 16px;
+    color: $black;
+    font-family: 'Graphik' , 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    &.thin {
+        font-family: 'GraphikThin' , 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    &.bold {
+        font-weight: bolder;
+        font-family: 'GraphikBold' , 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    &.semibold {
+        font-family: 'GraphikSemibold' , 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    &.micro {
+        font-size: 13px;
+    }
+    &.normal {
+        font-size: 16px;
+    }
+    &.small {
+        font-size: 16px;
+    }
+    &.medium {
+        font-size: 24px;
+    }
+    &.big {
+        font-size: 32px;
+    }
+    &.extra-big {
+        font-size: 48px;
+    }
+    &.main {
+        color: $main-color
+    }
+    &.orange {
+        color: $main-color
+    }
+    &.black {
+        color: $black;
+    }
+    &.white {
+        color: #fff;
+    }
+    &.grey {
+        color: $grey;
+    }
+    &.light-grey {
+        color: $light-grey;
+    }
+    &.green {
+        color: $green;
+    }
+    &.no-line-height {
+        line-height: 1.2;
+    }
+    &.link {
+        color: $main-color;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+    @for $var from 0 to 1000 {
+        &.fonts-#{$var} {
+            font-size: #{$var} + 'pt';
+        }
+        &.fonts-#{$var}px {
+            font-size: #{$var} + 'px';
+        }
+    }
+}

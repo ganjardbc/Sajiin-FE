@@ -1,0 +1,32 @@
+.width {
+    @for $var from 0 to 1000 {
+        &.width-#{$var}-px {
+            width: #{$var} + 'px';
+        }
+    }
+    @for $var from 0 to 100 {
+        &.width-#{$var} {
+            width: #{$var} + '%';
+        }
+    }
+    &.width-center {
+        margin: auto;
+    }
+    &.width-row-2 {
+        width: calc(100% / 1.5);
+        @media (max-width: $min-width) {
+            width: 100%;
+        }
+    }
+    &.width-row-3 {
+        width: calc(100% / 3);
+        @media (max-width: $min-width) {
+            width: 100%;
+        }
+    }
+    @media (max-width: $min-width) {
+        &.width-mobile {
+            width: calc(100% - 0px);
+        }
+    }
+}

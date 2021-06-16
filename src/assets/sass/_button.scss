@@ -1,0 +1,213 @@
+a {
+    &.btn {
+        text-decoration: none;
+        margin: 0 2px;
+    }
+}
+
+.btn {
+    position: relative;
+    font-family: 'GraphikSemibold' , 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding: 11px 12.8px;
+    border: 0;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 2;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    border-radius: 4px;
+    .notif {
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: 11px;
+        width: 18px;
+        height: 18px;
+        line-height: 20px;
+        border-radius: 100%;
+        background-color: $red;
+        color: #fff;
+    }
+    .icon {
+        margin-right: 8px;
+        font-size: 18px;
+    }
+    .icn {
+        margin-top: 3px;
+        margin-left: 8px;
+        font-size: 13px;
+        &.icn-left {
+            margin-left: 0;
+            margin-right: 8px;
+        }
+    }
+    &.btn-main {
+        background-color: rgba($color: $main-color, $alpha: 0.8);
+        color: #fff;
+        border: 1px $main-color solid;
+        &:hover {
+            background-color: $main-color;
+        }
+    }
+    &.btn-main-reverse {
+        background-color: #fff;
+        color: $main-color;
+        // border: 1px $main-color solid;
+        &.with-hover {
+            &:hover {
+                background-color: #f5f5f5;
+            }
+        }
+    }
+    &.btn-primary {
+        background-color: #f5f5f5;
+        color: $black;
+        border: 1px #f5f5f5 solid;
+        &:hover {
+            background-color: #f0f0f0;
+        }
+    }
+    &.btn-link {
+        background-color: #fff;
+        color: $black;
+        border: 1px #fff solid;
+    }
+    &.btn-sekunder {
+        background-color: #fff;
+        color: $black;
+        border: 1px $tiny-grey solid;
+        &:hover {
+            border: 1px #555 solid;
+        }
+    }
+    &.btn-white {
+        background-color: #fff;
+        color: $black;
+        border: 1px #fff solid;
+        &:hover {
+            background-color: $white-grey;
+            border: 1px $white-grey solid;
+            color: $black;
+        }
+    }
+    &.btn-danger {
+        background-color: #fff;
+        color: $red;
+        border: 1px $red solid;
+        &:hover {
+            background-color: $white-grey;
+        }
+    }
+    &.btn-sekunder:focus {
+        box-shadow: 0 0 0 #fff;
+    }
+    &.btn-transparent {
+        background-color: rgba($color: #000000, $alpha: 0);
+        color: $black;
+        &:hover {
+            background-color: $white-grey;
+        }
+    }
+    &.btn-radius {
+        border-radius: 3.5px;
+    }
+    &.btn-radius-rounded {
+        border-radius: 55px;
+    }
+    &.btn-fixed {
+        height: 40px;
+        line-height: 40px;
+        padding: 0 12.8px;
+    }
+    &.btn-icon {
+        width: 40px;
+        height: 40px;
+        padding: 12.5px 0;
+        text-align: center;
+    }
+    &.btn-micro {
+        padding: 6px 7.8px;
+    }
+    &.btn-small-icon {
+        width: 30px;
+        height: 30px;
+        padding: 8px 0;
+        text-align: center;
+    }
+    &.btn-radius {
+        border-radius: 4px;
+    }
+    &.btn-small-radius {
+        border-radius: 40px;
+    }
+    &.btn-full {
+        width: 100%;
+    }
+    &.btn-no-hover {
+        &:hover {
+            cursor: default;
+            background-color: rgba($color: #fff, $alpha: 0);
+        }
+    }
+    &.router-link-active {
+        background-color: $white-grey;
+    }
+    &.btn-route-link {
+        display: block;
+        color: $black;
+        background-color: #f5f5f5;
+        padding: 9px 10.8px;
+        border: 1px #f5f5f5 solid;
+        &:hover {
+            background-color: #f0f0f0;
+            border: 1px #f0f0f0 solid;
+        }
+    }
+    &.btn-mobile {
+        width: 100%;
+        .label {
+            display: none;
+        }
+        .label-icon {
+            font-size: 18px;
+        }
+        .label-text {
+            margin-left: 8px;
+            margin-top: 1px;
+            display: block;
+        }
+        .notif {
+            right: 0;
+        }
+        @media (max-width: $min-width) {
+            width: 100%;
+            // display: flex;
+            // flex-direction: row;
+            // justify-content: flex-start;
+            .label-icon {
+                width: 30px;
+                text-align: center;
+            }
+            .label {
+                margin-left: 10px;
+                display: block;
+            }
+            .label-text {
+                margin-left: 0;
+                display: block;
+            }
+        }
+    }
+}
+
+.button-router-link {
+    &.router-link-active {
+        .btn {
+            background-color: $white-grey;
+        }
+    }
+}

@@ -1,0 +1,560 @@
+.navbar {
+    position: relative;
+    padding: 0;
+    margin: 0;
+    li {
+        position: relative;
+        list-style: none;
+        color: #151f2d;
+        font-size: 13px;
+        cursor: pointer;
+        display: inline-block;
+        font-family: 'GraphikSemibold' , 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        // &:hover {
+        //     color: $main-color;
+        //     a {
+        //         color: $main-color;
+        //     }
+        // }
+        &.active {
+            color: $main-color;
+        }
+        a {
+            padding: 12.8px;
+            margin: 0;
+            color: #151f2d;
+            display: block;
+            font-family: 'GraphikSemibold' , 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            &:hover {
+                color: $main-color;
+            }
+            &.router-link-exact-active {
+                color: $main-color;
+            }
+            // &.router-link-active {
+            //     color: #151f2d;
+            // }
+        }
+    }
+    &.mobile {
+        @media (max-width: $min-width) {
+            li {
+                display: block;
+            }
+        }
+    }
+}
+
+.menu-list {
+    .ml-list {
+        position: relative;
+        list-style: none;
+        .ml-link {
+            position: relative;
+            text-decoration: none;
+            display: block;
+            padding: 10px 0;
+            font-size: 13px;
+            color: $black;
+            font-weight: bold;
+            font-family: 'GraphikSemibold' , 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            &:hover {
+                color: $main-color;
+            }
+        }
+        .router-link-active {
+            color: $main-color;
+        }
+    }
+    &.hover {
+        .ml-list {
+            .ml-link {
+                &:hover {
+                    border-radius: 8px;
+                    background-color: #f9f9f9;
+                    transition: 0.2s;
+                    .ml-icon {
+                        color: $black;
+                    }
+                    .ml-label {
+                        color: $black;
+                    }
+                }
+            }
+        }
+    }
+    &.with-icon {
+        .ml-list {
+            margin-bottom: 5px;
+            .ml-link {
+                display: flex;
+                .ml-icon {
+                    width: 45px;
+                    height: 30px;
+                    line-height: 32px;
+                    text-align: center;
+                    font-size: 11px;
+                    color: $grey;
+                }
+                .ml-label {
+                    width: calc(100% - 75px);
+                    font-size: 13px;
+                    .label {
+                        @include post_top(relative);
+                    }
+                }
+                .val-container {
+                    width: 30px; 
+                    text-align: center;
+                }
+                .ml-value {
+                    width: 18px;
+                    height: 17px;
+                    border-radius: 2px;
+                    background-color: $tertiary-color;
+                    color: #fff;
+                    text-align: center;
+                    font-size: 11px;
+                    overflow: hidden;
+                }
+            }
+            .router-link-active {
+                border-radius: 8px;
+                background-color: $main-color;
+                box-shadow: $shadow;
+                .ml-icon {
+                    color: #fff;
+                }
+                .ml-label {
+                    color: #fff;
+                }
+                &:hover {
+                    background-color: $main-color;
+                    .ml-icon {
+                        color: #fff;
+                    }
+                    .ml-label {
+                        color: #fff;
+                    }
+                }
+            }
+        }
+    }
+    &.with-big-icon {
+        .ml-list {
+            .ml-link {
+                position: relative;
+                width: calc(100% - 20px);
+                margin: 0 10px;
+                display: block;
+                text-align: center;
+                border-radius: 8px;
+                @media (max-width: $min-width) {
+                    width: 100%;
+                    margin: 0 0;
+                    border-radius: 0;
+                }
+                .ml-icon {
+                    margin: auto;
+                    width: 45px;
+                    height: 42px;
+                    line-height: 42px;
+                    text-align: center;
+                    margin-top: 5px;
+                    font-size: 16px;
+                    color: $grey;
+                }
+                .ml-label {
+                    width: 100%;
+                    font-size: 11px;
+                    margin-bottom: 5px;
+                    color: $grey;
+                    .label {
+                        @include post_top(relative);
+                    }
+                }
+                .val-container {
+                    position: absolute;
+                    top: 5px;
+                    right: 5px;
+                    width: 18px; 
+                    text-align: center;
+                }
+                .ml-value {
+                    width: 18px;
+                    height: 17px;
+                    border-radius: 2px;
+                    background-color: $teal;
+                    color: #fff;
+                    text-align: center;
+                    font-size: 11px;
+                    overflow: hidden;
+                }
+            }
+            .router-link-active {
+                background-color: $main-color;
+                box-shadow: $shadow;
+                .ml-icon {
+                    color: #fff;
+                }
+                .ml-label {
+                    color: #fff;
+                }
+                &:hover {
+                    background-color: $main-color;
+                    .ml-icon {
+                        color: #fff;
+                    }
+                    .ml-label {
+                        color: #fff;
+                    }
+                }
+            }
+        }
+        .submenu {
+            text-align: center;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            // border-top: $border;
+            .sublist {
+                display: none;
+            }
+            .subcontent {
+                width: 100%;
+                padding: 0 0;
+            }
+        }
+    }
+    &.big {
+        .ml-list {
+            .ml-link {
+                padding: 15px 0;
+            }
+        }
+    }
+    &.small {
+        .ml-list {
+            .ml-link {
+                .ml-icon {
+                    width: 100%;
+                    font-size: 14px;
+                    margin: 0;
+                }
+                .ml-label {
+                    display: none;
+                }
+                .val-container {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    width: 15px;
+                }
+                .ml-value {
+                    width: 10px;
+                    height: 10px;
+                    border-radius: 100%;
+                    color: $tertiary-color;
+                    content: '';
+                }
+            }
+            .submenu {
+                padding: 0 0;
+                .sublist {
+                    display: none;
+                }
+                .subcontent {
+                    padding-top: 0;
+                    padding-left: 0;
+                    width: 100%;
+                }
+            }
+        }
+    }
+    &.mobile {
+        @media (max-width: $min-width) {
+            .ml-list {
+                .ml-link {
+                    .ml-icon {
+                        width: 100%;
+                        font-size: 14px;
+                        margin: 0;
+                    }
+                    .ml-label {
+                        display: none;
+                    }
+                    .val-container {
+                        position: absolute;
+                        top: 3px;
+                        right: 0;
+                        width: 15px;
+                    }
+                    .ml-value {
+                        width: 10px;
+                        height: 10px;
+                        border-radius: 100%;
+                        color: $tertiary-color;
+                        content: '';
+                    }
+                }
+                .submenu {
+                    padding: 0 0;
+                    .sublist {
+                        display: none;
+                    }
+                    .subcontent {
+                        padding-top: 0;
+                        padding-left: 0;
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+    .submenu {
+        position: relative;
+        padding: 5px 0;
+        .sublist {
+            display: flex;
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+        .subicon {
+            width: 45px;
+            height: 30px;
+            line-height: 32px;
+            text-align: center;
+            font-size: 11px;
+            color: $grey;
+        }
+        .sublabel {
+            width: 100%;
+            color: $light-grey;
+            font-weight: 600;
+            font-size: 11px;
+        }
+        .subcontent {
+            padding-top: 5px;
+            padding-left: 0;
+            width: 100%;
+            .ml-list {
+                .ml-link {
+                    .ml-label {
+                        margin-top: 5px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.tabs {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    .tabs-val {
+        position: absolute;
+        right: 2px;
+        top: 5px;
+        border-radius: 2px;
+        padding: 3px 6px 2px 6px;
+        color: #fff;
+        background-color: $tertiary-color;
+        font-size: 11px;
+    }
+    .tabs-button {
+        position: relative;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        font-size: 16px;
+        border-radius: 100%;
+        color: $black;
+        background-color: rgba($color: #000000, $alpha: 0);
+        &:hover {
+            background-color: rgba($color: #000000, $alpha: 0.1);
+        }
+    }
+    .tabs-content {
+        position: relative;
+        width: 100%;
+        height: 40px;
+        white-space: nowrap;
+        overflow-y: hidden;
+        overflow-x: hidden;
+        li {
+            position: relative;
+            list-style: none;
+            display: inline-block;
+            height: 30px;
+            padding: 8px 10px 0 10px;
+            background-color: #fff;
+            cursor: pointer;
+            &.active {
+                border-bottom: 2px $main-color solid;
+                .tabs-label {
+                    color: $main-color;
+                }
+            }
+            .tabs-label {
+                font-weight: bold;
+                font-size: 13px;
+                color: $grey;
+            }
+        }
+        &.full {
+            display: flex;
+            flex-wrap: wrap;
+            white-space: normal;
+            overflow-y: hidden;
+            overflow-x: hidden;
+            li {
+                flex-grow: 1;
+                display: block;
+                text-align: center;
+            }
+        }
+    }
+}
+
+.menu-capsule {
+    li {
+        display: inline-block;
+        padding: 5px 10px;
+        background-color: #fff;
+        border: 1px $light-grey solid;
+        border-radius: 4px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        &:hover {
+            box-shadow: $shadow;
+        }
+        &.enable {
+            border: 1px $main-color solid;
+        }
+        &.disable {
+            background-color: #f5f5f5;
+            border: 1px $white-grey solid;
+            cursor: not-allowed;
+            box-shadow: 0 0 0 0 #fff;
+            .icn {
+                color: $light-grey;
+            }
+            .ttl {
+                color: $grey;
+            }
+            .val {
+                color: $grey;
+            }
+        }
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .icn {
+            color: $grey;
+            font-size: 13px;
+        }
+        .ttl {
+            font-size: 13px;
+            font-weight: normal;
+            color: $black;
+        }
+        .val {
+            font-size: 13px;
+            font-weight: bold;
+            color: $black;
+            margin-top: 7px;
+        }
+    }
+}
+
+.menu-info {
+    position: relative;
+    width: 100%;
+    li {
+        position: relative;
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        margin-bottom: 5px;
+        .icn {
+            width: 20px;
+            .icn-left {
+                font-size: 13px;
+            }
+        }
+        .label {
+            width: calc(100% - 30px);
+            font-size: 13px;
+            color: $black;
+            margin-top: 4px;
+        }
+    }
+}
+
+.menu-navbar {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    a {
+        position: relative;
+        width: 100%;
+        height: 55px;
+        display: block;
+        text-align: center;
+        &.router-link-active {
+            li {
+                .icon {
+                    .label-icon {
+                        color: $main-color;
+                    }
+                }
+                .label {
+                    color: $black;
+                }
+            }
+        }
+    }
+    li {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        list-style: none;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        .icon {
+            position: relative;
+            width: 50px;
+            height: 35px;
+            margin: auto;
+            .label-icon {
+                @include post_center(absolute);
+                font-size: 18px;
+                color: $grey;
+            }
+        }
+        .label {
+            font-size: 11px;
+            color: $grey;
+            margin-bottom: 5px;
+        }
+        .notif {
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-size: 10px;
+            width: 18px;
+            height: 18px;
+            line-height: 20px;
+            border-radius: 100%;
+            background-color: $red;
+            color: #fff;
+        }
+    }
+}

@@ -1,0 +1,651 @@
+.card {
+    position: relative;
+    width: calc(100% - 40px);
+    padding: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    &.no-padding {
+        width: 100%;
+        padding: 0;
+    }
+    &.no-padding-mobile {
+        @media (max-width: $min-width) {
+            width: calc(100% - 20px);
+            padding: 10px;
+        }
+    }
+    &.mobile-grid {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        .cover {
+            width: 200px;
+            height: 200px;
+        }
+        .left {
+            position: relative;
+            margin-bottom: 0;
+        }
+        .right {
+            position: relative;
+            padding: 15px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        @media (max-width: $min-width) {
+            display: block;
+            .cover {
+                width: 100%;
+            }
+            .right {
+                display: block;
+            }
+        }
+    }
+    .left {
+        margin-bottom: 20px;
+    }
+    .right {
+        padding: 0 20px; 
+        padding-bottom: 15px;
+        width: calc(100% - 40px);
+    }
+    .cover {
+        width: 100%; 
+        height: 240px; 
+        background-color: #000; 
+        border-radius: 0; 
+        overflow: hidden;
+    }
+    &.card-login {
+        width: 350px;
+        @media (max-width: $min-width) {
+            width: calc(100% - 40px);
+            padding: 20px;
+        }
+    }
+    &.card-banner {
+        .card-banner-center {
+            @media (max-width: $min-width) {
+                justify-content: center;
+            }
+        }
+        .card-banner-padding {
+            @media (max-width: $min-width) {
+                padding-bottom: 17px;
+            }
+        }
+        @media (max-width: $min-width) {
+            justify-content: center;
+        }
+    }
+    &.card-mobile {
+        position: relative;
+        width: calc(100% - 20px);
+        padding: 10px;
+        display: flex;
+        flex-direction: row;
+        .left {
+            width: 70px;
+            height: 70px;
+            margin-bottom: 0;
+        }
+        .right {
+            width: calc(100% - 90px);
+            padding: 0 10px;
+            padding-bottom: 0;
+        }
+        .cover {
+            height: 70px;
+            border-radius: 8px;
+        }
+    }
+    .card-full {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba($color: #000, $alpha: 0.2)
+    }
+    .card-info {
+        position: absolute;
+        width: calc(100% - 30px); 
+        padding: 15px; 
+        padding-top: 10px;
+        bottom: 0;
+        .card-info-content {
+            position: relative;
+            width: 100%;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+    }
+}
+
+.card-container-popup {
+    @include post_center(absolute);
+    @media (max-width: $min-width) {
+        @include post_bottom(absolute);
+        top: unset;
+        width: 100%;
+    }
+}
+
+.card-popup {
+    position: relative;
+    width: 600px;
+    padding: 15px;
+    margin: auto;
+    border-radius: 8px;
+    @media (max-width: $min-width) {
+        width: calc(100% - 30px);
+        border-radius: 0;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+}
+
+.card-full-popup {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    overflow-y: auto;
+    background-color: #fff;
+    z-index: 10000;
+}
+
+.card-small-profile {
+    position: relative;
+    height: 30px;
+    padding: 5px;
+    border-radius: 50px;
+    display: flex;
+    flex-wrap: nowrap;
+    .image {
+        position: relative;
+        width: 30px;
+        height: 30px;
+        border-radius: 100%;
+        background-color: $tiny-grey;
+    }
+    .label {
+        margin-top: 7px;
+        margin-left: 7px;
+        margin-right: 10px;
+        font-size: 13px;
+        color: $black;
+        font-weight: bold;
+    }
+    &:hover {
+        background-color: $white-grey;
+        cursor: pointer;
+    }
+    &.router-link-active {
+        background-color: $white-grey;
+    }
+    @media (max-width: $min-width) {
+        .label {
+            display: none;
+        }
+    }
+}
+
+.card-search {
+    position: relative;
+    margin-top: -1px;
+    width: 300px;
+    height: 40px;
+    display: flex;
+    flex-wrap: nowrap;
+    border: 1px #ccc solid;
+    border-radius: 5px;
+    overflow: hidden;
+    &.full {
+        width: 100%;
+    }
+    &.mobile {
+        @media (max-width: $min-width) {
+            width: 40px;
+            .field {
+                display: none;
+            }
+        }
+    }
+    &.flat {
+        border: 1px #f9f9f9 solid;
+        border-radius: 40px;
+        background-color: #f9f9f9;
+        .field {
+            background-color: rgba($color: #000, $alpha: 0);
+        }
+        .btn {
+            background-color: rgba($color: #000, $alpha: 0);
+            border: 1px rgba($color: #000, $alpha: 0) solid;
+        }
+    }
+    .field {
+        border-radius: 0;
+    }
+    .btn {
+        border-radius: 0;
+    }
+}
+
+.card-alert {
+    position: relative;
+    width: 300px;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+.card-article {
+    position: relative;
+    width: 100%;
+    padding: 32px 0;
+    display: flex;
+    flex-direction: row;
+    &.reverse {
+        flex-direction: row-reverse;
+    }
+    .cover {
+        position: relative;
+        width: calc(100% - 60px);
+        margin-left: 30px;
+        margin-right: 30px;
+        height: 320px;
+        overflow: hidden;
+    }
+    .detail {
+        position: relative;
+        width: calc(100% - 60px);
+        padding: 15px 30px;
+    }
+}
+
+.card-capsule {
+    padding: 4px 10px 0 10px;
+    border-radius: 20px;
+    background-color: $white-grey;
+    color: $light-grey;
+    font-weight: bold;
+    border: 0.1px $light-grey solid;
+    font-size: 13px;
+    height: 18px;
+    &.no-height {
+        height: auto;
+    }
+    &.pointer {
+        cursor: pointer;
+    }
+    &.active {
+        background-color: rgba($color: $teal, $alpha: 0.1);
+        color: $green;
+        border: 0.1px $green solid;
+    }
+    &.inactive {
+        background-color: rgba($color: $pink, $alpha: 0.1);
+        color: $red;
+        border: 0.1px $red solid;
+    }
+    &.wip {
+        background-color: rgba($color: $yellow, $alpha: 0.1);
+        color: $orange;
+        border: 0.1px $orange solid;
+    }
+    &.normal {
+        background-color: rgba($color: #fff, $alpha: 1);
+        color: $grey;
+        border: 0.1px $tiny-grey solid;
+        &:hover {
+            color: $black;
+            border: 0.1px $grey solid;
+        }
+    }
+}
+
+.card-scanner {
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+    border-radius: 8px;
+    border: $border;
+    background-color: #f5f5f5;
+    cursor: pointer;
+    &:hover {
+        background-color: $white-grey;
+        .icon {
+            .icn {
+                transition: 0.2s;
+                font-size: 88px;
+                color: $black;
+            }
+            .lbl {
+                color: $black;
+            }
+        }
+    }
+    .icon {
+        @include post_center(absolute);
+        text-align: center;
+        .icn {
+            transition: 0.2s;
+            font-size: 68px;
+            color: $grey;
+            margin-bottom: 20px;
+        }
+        .lbl {
+            font-size: 18px;
+            font-weight: bold;
+            color: $grey;
+        }
+    }
+}
+
+.card-toast {
+    position: fixed;
+    z-index: 10000;
+    top: 80px;
+    left: 50%;
+	-webkit-transform: translate(-50%, 0);
+	   -moz-transform: translate(-50%, 0);
+		    -ms-transform: translate(-50%, 0);
+		     -o-transform: translate(-50%, 0);
+		        transform: translate(-50%, 0);
+    
+    &.hide {
+        top: -100px;
+        transition: 0.5s;
+    }
+    &.show {
+        top: 80px;
+        transition: 0.5s;
+    }
+    .card-toast-content {
+        position: relative;
+        max-width: 300px;
+        border-radius: 6px;
+        overflow: hidden;
+        background-color: rgba($color: #000, $alpha: 0.8);
+        box-shadow: $shadow-bold;
+        .sign {
+            position: relative;
+            width: 20px;
+            text-align: center;
+            background-color: rgba($color: #000, $alpha: 0);
+            border-left: 5px rgba($color: #000, $alpha: 0.2) solid;
+            .icn {
+                @include post_center(absolute);
+                color: #fff;
+                font-size: 12px;
+            }
+        }
+        .left {
+            position: relative;
+            width: calc(100% - 50px);
+            padding: 12px 15px;
+            .ttl {
+                font-weight: bold;
+                font-size: 11pt;
+                color: #fff;
+            }
+            .subttl {
+                font-weight: normal;
+                font-size: 10pt;
+                color: #fff;
+            }
+        }
+        .right {
+            position: relative;
+            width: 30px;
+            text-align: center;
+            cursor: pointer;
+            &:hover {
+                background-color: rgba($color: #000, $alpha: 0.2);
+            }
+            .icn {
+                @include post_center(absolute);
+                color: #fff;
+                font-size: 12px;
+            }
+        }
+    }
+}
+
+.card-toast-message-container {
+    position: fixed;
+    z-index: 10000;
+    top: 50px;
+    right: 20px;
+    width: 340px;
+    padding: 0 10px;
+    // max-height: calc(100vh - 100px);
+    // overflow-y: auto;
+    transition: 0.5s;
+}
+
+.card-toast-message {
+    position: relative;
+    width: 100%;
+    margin: 10px 0;
+    transition: 0.5s;
+    // &.hide {
+    //     position: absolute;
+    //     right: -320px;
+    //     transition: 0.5s;
+    // }
+    // &.show {
+    //     right: 20px;
+    //     transition: 0.5s;
+    // }
+    .card-toast-message-content {
+        position: relative;
+        width: calc(100% - 10px);
+        border-radius: 6px;
+        overflow: hidden;
+        background-color: #e8f9f6;
+        box-shadow: $shadow-bold;
+        border-left: 5px $teal solid;
+        .sign {
+            position: relative;
+            text-align: left;
+            .icn {
+                color: $teal;
+                font-size: 18px;
+            }
+        }
+        .left {
+            position: relative;
+            width: calc(100% - 55px);
+            padding: 14px 0;
+            padding-left: 10px;
+            padding-right: 15px;
+            .ttl {
+                font-weight: bold;
+                font-size: 11pt;
+                color: $black;
+            }
+            .subttl {
+                font-weight: normal;
+                font-size: 10pt;
+                color: $black;
+            }
+        }
+        .right {
+            position: relative;
+            width: 30px;
+            text-align: center;
+            cursor: pointer;
+            &:hover {
+                background-color: rgba($color: $teal, $alpha: 0.4);
+            }
+            .icn {
+                @include post_center(absolute);
+                color: $black;
+                font-size: 14px;
+            }
+        }
+    }
+}
+
+.card-check {
+    position: relative;
+    width: 35px;
+    height: 35px;
+    border-radius: 100%;
+    background-color: #fff;
+    color: $main-color;
+    .icn {
+        @include post_center(absolute);
+        font-size: 30px;
+    }
+}
+
+.card-verified {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    background-color: $blue;
+    &.not {
+        background-color: $white-grey;
+        .icn {
+            color: $black;
+        }
+    }
+    .icn {
+        @include post_center(absolute);
+        font-size: 10px;
+        color: #fff;
+    }
+}
+
+.card-notes {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    .icon {
+        padding-top: 4px;
+        width: 30px;
+        font-size: 13px;
+        color: $main-color;
+    }
+    .desc {
+        width: calc(100% - 40px);
+    }
+}
+
+.card-table {
+    position: relative;
+    width: calc(100% - 10px);
+    padding-bottom: calc(100% - 10px);
+    border-radius: 4px;
+    margin: 5px;
+    background-color: #fff;
+    color: $black;
+    border: 1px $tiny-grey solid;
+    &:hover {
+        cursor: pointer;
+        box-shadow: $shadow-bold;
+        border: 1px $light-grey solid;
+    }
+    &.active {
+        background-color: rgba($color: $teal, $alpha: 0.1);
+        color: $green;
+        border: 1px $green solid;
+    }
+    &.inactive {
+        border: 1px $tiny-grey solid;
+        background-color: #f0f0f0;
+        color: $light-grey;
+        &:hover {
+            cursor: default;
+            box-shadow: none;
+        }
+    }
+    .desc {
+        @include post_center(absolute);
+        font-size: 14px;
+        font-weight: bold;
+    }
+}
+
+.card-check-in {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    &.check-in {
+        .icon {
+            .icn {
+                background-color: $green;
+                color: #fff;
+            }
+        }
+    }
+    &.check-out {
+        .icon {
+            .icn {
+                background-color: $red;
+                color: #fff;
+            }
+        }
+    }
+    .icon {
+        position: relative;
+        width: 40px;
+        .icn {
+            position: relative;
+            width: 25px;
+            height: 25px;
+            line-height: 25px;
+            text-align: center;
+            border-radius: 100%;
+            font-size: 13px;
+        }
+    }
+    .main {
+        position: relative;
+        width: calc(100% - 140px);
+    }
+    .detail {
+        position: relative;
+        width: 100px;
+    }
+}
+
+.card-check-out {
+    position: relative;
+    width: calc(100% - 20px);
+    padding: 5px 10px;
+    .check-out-header {
+        position: relative;
+        width: 100%;
+        height: 40px;
+    }
+    .check-out-body {
+        position: relative;
+        width: calc(100% - 10px);
+        padding: 0 5px;
+        padding-top: 5px;
+        height: calc(100vh - 245px);
+        overflow-y: auto;
+    }
+    .check-out-footer {
+        position: relative;
+        width: 100%;
+        height: 95px;
+        padding-top: 15px;
+    }
+}

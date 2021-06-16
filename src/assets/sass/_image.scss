@@ -1,0 +1,115 @@
+.image {
+	position: relative;
+	background-size: cover !important;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-color: #f0f0f0;
+	border-radius: 7px;
+	overflow: hidden;
+	&.image-selected {
+		box-shadow: 0 0 3px 3px $red;
+	}
+	&.image-30px {
+		width: 30px;
+		height: 30px;
+	}
+	&.image-35px {
+		width: 35px;
+		height: 35px;
+	}
+	&.image-40px {
+		width: 40px;
+		height: 40px;
+	}
+	&.image-45px {
+		width: 45px;
+		height: 45px;
+	}
+	&.image-50px {
+		width: 50px;
+		height: 50px;
+	}
+	&.image-100px {
+		width: 100px;
+		height: 100px;
+	}
+	&.image-150px {
+		width: 150px;
+		height: 150px;
+	}
+	&.image-200px {
+		width: 200px;
+		height: 200px;
+	}
+	&.image-all {
+		width: 100%;
+		height: 100%;
+	}
+	&.image-padding {
+		width: 100%;
+		padding-bottom: 100%;
+	}
+	&.image-half-padding {
+		width: 100%;
+		padding-bottom: 50%;
+	}
+	&.image-radius {
+		border-radius: 5px;
+	}
+	&.image-circle {
+		border-radius: 100%;
+	}
+	&.image-center {
+		margin: auto;
+	}
+	.status {
+		position: absolute;
+		bottom: 0;
+		right: 5px;
+		background-color: $green;
+		width: 20px;
+		height: 20px;
+		border-radius: 100%;
+		border: 2px #fff solid;
+	}
+	img {
+		@include post_center(absolute);
+		width: 100%;
+	}
+	.icn {
+		@include post_center('absolute');
+		color: $grey;
+		.icn-big {
+			font-size: 34px;
+		}
+	}
+	.remove {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 25px;
+		height: 25px;
+		background-color: rgba($color: #000000, $alpha: 0.8);
+		color: #fff;
+		cursor: pointer;
+	}
+	.choose {
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		width: 100%;
+		padding: 5px 0;
+		background-color: rgba($color: #000000, $alpha: 0.3);
+		color: #fff;
+		text-align: center;
+		cursor: pointer;
+		&:hover {
+			background-color: rgba($color: #000000, $alpha: 0.5);
+		}
+	}
+	&.image-center-mobile {
+		@media (max-width: $min-width) {
+			margin: auto;
+		}
+	}
+}

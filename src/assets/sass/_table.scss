@@ -1,0 +1,158 @@
+table {
+    position: relative;
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    background-color: #fff;
+    table-layout: fixed;
+
+    tr:nth-child(even) {
+        td {
+            background-color: #f9f9f9;
+        }
+    }
+
+    tr:hover {
+        td {
+            background-color: #f5f5f5;
+        }
+    }
+
+    thead {
+        position: sticky;
+        top: 0;
+        width: calc(100% - 1em);
+        background-color: #fff;
+        z-index: 5;
+    }
+
+    tbody {
+        position: relative;
+        width: 100%;
+    }
+
+    th {
+        font-size: 12px;
+        text-align: left;
+        text-transform: uppercase;
+        background-color: #fff;
+        border-bottom: $border;
+        color: $black;
+        display: flex;
+        svg {
+            padding-top: 0px;
+            padding-right: 5px;
+            padding-left: -5px;
+            cursor: pointer;
+        }
+    }
+
+    td {
+        font-size: 14px;
+        color: $black;
+        text-transform: capitalize;
+    }
+
+    td, th {
+        width: 100%;
+        min-width: 200px;
+        padding: 10px 15px;
+    }
+
+    thead, tbody tr {
+        display: flex;
+        display: -webkit-flex;
+        flex-direction: row;
+        -webkit-flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+    }
+}
+
+.table-container {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 225px);
+    overflow: auto;
+    border-bottom: $border;
+}
+
+.no-height {
+    height: auto;
+}
+
+.hide-icon {
+    svg {
+        display: none;
+    }
+}
+
+.small-col {
+    width: 50px;
+    min-width: 50px;
+    // text-align: center;
+}
+
+.normal-col {
+    width: 120px;
+    min-width: 120px;
+}
+
+.medium-col {
+    width: 150px;
+    min-width: 150px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.center-col {
+    text-align: center;
+}
+
+.smart-pagination {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    @media (max-width: $min-width) {
+        display: block;
+    }
+    .pagination {
+        display: flex;
+        flex-wrap: nowrap;
+        @media (max-width: $min-width) {
+            justify-content: space-between;
+        }
+        .page-item {
+            list-style: none;
+            .page-link {
+                padding: 0 15px;
+                height: 40px;
+                line-height: 40px;
+                font-size: 14px;
+                font-weight: bold;
+                color: $black !important;
+                display: block;
+                &:hover {
+                    background-color: $white-grey;
+                    color: $main-color;
+                }
+                svg {
+                    margin-top: 12px;
+                }
+            }
+            &.disabled {
+                cursor: none;
+                .page-link {
+                    color: $grey !important;
+                }
+            }
+            &.active {
+                cursor: pointer;
+                .page-link {
+                    color: $main-color !important;
+                }
+            }
+        }
+    }
+}
