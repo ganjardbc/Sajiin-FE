@@ -95,7 +95,7 @@
                         {{ formMessage && formMessage.phone && formMessage.phone[0] }}
                     </div>
                 </div>
-                <div class="field-group margin margin-bottom-15-px">
+                <div class="field-group margin margin-bottom-20-px">
                     <div class="field-label">STATUS</div>
                     <div class="display-flex">
                         <label class="radio">
@@ -216,7 +216,8 @@ const payload = {
     email: '',
     phone: '',
     about: '',
-    status: ''
+    status: 'active',
+    shop_id: ''
 }
 
 const shop = {

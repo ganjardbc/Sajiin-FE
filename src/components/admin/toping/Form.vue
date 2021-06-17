@@ -151,8 +151,8 @@ const payload = {
     image: '',
     name: '',
     price: '',
-    is_available: '',
-    status: '',
+    is_available: 0,
+    status: 'active',
     description: ''
 }
 

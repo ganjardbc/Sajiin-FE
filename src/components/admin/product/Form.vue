@@ -220,7 +220,7 @@ const payload = {
         note: '',
         is_pinned: 0,
         is_available: 0,
-        status: '',
+        status: 'active',
         category_id: ''
     },
     details: [],

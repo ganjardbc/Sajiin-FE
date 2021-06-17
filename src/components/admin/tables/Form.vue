@@ -235,10 +235,10 @@ const payload = {
     code: '',
     image: '',
     name: '',
-    status: '',
+    status: 'active',
     is_available: 0,
     description: '',
-    shop_id: 0
+    shop_id: ''
 }
 
 const shop = {

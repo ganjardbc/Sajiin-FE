@@ -118,7 +118,7 @@ const payload = {
     category_id: 'CT-' + time,
     image: '',
     name: '',
-    status: '',
+    status: 'active',
     description: ''
 }
 
