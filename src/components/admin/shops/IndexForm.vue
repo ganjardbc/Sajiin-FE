@@ -4,8 +4,7 @@
             <div class="bg-white box-shadow">
                 <div class="display-flex row space-between padding padding-10-px" style="height: 40px;">
                     <div>
-                        <h1 class="fonts small black">{{ formTitle }} SHOP</h1>
-                        <p class="fonts micro grey no-line-height">controll your datas</p>
+                        <h1 class="post-top fonts small black bold">{{ formTitle }} SHOP</h1>
                     </div>
                     <div class="display-flex">
                         <!-- <AppButtonMenu 
@@ -29,28 +28,25 @@
                 <div class="content-body">
                     <div style="padding-left: 15px; padding-right: 15px;">
                         <AppLoader v-if="visibleLoader" />
-                        <div v-else style="padding-top: 10px; padding-bottom: 10px;">
-                            <div class="display-flex">
-                                <div style="width: calc(100% - 20px); margin-right: 10px;">
-                                    <div v-if="formTitle !== 'CREATE' ? true : false" class="field-group margin margin-bottom-15-px">
-                                        <div class="field-label">IMAGE</div>
-                                        <AppImage 
-                                            :image.sync="image"
-                                            :isEnable="formTitle !== 'VIEW' ? true : false"
-                                            :onUpload="(data) => uploadImage(data)"
-                                            :onRemove="removeImage"
-                                        />
-                                        <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
-                                            {{ formMessage && formMessage.image && formMessage.image[0] }}
+                        <div v-else class="display-flex" style="padding-top: 10px; padding-bottom: 10px;">
+                            <div style="width: 330px; margin-right: 10px;">
+                                <div class="card no-padding-mobile box-shadow bg-white">
+                                    <div class="content-center">
+                                        <div class="image image-padding" style="margin: auto; text-align: center;">
+                                            <i v-if="!image" class="post-middle-absolute fa fa-lg fa-store" style="font-size: 58px; color: #999;" />
+                                            <img v-else :src="image ? image : ''" alt="">
+                                            <button v-if="formTitle !== 'CREATE' ? true : false" class="btn btn-sekunder btn-icon" style="position: absolute; bottom: 10px; right: 10px; border-radius: 100%;" @click="onButtonUpload">
+                                                <i class="post-center fa fa-lg fa-pencil-alt" style="font-size: 16px;" />
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
-                                <div style="width: calc(100% - 20px); margin-left: 10px;"></div>
                             </div>
 
-                            <div class="display-flex">
-                                <div style="width: calc(100% - 20px); margin-right: 10px;">
-                                    <!-- <div class="field-group margin margin-bottom-15-px">
+                            <div style="width: calc(100% - 350px); margin-left: 10px;">
+                                <div class="card box-shadow" style="margin-bottom: 20px;">
+                                    <div class="fonts fonts-10 black semibold" style="margin-bottom: 10px;">General Info</div>
+                                    <div class="field-group margin margin-bottom-15-px">
                                         <div class="field-label">ID</div>
                                         <input 
                                             type="text" 
@@ -60,8 +56,7 @@
                                             id="id" 
                                             v-model="formData.id"
                                             readonly>
-                                    </div> -->
-
+                                    </div>
                                     <div class="field-group margin margin-bottom-15-px">
                                         <div class="field-label">SHOP ID</div>
                                         <input 
@@ -76,7 +71,6 @@
                                             {{ formMessage && formMessage.shop_id && formMessage.shop_id[0] }}
                                         </div>
                                     </div>
-
                                     <div class="field-group margin margin-bottom-15-px">
                                         <div class="field-label">NAME</div>
                                         <input 
@@ -91,34 +85,22 @@
                                             {{ formMessage && formMessage.name && formMessage.name[0] }}
                                         </div>
                                     </div>
-                                    <div class="field-group margin margin-bottom-15-px">
-                                        <div class="field-label">EMAIL</div>
-                                        <input 
-                                            type="email" 
-                                            placeholder="" 
-                                            class="field field-sekunder" 
-                                            name="email" 
-                                            id="email" 
-                                            v-model="formData.email"
-                                            :readonly="formTitle === 'VIEW' ? true : false">
+                                    <div class="field-group margin margin-bottom-0-px">
+                                        <div class="field-label">ABOUT</div>
+                                        <textarea 
+                                            name="about" 
+                                            id="about" 
+                                            class="field field-sekunder field-textarea" 
+                                            v-model="formData.about"
+                                            :readonly="formTitle === 'VIEW' ? true : false"></textarea>
                                         <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
-                                            {{ formMessage && formMessage.email && formMessage.email[0] }}
+                                            {{ formMessage && formMessage.about && formMessage.about[0] }}
                                         </div>
                                     </div>
-                                    <div class="field-group margin margin-bottom-15-px">
-                                        <div class="field-label">PHONE</div>
-                                        <input 
-                                            type="text" 
-                                            placeholder="" 
-                                            class="field field-sekunder" 
-                                            name="phone" 
-                                            id="phone" 
-                                            v-model="formData.phone"
-                                            :readonly="formTitle === 'VIEW' ? true : false">
-                                        <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
-                                            {{ formMessage && formMessage.phone && formMessage.phone[0] }}
-                                        </div>
-                                    </div>
+                                </div>
+
+                                <div class="card box-shadow" style="margin-bottom: 20px;">
+                                    <div class="fonts fonts-10 black semibold" style="margin-bottom: 10px;">Opening Hours</div>
                                     <div class="display-flex margin margin-bottom-15-px">
                                         <div class="field-group" style="width: calc(100% - 10px); margin-right: 10px;">
                                             <div class="field-label">OPEN DAY</div>
@@ -149,7 +131,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="display-flex margin margin-bottom-15-px">
+                                    <div class="display-flex margin margin-bottom-0-px">
                                         <div class="field-group" style="width: calc(100% - 10px); margin-right: 10px;">
                                             <div class="field-label">OPEN TIME</div>
                                             <input 
@@ -180,9 +162,43 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div style="width: calc(100% - 20px); margin-left: 10px;">
+
+                                <div class="card box-shadow" style="margin-bottom: 20px;">
+                                    <div class="fonts fonts-10 black semibold" style="margin-bottom: 10px;">Contact</div>
                                     <div class="field-group margin margin-bottom-15-px">
-                                        <div class="field-label">LOCATION</div>
+                                        <div class="field-label">EMAIL</div>
+                                        <input 
+                                            type="email" 
+                                            placeholder="" 
+                                            class="field field-sekunder" 
+                                            name="email" 
+                                            id="email" 
+                                            v-model="formData.email"
+                                            :readonly="formTitle === 'VIEW' ? true : false">
+                                        <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
+                                            {{ formMessage && formMessage.email && formMessage.email[0] }}
+                                        </div>
+                                    </div>
+                                    <div class="field-group margin margin-bottom-0-px">
+                                        <div class="field-label">PHONE</div>
+                                        <input 
+                                            type="text" 
+                                            placeholder="" 
+                                            class="field field-sekunder" 
+                                            name="phone" 
+                                            id="phone" 
+                                            v-model="formData.phone"
+                                            :readonly="formTitle === 'VIEW' ? true : false">
+                                        <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
+                                            {{ formMessage && formMessage.phone && formMessage.phone[0] }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card box-shadow" style="margin-bottom: 20px;">
+                                    <div class="fonts fonts-10 black semibold" style="margin-bottom: 10px;">Location</div>
+                                    <div class="field-group margin margin-bottom-0-px">
+                                        <div class="field-label">ADDRESS</div>
                                         <textarea 
                                             name="location" 
                                             id="location" 
@@ -193,18 +209,10 @@
                                             {{ formMessage && formMessage.location && formMessage.location[0] }}
                                         </div>
                                     </div>
-                                    <div class="field-group margin margin-bottom-15-px">
-                                        <div class="field-label">ABOUT</div>
-                                        <textarea 
-                                            name="about" 
-                                            id="about" 
-                                            class="field field-sekunder field-textarea" 
-                                            v-model="formData.about"
-                                            :readonly="formTitle === 'VIEW' ? true : false"></textarea>
-                                        <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
-                                            {{ formMessage && formMessage.about && formMessage.about[0] }}
-                                        </div>
-                                    </div>
+                                </div>
+
+                                <div class="card box-shadow" style="margin-bottom: 20px;">
+                                    <div class="fonts fonts-10 black semibold" style="margin-bottom: 10px;">Configuration</div>
                                     <div class="field-group margin margin-bottom-15-px">
                                         <div class="field-label">STATUS</div>
                                         <div v-if="formTitle !== 'VIEW' ? true : false">
@@ -255,11 +263,11 @@
                                             {{ formMessage && formMessage.status && formMessage.status[0] }}
                                         </div>
                                     </div>
-                                    <div class="field-group margin margin-bottom-15-px">
+                                    <div class="field-group">
                                         <div class="field-label">AVAILABLE</div>
                                         <div v-if="formTitle !== 'VIEW' ? true : false">
                                             <div class="display-flex space-between">
-                                                <div class="fonts micro black">Is this table still available ?</div>
+                                                <div class="fonts micro black">Is this shop still available ?</div>
                                                 <label class="switch green">
                                                     <input 
                                                         type="checkbox" 
@@ -290,7 +298,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -298,6 +305,25 @@
         </div>
 
         <div class="right"></div>
+
+        <AppPopupForm 
+            v-if="visiblePopup"
+            :title="'Update Cover'"
+            :onClose="onButtonUpload"
+        >
+            <div class="field-group" style="padding-top: 10px;">
+                <div class="fonts fonts-10 black semibold" style="margin-bottom: 10px;">Cover</div>
+                <AppImage 
+                    :image.sync="image"
+                    :isEnable="formTitle !== 'VIEW' ? true : false"
+                    :onUpload="(data) => uploadImage(data)"
+                    :onRemove="removeImage"
+                />
+                <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
+                    {{ formMessage && formMessage.image && formMessage.image[0] }}
+                </div>
+            </div>
+        </AppPopupForm>
 
         <AppAlert 
             v-if="visibleAlertDelete" 
@@ -325,6 +351,7 @@ import AppButtonMenu from '../../modules/AppButtonMenu'
 import AppListDownMenu from '../../modules/AppListDownMenu'
 import AppButtonQR from '../../modules/AppButtonQR'
 import AppImage from '../../modules/AppImage'
+import AppPopupForm from '../../modules/AppPopupForm'
 import Form from './Form'
 
 const time = new Date().getTime()
@@ -356,6 +383,7 @@ export default {
             visibleLoaderAction: false,
             visibleLoadMore: false,
             isSidebarSmall: false,
+            visiblePopup: false,
             formTitle: 'CREATE',
             formClass: false,
             image: '',
@@ -380,6 +408,7 @@ export default {
         this.getData(this.limit, this.offset)
     },
     components: {
+        AppPopupForm,
         AppImage,
         AppButtonQR,
         AppListDownMenu,
@@ -397,6 +426,9 @@ export default {
         })
     },
     methods: {
+        onButtonUpload () {
+            this.visiblePopup = !this.visiblePopup
+        },
         onSearch (data) {
             console.log('search', data)
         },
@@ -435,6 +467,7 @@ export default {
         },
         onClose () {
             this.formClass = false
+            this.visiblePopup = false 
         },
         onShow (title, index = null) {
             this.formClass = true
@@ -456,11 +489,10 @@ export default {
         onChangeImage (data) {
             this.formData = {
                 ...this.formData,
-                shop: {
-                    ...this.formData.shop,
-                    image: data
-                }
+                image: data
             }
+            this.image = this.formData.image ? this.shopImageThumbnailUrl + this.formData.image : ''
+            this.$cookies.set('shop', this.formData)
         },
         async removeData () {
             this.visibleLoaderAction = true
@@ -507,6 +539,7 @@ export default {
 
                 const data = rest.data.data
                 if (data.length !== 0) {
+                    this.$cookies.set('shop', this.formData)
                     this.onClose()
                     this.getData(this.limit, 0)
                 } else {
@@ -536,7 +569,7 @@ export default {
                 const data = rest.data.data
                 if (data && data.image) {
                     this.onChangeImage(data && data.image)
-                    this.getData(this.limit, 0)
+                    this.onButtonUpload()
                     this.formMessage = []
                 } else {
                     this.formMessage = rest.data.message
@@ -564,7 +597,7 @@ export default {
 
                     const data = rest.data.data
                     this.onChangeImage(data && data.image)
-                    this.getData(this.limit, 0)
+                    this.onButtonUpload()
                 } else {
                     alert('Proceed failed')
                 }

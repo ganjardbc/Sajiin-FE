@@ -216,7 +216,7 @@
             </div>
 
             <div v-if="selectedIndex === 1">
-                <div v-if="roleName !== 'customer'">
+                <div>
                     <div class="field-group margin margin-bottom-15-px">
                         <div class="field-label">ID</div>
                         <div v-if="this.title !== 'VIEW'" class="card-search full">
@@ -252,9 +252,6 @@
                         :enablePopup="openCreateShop"
                         :onChange="(data) => onChangeShop(data)"
                     />
-                </div>
-                <div v-else style="text-align: center;">
-                    <div class="fonts micro semibold" >You have got owner access</div>
                 </div>
             </div>
 

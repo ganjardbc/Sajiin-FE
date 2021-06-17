@@ -103,7 +103,7 @@
                         </div>
 
                         <div class="margin margin-bottom-20-px margin-top-40-px">
-                            <div class="fonts fonts-11 bold">Kontak</div>
+                            <div class="fonts fonts-11 bold">Contact</div>
                         </div>
                         <div class="width width-100 display-flex display-mobile margin margin-bottom-20-px">
                             <div class="width width-300-px width-mobile fonts fonts-11">Email</div>

@@ -37,7 +37,7 @@
                             :code="code"
                             title="Show QR" 
                         /> -->
-                        <router-link :to="{name: '404'}" style="margin-left: 5px;" class="button-router-link">
+                        <router-link v-if="dataUser.role_name !== 'customer'" :to="{name: '404'}" style="margin-left: 5px;" class="button-router-link">
                             <button class="btn btn-white btn-icon btn-radius" title="Reports">
                                 <i class="fa fa-lg fa-calendar-alt" />
                             </button>

@@ -55,7 +55,7 @@
                         {{ formMessage && formMessage.role_name && formMessage.role_name[0] }}
                     </div>
                 </div>
-                <div class="field-group margin margin-bottom-15-px">
+                <div class="field-group margin margin-bottom-20-px">
                     <div class="field-label">STATUS</div>
                     <div class="display-flex">
                         <label class="radio">
@@ -130,7 +130,7 @@ const payload = {
     id: '',
     role_id: 'RL-' + time,
     role_name: '',
-    status: '',
+    status: 'active',
     description: ''
 }
 

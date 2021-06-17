@@ -319,8 +319,8 @@ const payload = {
     password: '',
     email_verified_at: '',
     provider: '',
-    enabled: '',
-    status: '',
+    enabled: 0,
+    status: 'inactive',
     role_id: ''
 }
 

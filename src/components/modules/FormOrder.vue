@@ -150,28 +150,28 @@
                     </div>
                     <div class="width width-30"></div>
                 </div>
-                <div v-if="data && data.order.shop_name" class="display-flex space-between" style="margin-bottom: 5px;">
+                <div class="display-flex space-between" style="margin-bottom: 5px;">
                     <div class="width width-70">
                         <div class="fonts fonts-10 black">Shop</div>
                     </div>
                     <div class="width width-30">
-                        <div class="fonts fonts-10 semibold">{{ data.order.shop_name }}</div>
+                        <div class="fonts fonts-10 semibold">{{ data.order.shop_name ? data.order.shop_name : '-' }}</div>
                     </div>
                 </div>
-                <div v-if="data && data.order.table_name" class="display-flex space-between" style="margin-bottom: 5px;">
+                <div class="display-flex space-between" style="margin-bottom: 5px;">
                     <div class="width width-70">
                         <div class="fonts fonts-10 black">Table</div>
                     </div>
                     <div class="width width-30">
-                        <div class="fonts fonts-10 semibold">{{ data.order.table_name }}</div>
+                        <div class="fonts fonts-10 semibold">{{ data.order.table_name ? data.order.table_name : '-' }}</div>
                     </div>
                 </div>
-                <div v-if="data && data.order.customer_name" class="display-flex space-between" style="margin-bottom: 0;">
+                <div class="display-flex space-between" style="margin-bottom: 0;">
                     <div class="width width-70">
                         <div class="fonts fonts-10 black">Customer</div>
                     </div>
                     <div class="width width-30">
-                        <div class="fonts fonts-10 black semibold">{{ data.order.customer_name }}</div>
+                        <div class="fonts fonts-10 black semibold">{{ data.order.customer_name ? data.order.customer_name : '-' }}</div>
                     </div>
                 </div>
             </div>

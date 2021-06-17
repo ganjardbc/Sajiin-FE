@@ -2,7 +2,7 @@
     <div id="App">
         <div style="margin-bottom: 5px;">
             <div class="display-flex space-between" style="padding: 10px; padding-top: 0; padding-left: 15px; padding-right: 15px;">
-                <div class="fonts fonts-14 bold" style="margin-top: 5px;">Categories</div>
+                <div class="fonts fonts-small black bold" style="margin-top: 5px;">Categories</div>
                 <!-- <button class="btn btn-icon btn-white" @click="refresh">
                     <i class="fa fa-lg fa-retweet"></i>
                 </button> -->
@@ -16,7 +16,7 @@
         </div>
         <div>
             <div class="display-flex space-between" style="padding: 10px; padding-left: 15px; padding-right: 15px;">
-                <div class="fonts fonts-14 bold" style="margin-top: 5px;">Products</div>
+                <div class="fonts small black bold" style="margin-top: 5px;">Products</div>
                 <button class="btn btn-icon btn-white" @click="refresh">
                     <i class="fa fa-lg fa-retweet"></i>
                 </button>
