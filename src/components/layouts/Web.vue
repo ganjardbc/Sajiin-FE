@@ -3,8 +3,8 @@
         <div id="header" class="box-shadow">
             <div id="header-container" class="header-mobile">
                 <div class="left">
-                    <router-link :to="{name: 'home'}" style="position: relative; width: 100%; top: -10px; left: -7.5px;">
-                        <img :src="logo" alt="SAJI-IN" style="width: 100%;">
+                    <router-link :to="{name: 'home'}" style="position: relative; width: 100%; top: -2.5px; left: 0;">
+                        <img :src="logo" alt="SAJI-IN" style="width: 80%;">
                     </router-link>
                 </div>
                 <div class="right">
@@ -46,9 +46,9 @@
                                         </button>
                                     </router-link>
                                 </div>
-                                <div class="header-menu-list header-search">
+                                <!-- <div class="header-menu-list header-search">
                                     <SearchField :placeholder="'Search article ..'" />
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div> 
@@ -79,9 +79,9 @@
                     <div style="position: relative; 
                                 width: 150px;
                                 margin-bottom: 20px;
-                                margin-left: -13px;
+                                margin-left: 0;
                                 overflow: hidden;
-                                height: 46px;">
+                                height: 58px;">
                         <img 
                             :src="logo" 
                             alt="SAJI-IN" 

@@ -46,11 +46,11 @@ a {
         }
     }
     &.btn-main {
-        background-color: rgba($color: $main-color, $alpha: 0.8);
+        background-color: $main-color;
         color: #fff;
         border: 1px $main-color solid;
         &:hover {
-            background-color: $main-color;
+            background-color: rgba($color: $main-color, $alpha: 0.77);
         }
     }
     &.btn-main-reverse {

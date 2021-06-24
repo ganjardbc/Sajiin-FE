@@ -3,7 +3,7 @@
         <div :class="isSidebarSmall ? 'sidebar small' : 'sidebar'">
             <div class="header">
                 <div class="header-content display-flex space-between">
-                    <router-link :to="{name: 'home'}" class="logo" style="width: 100%;">
+                    <router-link :to="{name: 'home'}" class="logo" style="width: 85%; margin: auto; margin-top: 13px;">
                         <img :src="logo" alt="SAJI-IN" style="width: 100%;">
                     </router-link>
                     <div class="mobile-visible" style="width: calc(100% - 8px); padding-left: 4px; padding-right: 4px;">

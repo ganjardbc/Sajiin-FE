@@ -291,10 +291,10 @@ a {
         flex-wrap: nowrap;
         justify-content: space-between;
         .left {
-            width: 160px;
+            width: 150px;
         }
         .right {
-            width: calc(100% - 160px);
+            width: calc(100% - 150px);
             margin-top: 2px;
             @media (max-width: $min-width) {
                 display: flex;
@@ -452,10 +452,10 @@ a {
             background-color: #fff;
             .header-content {
                 width: calc(100% - 0);
-                padding: 10px 0;
+                padding: 0 0;
                 .logo {
                     width: 100%; 
-                    margin-top: -2px; 
+                    margin-top: 0; 
                     // margin-left: -5px;
                 }
                 .close {

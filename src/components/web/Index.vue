@@ -3,7 +3,7 @@
         <div class="banner">
             <div class="banner-container banner-flex">
                 <div class="left">
-                    <div class="post-tops" style="padding-top: 70px;">
+                    <div class="post-tops" style="padding-top: 60px;">
                         <div style="width: 100%;">
                             <div style="width: 85%;">
                                 <h1 class="fonts fonts-48px bold black no-line-height">Saji-in, best all-in-one platform restaurant management</h1>
@@ -82,7 +82,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import axios from 'axios'
-import icon from '@/assets/img/icon.png'
+import icon from '@/assets/img/cover2.png'
 import AppWrapper from '../modules/AppWrapper'
 import AppButton from '../modules/AppButton'
 import AppText from '../modules/AppText'

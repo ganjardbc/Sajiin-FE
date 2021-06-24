@@ -58,13 +58,13 @@
                         v-if="indexDetail"
                         :class="'btn btn-full btn-main'" 
                         @click="addCheckOut(data)">
-                        Add To Check Out
+                        Add To Cart
                     </button>
                     <button 
                         v-else
                         :class="'btn btn-full btn-primary'" 
                         :disabled="true">
-                        Add To Check Out
+                        Add To Cart
                     </button>
                 </div>
             </div>
