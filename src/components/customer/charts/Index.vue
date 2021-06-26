@@ -306,8 +306,8 @@ export default {
                 details: data
             }
 
-            console.log('makeOrder', newPayload)
-            console.log('data', data)
+            // console.log('makeOrder', newPayload)
+            // console.log('data', data)
 
             this.setCart(newPayload)
             this.$cookies.set('orderItem', JSON.stringify(newPayload))

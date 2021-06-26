@@ -150,7 +150,7 @@
                                     </div>
                                     <div class="width width-49">
                                         <button 
-                                            v-if="selectedPayment && selectedCustomer" 
+                                            v-if="selectedTable && selectedPayment && selectedCustomer" 
                                             class="btn btn-main btn-full" 
                                             @click="onShowHideSave">
                                             Order Now
@@ -249,7 +249,7 @@ export default {
         this.onChangeOnlyShop(this.dataShop)
 
         // console.log('orderItem', orderItem)
-        // console.log('selectedPayment', this.selectedPayment)
+        // console.log('selected', this.dataShop)
     },
     components: {
         FormPayment,
@@ -334,6 +334,18 @@ export default {
                 this.visibleButton = false 
             }
         },
+        onChangeOnlyPayment (data) {
+            this.formPayload = {
+                ...this.formPayload,
+                payment: data ? data : null,
+                order: {
+                    ...this.formPayload.order,
+                    payment_id: data ? data.id : 0,
+                    payment_name: data ? data.name : ''
+                }
+            }
+            this.$cookies.set('orderItem', JSON.stringify(this.formPayload))
+        },
         onChangeOnlyTable (data) {
             this.formPayload = {
                 ...this.formPayload,
@@ -358,30 +370,14 @@ export default {
             }
             this.$cookies.set('orderItem', JSON.stringify(this.formPayload))
         },
-        onChangeOnlyPayment (data) {
-            this.formPayload = {
-                ...this.formPayload,
-                payment: data ? data : null,
-                order: {
-                    ...this.formPayload.order,
-                    payment_id: data ? data.id : 0,
-                    payment_name: data ? data.name : ''
-                }
-            }
-            this.$cookies.set('orderItem', JSON.stringify(this.formPayload))
-        },
-        onChangeOnlyCustomer (data) {
-            this.visibleAddress = true 
-            this.selectedAddress = null 
+        onChangeOnlyCustomer (data) { 
             this.formPayload = {
                 ...this.formPayload,
                 customer: data ? data : null,
-                address: null,
                 order: {
                     ...this.formPayload.order,
                     customer_id: data ? data.id : 0,
-                    customer_name: data ? data.name : '',
-                    address_id: null
+                    customer_name: data ? data.name : ''
                 }
             }
             this.$cookies.set('orderItem', JSON.stringify(this.formPayload))
