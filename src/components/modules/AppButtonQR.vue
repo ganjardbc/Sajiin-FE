@@ -16,13 +16,10 @@
                         <VueQrcode :value="validCode" />
                     </div>
                 </div>
-                <div class="content-center" style="padding-bottom: 30px;">
+                <div class="content-center" style="padding-bottom: 10px;">
                     <div class="fonts fonts-11 black semibold">Scan this QR-code to make an order</div>
-                    <div class="fonts fonts-11 grey">{{ validCode }}</div>
+                    <div class="fonts fonts-11 grey">Your Shop ID : {{ validCode }}</div>
                 </div>
-                <router-link :to="{name: 'customer-main'}" class="btn btn-sekunder">
-                    Navigate To Customer Dashboard (For Development)
-                </router-link>
             </div>
         </AppPopupForm>
     </div>

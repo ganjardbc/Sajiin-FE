@@ -7,12 +7,6 @@
                         <h1 class="post-top fonts small black bold">{{ formTitle }} SHOP</h1>
                     </div>
                     <div class="display-flex">
-                        <!-- <AppButtonMenu 
-                            style="margin-right: 10px;"
-                            :icon="'fa fa-lw fa-bars'"
-                            :button="'btn btn-icon btn-sekunder'"
-                            :onChange="(data) => onChangeMenu(data)" 
-                            :data="[{label: 'By ID'}, {label: 'By Name'}, {label: 'By Status'}]" /> -->
                         <AppButtonQR 
                             v-if="dataUser && dataUser.role_name !== 'customer'"
                             style="margin-right: 0;"

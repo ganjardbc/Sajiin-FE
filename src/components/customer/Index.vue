@@ -11,24 +11,17 @@
                     </div>
                     <div style="position: relative; width: calc(100% - 85px;">
                         <div class="display-flex space-between" style="margin-bottom: 5px;">
-                            <div class="display-flex" style="width: calc(100% - 120px);">
-                                <div>
-                                    <div class="post-top">
-                                        <div class="fonts fonts-11 semibold" style="margin-right: 10px;">{{ selectedShop && selectedShop.name }}</div>
-                                        <!-- <div class="card-verified not" style="margin-right: 6px;" :title="selectedShop && selectedShop.about">
-                                            <i class="icn fa fa-lw fa-info"></i>
-                                        </div> -->
-                                    </div>
+                            <div class="display-flex">
+                                <div class="fonts fonts-11 semibold" style="margin-right: 10px;">{{ selectedShop && selectedShop.name }}</div>
+                                <div class="card-verified not" style="margin-right: 6px;" :title="selectedShop && selectedShop.about">
+                                    <i class="icn fa fa-lw fa-info"></i>
                                 </div>
-                                <div class="post-top card-capsule active">Open</div>
                             </div>
-                            <div style="width: 120px;">
-                                <button class="btn btn-small btn-sekunder btn-full" @click="onShowHideExit" title="Exit Shop">
-                                    Exit Shop <i class="icn fa fa-1x fa-sign-out-alt"></i>
-                                </button>
+                            <div>
+                                <div class="card-capsule active">Open</div>
                             </div>
                         </div>
-                        <div style="padding-bottom: 10px;">
+                        <div style="padding-bottom: 15px;">
                             <ul class="menu-info">
                                 <li>
                                     <div class="icn">
@@ -52,13 +45,19 @@
                 </div>
             </div>
 
-            <div class="display-flex space-between">
+            <div class="display-flex space-between" style="padding-bottom: 20px;">
                 <div v-for="(dt, index) in infos" :key="index" style="width: 100%; text-align: center;">
                     <div class="display-flex column">
                         <div class="fonts fonts-8 grey">{{ dt.title }}</div>
                         <div class="fonts fonts-16 semibold">{{ dt.qty }}</div>
                     </div>
                 </div>
+            </div>
+
+            <div style="padding-bottom: 0;">
+                <button class="btn btn-sekunder btn-full" @click="onShowHideExit" title="Exit Shop">
+                    Exit Shop <i class="icn fa fa-1x fa-sign-out-alt" style="margin-top: 1px;"></i>
+                </button>
             </div>
         </div>
 
