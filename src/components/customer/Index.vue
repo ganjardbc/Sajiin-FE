@@ -56,7 +56,7 @@
 
             <div style="padding-bottom: 0;">
                 <button class="btn btn-sekunder btn-full" @click="onShowHideExit" title="Exit Shop">
-                    Exit Shop <i class="icn fa fa-1x fa-sign-out-alt" style="margin-top: 1px;"></i>
+                    Exit Shop <i class="icn fa fa-1x fa-sign-out-alt"></i>
                 </button>
             </div>
         </div>
