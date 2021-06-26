@@ -3,49 +3,37 @@
         <div class="navbar-header border-bottom">
             <div class="navbar-header-content">
                 <div class="left">
-                    <router-link :to="{name: 'customer-main'}" style="position: relative; width: 100%; top: 0; left: -7.5px;">
-                        <img :src="logo" alt="SAJI-IN" style="width: 100%;">
+                    <router-link :to="{name: 'customer-home'}" style="position: relative; width: 100%; top: 3px;">
+                        <img :src="logo" alt="SAJI-IN" style="width: 80%;">
                     </router-link>
                 </div>
                 <div class="right">
                     <div class="header-menu-content display-flex space-between display-mobile">
                         <div></div>
                         <div class="header-menu-list display-flex">
-                            <!-- <router-link v-if="selectedCustomer.id" :to="{name: 'customer-chart'}" class="btn btn-icon btn-white" style="height: 14px;">
-                                <i class="label-icon fa fa-lg fa-shopping-basket" style="font-size: 18px;" />
-                                <span class="notif">{{ cart }}</span>
-                            </router-link> -->
-                            <router-link v-if="selectedCustomer.id" :to="{name: 'customer-profile'}" class="btn btn-sekunder btn-radius-rounded" style="padding: 9px 12px; margin-top: 2px;">
-                                <i class="icn icn-left far fa-lg fa-user" /> Customer
+                            <router-link :to="{name: 'customer-profile'}" class="btn btn-sekunder btn-radius-rounded" style="padding: 9px 12px; margin-top: 2px;">
+                                <i class="icn icn-left far fa-lg fa-user" /> {{ dataUser && dataUser.name }}
                             </router-link>
-                            <!-- <button class="btn btn-icon btn-white" @click="onLogout">
-                                <i class="fa fa-lg fa-power-off"></i>
-                            </button> -->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div id="body">
-            <transition>
-                <router-view />
-            </transition>
-
-            <transition>
-                <router-view name="customerfresh" />
-            </transition>
+            <router-view />
+            <router-view name="customerfresh" />
         </div>
         <div style="padding-bottom: 70px;"></div>
         <div class="navbar-bottom">
-            <div v-if="selectedCustomer.id" class="main-screen display-flex space-between">
+            <div v-if="selectedShop && selectedShop.id" class="main-screen display-flex space-between">
                 <ul class="menu-navbar">
                     <router-link :to="{name: 'customer-main'}">
                         <li>
                             <div class="icon">
-                                <i class="label-icon fa fa-lg fa-home" />
+                                <i class="label-icon fa fa-lg fa-store" />
                             </div>
                             <div class="label">
-                                Home
+                                Shop
                             </div>
                         </li>
                     </router-link>
@@ -53,7 +41,7 @@
                         <li>
                             <div class="icon">
                                 <i class="label-icon fa fa-lg fa-shopping-basket" />
-                                <span class="notif">{{ countCart }}</span>
+                                <span v-if="countCart" class="notif">{{ countCart }}</span>
                             </div>
                             <div class="label">
                                 Carts
@@ -64,7 +52,7 @@
                         <li>
                             <div class="icon">
                                 <i class="label-icon fa fa-lg fa-list-ol" />
-                                <span class="notif">{{ countOrder }}</span>
+                                <span v-if="countOrder" class="notif">{{ countOrder }}</span>
                             </div>
                             <div class="label">
                                 Orders
@@ -74,10 +62,13 @@
                 </ul>
             </div>
             <div v-else class="main-screen display-flex space-between">
-                <AppButtonTable 
-                    :isFull="true" 
-                    :onChange="(data) => onChangeTable(data)" 
-                    style="width: 100%; margin-top: 8px;" />
+                <div style="margin-top: 8px; width: 100%;">
+                    <AppButtonScanQr 
+                        :title="'Scan QR Code'"
+                        :btnClass="'btn btn-main'"
+                        :buttonFull="true"
+                    />
+                </div>
             </div>
         </div>
 
@@ -96,6 +87,7 @@ import AppText from "../modules/AppText"
 import SearchField from '../modules/SearchField'
 import AppToast from '../modules/AppToast'
 import AppButtonTable from '../modules/AppButtonTable'
+import AppButtonScanQr from '../modules/AppButtonScanQr'
 
 const customer = {
     id: '',
@@ -132,6 +124,7 @@ export default {
             visibleMenu: false,
             selectedCustomer: {...customer},
             selectedTable: {...table},
+            selectedShop: null,
             dataUser: null,
             logo: logo,
             logo2: logo2,
@@ -144,14 +137,20 @@ export default {
         if (!this.$cookies.get('token')) {
             this.$router.push({ name: 'home' })
         }
+        if (this.$cookies.get('user').role_name !== 'customer') {
+            this.$router.push({ name: 'home' })
+        }
     },
     mounted () {
+        this.selectedShop = this.$cookies.get('shop')
+        // console.log('selectedShop', this.selectedShop)
+
         const customerData = this.$cookies.get('customer')
-        console.log('customerData', customerData)
         this.setCustomer(customerData)
 
         this.selectedCustomer = customerData ? customerData : customer
-        this.dataUser = this.$cookies.get('admin')
+        this.dataUser = this.$cookies.get('user')
+        // console.log('dataUser', this.dataUser)
 
         const tableData = this.$cookies.get('table')
         this.selectedTable = tableData ? tableData : table
@@ -168,6 +167,7 @@ export default {
         // this.getDataTable()
     },
     components: {
+        AppButtonScanQr,
         AppButtonTable,
         AppToast,
         AppWrapper,
@@ -221,7 +221,8 @@ export default {
             cart: 'cart/countCustomer',
             order: 'order/countCustomer',
             customer: 'customer/data',
-            selectTable: 'table/selected'
+            selectTable: 'table/selected',
+            selectShop: 'store/selected'
         })
     },
     watch: {
@@ -236,6 +237,13 @@ export default {
                 this.selectedTable = props
             } else {
                 this.selectedTable = null
+            }
+        },
+        selectShop (props) {
+            if (props) {
+                this.selectedShop = props 
+            } else {
+                this.selectedShop = null 
             }
         },
         customer (props) {

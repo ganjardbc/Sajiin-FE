@@ -431,7 +431,8 @@
             box-shadow: $shadow;
         }
         &.enable {
-            border: 1px $main-color solid;
+            border: 1px $green solid;
+            background-color: rgba($color: $green, $alpha: 0.1);
         }
         &.disable {
             background-color: #f5f5f5;

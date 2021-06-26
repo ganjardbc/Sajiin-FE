@@ -3,21 +3,30 @@
         <div style="width: 100%; margin-bottom: 15px;">
             <div style="padding-top: 15px; padding-bottom: 10px;">
                 <div class="display-flex space-between">
-                    <div style="width: 70px; margin-right: 12px;">
+                    <div style="width: 70px; margin-right: 15px;">
                         <div class="image image-padding image-center border border-full" style="text-align: center; overflow: hidden;">
-                            <i v-if="!user.image" class="post-middle-absolute fa fa-lg fa-user-circle" style="font-size: 32px; color: #999;" />
-                            <img v-else :src="user && user.image ? (adminImageThumbnailUrl + user.image) : ''" alt="">
+                            <i v-if="selectedShop && !selectedShop.image" class="post-middle-absolute fa fa-lg fa-store" style="font-size: 32px; color: #999;" />
+                            <img v-else :src="selectedShop && selectedShop.image ? (shopImageThumbnailUrl + selectedShop.image) : ''" alt="">
                         </div>
                     </div>
-                    <div style="position: relative; width: calc(100% - 82px;">
+                    <div style="position: relative; width: calc(100% - 85px;">
                         <div class="display-flex space-between" style="margin-bottom: 5px;">
-                            <div class="display-flex">
-                                <div class="fonts fonts-11 semibold" style="margin-right: 10px;">{{ user && user.name }}</div>
-                                <div class="card-verified not" style="margin-right: 6px;">
-                                    <i class="icn fa fa-lw fa-info"></i>
+                            <div class="display-flex" style="width: calc(100% - 120px);">
+                                <div>
+                                    <div class="post-top">
+                                        <div class="fonts fonts-11 semibold" style="margin-right: 10px;">{{ selectedShop && selectedShop.name }}</div>
+                                        <!-- <div class="card-verified not" style="margin-right: 6px;" :title="selectedShop && selectedShop.about">
+                                            <i class="icn fa fa-lw fa-info"></i>
+                                        </div> -->
+                                    </div>
                                 </div>
+                                <div class="post-top card-capsule active">Open</div>
                             </div>
-                            <div style="position: absolute; top: 0; right: 0;" class="card-capsule active">Open</div>
+                            <div style="width: 120px;">
+                                <button class="btn btn-small btn-sekunder btn-full" @click="onShowHideExit" title="Exit Shop">
+                                    Exit Shop <i class="icn fa fa-1x fa-sign-out-alt"></i>
+                                </button>
+                            </div>
                         </div>
                         <div style="padding-bottom: 10px;">
                             <ul class="menu-info">
@@ -26,7 +35,7 @@
                                         <i class="icn-left far fa-lg fa-clock" />
                                     </div>
                                     <div class="label">
-                                        7:00 - 22:00 WIB
+                                        {{ selectedShop && selectedShop.open_time }} - {{ selectedShop && selectedShop.close_time }}
                                     </div>
                                 </li>
                                 <li>
@@ -34,7 +43,7 @@
                                         <i class="icn-left fa fa-lg fa-map-marker-alt" />
                                     </div>
                                     <div class="label">
-                                        Jl. mana we lah
+                                        {{ selectedShop && selectedShop.location }}
                                     </div>
                                 </li>
                             </ul>
@@ -53,15 +62,6 @@
             </div>
         </div>
 
-        <!-- <div style="margin-bottom: 15px; padding-top: 0;">
-            <div class="fonts fonts-10 black semibold" style="margin-bottom: 10px;">Table</div>
-            <AppButtonTable 
-                :enableDetail="true"
-                :isFull="true" 
-                :onChange="(data) => onChangeSelectedTable(data)" 
-                style="width: 100%;" />
-        </div> -->
-
         <div v-if="dataOrder" class="border border-bottoms" style="padding-top: 0; padding-bottom: 15px;">
             <div class="fonts fonts-10 semibold" style="margin-bottom: 5px;">
                 You have an order
@@ -77,27 +77,23 @@
             <div style="margin-bottom: 10px;">
                 <div class="fonts fonts-10 black semibold">Categories</div>
             </div>
-            <div class="display-flex space-between">
-                <div style="width: 31%;">
-                    <router-link :to="{name: 'product-list'}">
-                        <div class="image image-padding box-shadow">
-                            <img src="https://kebunbegonialembang.com/sajiin-v2/public//contents/products/thumbnails/PI-16214114183701621412013dobeldough1067901232049356907930866164640464645857646n.jpeg" alt="">
-                        </div>
-                    </router-link>
-                </div>
-                <div style="width: 31%;">
-                    <router-link :to="{name: 'product-list'}">
-                        <div class="image image-padding box-shadow">
-                            <img src="https://kebunbegonialembang.com/sajiin-v2/public//contents/products/thumbnails/PI-16214114183701621412013dobeldough1067901232049356907930866164640464645857646n.jpeg" alt="">
-                        </div>
-                    </router-link>
-                </div>
-                <div style="width: 31%;">
-                    <router-link :to="{name: 'product-list'}">
-                        <div class="image image-padding box-shadow">
-                            <img src="https://kebunbegonialembang.com/sajiin-v2/public//contents/products/thumbnails/PI-16214114183701621412013dobeldough1067901232049356907930866164640464645857646n.jpeg" alt="">
-                        </div>
-                    </router-link>
+            <div class="display-flex">
+                <div v-for="(dt, i) in categories" :key="i" style="width: calc(100% / 3);">
+                    <div style="padding: 0 10px;">
+                        <router-link :to="{name: 'product-list'}">
+                            <div class="card no-padding box-shadow">
+                                <div class="image image-half-padding" style="padding-bottom: 60%; border-radius: 0;">
+                                    <i v-if="!dt.image" class="post-middle-absolute fa fa-lg fa-image" style="font-size: 32px; color: #999;"></i>
+                                    <img v-else :src="dt.image" alt="">
+                                </div>
+                                <div class="padding padding-10-px" style="text-align: center;">
+                                    <div class="fonts fonts-10 black semibold">
+                                        {{ dt.name }}
+                                    </div>
+                                </div>
+                            </div>
+                        </router-link>
+                    </div>
                 </div>
             </div>
         </div>
@@ -111,16 +107,18 @@
             <AppLoader v-if="visibleLoader" style="margin-top: 10px;" />
         </div>
 
-        <!-- <div v-if="!visibleLoader" class="display-flex center">
-            <button v-if="visibleLoadMore" class="btn btn-sekunder" style="margin-top: 10px;" @click="onMore">
-                Load More
-            </button>
-        </div> -->
+        <AppAlert 
+            v-if="visibleAlertExit" 
+            :isLoader="visibleLoaderExit"
+            :title="'Exit Shop ?'" 
+            :subtitle="'It will remove your carts.'"
+            :onClose="onShowHideExit" 
+            :onSave="exitShop" />
     </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import axios from 'axios'
 import AppWrapper from '../modules/AppWrapper'
 import AppButton from '../modules/AppButton'
@@ -130,6 +128,7 @@ import AppCardGrid from '../modules/AppCardGrid'
 import AppCardList from '../modules/AppCardList'
 import AppLoader from '../modules/AppLoader'
 import AppButtonTable from '../modules/AppButtonTable'
+import AppAlert from '../modules/AppAlert'
 
 const infos = [
     {title: 'Orders', qty: '120'},
@@ -147,27 +146,32 @@ export default {
     name: 'App',
     data () {
         return {
+            visibleAlertExit: false,
+            visibleLoaderExit: false,
             visibleLoader: false,
             limit: 4,
             offset: 0,
             visibleLoadMore: false,
             products: [],
+            categories: [],
             dataUser: null,
             dataOrder: null,
             selectedCustomer: null,
+            selectedShop: null,
             notes: notes,
             infos: infos
         }
     },
     mounted () {
+        this.selectedShop = this.$cookies.get('shop')
         this.selectedCustomer = this.$cookies.get('customer')
         this.dataOrder = this.$cookies.get('orderItem')
-        this.dataUser = this.$cookies.get('admin')
+        this.dataUser = this.$cookies.get('user')
         this.getProduct(this.limit, this.offset)
-
-        console.log('dataUser', this.dataUser)
+        this.getCategory(5, 0)
     },
     components: {
+        AppAlert,
         AppButtonTable,
         AppLoader,
         AppCardPostGrid,
@@ -186,10 +190,97 @@ export default {
         })
     },
     methods: {
-        onChangeSelectedTable (data) {
-            // this.getLocalCartCount()
-            // this.getLocalOrderCount()
-            console.log('onChangeSelectedTable', data)
+        ...mapActions({
+            setShop: 'store/setData',
+            setToast: 'toast/setToast',
+            getCount: 'cart/getCountCustomer',
+        }),
+        makeToast (title) {
+            const payload = {
+                visible: true,
+                title: title
+            }
+            this.setToast(payload)
+        },
+        getLocalCartCount () {
+            const token = 'Bearer '.concat(this.$cookies.get('token'))
+            this.getCount(token)
+        },
+        onShowHideExit () {
+            this.visibleAlertExit = !this.visibleAlertExit
+        },
+        async exitShop () {
+            this.visibleLoaderExit = true
+
+            const token = 'Bearer '.concat(this.$cookies.get('token'))
+            const payload = {
+                owner_id: this.dataUser.id
+            }
+
+            const rest = await axios.post('/api/cart/deleteByUserID', payload, { headers: { Authorization: token } })
+            if (rest && rest.status === 200) {
+                this.visibleLoaderExit = false
+                this.onShowHideExit()
+                this.getLocalCartCount()
+                this.setShop(null)
+                this.$cookies.remove('shop')
+                this.$cookies.remove('orderItem')
+                this.$router.push({ name: 'customer-home' })
+            } else {
+                this.onShowHideExit()
+                this.makeToast('Proceed failed')
+                this.visibleLoaderExit = false
+            }
+        },
+        async getCategory (limit, offset) {
+            this.visibleLoader = true 
+
+            const token = 'Bearer '.concat(this.$cookies.get('token'))
+            let category = []
+
+            if (offset > 0) {
+                category = Object.assign([], this.categories)
+            } else {
+                category = []
+            }
+
+            const payload = {
+                limit: limit,
+                offset: offset,
+                status: 'active',
+                shop_id: this.selectedShop.id 
+            }
+
+            const rest = await axios.post('/api/category/getAll', payload, { headers: { Authorization: token } })
+
+            if (rest && rest.status === 200) {
+                const data = rest.data.data
+                data && data.map((dt) => {
+                    return category.push({
+                        ...dt,
+                        id: dt.id,
+                        category: dt.category,
+                        image: dt.image ? this.categoryImageThumbnailUrl + dt.image : '',
+                        name: dt.name,
+                        available: dt.is_available ? 'Available' : 'Unavailable',
+                        description: dt.description
+                    })
+                })
+                this.categories = category
+                this.visibleLoader = false 
+
+                if (data.length > 0) {
+                    this.offset += this.limit
+                }
+
+                if (data.length < this.limit) {
+                    this.visibleLoadMore = false
+                } else {
+                    this.visibleLoadMore = true
+                }
+            } else {
+                this.visibleLoader = false 
+            }
         },
         async getProduct (limit, offset) {
             this.visibleLoader = true 
@@ -207,7 +298,7 @@ export default {
                 limit: limit,
                 offset: offset,
                 status: 'active',
-                user_id: this.dataUser.id
+                shop_id: this.selectedShop.id 
             }
 
             const rest = await axios.post('/api/product/getAll', payload, { headers: { Authorization: token } })

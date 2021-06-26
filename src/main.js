@@ -39,7 +39,7 @@ Vue.use(new VueSocketIO({
 }));
 
 
-Vue.$cookies.config('1d');
+Vue.$cookies.config('30d');
 Vue.prototype.deployUrl = deploy;
 Vue.prototype.apiUrl = api;
 Vue.prototype.initUrl = url;

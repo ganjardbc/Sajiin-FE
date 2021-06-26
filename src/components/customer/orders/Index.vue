@@ -8,42 +8,33 @@
                             <div class="display-flex">
                                 <div style="width: 50px; margin-right: 20px;">
                                     <div class="image image-50px image-circle" style="text-align: center;">
-                                        <i v-if="selectedCustomer && !selectedCustomer.image" class="post-center fa fa-lg fa-user-circle" style="color: #999;" />
-                                        <img v-else :src="selectedCustomer ? (customerImageThumbnailUrl + selectedCustomer.image) : ''" alt="" class="post-center">
+                                        <i v-if="dataUser && !dataUser.image" class="post-center fa fa-lg fa-user-circle" style="color: #999;" />
+                                        <img v-else :src="dataUser ? (adminImageThumbnailUrl + dataUser.image) : ''" alt="" class="post-center">
                                     </div>
                                 </div>
                                 <div style="width: calc(100% - 70px);">
-                                    <div class="fonts fonts-11 semibold" style="margin-bottom: 5px;">{{ selectedCustomer && selectedCustomer.name ? selectedCustomer.name : '-' }}</div>
+                                    <div class="fonts fonts-11 semibold" style="margin-bottom: 5px;">{{ dataUser && dataUser.name ? dataUser.name : '-' }}</div>
                                     <div class="display-flex" style="margin-bottom: 5px;">
                                         <div style="width: 25px;">
                                             <i class="fa fa-lw fa-envelope" style="font-size: 14px; color: #555;" />
                                         </div>
-                                        <div class="fonts fonts-10 grey">{{ selectedCustomer && selectedCustomer.email ? selectedCustomer.email : '-' }}</div>
+                                        <div class="fonts fonts-10 grey">{{ dataUser && dataUser.email ? dataUser.email : '-' }}</div>
                                     </div>
                                     <div class="display-flex" style="margin-bottom: 5px;">
                                         <div style="width: 25px;">
                                             <i class="fa fa-lw fa-phone" style="font-size: 14px; color: #555;" />
                                         </div>
-                                        <div class="fonts fonts-10 grey">{{ selectedCustomer && selectedCustomer.phone ? selectedCustomer.phone : '-' }}</div>
+                                        <div class="fonts fonts-10 grey">{{ dataUser && dataUser.phone ? dataUser.phone : '-' }}</div>
                                     </div>
                                     <div class="display-flex">
                                         <div style="width: 25px;">
                                             <i class="fa fa-lw fa-info-circle" style="font-size: 14px; color: #555;" />
                                         </div>
-                                        <div class="fonts fonts-10 grey">{{ selectedCustomer && selectedCustomer.about ? selectedCustomer.about : '-' }}</div>
+                                        <div class="fonts fonts-10 grey">{{ dataUser && dataUser.about ? dataUser.about : '-' }}</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- <div style="margin-top: 30px; padding-bottom: 15px;">
-                            <div class="fonts fonts-10 black semibold" style="margin-bottom: 10px;">Table</div>
-                            <AppButtonTable 
-                                :enableDetail="true"
-                                :isFull="true" 
-                                :onChange="(data) => onChangeTable(data)" 
-                                style="width: 100%; margin-bottom: 15px;" />
-                        </div> -->
                         
                         <div class="width width-full" style="margin-top: 30px;">
                             <div class="fonts fonts-11 semibold black" style="margin-bottom: 5px;">Products</div>
@@ -56,9 +47,6 @@
                                 <div class="display-flex space-between">
                                     <div class="fonts fonts-10 semibold" style="margin-top: 10px; margin-left: 10px;">Choose visible table</div>
                                     <div style="width: 40px;">
-                                        <!-- <button class="btn btn-icon btn-main-reverse with-hover" @click="openPayment">
-                                            <i class="fa fa-lg fa-arrow-right" />
-                                        </button> -->
                                         <router-link :to="{name: 'customer-table'}">
                                             <button class="btn btn-icon btn-main-reverse with-hover">
                                                 <i class="fa fa-lg fa-arrow-right" />
@@ -93,9 +81,6 @@
                                 <div class="display-flex space-between">
                                     <div class="fonts fonts-10 semibold" style="margin-top: 10px; margin-left: 10px;">Choose payment method</div>
                                     <div style="width: 40px;">
-                                        <!-- <button class="btn btn-icon btn-main-reverse with-hover" @click="openPayment">
-                                            <i class="fa fa-lg fa-arrow-right" />
-                                        </button> -->
                                         <router-link :to="{name: 'customer-payment'}">
                                             <button class="btn btn-icon btn-main-reverse with-hover">
                                                 <i class="fa fa-lg fa-arrow-right" />
@@ -117,7 +102,7 @@
                                             <div class="fonts fonts-10 grey">{{ selectedPayment && selectedPayment.description }}</div>
                                         </div>
                                         <div class="post-tops">
-                                            <div class="fonts fonts-10 semibold black">{{ 'Rp. 0' }}</div>
+                                            <div class="fonts fonts-10 semibold black"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -182,38 +167,6 @@
             </div>
         </AppMobileLayout>
 
-        <FormCustomer 
-            v-if="visiblePopupCustomer" 
-            :selectedID="selectedCustomer && selectedCustomer.id ? selectedCustomer.id : 0" 
-            :data.sync="dataCustomer"
-            :onChange="(data) => onChangeCustomer(data)"
-            :onClose="openCustomer" 
-        />
-        
-        <FormAddress 
-            v-if="visiblePopupAddress"
-            :selectedID="selectedAddress && selectedAddress.id ? selectedAddress.id : 0" 
-            :data.sync="dataAddress"
-            :onClose="openAddress"
-            :onChange="(data) => onChangeAddress(data)"
-        />
-
-        <FormShipment
-            v-if="visiblePopupShipment"
-            :selectedID="selectedShipment && selectedShipment.id ? selectedShipment.id : 0" 
-            :data.sync="dataShipment"
-            :onClose="openShipment"
-            :onChange="(data) => onChangeShipment(data)"
-        />
-
-        <FormPayment
-            v-if="visiblePopupPayment"
-            :selectedID="selectedPayment && selectedPayment.id ? selectedPayment.id : 0" 
-            :data.sync="dataPayment"
-            :onClose="openPayment"
-            :onChange="(data) => onChangePayment(data)"
-        />
-
         <AppAlert 
             v-if="visibleAlertCancel" 
             :title="'Cancel this order ?'" 
@@ -270,6 +223,7 @@ export default {
             dataPayment: [],
             dataShipment: [],
             dataUser: null,
+            dataShop: null,
             dataCustomer: null,
             dataAddress: null,
             selectedCustomer: null,
@@ -283,26 +237,19 @@ export default {
         const orderItem = this.$cookies.get('orderItem')
 
         this.data = orderItem.details
-        this.dataUser = this.$cookies.get('admin')
+        this.dataUser = this.$cookies.get('user')
+        this.dataShop = this.$cookies.get('shop')
         this.formPayload = {...orderItem}
-        this.selectedTable = orderItem && orderItem.table ? orderItem.table : this.$cookies.get('table')
-        this.selectedCustomer = orderItem && orderItem.customer ? orderItem.customer : this.$cookies.get('customer')
-        // this.selectedAddress = orderItem && orderItem.address ? orderItem.address : null
-        // this.visibleAddress = this.selectedCustomer ? true : false
-        // this.selectedShipment = orderItem && orderItem.shipment ? orderItem.shipment : null
+        this.selectedTable = orderItem && orderItem.table ? orderItem.table : null 
+        this.selectedCustomer = orderItem && orderItem.customer ? orderItem.customer : null 
         this.selectedPayment = orderItem && orderItem.payment ? orderItem.payment : null
-        // const csID = this.selectedCustomer ? this.selectedCustomer.customer_id : null
 
         this.onTotal(this.data)
-        this.onChangeOnlyTable(this.selectedTable)
-        this.onChangeOnlyCustomer(this.selectedCustomer)
-        
-        // this.getDataCustomer()
-        // this.getDataAddress(csID)
-        this.getDataPayment()
-        // this.getDataShipment()
+        this.onChangeOnlyCustomer(this.dataUser)
+        this.onChangeOnlyShop(this.dataShop)
 
-        console.log('orderItem', orderItem)
+        // console.log('orderItem', orderItem)
+        // console.log('selectedPayment', this.selectedPayment)
     },
     components: {
         FormPayment,
@@ -381,8 +328,6 @@ export default {
                 }
             }
 
-            // console.log('formPayload', this.formPayload)
-
             if (this.subtotalPrice) {
                 this.visibleButton = true 
             } else {
@@ -396,9 +341,33 @@ export default {
                 order: {
                     ...this.formPayload.order,
                     table_id: data ? data.id : 0,
+                    table_name: data ? data.name : ''
                 }
             }
-            // console.log('onChangeOnlyTable', this.formPayload)
+            this.$cookies.set('orderItem', JSON.stringify(this.formPayload))
+        },
+        onChangeOnlyShop (data) {
+            this.formPayload = {
+                ...this.formPayload,
+                shop: data ? data : null,
+                order: {
+                    ...this.formPayload.order,
+                    shop_id: data ? data.id : 0,
+                    shop_name: data ? data.name : ''
+                }
+            }
+            this.$cookies.set('orderItem', JSON.stringify(this.formPayload))
+        },
+        onChangeOnlyPayment (data) {
+            this.formPayload = {
+                ...this.formPayload,
+                payment: data ? data : null,
+                order: {
+                    ...this.formPayload.order,
+                    payment_id: data ? data.id : 0,
+                    payment_name: data ? data.name : ''
+                }
+            }
             this.$cookies.set('orderItem', JSON.stringify(this.formPayload))
         },
         onChangeOnlyCustomer (data) {
@@ -411,90 +380,11 @@ export default {
                 order: {
                     ...this.formPayload.order,
                     customer_id: data ? data.id : 0,
+                    customer_name: data ? data.name : '',
                     address_id: null
                 }
             }
             this.$cookies.set('orderItem', JSON.stringify(this.formPayload))
-        },
-        onChangeTable (data) {
-            this.onChangeOnlyTable (data)
-        },
-        onChangeCustomer (data) {
-            this.selectedCustomer = data.customer
-            this.dataAddress = data.address
-            this.visibleAddress = true 
-            this.selectedAddress = null 
-            this.formPayload = {
-                ...this.formPayload,
-                customer: this.selectedCustomer,
-                address: null,
-                order: {
-                    ...this.formPayload.order,
-                    customer_id: this.selectedCustomer.id,
-                    address_id: 0
-                }
-            }
-            this.$cookies.set('orderItem', JSON.stringify(this.formPayload))
-            this.openCustomer()
-            this.makeToast('Customer Updated')
-            // console.log('onChangeCustomer', data)
-        },
-        onChangeAddress (data) {
-            this.selectedAddress = data 
-            this.formPayload = {
-                ...this.formPayload,
-                address: this.selectedAddress,
-                order: {
-                    ...this.formPayload.order,
-                    address_id: this.selectedAddress.id 
-                }
-            }
-            this.$cookies.set('orderItem', JSON.stringify(this.formPayload))
-            this.openAddress()
-            this.makeToast('Address Customer Updated')
-            // console.log('onChangeAddress', data)
-        },
-        onChangeShipment (data) {
-            this.selectedShipment = data 
-            this.formPayload = {
-                ...this.formPayload,
-                shipment: this.selectedShipment,
-                order: {
-                    ...this.formPayload.order,
-                    shipment_id: this.selectedShipment.id 
-                }
-            }
-            this.$cookies.set('orderItem', JSON.stringify(this.formPayload))
-            this.openShipment()
-            this.makeToast('Shipment Updated')
-            // console.log('onChangeShipment', data)
-        },
-        onChangePayment (data) {
-            this.selectedPayment = data 
-            this.formPayload = {
-                ...this.formPayload,
-                payment: this.selectedPayment,
-                order: {
-                    ...this.formPayload.order,
-                    payment_id: this.selectedPayment.id 
-                }
-            }
-            this.$cookies.set('orderItem', JSON.stringify(this.formPayload))
-            this.openPayment()
-            this.makeToast('Shipment Updated')
-            // console.log('onChangePayment', data)
-        },
-        openCustomer () {
-            this.visiblePopupCustomer = !this.visiblePopupCustomer
-        },
-        openAddress () {
-            this.visiblePopupAddress = !this.visiblePopupAddress
-        },
-        openShipment () {
-            this.visiblePopupShipment = !this.visiblePopupShipment
-        },
-        openPayment () {
-            this.visiblePopupPayment = !this.visiblePopupPayment
         },
         async onSaveOrder () {
             this.visibleLoaderSave = true
@@ -524,73 +414,6 @@ export default {
                 this.visibleAlertSave = false
                 this.onShowHideSave()
                 this.makeToast('Order Failed to Create')
-            }
-
-            // console.log('makeOrder', rest)
-        },
-        async getDataPayment () {
-            const token = 'Bearer '.concat(this.$cookies.get('token'))
-            const payload = {
-                limit: 1000,
-                offset: 0,
-                status: 'active'
-            }
-            const rest = await axios.post('/api/payment/getAll', payload, { headers: { Authorization: token } })
-
-            if (rest && rest.status === 200) {
-                const data = rest.data.data
-                this.dataPayment = data
-            }
-
-            // console.log('rest', rest)
-        },
-        async getDataShipment () {
-            const token = 'Bearer '.concat(this.$cookies.get('token'))
-            const payload = {
-                limit: 1000,
-                offset: 0,
-                status: 'active'
-            }
-            const rest = await axios.post('/api/shipment/getAll', payload, { headers: { Authorization: token } })
-
-            if (rest && rest.status === 200) {
-                const data = rest.data.data
-                this.dataShipment = data
-            }
-
-            // console.log('getDataShipment', rest)
-        },
-        async getDataCustomer () {
-            const token = 'Bearer '.concat(this.$cookies.get('token'))
-            const payload = {
-                limit: 1000,
-                offset: 0,
-                user_id: this.dataUser.id,
-                status: 'active'
-            }
-            const rest = await axios.post('/api/customer/getAll', payload, { headers: { Authorization: token } })
-
-            if (rest && rest.status === 200) {
-                const data = rest.data.data
-                this.dataCustomer = data
-            }
-        },
-        async getDataAddress (csID) {
-            if (csID) {
-                const token = 'Bearer '.concat(this.$cookies.get('token'))
-                const payload = {
-                    limit: 1000,
-                    offset: 0,
-                    customer_id: csID
-                }
-                const rest = await axios.post('/api/address/getAll', payload, { headers: { Authorization: token } })
-
-                if (rest && rest.status === 200) {
-                    const data = rest.data.data
-                    this.dataAddress = data
-                }
-            } else {
-                // console.log('csID not defined', csID)
             }
         },
         sendSocketOrder (order_id) {

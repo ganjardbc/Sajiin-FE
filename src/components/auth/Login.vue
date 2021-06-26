@@ -110,7 +110,11 @@ export default {
                 this.getCount(token)
                 this.getCountOrder(token)
 
-                this.$router.push({ name: 'home' })
+                if (data.user.role_name === 'customer') {
+                    this.$router.push({ name: 'customer-home' })
+                } else {
+                    this.$router.push({ name: 'dashboard' })
+                }
                 // window.location = this.initUrl + '/home'
 
                 if (data) {

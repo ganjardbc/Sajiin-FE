@@ -78,7 +78,8 @@ export default {
             selectedID: null,
             selectedData: null,
             datas: [],
-            formPayload: null
+            formPayload: null,
+            dataShop: null 
         }
     },
     mounted () {
@@ -86,6 +87,7 @@ export default {
         this.formPayload = orderItem ? orderItem : null 
         this.selectedData = orderItem && orderItem.payment ? orderItem.payment : null
         this.selectedID = this.selectedData ? this.selectedData.id : null 
+        this.dataShop = this.$cookies.get('shop')
         this.getData()
     },
     components: {
@@ -121,9 +123,11 @@ export default {
                 payment: this.selectedData,
                 order: {
                     ...this.formPayload.order,
-                    payment_id: this.selectedData.id 
+                    payment_id: this.selectedData.id,
+                    payment_name: this.selectedData.name 
                 }
             }
+            console.log('formPayload', this.formPayload)
             this.$cookies.set('orderItem', JSON.stringify(this.formPayload))
             this.onShowHideSave()
             this.makeToast('Shipment Updated')
@@ -136,7 +140,8 @@ export default {
             const payload = {
                 limit: 1000,
                 offset: 0,
-                status: 'active'
+                status: 'active',
+                shop_id: this.dataShop.id 
             }
             const rest = await axios.post('/api/payment/getAll', payload, { headers: { Authorization: token } })
 

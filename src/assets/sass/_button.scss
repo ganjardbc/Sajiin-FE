@@ -138,6 +138,13 @@ a {
         padding: 8px 0;
         text-align: center;
     }
+    &.btn-small {
+        height: 30px;
+        padding: 8px 10px;
+        .icn {
+            margin-top: 0;
+        }
+    }
     &.btn-radius {
         border-radius: 4px;
     }

@@ -13,8 +13,18 @@
                 <div class="padding padding-top-30-px padding-bottom-30-px">
                     <i :class="isLoader ? 'fa fa-2x fa-spinner fa-spin' : 'fa fa-2x fa-info-circle'" style="font-size: 48px;"></i>
                 </div>
-                <div class="fonts micro semibold width width-90 width-center margin margin-bottom-30-px">
-                    {{ isLoader ? 'Please wait..' : title ? title : 'This action will take permanently to datas, are you sure ?' }}
+                <div v-if="isLoader" class="margin margin-bottom-30-px">
+                    <div class="fonts micro semibold width width-90 width-center">
+                        Please Wait ..
+                    </div>
+                </div>
+                <div v-else class="margin margin-bottom-30-px">
+                    <div class="fonts micro semibold width width-90 width-center margin margin-bottom-5-px">
+                        {{ title ? title : 'This action will take permanently to datas, are you sure ?' }}
+                    </div>
+                    <div v-if="subtitle" class="fonts fonts-10 grey width width-90 width-center">
+                        {{ subtitle }}
+                    </div>
                 </div>
                 <div v-if="!isLoader" class="display-flex justify-content">
                     <button class="btn btn-main btn-full margin margin-right-5-px" @click="onSave">
@@ -41,6 +51,10 @@ export default {
             required: false
         },
         title: {
+            type: String,
+            required: false
+        },
+        subtitle: {
             type: String,
             required: false
         },

@@ -59,6 +59,7 @@ import Notification from '@/components/admin/notification/Index.vue';
 
 // customer
 import CustomerMain from '@/components/customer/Index.vue';
+import CustomerHome from '@/components/customer/home/Index.vue';
 import CustomerProfile from '@/components/customer/profile/Index.vue';
 import CustomerAccount from '@/components/customer/profile/Order.vue';
 import CustomerFeedback from '@/components/customer/profile/Feedback.vue';
@@ -365,8 +366,13 @@ export const routes = [
         component: CustomerLayout,
         children: [
             {
-                name: 'customer-main',
+                name: 'customer-home',
                 path: 'home',
+                component: CustomerHome
+            },
+            {
+                name: 'customer-main',
+                path: 'main',
                 component: CustomerMain
             },
             {

@@ -191,11 +191,7 @@ export default {
             this.visibleLoader = true
 
             const token = 'Bearer '.concat(this.$cookies.get('token'))
-            const payload = this.dataUser.role_name === 'admin' ? {
-                limit: 1000,
-                offset: 0,
-                status: 'active'
-            } : {
+            const payload = {
                 limit: 1000,
                 offset: 0,
                 user_id: this.dataUser.id,

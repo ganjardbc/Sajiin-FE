@@ -37,6 +37,11 @@
                             :code="code"
                             title="Show QR" 
                         /> -->
+                        <router-link v-if="dataUser.role_name === 'customer'" :to="{name: 'customer-main'}" style="margin-left: 5px;" class="button-router-link">
+                            <button class="btn btn-white btn-radius" title="Reports">
+                                CUSTOMER
+                            </button>
+                        </router-link>
                         <router-link v-if="dataUser.role_name !== 'customer'" :to="{name: '404'}" style="margin-left: 5px;" class="button-router-link">
                             <button class="btn btn-white btn-icon btn-radius" title="Reports">
                                 <i class="fa fa-lg fa-calendar-alt" />
@@ -154,6 +159,9 @@ export default {
     },
     beforeMount (){
         if (!this.$cookies.get('token')) {
+            this.$router.push({ name: 'home' })
+        }
+        if (this.$cookies.get('user').role_name === 'customer') {
             this.$router.push({ name: 'home' })
         }
     },

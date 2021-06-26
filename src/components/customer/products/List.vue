@@ -58,7 +58,8 @@ export default {
             offset: 0,
             visibleLoadMore: false,
             products: [],
-            dataUser: null 
+            dataUser: null,
+            dataShop: null
         }
     },
     components: {
@@ -72,6 +73,7 @@ export default {
         AppText
     },
     mounted () {
+        this.dataShop = this.$cookies.get('shop')
         this.dataUser = this.$cookies.get('admin')
         this.getProduct(this.limit, this.offset)
     },
@@ -92,7 +94,7 @@ export default {
                 limit: limit,
                 offset: offset,
                 status: 'active',
-                user_id: this.dataUser.id
+                shop_id: this.dataShop.id
             }
 
             const rest = await axios.post('/api/product/getAll', payload, { headers: { Authorization: token } })

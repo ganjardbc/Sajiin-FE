@@ -1,30 +1,27 @@
 <template>
     <div id="App">
-        <AppMobileLayout :title="'Customer'">
+        <AppMobileLayout :title="'Profile'">
             <div style="padding: 10px 0; width: 100%; overflow: unset;">
                 <div style="padding-top: 5px; width: 100%;">
                     <div class="display-flex border border-bottoms" style="padding-bottom: 15px;">
                         <div style="width: 45px; margin-right: 15px;">
                             <div class="image image-circle image-45px" style="margin: auto; text-align: center;">
-                                <i v-if="selectedCustomer && !selectedCustomer.image" class="post-top fa fa-lg fa-user-circle" style="color: #999;" />
-                                <img v-else :src="selectedCustomer && selectedCustomer.image ? (customerImageThumbnailUrl + selectedCustomer.image) : ''" alt="">
+                                <i v-if="user && !user.image" class="post-top fa fa-lg fa-user-circle" style="color: #999;" />
+                                <img v-else :src="user && user.image ? (adminImageThumbnailUrl + user.image) : ''" alt="">
                             </div>
                         </div>
-                        <div style="width: calc(100% - 95px);">
-                            <div class="fonts fonts-13 semibold">{{ selectedCustomer && selectedCustomer.name }}</div>
-                            <div class="fonts fonts-10 grey">{{ selectedCustomer && selectedCustomer.about }}</div>
+                        <div style="width: calc(100% - 125px);">
+                            <div class="fonts fonts-13 semibold">{{ user && user.name }}</div>
+                            <div class="fonts fonts-10 grey">{{ user && user.role_name }}</div>
                         </div>
-                        <div class="display-flex space-between" style="width: 35px;">
+                        <div class="display-flex space-between" style="width: 70px;">
+                            <button class="btn btn-small-icon btn-sekunder" @click="sendSocketOrder">
+                                <i class="fa fa-1x fa-paper-plane"></i>
+                            </button>
                             <button class="btn btn-small-icon btn-sekunder" @click="onShowEdit">
                                 <i class="fa fa-1x fa-cog"></i>
                             </button>
                         </div>
-                    </div>
-
-                    <div style="padding-top: 5px; padding-bottom: 15px;">
-                        <button class="btn btn-main btn-full" @click="sendSocketOrder">
-                            Send Order 
-                        </button>
                     </div>
 
                     <div v-if="dataOrder" class="border border-bottoms" style="padding-top: 5px; padding-bottom: 15px;">
@@ -40,7 +37,7 @@
 
                     <div class="border border-bottoms">
                         <div class="fonts fonts-10 black semibold" style="margin-bottom: 10px;">Menus</div>
-                        <AppListMenu :data.sync="sidebar" :isSidebarSmall="isSidebarSmall" :enableGridView="true" />
+                        <AppListDownMenu :data.sync="sidebar" :isSidebarSmall="isSidebarSmall" />
                     </div>
                 </div>
 
@@ -54,11 +51,11 @@
             </div>
         </AppMobileLayout>
 
-        <FormCustomer 
+        <FormUser 
             v-if="visiblePopup"
             :data.sync="selectedData"
             :message.sync="selectedMessage"
-            :title="'Edit Customer'" 
+            :title="'Edit User'" 
             :uploadImage="(data) => uploadImage(data)"
             :removeImage="removeImage"
             :onSave="(data) => onFormSave(data)"
@@ -76,17 +73,18 @@
 import { mapGetters, mapActions } from 'vuex'
 import M from 'moment'
 import axios from 'axios'
-import AppListMenu from '../../modules/AppListMenu'
+import AppListDownMenu from '../../modules/AppListDownMenu'
 import AppLoader from '../../modules/AppLoader'
 import AppMobileLayout from '../../modules/AppMobileLayout'
 import AppAlert from '../../modules/AppAlert'
-import FormCustomer from './forms/Customer'
+import FormUser from './forms/User'
 
 const sidebarCustomer = [
     // {icon: 'fa fa-lg fa-user', label: 'Subscribe', value: 0, link: 'customer-order'},
-    {icon: 'fa fa-lg fa-list-ol', label: 'Orders', value: 0, link: 'customer-order'},
+    {icon: 'fa fa-lg fa-list-ol', label: 'Order History', value: 0, link: 'customer-order'},
     {icon: 'fa fa-lg fa-star', label: 'Feedbacks', value: 0, link: 'customer-feedback'},
-    {icon: 'fa fa-lg fa-heart', label: 'Wiselists', value: 0, link: 'customer-whiselist'}
+    {icon: 'fa fa-lg fa-heart', label: 'Wiselists', value: 0, link: 'customer-whiselist'},
+    {icon: 'fa fa-lg fa-plus-circle', label: 'Register Restaurant', value: 0, link: '404'}
 ]
 
 export default {
@@ -114,21 +112,22 @@ export default {
     mounted () {
         this.selectedCustomer = this.$cookies.get('customer')
         this.dataOrder = this.$cookies.get('orderItem')
-        this.dataUser = this.$cookies.get('admin')
+        this.dataUser = this.$cookies.get('user')
+        this.sidebar[0].value = this.order 
     },
     components: {
-        FormCustomer,
+        FormUser,
         AppMobileLayout,
         AppLoader,
-        AppListMenu,
+        AppListDownMenu,
         AppAlert
     },
     methods: {
         ...mapActions({
-            removeCookieAuth: 'auth/removeCookieCustomerAuth',
-            signOut: 'customer/removeData',
+            removeCookieAuth: 'auth/removeCookieAuth',
+            signOut: 'auth/signOut',
             setToast: 'toast/setToast',
-            setCustomer: 'auth/setCustomer'
+            setUser: 'auth/setUser'
         }),
         makeToast (title) {
             const time = new Date().getTime()
@@ -139,14 +138,6 @@ export default {
             }
             this.setToast(payload)
         },
-        onLogout() {
-            var a = confirm('Logout customer ?')
-            if (a) {
-                this.removeCookieAuth()
-                this.signOut()
-                this.$router.push({ name: 'home' })
-            }
-        },
         onBuilded () {
             alert('still builded !')
         },
@@ -155,7 +146,7 @@ export default {
             this.formTitle = 'CREATE'
         },
         onShowEdit () {
-            this.selectedData = this.selectedCustomer
+            this.selectedData = this.dataUser
             this.visiblePopup = true 
             this.formTitle = 'EDIT'
         },
@@ -176,11 +167,11 @@ export default {
             this.visibleLoaderAction = true
 
             const token = 'Bearer '.concat(this.$cookies.get('token'))
-            const payload = this.selectedData.customer
-            const url = '/api/customer/uploadImage' 
+            const payload = this.selectedData
+            const url = '/api/user/uploadImage' 
 
             let formData = new FormData();
-            formData.append('customer_id', payload.customer_id);
+            formData.append('id', payload.id);
             formData.append('image', data);
 
             const rest = await axios.post(url, formData, { headers: { Authorization: token, 'Content-Type': 'multipart/form-data' } })
@@ -204,11 +195,11 @@ export default {
             this.visibleLoaderAction = true
 
             const token = 'Bearer '.concat(this.$cookies.get('token'))
-            const payload = this.selectedData.customer
-            const url = '/api/customer/removeImage' 
+            const payload = this.selectedData
+            const url = '/api/user/removeImage' 
 
             let formData = new FormData();
-            formData.append('customer_id', payload.customer_id);
+            formData.append('id', payload.id);
 
             var a = confirm('remove this image ?')
             if (a) {
@@ -230,7 +221,7 @@ export default {
 
             const token = 'Bearer '.concat(this.$cookies.get('token'))
             const payload = this.selectedForm
-            const url = '/api/customer/update' 
+            const url = '/api/user/update' 
 
             const rest = await axios.post(url, payload, { headers: { Authorization: token } })
 
@@ -241,14 +232,24 @@ export default {
                 const data = rest.data.data
                 if (data.length !== 0) {
                     this.onClose()
-                    this.$cookies.set('customer', data)
-                    this.setCustomer(data)
+                    this.setUser(data)
                 } else {
                     this.selectedMessage = rest.data.message
                 }
             } else {
                 alert('Proceed failed')
                 this.visibleLoaderAction = false
+            }
+        },
+        async onLogout() {
+            var a = confirm('Logout customer ?')
+            if (a) {
+                const rest = await this.signOut(this.token)
+                
+                if (rest.data.status === 'ok') {
+                    this.removeCookieAuth()
+                    this.$router.push({ name: 'home' })
+                }
             }
         },
         sendSocketOrder () {
@@ -267,7 +268,7 @@ export default {
     computed: {
         ...mapGetters({
             authenticated: 'auth/authenticated',
-            user: 'auth/user',
+            user: 'auth/admin',
             token: 'auth/token',
             order: 'order/countCustomer'
         })

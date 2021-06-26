@@ -79,7 +79,9 @@ export default {
             selectedData: null,
             datas: [],
             formPayload: null,
-            data: null 
+            data: null ,
+            dataShop: null,
+            dataUser: null
         }
     },
     mounted () {
@@ -88,6 +90,7 @@ export default {
         this.selectedData = orderItem && orderItem.table ? orderItem.table : null
         this.selectedID = this.selectedData ? this.selectedData.id : null 
         this.dataUser = this.$cookies.get('admin')
+        this.dataShop = this.$cookies.get('shop')
         this.getData()
     },
     components: {
@@ -123,7 +126,8 @@ export default {
                 table: this.selectedData,
                 order: {
                     ...this.formPayload.order,
-                    table_id: this.selectedData.id 
+                    table_id: this.selectedData.id,
+                    table_name: this.selectedData.name 
                 }
             }
             this.$cookies.set('orderItem', JSON.stringify(this.formPayload))
@@ -139,7 +143,7 @@ export default {
             const payload = {
                 limit: 1000,
                 offset: 0,
-                user_id: this.dataUser.id,
+                shop_id: this.dataShop.id,
                 status: 'active'
             }
             const rest = await axios.post('/api/table/getAll', payload, { headers: { Authorization: token } })

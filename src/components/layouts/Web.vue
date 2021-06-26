@@ -30,9 +30,9 @@
                             </div>
                             <div class="display-flex display-mobile">
                                 <div class="header-menu-list display-flex display-mobile">
-                                    <router-link v-if="!dataUser ? false : true" :to="{name: 'dashboard'}" style="display: block;" class="margin margin-left-5-px no-margin-padding">
+                                    <router-link v-if="!dataUser ? false : true" :to="{name: dataUser.role_name === 'customer' ? 'customer-home' : 'dashboard'}" style="display: block;" class="margin margin-left-5-px no-margin-padding">
                                         <button class="btn btn-small btn-sekunder btn-mobile">
-                                            DASHBOARD
+                                            {{ dataUser.role_name === 'customer' ? 'CUSTOMER' : 'DASHBOARD' }}
                                         </button>
                                     </router-link>
                                     <router-link v-if="dataUser ? false : true" :to="{name: 'login'}" style="display: block;" class="header-menu-mobile">

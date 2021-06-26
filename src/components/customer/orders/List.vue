@@ -134,14 +134,14 @@ export default {
             }
         },
         async getDataOrder () {
-            if (this.selectedCustomer) {
+            if (this.dataUser) {
                 this.visibleLoader = true 
 
                 const token = 'Bearer '.concat(this.$cookies.get('token'))
                 const payload = {
                     limit: 1000,
                     offset: 0,
-                    owner_id: this.selectedCustomer.id
+                    owner_id: this.dataUser.id
                 }
                 
                 const rest = await axios.post('/api/order/getAll', payload, { headers: { Authorization: token } })

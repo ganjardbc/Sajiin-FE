@@ -1,5 +1,5 @@
 <template>
-    <div id="AppListMenu">
+    <div id="AppListDownMenu">
         <ul :class="(isSidebarSmall 
                 ? 'content-scroll menu-list hover with-big-icon small' 
                 : 'content-scroll menu-list hover with-big-icon ' + (enableGridView ? 'display-flex wrap' : '')
@@ -48,7 +48,7 @@
 </template>
 <script>
 export default {
-    name: 'AppListMenu',
+    name: 'AppListDownMenu',
     data () {
         return {
             datas: this.data

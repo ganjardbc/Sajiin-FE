@@ -54,7 +54,7 @@ export default {
 
     actions: {
         async getCountCustomer ({ commit }, token = '') {
-            const customerData = $cookies.get('customer')
+            const customerData = $cookies.get('user')
             const payload = {
                 owner_id: customerData.id
             }

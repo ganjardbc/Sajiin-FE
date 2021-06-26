@@ -128,25 +128,27 @@ const payloadOrder = {
         delivery_fee: 0,
         total_price: 0,
         total_item: 0,
+        bills_price: 0,
+        change_price: 0,
         payment_status: 0,
         proof_of_payment: '',
         status: 'unconfirmed',
         type: 'personal',
         note: '',
-        config_id: null,
+        customer_name: '',
+        shop_name: '',
+        table_name: '',
+        payment_name: '',
+        shop_id: '',
         customer_id: '',
         table_id: '',
-        address_id: '',
-        shipment_id: '',
         payment_id: ''
     },
     details: null,
     customer: null,
     table: null,
-    address: null,
-    shipment: null,
     payment: null,
-    config: null
+    shop: null
 }
 
 export default {

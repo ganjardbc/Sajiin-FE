@@ -69,14 +69,14 @@ export default {
             this.getProduct(this.limit, this.offset)
         },
         async getProduct (limit, offset) {
-            if (this.selectedCustomer) {
+            if (this.dataUser) {
                 this.visibleLoader = true 
 
                 const token = 'Bearer '.concat(this.$cookies.get('token'))
                 const payload = {
                     limit: limit,
                     offset: offset,
-                    owner_id: this.selectedCustomer.id
+                    owner_id: this.dataUser.id
                 }
 
                 let product = []
