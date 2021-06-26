@@ -12,6 +12,7 @@ import SmartTable from 'vuejs-smart-table';
 import jquery from 'jquery';
 import VueSocketIO from 'vue-socket.io';
 import SocketIo from 'socket.io-client';
+import VueQrcodeReader from "vue-qrcode-reader";
 import "./assets/sass/app.css";
 import "./assets/icons/fontawesome/css/all.min.css";
 import Vue from 'vue';
@@ -28,6 +29,7 @@ axios.defaults.baseURL = api;
 window.$ = jquery;
 
 Vue.use(require('vue-moment'));
+Vue.use(VueQrcodeReader);
 Vue.use(Vuex);
 Vue.use(VueRouter);
 Vue.use(VueAxios, axios);

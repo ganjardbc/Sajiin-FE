@@ -2,9 +2,9 @@
     <div id="App" class="main-screen">
         <div style="padding-top: 25px;">
             <div v-if="dataShop && dataShop.id" style="padding-bottom: 25px;">
-                <div class="card box-shadow">
-                    <div class="display-flex space-between">
-                        <div>
+                <div class="card box-shadow" style="padding-top: 5px; padding-bottom: 5px;">
+                    <div class="display-flex space-between display-mobile">
+                        <div style="margin-top: 10px; margin-bottom: 10px;">
                             <div class="fonts fonts-11 black semibold">
                                 You're visiting {{ dataShop && dataShop.name }}
                             </div>
@@ -12,7 +12,7 @@
                                 you can create orders or view catalogs at this shop
                             </div>
                         </div>
-                        <div>
+                        <div style="margin-top: 10px; margin-bottom: 10px;">
                             <router-link :to="{name: 'customer-main'}">
                                 <button class="btn btn-main">
                                     Visit Shop <i class="icn fa fa-lg fa-arrow-right"></i>
@@ -23,9 +23,9 @@
                 </div>
             </div>
             <div v-else style="padding-bottom: 25px;">
-                <div class="card box-shadow">
-                    <div class="display-flex space-between">
-                        <div>
+                <div class="card box-shadow" style="padding-top: 5px; padding-bottom: 5px;">
+                    <div class="display-flex space-between display-mobile">
+                        <div style="margin-top: 10px; margin-bottom: 10px;">
                             <div class="fonts fonts-11 black semibold">
                                 Make your orders
                             </div>
@@ -33,7 +33,7 @@
                                 by scan the QR restaurant that have join with us
                             </div>
                         </div>
-                        <div>
+                        <div style="margin-top: 10px; margin-bottom: 10px;">
                             <AppButtonScanQr 
                                 :title="'Scan QR Code'"
                                 :btnClass="'btn btn-main'"
@@ -46,7 +46,7 @@
             <div v-if="!visibleLoaderOrder">
                 <div v-if="orders.length > 0">
                     <div style="padding-bottom: 25px;">
-                        <div class="fonts fonts-10 black semibold" style="margin-bottom: 10px;">Last Order</div>
+                        <div class="fonts fonts-10 black semibold" style="margin-bottom: 10px;">Active Order</div>
                         <AppCardOrder :data.sync="orders" />
                         <router-link :to="{name: 'customer-order'}" style="margin-top: 15px;">
                             <button class="btn btn-grey btn-full">

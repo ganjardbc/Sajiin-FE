@@ -626,7 +626,7 @@ export default {
                 const newData = rest.data.data
                 
                 newData && newData.map((dt) => {
-                    const code = this.deployUrl + (this.$router.mode === 'hash' ? '#' : '') + '/generate-customer/' + (dt.shop ? dt.shop.shop_id : token)
+                    const code = dt.shop ? dt.shop.shop_id : ''
                     return data.push({...dt, code: code})
                 })
 

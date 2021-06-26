@@ -1824,6 +1824,20 @@ a.btn {
   padding-top: 15px;
 }
 
+.card-qr-camera {
+  position: relative;
+  width: 350px;
+  height: 350px;
+  margin: auto;
+  border-radius: 12px;
+  overflow: hidden;
+}
+@media (max-width: 720px) {
+  .card-qr-camera {
+    width: 100%;
+  }
+}
+
 .display-flex {
   display: flex;
   flex-wrap: nowrap;
@@ -35405,6 +35419,12 @@ a.btn {
   color: #FB3640;
 }
 .fonts.black {
+  color: #151f2d;
+}
+.fonts.red {
+  color: #e3342f;
+}
+.fonts.error {
   color: #151f2d;
 }
 .fonts.white {

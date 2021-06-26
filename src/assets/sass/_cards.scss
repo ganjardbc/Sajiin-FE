@@ -649,3 +649,15 @@
         padding-top: 15px;
     }
 }
+
+.card-qr-camera {
+    position: relative; 
+    width: 350px; 
+    height: 350px;
+    margin: auto; 
+    border-radius: 12px; 
+    overflow: hidden;
+    @media (max-width: $min-width) {
+        width: 100%;
+    }
+}
