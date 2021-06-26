@@ -13,12 +13,12 @@
                         </div>
                     </div>
 
-                    <AppButtonQR 
+                    <!-- <AppButtonQR 
                         v-if="dataUser && dataUser.role_name !== 'customer'"
                         :buttonFull="true"
                         :code="code"
                         title="Show QR Restaurant" 
-                    />
+                    /> -->
 
                     <div class="border border-bottom margin margin-top-20-px"></div>
 
