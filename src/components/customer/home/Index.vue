@@ -43,7 +43,7 @@
                 </div>
             </div>
 
-            <div v-if="!visibleLoaderOrder">
+            <!-- <div v-if="!visibleLoaderOrder">
                 <div v-if="orders.length > 0">
                     <div style="padding-bottom: 25px;">
                         <div class="fonts fonts-10 black semibold" style="margin-bottom: 10px;">Active Order</div>
@@ -54,9 +54,9 @@
                             </button>
                         </router-link>
                     </div>
-                    </div>
                 </div>
-            <AppLoader v-else />
+            </div>
+            <AppLoader v-else /> -->
 
             <div style="padding-bottom: 0">
                 <div class="fonts fonts-10 black semibold" style="margin-bottom: 0;">Articles</div>
@@ -109,7 +109,7 @@ export default {
     mounted () {
         this.dataUser = this.$cookies.get('user')
         this.dataShop = this.$cookies.get('shop')
-        this.getDataOrder()
+        // this.getDataOrder()
         this.getArticle()
     },
     components: {
