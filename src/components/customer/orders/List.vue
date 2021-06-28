@@ -97,8 +97,13 @@ export default {
     },
     methods: {
         ...mapActions({
-            setToast: 'toast/setToast'
+            setToast: 'toast/setToast',
+            getCountOrder: 'order/getCountCustomer'
         }),
+        getLocalOrderCount () {
+            const token = 'Bearer '.concat(this.$cookies.get('token'))
+            this.getCountOrder(token)
+        },
         makeToast (title) {
             const payload = {
                 visible: true,
@@ -111,6 +116,7 @@ export default {
         },
         getRefresh () {
             this.getDataOrder()
+            this.getLocalOrderCount()
         },
         async changeStatusOrder (id, status) {
             var a = confirm('Change this order status ?')
