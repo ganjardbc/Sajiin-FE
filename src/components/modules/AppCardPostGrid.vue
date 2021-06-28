@@ -30,8 +30,10 @@
                             <!-- <div>
                                 <AppLikeButton :productID.sync="dt.id" />
                             </div> -->
-                            <router-link :to="{name: 'product', params: {id: dt.product_id}}" class="btn btn-small btn-main-reverse" style="display: block; padding-top: 5px; padding-bottom: 5px; padding-right: 5px; padding-left: 5px;">
-                                Detail <i class="icn fa fa-1x fa-arrow-right" />
+                            <router-link :to="{name: 'product', params: {id: dt.product_id}}">
+                                <button class="btn btn-small btn-main-reverse">
+                                    Detail <i class="icn fa fa-1x fa-arrow-right" />
+                                </button>
                             </router-link>
                         </div>
                     </div>

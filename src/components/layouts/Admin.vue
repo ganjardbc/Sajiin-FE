@@ -31,12 +31,6 @@
                         </form>
                     </div>
                     <div style="width: 100%;" class="display-flex right">
-                        <!-- <AppButtonQR 
-                            v-if="dataUser.role_name !== 'customer'"
-                            :buttonClass="'btn btn-white'"
-                            :code="code"
-                            title="Show QR" 
-                        /> -->
                         <router-link v-if="dataUser.role_name === 'customer'" :to="{name: 'customer-main'}" style="margin-left: 5px;" class="button-router-link">
                             <button class="btn btn-white btn-radius" title="Reports">
                                 CUSTOMER
@@ -50,7 +44,7 @@
                         <router-link :to="{name: 'notification'}" style="margin-left: 5px;" class="button-router-link">
                             <button class="btn btn-white btn-icon btn-radius" title="Notifications">
                                 <i class="fa fa-lg fa-bell" />
-                                <span class="notif">{{ countNotif }}</span>
+                                <span v-if="countNotif" class="notif">{{ countNotif }}</span>
                             </button>
                         </router-link>
                         <router-link :to="{name: 'profile'}" class="card-small-profile" style="margin-left: 5px;">
@@ -322,30 +316,30 @@ export default {
                 this.visibleLoader = false 
             }
         },
-        async saveNotif (title, subtitle) {
-            const time = new Date().getTime()
+        // async saveNotif (title, subtitle) {
+        //     const time = new Date().getTime()
 
-            const token = 'Bearer '.concat(this.$cookies.get('token'))
-            const payload = {
-                id: '',
-                notification_id: 'NF-' + time,
-                image: '',
-                title: title,
-                link: '',
-                status: 'active',
-                subtitle: subtitle,
-                is_read: 0
-            }
+        //     const token = 'Bearer '.concat(this.$cookies.get('token'))
+        //     const payload = {
+        //         id: '',
+        //         notification_id: 'NF-' + time,
+        //         image: '',
+        //         title: title,
+        //         link: '',
+        //         status: 'active',
+        //         subtitle: subtitle,
+        //         is_read: 0
+        //     }
 
-            const rest = await axios.post('/api/notification/post', payload, { headers: { Authorization: token } })
+        //     const rest = await axios.post('/api/notification/post', payload, { headers: { Authorization: token } })
 
-            if (rest && rest.status === 200) {
-                console.log('saveNotif', rest)
-                this.visibleLoader = false 
-            } else {
-                this.visibleLoader = false 
-            }
-        }
+        //     if (rest && rest.status === 200) {
+        //         console.log('saveNotif', rest)
+        //         this.visibleLoader = false 
+        //     } else {
+        //         this.visibleLoader = false 
+        //     }
+        // }
     },
     computed: {
         ...mapGetters({
@@ -390,7 +384,7 @@ export default {
             console.log('orderList', data)
             const lth = data.length
             const payload = data && data[lth - 1]
-            this.saveNotif(payload.title, payload.subtitle)
+            // this.saveNotif(payload.title, payload.subtitle)
             this.makeMultipleToast(payload.title, payload.subtitle)
             this.getLocalNotifCount()
             this.getLocalOrderCount()

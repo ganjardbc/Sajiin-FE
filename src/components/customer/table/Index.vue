@@ -85,9 +85,9 @@ export default {
         }
     },
     mounted () {
-        const orderItem = this.$cookies.get('orderItem')
-        this.formPayload = orderItem ? orderItem : null 
-        this.selectedData = orderItem && orderItem.table ? orderItem.table : null
+        const orderTable = this.$cookies.get('orderTable')
+        this.formPayload = orderTable ? orderTable : null 
+        this.selectedData = orderTable ? orderTable : null
         this.selectedID = this.selectedData ? this.selectedData.id : null 
         this.dataUser = this.$cookies.get('admin')
         this.dataShop = this.$cookies.get('shop')
@@ -122,18 +122,12 @@ export default {
         },
         onChangePayment () {
             this.formPayload = {
-                ...this.formPayload,
-                table: this.selectedData,
-                order: {
-                    ...this.formPayload.order,
-                    table_id: this.selectedData.id,
-                    table_name: this.selectedData.name 
-                }
+                ...this.selectedData
             }
-            this.$cookies.set('orderItem', JSON.stringify(this.formPayload))
+            this.$cookies.set('orderTable', JSON.stringify(this.formPayload))
             this.$cookies.set('table', this.selectedData)
             this.onShowHideSave()
-            this.makeToast('Table Updated')
+            this.makeToast('Table choosed')
             this.$router.back()
         },
         async getData () {

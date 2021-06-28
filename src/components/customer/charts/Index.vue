@@ -5,7 +5,7 @@
             <div style="padding: 10px 0; width: 100%; overflow: unset;">
                 <div class="width width-100">
                     <div class="width width-100 width-mobile">
-                        <div style="width: 100%; margin-bottom: 10px;">
+                        <div style="width: 100%; margin-bottom: 80px;">
                             <div class="display-flex space-between border-bottom" style="padding-bottom: 5px; margin-bottom: 10px;">
                                 <div class="display-flex" style="padding-top: 6px;">
                                     <div style="margin-right: 10px;">
@@ -301,16 +301,13 @@ export default {
         },
         makeOrder () {
             const data = this.dataItems
-            const newPayload = {
-                ...payloadOrder,
-                details: data
-            }
+            // const newPayload = {
+            //     ...payloadOrder,
+            //     details: data
+            // }
 
-            // console.log('makeOrder', newPayload)
-            // console.log('data', data)
-
-            this.setCart(newPayload)
-            this.$cookies.set('orderItem', JSON.stringify(newPayload))
+            this.setCart(data)
+            this.$cookies.set('orderItem', JSON.stringify(data))
             this.$router.push({ name: 'order' })
 
             this.makeToast('Order Saved to Draft')

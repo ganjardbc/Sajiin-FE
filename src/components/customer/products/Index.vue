@@ -41,7 +41,11 @@
                                 <div class="fonts fonts-10 semibold black" style="margin-bottom: 5px;">Description</div>
                                 <div class="fonts fonts-10 grey" style="margin-bottom: 15px;">{{ product && product.description }}</div>
                                 <div class="display-flex">
-                                    <router-link :to="{name: 'product-list'}" class="btn btn-small btn-primary">{{ product && product.ctr_name }}</router-link>
+                                    <router-link :to="{name: 'product-list'}">
+                                        <button class="btn btn-small btn-primary">
+                                            {{ product && product.ctr_name }}
+                                        </button>
+                                    </router-link>
                                 </div>
                             </div>
 

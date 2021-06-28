@@ -110,7 +110,7 @@
             v-if="visibleAlertExit" 
             :isLoader="visibleLoaderExit"
             :title="'Exit Shop ?'" 
-            :subtitle="'It will remove your carts.'"
+            :subtitle="'It will remove your Carts and Wishelists.'"
             :onClose="onShowHideExit" 
             :onSave="exitShop" />
     </div>
@@ -216,7 +216,7 @@ export default {
                 owner_id: this.dataUser.id
             }
 
-            const rest = await axios.post('/api/cart/deleteByUserID', payload, { headers: { Authorization: token } })
+            const rest = await axios.post('/api/shop/exit', payload, { headers: { Authorization: token } })
             if (rest && rest.status === 200) {
                 this.visibleLoaderExit = false
                 this.onShowHideExit()
@@ -224,6 +224,8 @@ export default {
                 this.setShop(null)
                 this.$cookies.remove('shop')
                 this.$cookies.remove('orderItem')
+                this.$cookies.remove('orderTable')
+                this.$cookies.remove('orderPayment')
                 this.$router.push({ name: 'customer-home' })
             } else {
                 this.onShowHideExit()

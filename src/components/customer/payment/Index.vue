@@ -83,9 +83,9 @@ export default {
         }
     },
     mounted () {
-        const orderItem = this.$cookies.get('orderItem')
-        this.formPayload = orderItem ? orderItem : null 
-        this.selectedData = orderItem && orderItem.payment ? orderItem.payment : null
+        const orderPayment = this.$cookies.get('orderPayment')
+        this.formPayload = orderPayment ? orderPayment : null 
+        this.selectedData = orderPayment ? orderPayment : null
         this.selectedID = this.selectedData ? this.selectedData.id : null 
         this.dataShop = this.$cookies.get('shop')
         this.getData()
@@ -119,18 +119,11 @@ export default {
         },
         onChangePayment () {
             this.formPayload = {
-                ...this.formPayload,
-                payment: this.selectedData,
-                order: {
-                    ...this.formPayload.order,
-                    payment_id: this.selectedData.id,
-                    payment_name: this.selectedData.name 
-                }
+                ...this.selectedData
             }
-            console.log('formPayload', this.formPayload)
-            this.$cookies.set('orderItem', JSON.stringify(this.formPayload))
+            this.$cookies.set('orderPayment', JSON.stringify(this.formPayload))
             this.onShowHideSave()
-            this.makeToast('Shipment Updated')
+            this.makeToast('Payment Selected')
             this.$router.back()
         },
         async getData () {

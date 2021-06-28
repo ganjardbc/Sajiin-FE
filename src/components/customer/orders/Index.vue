@@ -150,12 +150,12 @@
                                     </div>
                                     <div class="width width-49">
                                         <button 
-                                            v-if="selectedTable && selectedPayment && selectedCustomer" 
+                                            v-if="selectedTable && selectedPayment && dataUser && dataShop" 
                                             class="btn btn-main btn-full" 
                                             @click="onShowHideSave">
                                             Order Now
                                         </button>
-                                        <button v-else class="btn btn-primary btn-full">
+                                        <button v-else class="btn btn-primary btn-full" @click="onShowHideSave">
                                             Order Now
                                         </button>
                                     </div>
@@ -200,6 +200,36 @@ import FormAddress from './FormAddress'
 import FormShipment from './FormShipment'
 import FormPayment from './FormPayment'
 
+const payloadOrder = {
+    order: {
+        id: '',
+        order_id: '',
+        delivery_fee: 0,
+        total_price: 0,
+        total_item: 0,
+        bills_price: 0,
+        change_price: 0,
+        payment_status: 0,
+        proof_of_payment: '',
+        status: 'unconfirmed',
+        type: 'personal',
+        note: '',
+        customer_name: '',
+        shop_name: '',
+        table_name: '',
+        payment_name: '',
+        shop_id: '',
+        customer_id: '',
+        table_id: '',
+        payment_id: ''
+    },
+    details: null,
+    customer: null,
+    table: null,
+    payment: null,
+    shop: null
+}
+
 export default {
     name: 'product',
     data () {
@@ -218,7 +248,7 @@ export default {
             totalProduct: 0,
             totalPPN: 0,
             ppn: 0,
-            formPayload: null,
+            formPayload: {...payloadOrder},
             data: [],
             dataPayment: [],
             dataShipment: [],
@@ -236,20 +266,24 @@ export default {
     mounted () {
         const orderItem = this.$cookies.get('orderItem')
 
-        this.data = orderItem.details
+        this.data = JSON.parse(orderItem)
         this.dataUser = this.$cookies.get('user')
         this.dataShop = this.$cookies.get('shop')
-        this.formPayload = {...orderItem}
-        this.selectedTable = orderItem && orderItem.table ? orderItem.table : null 
-        this.selectedCustomer = orderItem && orderItem.customer ? orderItem.customer : null 
-        this.selectedPayment = orderItem && orderItem.payment ? orderItem.payment : null
+        this.selectedTable = this.$cookies.get('orderTable')
+        this.selectedPayment = this.$cookies.get('orderPayment')
+        this.formPayload = {
+            ...payloadOrder,
+            details: this.data
+        }
 
         this.onTotal(this.data)
         this.onChangeOnlyCustomer(this.dataUser)
         this.onChangeOnlyShop(this.dataShop)
+        this.onChangeOnlyPayment(this.selectedPayment)
+        this.onChangeOnlyTable(this.selectedTable)
 
-        // console.log('orderItem', orderItem)
-        // console.log('selected', this.dataShop)
+        // console.log('formPayload', this.formPayload)
+        // console.log('selectedTable', this.selectedTable)
     },
     components: {
         FormPayment,
@@ -299,12 +333,6 @@ export default {
         onShowHideCancel () {
             this.visibleAlertCancel = !this.visibleAlertCancel
         },
-        onCancelOrder () {
-            this.makeToast('Order Canceled')
-            this.$cookies.remove('orderItem')
-            this.$cookies.remove('table')
-            this.$router.push({ name: 'customer-main' })
-        },
         onTotal (data) {
             let qty = 0
             let price = 0
@@ -344,7 +372,6 @@ export default {
                     payment_name: data ? data.name : ''
                 }
             }
-            this.$cookies.set('orderItem', JSON.stringify(this.formPayload))
         },
         onChangeOnlyTable (data) {
             this.formPayload = {
@@ -356,7 +383,6 @@ export default {
                     table_name: data ? data.name : ''
                 }
             }
-            this.$cookies.set('orderItem', JSON.stringify(this.formPayload))
         },
         onChangeOnlyShop (data) {
             this.formPayload = {
@@ -368,7 +394,6 @@ export default {
                     shop_name: data ? data.name : ''
                 }
             }
-            this.$cookies.set('orderItem', JSON.stringify(this.formPayload))
         },
         onChangeOnlyCustomer (data) { 
             this.formPayload = {
@@ -377,10 +402,17 @@ export default {
                 order: {
                     ...this.formPayload.order,
                     customer_id: data ? data.id : 0,
-                    customer_name: data ? data.name : ''
+                    customer_name: data ? data.name : '',
+                    note: data ? data.name : ''
                 }
             }
-            this.$cookies.set('orderItem', JSON.stringify(this.formPayload))
+        },
+        onCancelOrder () {
+            this.makeToast('Order Canceled')
+            this.$cookies.remove('orderItem')
+            this.$cookies.remove('orderTable')
+            this.$cookies.remove('orderPayment')
+            this.$router.push({ name: 'customer-main' })
         },
         async onSaveOrder () {
             this.visibleLoaderSave = true
@@ -405,11 +437,37 @@ export default {
                 this.getLocalOrderCount()
                 this.sendSocketOrder(data.order.order_id)
                 this.$cookies.remove('orderItem')
+                this.$cookies.remove('orderTable')
+                this.$cookies.remove('orderPayment')
                 this.$router.push({ name: 'customer-order-list' })
             } else {
                 this.visibleAlertSave = false
                 this.onShowHideSave()
                 this.makeToast('Order Failed to Create')
+            }
+        },
+        async saveNotif (title, subtitle) {
+            const time = new Date().getTime()
+
+            const token = 'Bearer '.concat(this.$cookies.get('token'))
+            const payload = {
+                id: '',
+                notification_id: 'NF-' + time,
+                image: '',
+                title: title,
+                link: '',
+                status: 'active',
+                subtitle: subtitle,
+                is_read: 0,
+                owner_id: this.dataShop.user_id
+            }
+
+            const rest = await axios.post('/api/notification/postOwner', payload, { headers: { Authorization: token } })
+
+            if (rest && rest.status === 200) {
+                this.visibleLoader = false 
+            } else {
+                this.visibleLoader = false 
             }
         },
         sendSocketOrder (order_id) {
@@ -423,6 +481,7 @@ export default {
             }
 
             this.$socket.emit('order', payload)
+            this.saveNotif(payload.title, payload.subtitle)
         }
     }
 }

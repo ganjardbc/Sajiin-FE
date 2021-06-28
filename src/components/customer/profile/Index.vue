@@ -83,7 +83,7 @@ const sidebarCustomer = [
     // {icon: 'fa fa-lg fa-user', label: 'Subscribe', value: 0, link: 'customer-order'},
     {icon: 'fa fa-lg fa-list-ol', label: 'Order History', value: 0, link: 'customer-order'},
     {icon: 'fa fa-lg fa-star', label: 'Feedbacks', value: 0, link: 'customer-feedback'},
-    {icon: 'fa fa-lg fa-heart', label: 'Wiselists', value: 0, link: 'customer-whiselist'},
+    {icon: 'fa fa-lg fa-heart', label: 'Wishelists', value: 0, link: 'customer-whiselist'},
     {icon: 'fa fa-lg fa-plus-circle', label: 'Register Restaurant', value: 0, link: '404'}
 ]
 
@@ -103,6 +103,7 @@ export default {
             selectedMessage: null,
             dataUser: null,
             dataOrder: null,
+            dataShop: null,
             isSidebarSmall: false,
             popupCreate: false,
             datas: [],
@@ -113,6 +114,7 @@ export default {
         this.selectedCustomer = this.$cookies.get('customer')
         this.dataOrder = this.$cookies.get('orderItem')
         this.dataUser = this.$cookies.get('user')
+        this.dataShop = this.$cookies.get('shop')
         this.sidebar[0].value = this.order 
     },
     components: {
@@ -252,9 +254,34 @@ export default {
                 }
             }
         },
-        sendSocketOrder () {
+        async saveNotif (title, subtitle) {
+            const time = new Date().getTime()
+
+            const token = 'Bearer '.concat(this.$cookies.get('token'))
             const payload = {
-                order_id: '0001',
+                id: '',
+                notification_id: 'NF-' + time,
+                image: '',
+                title: title,
+                link: '',
+                status: 'active',
+                subtitle: subtitle,
+                is_read: 0,
+                owner_id: this.dataShop.user_id
+            }
+
+            const rest = await axios.post('/api/notification/postOwner', payload, { headers: { Authorization: token } })
+
+            if (rest && rest.status === 200) {
+                this.visibleLoader = false 
+            } else {
+                this.visibleLoader = false 
+            }
+        },
+        sendSocketOrder () {
+            const time = new Date().getTime()
+            const payload = {
+                order_id: 'ODR-' + time,
                 customer_id: this.selectedCustomer ? this.selectedCustomer.id : '',
                 owner_id: this.dataUser ? this.dataUser.id : '',
                 title: 'Orders',
@@ -263,6 +290,7 @@ export default {
             }
 
             this.$socket.emit('order', payload)
+            this.saveNotif(payload.title, payload.order_id)
         }
     },
     computed: {

@@ -31,17 +31,17 @@
                             <div class="display-flex display-mobile">
                                 <div class="header-menu-list display-flex display-mobile">
                                     <router-link v-if="!dataUser ? false : true" :to="{name: dataUser.role_name === 'customer' ? 'customer-home' : 'dashboard'}" style="display: block;" class="margin margin-left-5-px no-margin-padding">
-                                        <button class="btn btn-small btn-sekunder btn-mobile">
+                                        <button class="btn btn-sekunder btn-mobile">
                                             {{ dataUser.role_name === 'customer' ? 'CUSTOMER' : 'DASHBOARD' }}
                                         </button>
                                     </router-link>
                                     <router-link v-if="dataUser ? false : true" :to="{name: 'login'}" style="display: block;" class="header-menu-mobile">
-                                        <button class="btn btn-small btn-sekunder btn-mobile">
+                                        <button class="btn btn-sekunder btn-mobile">
                                             LOGIN
                                         </button>
                                     </router-link>
                                     <router-link v-if="dataUser ? false : true" :to="{name: 'register'}" style="display: block;" class="margin margin-left-5-px no-margin-padding">
-                                        <button class="btn btn-small btn-main btn-mobile">
+                                        <button class="btn btn-main btn-mobile">
                                             REGISTER
                                         </button>
                                     </router-link>

@@ -177,6 +177,8 @@ export default {
       $cookies.remove('permissions')
       $cookies.remove('rawUser')
       $cookies.remove('orderItem')
+      $cookies.remove('orderTable')
+      $cookies.remove('orderPayment')
       $cookies.remove('customer')
       $cookies.remove('shop')
 
