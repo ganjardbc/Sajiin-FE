@@ -144,7 +144,7 @@ export default {
             icon: icon,
             countNotif: 0,
             sidebar: null,
-            showBar: true,
+            showBar: false,
             classSidebar: 'sidebar smalls',
             classSidebarMenu: 'menu-list hover with-icon smalls',
             dataUser: null,
