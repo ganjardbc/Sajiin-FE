@@ -338,11 +338,9 @@ import AppImage from '../../modules/AppImage'
 import AppPopupForm from '../../modules/AppPopupForm'
 import Form from './Form'
 
-const time = new Date().getTime()
-
 const payload = {
     id: '',
-    shop_id: 'SH-' + time,
+    shop_id: '',
     image: '',
     name: '',
     about: '',
@@ -512,10 +510,16 @@ export default {
             this.visibleLoaderAction = true
 
             const token = 'Bearer '.concat(this.$cookies.get('token'))
-            const payload = this.formData
+            const time = new Date().getTime()
+            const newPayload = this.title === 'CREATE' ? {
+                ...this.formData,
+                shop_id: 'SH-' + time.toString()
+            } : {
+                ...this.formData
+            }
             const url = this.formTitle === 'CREATE' ? '/api/shop/post' : '/api/shop/update' 
 
-            const rest = await axios.post(url, payload, { headers: { Authorization: token } })
+            const rest = await axios.post(url, newPayload, { headers: { Authorization: token } })
 
             if (rest && rest.status === 200) {
                 this.onShowHideSave()
