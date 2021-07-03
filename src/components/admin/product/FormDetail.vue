@@ -189,11 +189,9 @@ import AppPopupForm from '../../modules/AppPopupForm'
 import AppAlert from '../../modules/AppAlert'
 import AppLoader from '../../modules/AppLoader'
 
-const time = new Date().getTime()
-
 const payload = {
     id: '',
-    proddetail_id: 'PD-' + time,
+    proddetail_id: '',
     name: '',
     description: '',
     price: '',
@@ -297,7 +295,15 @@ export default {
             const payload = {...this.payload, product_id: this.selectedId}
             const url = this.isCreate ? '/api/productDetail/post' : '/api/productDetail/update' 
 
-            const rest = await axios.post(url, payload, { headers: { Authorization: token } })
+            const time = new Date().getTime()
+            const newPayload = this.isCreate ? {
+                ...payload,
+                proddetail_id: 'PD-' + time.toString()
+            } : {
+                ...payload
+            }
+
+            const rest = await axios.post(url, newPayload, { headers: { Authorization: token } })
 
             if (rest && rest.status === 200) {
                 this.onShowHideSave()

@@ -124,11 +124,9 @@ const tabs = [
     {id: 2, label: 'Permissions', status: ''}
 ]
 
-const time = new Date().getTime()
-
 const payload = {
     id: '',
-    role_id: 'RL-' + time,
+    role_id: '',
     role_name: '',
     status: 'active',
     description: ''
@@ -185,7 +183,13 @@ export default {
             this.selectedIndex = data
         },
         onButtonSave () {
-            const newPayload = this.formData
+            const time = new Date().getTime()
+            const newPayload = this.title === 'CREATE' ? {
+                ...this.formData,
+                role_id: 'RL-' + time.toString()
+            } : {
+                ...this.formData
+            }
             this.onSave(newPayload)
         }
     },

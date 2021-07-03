@@ -137,11 +137,9 @@
 import AppSideForm from '../../modules/AppSideForm'
 import AppImage from '../../modules/AppImage'
 
-const time = new Date().getTime()
-
 const payload = {
     id: '',
-    article_id: 'AR-' + time,
+    article_id: '',
     image: '',
     title: '',
     subtitle: '',
@@ -196,7 +194,13 @@ export default {
     },
     methods: {
         onButtonSave () {
-            const newPayload = this.formData
+            const time = new Date().getTime()
+            const newPayload = this.title === 'CREATE' ? {
+                ...this.formData,
+                article_id: 'AR-' + time.toString()
+            } : {
+                ...this.formData
+            }
             this.onSave(newPayload)
         }
     },

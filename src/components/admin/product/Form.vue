@@ -209,12 +209,10 @@ const tabs = [
     {id: 4, label: 'Topings', status: ''}
 ]
 
-const time = new Date().getTime()
-
 const payload = {
     product: {
         id: '',
-        product_id: 'PR-' + time,
+        product_id: '',
         name: '',
         description: '',
         note: '',
@@ -300,7 +298,16 @@ export default {
             }
         },
         onButtonSave () {
-            const newPayload = this.formData
+            const time = new Date().getTime()
+            const newPayload = this.title === 'CREATE' ? {
+                ...this.formData,
+                product: {
+                    ...this.formData.product,
+                    product_id: 'PR-' + time.toString()
+                }
+            } : {
+                ...this.formData
+            }
             this.onSave(newPayload)
         },
         onChangeTabs (data) {

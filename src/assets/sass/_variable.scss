@@ -38,6 +38,32 @@ $font_path: './fonts/';
     src: url($font_path + "Graphik/Graphik-Black.ttf");
 }
 
+//animation
+@mixin animate_1() {
+	-webkit-transition: all .25s ease;
+	   -moz-transition: all .25s ease;
+	    -ms-transition: all .25s ease;
+	     -o-transition: all .25s ease;
+	        transition: all .25s ease;
+}
+
+@mixin animate_2() {
+	-webkit-transition: all .35s cubic-bezier(0,1,0.5,1);
+		-moz-transition: all .35s cubic-bezier(0,1,0.5,1);
+		 -ms-transition: all .35s cubic-bezier(0,1,0.5,1);
+		  -o-transition: all .35s cubic-bezier(0,1,0.5,1);
+		     transition: all .35s cubic-bezier(0,1,0.5,1);
+}
+
+@mixin animate_none() {
+	-webkit-transition: all 0 cubic-bezier(0,0,0,0);
+		-moz-transition: all 0 cubic-bezier(0,0,0,0);
+		 -ms-transition: all 0 cubic-bezier(0,0,0,0);
+		  -o-transition: all 0 cubic-bezier(0,0,0,0);
+		     transition: all 0 cubic-bezier(0,0,0,0);
+}
+
+
 // width
 $max-width: 1200px;
 $min-width: 720px;
@@ -161,4 +187,166 @@ $border: 1px solid $tiny-grey;
 
 .cursor-pointer {
 	cursor: pointer;
+}
+
+// scrollbar
+@mixin transparantScrollBar() {
+    // normal
+    &::-moz-scrollbar {
+        width: 6px;
+        height: 6px;
+        background-color: rgba(0, 0, 0, 0);
+    }
+    &::-moz-scrollbar-thumb {
+        background-color: rgba(0,0,0,0.3);
+        -moz-border-radius: 1ex;
+        border-radius: 1ex;
+    }
+    &::-moz-scrollbar-corner {
+        background-color: #fff;
+    }
+
+    // webkit
+    &::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+        background-color: rgba(0, 0, 0, 0);
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: rgba(0,0,0,0.3);
+        -webkit-border-radius: 1ex;
+        border-radius: 1ex;
+    }
+    &::-webkit-scrollbar-corner {
+        background-color: #fff;
+    }
+}
+
+@mixin transparantScrollBarHover() {
+    
+    &::scrollbar {
+        width: 0;
+        height: 6px;
+        background-color: rgba(0, 0, 0, 0);
+    }
+    &::scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0);
+        border-radius: 1ex;
+        border-radius: 1ex;
+    }
+    &::scrollbar-corner {
+        background-color: #fff;
+    }
+
+    &::-webkit-scrollbar {
+        width: 0;
+        height: 6px;
+        background-color: rgba(0, 0, 0, 0);
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0);
+        -webkit-border-radius: 1ex;
+        border-radius: 1ex;
+    }
+    &::-webkit-scrollbar-corner {
+        background-color: #fff;
+    }
+
+    &::-moz-scrollbar {
+        width: 0;
+        height: 6px;
+        background-color: rgba(0, 0, 0, 0);
+    }
+    &::-moz-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0);
+        -moz-border-radius: 1ex;
+        border-radius: 1ex;
+    }
+    &::-moz-scrollbar-corner {
+        background-color: #fff;
+    }
+
+    &:hover {
+        &::scrollbar {
+            width: 6px;
+        }
+        &::-webkit-scrollbar {
+            width: 6px;
+        }
+        &::-moz-scrollbar {
+            width: 6px;
+        }
+
+        &::scrollbar-thumb {
+            @include animate_1();
+            background-color: rgba(0, 0, 0, 0.3);
+            width: 6px;
+        }
+        &::-webkit-scrollbar-thumb {
+            @include animate_1();
+            background-color: rgba(0, 0, 0, 0.3);
+            width: 6px;
+        }
+        &::-moz-scrollbar-thumb {
+            @include animate_1();
+            background-color: rgba(0, 0, 0, 0.3);
+            width: 6px;
+        }
+    }
+}
+
+@mixin greyScrollBar() {
+    &::scrollbar {
+        width: 6px;
+        height: 6px;
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+    &::scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.1);
+        border-radius: 1ex;
+        border-radius: 1ex;
+    }
+    &::scrollbar-corner {
+        background-color: #fff;
+    }
+
+    &::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.1);
+        -webkit-border-radius: 1ex;
+        border-radius: 1ex;
+    }
+    &::-webkit-scrollbar-corner {
+        background-color: #fff;
+    }
+
+    &::-moz-scrollbar {
+        width: 6px;
+        height: 6px;
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+    &::-moz-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.1);
+        -webkit-border-radius: 1ex;
+        border-radius: 1ex;
+    }
+    &::-moz-scrollbar-corner {
+        background-color: #fff;
+    }
+}
+
+.change-scrollbar {
+    @include transparantScrollBarHover();
+    scroll-behavior: smooth;
+    overflow-y: overlay;
+}
+
+.change-scrollbar-normal {
+    @include greyScrollBar();
+    scroll-behavior: smooth;
+    overflow-y: overlay;
 }

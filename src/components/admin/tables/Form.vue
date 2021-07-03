@@ -227,11 +227,9 @@ const tabs = [
     {label: 'Shop', status: ''}
 ]
 
-const time = new Date().getTime()
-
 const payload = {
     id: '',
-    table_id: 'CT-' + time,
+    table_id: '',
     code: '',
     image: '',
     name: '',
@@ -324,7 +322,13 @@ export default {
             this.openCreateShop = !this.openCreateShop
         },
         onButtonSave () {
-            const newPayload = this.formData
+            const time = new Date().getTime()
+            const newPayload = this.title === 'CREATE' ? {
+                ...this.formData,
+                table_id: 'CT-' + time.toString()
+            } : {
+                ...this.formData
+            }
             this.onSave(newPayload)
         }
     },

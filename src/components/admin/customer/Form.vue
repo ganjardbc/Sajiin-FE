@@ -9,7 +9,6 @@
             :onClose="onClose">
 
             <AppTabs 
-                v-if="title !== 'CREATE' ? true : false"
                 :selectedIndex="selectedIndex" 
                 :data="tabs" 
                 :onChange="(data) => onChangeTabs(data)" 
@@ -206,11 +205,9 @@ const tabs = [
     {id: 3, label: 'Address', status: ''}
 ]
 
-const time = new Date().getTime()
-
 const payload = {
     id: '',
-    customer_id: 'CC-' + time,
+    customer_id: '',
     image: '',
     name: '',
     email: '',
@@ -305,7 +302,13 @@ export default {
             this.popupCreate = !this.popupCreate
         },
         onButtonSave () {
-            const newPayload = this.formData
+            const time = new Date().getTime()
+            const newPayload = this.title === 'CREATE' ? {
+                ...this.formData,
+                customer_id: 'CC-' + time.toString()
+            } : {
+                ...this.formData
+            }
             this.onSave(newPayload)
         },
         onChangeTabs (data) {

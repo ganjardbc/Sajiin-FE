@@ -77,11 +77,9 @@
 <script>
 import AppSideForm from '../../modules/AppSideForm'
 
-const time = new Date().getTime()
-
 const payload = {
     id: '',
-    key: 'BZ-' + time,
+    key: '',
     value: '',
     type: '',
     description: ''
@@ -124,7 +122,13 @@ export default {
     },
     methods: {
         onButtonSave () {
-            const newPayload = this.formData
+            const time = new Date().getTime()
+            const newPayload = this.title === 'CREATE' ? {
+                ...this.formData,
+                key: 'BZ-' + time.toString()
+            } : {
+                ...this.formData
+            }
             this.onSave(newPayload)
         }
     },

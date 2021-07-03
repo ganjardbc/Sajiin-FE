@@ -120,11 +120,9 @@ import AppPopupForm from '../../modules/AppPopupForm'
 import AppAlert from '../../modules/AppAlert'
 import AppLoader from '../../modules/AppLoader'
 
-const time = new Date().getTime()
-
 const payload = {
     id: '',
-    prodimage_id: 'PI-' + time,
+    prodimage_id: '',
     image: '',
     description: '',
     product_id: 0
@@ -232,11 +230,19 @@ export default {
             const payload = {...this.payload, product_id: this.selectedId}
             const url = this.isCreate ? '/api/productImage/post' : '/api/productImage/update' 
 
+            const time = new Date().getTime()
+            const newPayload = this.isCreate ? {
+                ...payload,
+                prodimage_id: 'PI-' + time.toString()
+            } : {
+                ...payload
+            }
+
             let formData = new FormData();
-            formData.append('prodimage_id', payload.prodimage_id);
-            formData.append('image', payload.image);
-            formData.append('description', payload.description);
-            formData.append('product_id', payload.product_id);
+            formData.append('prodimage_id', newPayload.prodimage_id);
+            formData.append('image', newPayload.image);
+            formData.append('description', newPayload.description);
+            formData.append('product_id', newPayload.product_id);
 
             const rest = await axios.post(url, formData, { headers: { Authorization: token, 'Content-Type': 'multipart/form-data' } })
 

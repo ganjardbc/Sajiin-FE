@@ -90,6 +90,130 @@
   cursor: pointer;
 }
 
+.change-scrollbar {
+  scroll-behavior: smooth;
+  overflow-y: overlay;
+}
+.change-scrollbar::scrollbar {
+  width: 0;
+  height: 6px;
+  background-color: rgba(0, 0, 0, 0);
+}
+.change-scrollbar::scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0);
+  border-radius: 1ex;
+  border-radius: 1ex;
+}
+.change-scrollbar::scrollbar-corner {
+  background-color: #fff;
+}
+.change-scrollbar::-webkit-scrollbar {
+  width: 0;
+  height: 6px;
+  background-color: rgba(0, 0, 0, 0);
+}
+.change-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0);
+  -webkit-border-radius: 1ex;
+  border-radius: 1ex;
+}
+.change-scrollbar::-webkit-scrollbar-corner {
+  background-color: #fff;
+}
+.change-scrollbar::-moz-scrollbar {
+  width: 0;
+  height: 6px;
+  background-color: rgba(0, 0, 0, 0);
+}
+.change-scrollbar::-moz-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0);
+  -moz-border-radius: 1ex;
+  border-radius: 1ex;
+}
+.change-scrollbar::-moz-scrollbar-corner {
+  background-color: #fff;
+}
+.change-scrollbar:hover::scrollbar {
+  width: 6px;
+}
+.change-scrollbar:hover::-webkit-scrollbar {
+  width: 6px;
+}
+.change-scrollbar:hover::-moz-scrollbar {
+  width: 6px;
+}
+.change-scrollbar:hover::scrollbar-thumb {
+  -webkit-transition: all 0.25s ease;
+  -moz-transition: all 0.25s ease;
+  -ms-transition: all 0.25s ease;
+  -o-transition: all 0.25s ease;
+  transition: all 0.25s ease;
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 6px;
+}
+.change-scrollbar:hover::-webkit-scrollbar-thumb {
+  -webkit-transition: all 0.25s ease;
+  -moz-transition: all 0.25s ease;
+  -ms-transition: all 0.25s ease;
+  -o-transition: all 0.25s ease;
+  transition: all 0.25s ease;
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 6px;
+}
+.change-scrollbar:hover::-moz-scrollbar-thumb {
+  -webkit-transition: all 0.25s ease;
+  -moz-transition: all 0.25s ease;
+  -ms-transition: all 0.25s ease;
+  -o-transition: all 0.25s ease;
+  transition: all 0.25s ease;
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 6px;
+}
+
+.change-scrollbar-normal {
+  scroll-behavior: smooth;
+  overflow-y: overlay;
+}
+.change-scrollbar-normal::scrollbar {
+  width: 6px;
+  height: 6px;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.change-scrollbar-normal::scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 1ex;
+  border-radius: 1ex;
+}
+.change-scrollbar-normal::scrollbar-corner {
+  background-color: #fff;
+}
+.change-scrollbar-normal::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.change-scrollbar-normal::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.1);
+  -webkit-border-radius: 1ex;
+  border-radius: 1ex;
+}
+.change-scrollbar-normal::-webkit-scrollbar-corner {
+  background-color: #fff;
+}
+.change-scrollbar-normal::-moz-scrollbar {
+  width: 6px;
+  height: 6px;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.change-scrollbar-normal::-moz-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.1);
+  -webkit-border-radius: 1ex;
+  border-radius: 1ex;
+}
+.change-scrollbar-normal::-moz-scrollbar-corner {
+  background-color: #fff;
+}
+
 .wrapper {
   display: flex;
 }
@@ -41727,6 +41851,32 @@ table thead, table tbody tr {
   font-family: "Graphik", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+*::-moz-scrollbar {
+  width: 6px;
+  height: 6px;
+  background-color: rgba(0, 0, 0, 0);
+}
+*::-moz-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3);
+  -moz-border-radius: 1ex;
+  border-radius: 1ex;
+}
+*::-moz-scrollbar-corner {
+  background-color: #fff;
+}
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  background-color: rgba(0, 0, 0, 0);
+}
+*::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3);
+  -webkit-border-radius: 1ex;
+  border-radius: 1ex;
+}
+*::-webkit-scrollbar-corner {
+  background-color: #fff;
 }
 
 a {

@@ -161,11 +161,9 @@
 import AppSideForm from '../../modules/AppSideForm'
 import AppImage from '../../modules/AppImage'
 
-const time = new Date().getTime()
-
 const payload = {
     id: '',
-    notification_id: 'CT-' + time,
+    notification_id: '',
     image: '',
     title: '',
     link: '',
@@ -213,7 +211,13 @@ export default {
     },
     methods: {
         onButtonSave () {
-            const newPayload = this.formData
+            const time = new Date().getTime()
+            const newPayload = this.title === 'CREATE' ? {
+                ...this.formData,
+                notification_id: 'NF-' + time.toString()
+            } : {
+                ...this.formData
+            }
             this.onSave(newPayload)
         }
     },

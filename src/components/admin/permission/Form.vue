@@ -101,11 +101,9 @@
 <script>
 import AppSideForm from '../../modules/AppSideForm'
 
-const time = new Date().getTime()
-
 const payload = {
     id: '',
-    permission_id: 'PR-' + time,
+    permission_id: '',
     name: '',
     status: 'active',
     description: ''
@@ -151,7 +149,13 @@ export default {
             this.selectedIndex = data
         },
         onButtonSave () {
-            const newPayload = this.formData
+            const time = new Date().getTime()
+            const newPayload = this.title === 'CREATE' ? {
+                ...this.formData,
+                permission_id: 'PR-' + time.toString()
+            } : {
+                ...this.formData
+            }
             this.onSave(newPayload)
         }
     },

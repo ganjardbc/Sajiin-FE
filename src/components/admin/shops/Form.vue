@@ -284,11 +284,9 @@ const tabs = [
     {label: 'Customers', status: ''}
 ]
 
-const time = new Date().getTime()
-
 const payload = {
     id: '',
-    shop_id: 'SH-' + time,
+    shop_id: '',
     image: '',
     name: '',
     about: '',
@@ -357,7 +355,13 @@ export default {
             this.selectedIndex = data
         },
         onButtonSave () {
-            const newPayload = this.formData
+            const time = new Date().getTime()
+            const newPayload = this.title === 'CREATE' ? {
+                ...this.formData,
+                shop_id: 'SH-' + time.toString()
+            } : {
+                ...this.formData
+            }
             this.onSave(newPayload)
         }
     },
