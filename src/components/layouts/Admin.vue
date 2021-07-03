@@ -1,28 +1,31 @@
 <template>
     <div id="admin">
-        <div :class="isSidebarSmall ? 'sidebar small' : 'sidebar'">
+        <div :class="showBar ? 'sidebar show' : 'sidebar'">
             <div class="header">
                 <div class="header-content display-flex space-between">
                     <router-link :to="{name: 'home'}" class="logo" style="width: 85%; margin: auto; margin-top: 13px;">
                         <img :src="logo" alt="SAJI-IN" style="width: 100%;">
                     </router-link>
                     <div class="mobile-visible" style="width: calc(100% - 8px); padding-left: 4px; padding-right: 4px;">
-                        <router-link :to="{name: 'home'}">
-                            <div class="image image-padding">
-                                <img :src="icon" alt="">
-                            </div>
-                        </router-link>
+                        <div class="display-flex space-between">
+                            <button class="close btn btn-white" @click="onSidebar">
+                                <i class="icn icn-left fa fa-lg fa-times" style="margin-top: 2px;" /> CLOSE
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="content">
-                <AppListMenu :data.sync="sidebar" :isSidebarSmall.sync="isSidebarSmall" />
+                <AppListMenu :data.sync="sidebar" :showBar.sync="showBar" />
             </div>
         </div>
         <div class="main">
             <div class="header">
                 <div class="set-padding display-flex space-between">
-                    <div>
+                    <div class="display-flex">
+                        <button class="mobile-visible btn btn-icon btn-radius-rounded btn-primary" style="margin-right: 5px;" @click="onSidebar">
+                            <i class="fa fa-lg fa-bars"></i>
+                        </button>
                         <form action="#" class="card-search mobile flat">
                             <button class="btn btn-icon btn-white" type="submite">
                                 <i class="fa fa-1x fa-search" />
@@ -52,7 +55,7 @@
                                 <img v-if="dataUser && dataUser.image" :src="dataUser && dataUser.image ? (adminImageThumbnailUrl + dataUser.image) : ''" alt="">
                                 <i v-else class="post-top fa fa-lg fa-user-circle" style="color: #999;" />
                             </div>
-                            <div style="height: 30px; padding-right: 10px; padding-left: 5px;">
+                            <div class="label">
                                 <div class="post-center fonts fonts-10 semibold black" style="text-transform: uppercase;">{{ dataUser && dataUser.name }}</div>
                             </div>
                         </router-link>
@@ -71,7 +74,7 @@
                                     <img v-if="selectedShop && selectedShop.image" :src="selectedShop ? (shopImageThumbnailUrl + selectedShop.image) : ''" alt="">
                                     <i v-else class="post-top fa fa-lw fa-store" style="color: #999;" />
                                 </div>
-                                <div style="height: 30px; padding-right: 10px; padding-left: 5px;">
+                                <div class="label">
                                     <div class="post-center fonts fonts-10 semibold black" style="text-transform: uppercase;">{{ selectedLabel ? selectedLabel : 'CREATE SHOP' }}</div>
                                 </div>
                             </router-link>
@@ -140,7 +143,7 @@ export default {
             icon: icon,
             countNotif: 0,
             sidebar: null,
-            isSidebarSmall: false,
+            showBar: true,
             classSidebar: 'sidebar smalls',
             classSidebarMenu: 'menu-list hover with-icon smalls',
             dataUser: null,
@@ -277,7 +280,7 @@ export default {
             })
         },
         onSidebar () {
-            this.isSidebarSmall = !this.isSidebarSmall
+            this.showBar = !this.showBar
         },
         getLocalCartCount () {
             const token = 'Bearer '.concat(this.$cookies.get('token'))

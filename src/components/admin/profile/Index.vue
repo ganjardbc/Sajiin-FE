@@ -1,5 +1,5 @@
 <template>
-    <div id="Profile" class="width width-97 width-mobile" style="margin: auto; padding-top: 25px; padding-bottom: 25px;">
+    <div id="Profile" style="padding-top: 10px; padding-left: 15px; padding-right: 15px;">
         <div class="display-flex display-mobile space-between">
             <div class="width width-25 width-mobile" style="margin-bottom: 30px;">
                 <div class="card no-padding-mobile box-shadow bg-white">

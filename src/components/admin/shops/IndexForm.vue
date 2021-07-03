@@ -1,304 +1,294 @@
 <template>
-    <div id="App" :class="formClass ? 'content-form' : 'content-form hide'">
-        <div class="left">
-            <div class="bg-white box-shadow">
-                <div class="display-flex row space-between padding padding-10-px" style="height: 40px;">
-                    <div>
-                        <h1 class="post-top fonts small black bold">{{ formTitle }} SHOP</h1>
-                    </div>
-                    <div class="display-flex">
-                        <AppButtonQR 
-                            v-if="dataUser && dataUser.role_name !== 'customer'"
-                            style="margin-right: 0;"
-                            :buttonClass="'btn btn-sekunder'"
-                            :code="formData.code"
-                            title="Show QR" 
-                        />
-                        <button class="btn btn-main" @click="onSave">
-                            Save  
-                        </button>
-                    </div>
-                </div>
-                <div class="content-body">
-                    <div style="padding-left: 15px; padding-right: 15px;">
-                        <AppLoader v-if="visibleLoader" />
-                        <div v-else class="display-flex" style="padding-top: 10px; padding-bottom: 10px;">
-                            <div style="width: 330px; margin-right: 10px;">
-                                <div class="card no-padding-mobile box-shadow bg-white">
-                                    <div class="content-center">
-                                        <div class="image image-padding" style="margin: auto; text-align: center;">
-                                            <i v-if="!image" class="post-middle-absolute fa fa-lg fa-store" style="font-size: 58px; color: #999;" />
-                                            <img v-else :src="image ? image : ''" alt="">
-                                            <button v-if="formTitle !== 'CREATE' ? true : false" class="btn btn-sekunder btn-icon" style="position: absolute; bottom: 10px; right: 10px; border-radius: 100%;" @click="onButtonUpload">
-                                                <i class="post-center fa fa-lg fa-pencil-alt" style="font-size: 16px;" />
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
+    <div id="App">
+        <div style="padding-top: 0; padding-left: 15px; padding-right: 15px;">
+            <div class="display-flex display-mobile space-between" style="padding-top: 10px; padding-bottom: 10px;">
+                <div class="width width-25 width-mobile" style="margin-bottom: 20px;">
+                    <div class="card no-padding-mobile box-shadow bg-white">
+                        <div class="width width-full">
+                            <div class="image image-padding" style="margin: auto; text-align: center;">
+                                <i v-if="!image" class="post-middle-absolute fa fa-lg fa-store" style="font-size: 58px; color: #999;" />
+                                <img v-else :src="image ? image : ''" alt="">
+                                <button v-if="formTitle !== 'CREATE' ? true : false" class="btn btn-sekunder btn-icon" style="position: absolute; bottom: 10px; right: 10px; border-radius: 100%;" @click="onButtonUpload">
+                                    <i class="post-center fa fa-lg fa-pencil-alt" style="font-size: 16px;" />
+                                </button>
                             </div>
 
-                            <div style="width: calc(100% - 350px); margin-left: 10px;">
-                                <div class="card box-shadow" style="margin-bottom: 20px;">
-                                    <div class="fonts fonts-10 black semibold" style="margin-bottom: 10px;">General Info</div>
-                                    <div class="field-group margin margin-bottom-15-px">
-                                        <div class="field-label">ID</div>
-                                        <input 
-                                            type="text" 
-                                            placeholder="" 
-                                            class="field field-sekunder" 
-                                            name="id" 
-                                            id="id" 
-                                            v-model="formData.id"
-                                            readonly>
-                                    </div>
-                                    <div class="field-group margin margin-bottom-15-px">
-                                        <div class="field-label">SHOP ID</div>
-                                        <input 
-                                            type="text" 
-                                            placeholder="" 
-                                            class="field field-sekunder" 
-                                            name="shop_id" 
-                                            id="shop_id" 
-                                            v-model="formData.shop_id"
-                                            readonly>
-                                        <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
-                                            {{ formMessage && formMessage.shop_id && formMessage.shop_id[0] }}
-                                        </div>
-                                    </div>
-                                    <div class="field-group margin margin-bottom-15-px">
-                                        <div class="field-label">NAME</div>
-                                        <input 
-                                            type="text" 
-                                            placeholder="" 
-                                            class="field field-sekunder" 
-                                            name="name" 
-                                            id="name" 
-                                            v-model="formData.name"
-                                            :readonly="formTitle === 'VIEW' ? true : false">
-                                        <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
-                                            {{ formMessage && formMessage.name && formMessage.name[0] }}
-                                        </div>
-                                    </div>
-                                    <div class="field-group margin margin-bottom-0-px">
-                                        <div class="field-label">ABOUT</div>
-                                        <textarea 
-                                            name="about" 
-                                            id="about" 
-                                            class="field field-sekunder field-textarea" 
-                                            v-model="formData.about"
-                                            :readonly="formTitle === 'VIEW' ? true : false"></textarea>
-                                        <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
-                                            {{ formMessage && formMessage.about && formMessage.about[0] }}
-                                        </div>
-                                    </div>
+                            <AppButtonQR 
+                                v-if="dataUser && dataUser.role_name !== 'customer'"
+                                style="margin-top: 15px;"
+                                :buttonClass="'btn btn-sekunder btn-full'"
+                                :code="formData.code"
+                                title="Show QR" 
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="width width-73 width-mobile">
+                    <AppLoader v-if="visibleLoader" />
+                    <div class="card box-shadow" style="margin-bottom: 20px;">
+                        <div class="fonts fonts-10 black semibold" style="margin-bottom: 10px;">General Info</div>
+                        <div class="field-group margin margin-bottom-15-px">
+                            <div class="field-label">ID</div>
+                            <input 
+                                type="text" 
+                                placeholder="" 
+                                class="field field-sekunder" 
+                                name="id" 
+                                id="id" 
+                                v-model="formData.id"
+                                readonly>
+                        </div>
+                        <div class="field-group margin margin-bottom-15-px">
+                            <div class="field-label">SHOP ID</div>
+                            <input 
+                                type="text" 
+                                placeholder="" 
+                                class="field field-sekunder" 
+                                name="shop_id" 
+                                id="shop_id" 
+                                v-model="formData.shop_id"
+                                readonly>
+                            <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
+                                {{ formMessage && formMessage.shop_id && formMessage.shop_id[0] }}
+                            </div>
+                        </div>
+                        <div class="field-group margin margin-bottom-15-px">
+                            <div class="field-label">NAME</div>
+                            <input 
+                                type="text" 
+                                placeholder="" 
+                                class="field field-sekunder" 
+                                name="name" 
+                                id="name" 
+                                v-model="formData.name"
+                                :readonly="formTitle === 'VIEW' ? true : false">
+                            <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
+                                {{ formMessage && formMessage.name && formMessage.name[0] }}
+                            </div>
+                        </div>
+                        <div class="field-group margin margin-bottom-0-px">
+                            <div class="field-label">ABOUT</div>
+                            <textarea 
+                                name="about" 
+                                id="about" 
+                                class="field field-sekunder field-textarea" 
+                                v-model="formData.about"
+                                :readonly="formTitle === 'VIEW' ? true : false"></textarea>
+                            <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
+                                {{ formMessage && formMessage.about && formMessage.about[0] }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card box-shadow" style="margin-bottom: 20px;">
+                        <div class="fonts fonts-10 black semibold" style="margin-bottom: 10px;">Opening Hours</div>
+                        <div class="display-flex margin margin-bottom-15-px">
+                            <div class="field-group" style="width: calc(100% - 10px); margin-right: 10px;">
+                                <div class="field-label">OPEN DAY</div>
+                                <input 
+                                    type="text" 
+                                    placeholder="" 
+                                    class="field field-sekunder" 
+                                    name="open_day" 
+                                    id="open_day" 
+                                    v-model="formData.open_day"
+                                    :readonly="formTitle === 'VIEW' ? true : false">
+                                <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
+                                    {{ formMessage && formMessage.open_day && formMessage.open_day[0] }}
                                 </div>
-
-                                <div class="card box-shadow" style="margin-bottom: 20px;">
-                                    <div class="fonts fonts-10 black semibold" style="margin-bottom: 10px;">Opening Hours</div>
-                                    <div class="display-flex margin margin-bottom-15-px">
-                                        <div class="field-group" style="width: calc(100% - 10px); margin-right: 10px;">
-                                            <div class="field-label">OPEN DAY</div>
-                                            <input 
-                                                type="text" 
-                                                placeholder="" 
-                                                class="field field-sekunder" 
-                                                name="open_day" 
-                                                id="open_day" 
-                                                v-model="formData.open_day"
-                                                :readonly="formTitle === 'VIEW' ? true : false">
-                                            <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
-                                                {{ formMessage && formMessage.open_day && formMessage.open_day[0] }}
-                                            </div>
-                                        </div>
-                                        <div class="field-group" style="width: calc(100% - 10px); margin-left: 10px;">
-                                            <div class="field-label">CLOSE DAY</div>
-                                            <input 
-                                                type="text" 
-                                                placeholder="" 
-                                                class="field field-sekunder" 
-                                                name="close_day" 
-                                                id="close_day" 
-                                                v-model="formData.close_day"
-                                                :readonly="formTitle === 'VIEW' ? true : false">
-                                            <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
-                                                {{ formMessage && formMessage.close_day && formMessage.close_day[0] }}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="display-flex margin margin-bottom-0-px">
-                                        <div class="field-group" style="width: calc(100% - 10px); margin-right: 10px;">
-                                            <div class="field-label">OPEN TIME</div>
-                                            <input 
-                                                type="text" 
-                                                placeholder="" 
-                                                class="field field-sekunder" 
-                                                name="open_time" 
-                                                id="open_time" 
-                                                v-model="formData.open_time"
-                                                :readonly="formTitle === 'VIEW' ? true : false">
-                                            <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
-                                                {{ formMessage && formMessage.open_time && formMessage.open_time[0] }}
-                                            </div>
-                                        </div>
-                                        <div class="field-group" style="width: calc(100% - 10px); margin-left: 10px;">
-                                            <div class="field-label">CLOSE TIME</div>
-                                            <input 
-                                                type="text" 
-                                                placeholder="" 
-                                                class="field field-sekunder" 
-                                                name="close_time" 
-                                                id="close_time" 
-                                                v-model="formData.close_time"
-                                                :readonly="formTitle === 'VIEW' ? true : false">
-                                            <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
-                                                {{ formMessage && formMessage.close_time && formMessage.close_time[0] }}
-                                            </div>
-                                        </div>
-                                    </div>
+                            </div>
+                            <div class="field-group" style="width: calc(100% - 10px); margin-left: 10px;">
+                                <div class="field-label">CLOSE DAY</div>
+                                <input 
+                                    type="text" 
+                                    placeholder="" 
+                                    class="field field-sekunder" 
+                                    name="close_day" 
+                                    id="close_day" 
+                                    v-model="formData.close_day"
+                                    :readonly="formTitle === 'VIEW' ? true : false">
+                                <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
+                                    {{ formMessage && formMessage.close_day && formMessage.close_day[0] }}
                                 </div>
-
-                                <div class="card box-shadow" style="margin-bottom: 20px;">
-                                    <div class="fonts fonts-10 black semibold" style="margin-bottom: 10px;">Contact</div>
-                                    <div class="field-group margin margin-bottom-15-px">
-                                        <div class="field-label">EMAIL</div>
-                                        <input 
-                                            type="email" 
-                                            placeholder="" 
-                                            class="field field-sekunder" 
-                                            name="email" 
-                                            id="email" 
-                                            v-model="formData.email"
-                                            :readonly="formTitle === 'VIEW' ? true : false">
-                                        <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
-                                            {{ formMessage && formMessage.email && formMessage.email[0] }}
-                                        </div>
-                                    </div>
-                                    <div class="field-group margin margin-bottom-0-px">
-                                        <div class="field-label">PHONE</div>
-                                        <input 
-                                            type="text" 
-                                            placeholder="" 
-                                            class="field field-sekunder" 
-                                            name="phone" 
-                                            id="phone" 
-                                            v-model="formData.phone"
-                                            :readonly="formTitle === 'VIEW' ? true : false">
-                                        <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
-                                            {{ formMessage && formMessage.phone && formMessage.phone[0] }}
-                                        </div>
-                                    </div>
+                            </div>
+                        </div>
+                        <div class="display-flex margin margin-bottom-0-px">
+                            <div class="field-group" style="width: calc(100% - 10px); margin-right: 10px;">
+                                <div class="field-label">OPEN TIME</div>
+                                <input 
+                                    type="text" 
+                                    placeholder="" 
+                                    class="field field-sekunder" 
+                                    name="open_time" 
+                                    id="open_time" 
+                                    v-model="formData.open_time"
+                                    :readonly="formTitle === 'VIEW' ? true : false">
+                                <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
+                                    {{ formMessage && formMessage.open_time && formMessage.open_time[0] }}
                                 </div>
-
-                                <div class="card box-shadow" style="margin-bottom: 20px;">
-                                    <div class="fonts fonts-10 black semibold" style="margin-bottom: 10px;">Location</div>
-                                    <div class="field-group margin margin-bottom-0-px">
-                                        <div class="field-label">ADDRESS</div>
-                                        <textarea 
-                                            name="location" 
-                                            id="location" 
-                                            class="field field-sekunder field-textarea" 
-                                            v-model="formData.location"
-                                            :readonly="formTitle === 'VIEW' ? true : false"></textarea>
-                                        <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
-                                            {{ formMessage && formMessage.location && formMessage.location[0] }}
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="card box-shadow" style="margin-bottom: 20px;">
-                                    <div class="fonts fonts-10 black semibold" style="margin-bottom: 10px;">Configuration</div>
-                                    <div class="field-group margin margin-bottom-15-px">
-                                        <div class="field-label">STATUS</div>
-                                        <div v-if="formTitle !== 'VIEW' ? true : false">
-                                            <div class="display-flex" style="padding-bottom: 10px;">
-                                                <label class="radio">
-                                                    <input 
-                                                        type="radio" 
-                                                        name="status"
-                                                        id="active"
-                                                        value="active"
-                                                        v-model="formData.status"
-                                                        :readonly="formTitle === 'VIEW' ? true : false" />
-                                                    <span class="checkmark" />
-                                                    <span class="fonts micro">
-                                                        Active
-                                                    </span>
-                                                </label>
-
-                                                <label class="radio">
-                                                    <input 
-                                                        type="radio" 
-                                                        name="status"
-                                                        id="inactive"
-                                                        value="inactive"
-                                                        v-model="formData.status"
-                                                        :readonly="formTitle === 'VIEW' ? true : false" />
-                                                    <span class="checkmark" />
-                                                    <span class="fonts micro">
-                                                        Inactive
-                                                    </span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div v-else>
-                                            <div style="width: 100%;">
-                                                <input 
-                                                    type="text" 
-                                                    placeholder="" 
-                                                    class="field field-sekunder" 
-                                                    name="status" 
-                                                    id="status" 
-                                                    style="text-transform: capitalize;"
-                                                    :value="formData.status"
-                                                    readonly>
-                                            </div>
-                                        </div>
-                                        <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
-                                            {{ formMessage && formMessage.status && formMessage.status[0] }}
-                                        </div>
-                                    </div>
-                                    <div class="field-group">
-                                        <div class="field-label">AVAILABLE</div>
-                                        <div v-if="formTitle !== 'VIEW' ? true : false">
-                                            <div class="display-flex space-between">
-                                                <div class="fonts micro black">Is this shop still available ?</div>
-                                                <label class="switch green">
-                                                    <input 
-                                                        type="checkbox" 
-                                                        name="is_available" 
-                                                        id="is_available" 
-                                                        v-model="formData.is_available"
-                                                        :readonly="formTitle === 'VIEW' ? true : false" />
-                                                    <span class="slider round" />
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div v-else>
-                                            <div style="width: 100%;">
-                                                <input 
-                                                    type="text" 
-                                                    placeholder="" 
-                                                    class="field field-sekunder" 
-                                                    name="is_available" 
-                                                    id="is_available" 
-                                                    style="text-transform: capitalize;"
-                                                    :value="formData.is_available ? 'Available' : 'Unavailable'"
-                                                    readonly>
-                                            </div>
-                                        </div>
-                                        <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
-                                            {{ formMessage && formMessage.is_available && formMessage.is_available[0] }}
-                                        </div>
-                                    </div>
+                            </div>
+                            <div class="field-group" style="width: calc(100% - 10px); margin-left: 10px;">
+                                <div class="field-label">CLOSE TIME</div>
+                                <input 
+                                    type="text" 
+                                    placeholder="" 
+                                    class="field field-sekunder" 
+                                    name="close_time" 
+                                    id="close_time" 
+                                    v-model="formData.close_time"
+                                    :readonly="formTitle === 'VIEW' ? true : false">
+                                <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
+                                    {{ formMessage && formMessage.close_time && formMessage.close_time[0] }}
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <div class="card box-shadow" style="margin-bottom: 20px;">
+                        <div class="fonts fonts-10 black semibold" style="margin-bottom: 10px;">Contact</div>
+                        <div class="field-group margin margin-bottom-15-px">
+                            <div class="field-label">EMAIL</div>
+                            <input 
+                                type="email" 
+                                placeholder="" 
+                                class="field field-sekunder" 
+                                name="email" 
+                                id="email" 
+                                v-model="formData.email"
+                                :readonly="formTitle === 'VIEW' ? true : false">
+                            <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
+                                {{ formMessage && formMessage.email && formMessage.email[0] }}
+                            </div>
+                        </div>
+                        <div class="field-group margin margin-bottom-0-px">
+                            <div class="field-label">PHONE</div>
+                            <input 
+                                type="text" 
+                                placeholder="" 
+                                class="field field-sekunder" 
+                                name="phone" 
+                                id="phone" 
+                                v-model="formData.phone"
+                                :readonly="formTitle === 'VIEW' ? true : false">
+                            <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
+                                {{ formMessage && formMessage.phone && formMessage.phone[0] }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card box-shadow" style="margin-bottom: 20px;">
+                        <div class="fonts fonts-10 black semibold" style="margin-bottom: 10px;">Location</div>
+                        <div class="field-group margin margin-bottom-0-px">
+                            <div class="field-label">ADDRESS</div>
+                            <textarea 
+                                name="location" 
+                                id="location" 
+                                class="field field-sekunder field-textarea" 
+                                v-model="formData.location"
+                                :readonly="formTitle === 'VIEW' ? true : false"></textarea>
+                            <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
+                                {{ formMessage && formMessage.location && formMessage.location[0] }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card box-shadow" style="margin-bottom: 20px;">
+                        <div class="fonts fonts-10 black semibold" style="margin-bottom: 10px;">Configuration</div>
+                        <div class="field-group margin margin-bottom-15-px">
+                            <div class="field-label">STATUS</div>
+                            <div v-if="formTitle !== 'VIEW' ? true : false">
+                                <div class="display-flex" style="padding-bottom: 10px;">
+                                    <label class="radio">
+                                        <input 
+                                            type="radio" 
+                                            name="status"
+                                            id="active"
+                                            value="active"
+                                            v-model="formData.status"
+                                            :readonly="formTitle === 'VIEW' ? true : false" />
+                                        <span class="checkmark" />
+                                        <span class="fonts micro">
+                                            Active
+                                        </span>
+                                    </label>
+
+                                    <label class="radio">
+                                        <input 
+                                            type="radio" 
+                                            name="status"
+                                            id="inactive"
+                                            value="inactive"
+                                            v-model="formData.status"
+                                            :readonly="formTitle === 'VIEW' ? true : false" />
+                                        <span class="checkmark" />
+                                        <span class="fonts micro">
+                                            Inactive
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div v-else>
+                                <div style="width: 100%;">
+                                    <input 
+                                        type="text" 
+                                        placeholder="" 
+                                        class="field field-sekunder" 
+                                        name="status" 
+                                        id="status" 
+                                        style="text-transform: capitalize;"
+                                        :value="formData.status"
+                                        readonly>
+                                </div>
+                            </div>
+                            <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
+                                {{ formMessage && formMessage.status && formMessage.status[0] }}
+                            </div>
+                        </div>
+                        <div class="field-group">
+                            <div class="field-label">AVAILABLE</div>
+                            <div v-if="formTitle !== 'VIEW' ? true : false">
+                                <div class="display-flex space-between">
+                                    <div class="fonts micro black">Is this shop still available ?</div>
+                                    <label class="switch green">
+                                        <input 
+                                            type="checkbox" 
+                                            name="is_available" 
+                                            id="is_available" 
+                                            v-model="formData.is_available"
+                                            :readonly="formTitle === 'VIEW' ? true : false" />
+                                        <span class="slider round" />
+                                    </label>
+                                </div>
+                            </div>
+                            <div v-else>
+                                <div style="width: 100%;">
+                                    <input 
+                                        type="text" 
+                                        placeholder="" 
+                                        class="field field-sekunder" 
+                                        name="is_available" 
+                                        id="is_available" 
+                                        style="text-transform: capitalize;"
+                                        :value="formData.is_available ? 'Available' : 'Unavailable'"
+                                        readonly>
+                                </div>
+                            </div>
+                            <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
+                                {{ formMessage && formMessage.is_available && formMessage.is_available[0] }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="display-flex space-between">
+                        <div></div>
+                        <button class="btn btn-main" @click="onSave">
+                            Save Info
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <div class="right"></div>
 
         <AppPopupForm 
             v-if="visiblePopup"
