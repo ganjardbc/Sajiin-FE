@@ -67,6 +67,12 @@
             text-decoration: underline;
         }
     }
+    &.pointer {
+        &:hover {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+    }
     @for $var from 0 to 1000 {
         &.fonts-#{$var} {
             font-size: #{$var} + 'pt';

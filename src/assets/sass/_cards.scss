@@ -146,6 +146,28 @@
         border-top-left-radius: 8px;
         border-top-right-radius: 8px;
     }
+    &.small {
+        width: 450px;
+        @media (max-width: $min-width) {
+            width: calc(100% - 30px);
+        }
+    }
+    &.no-padding {
+        padding: 0;
+    }
+    .card-popoup-header {
+        position: relative;
+        width: calc(100% - 30px);
+        padding: 0 15px;
+        height: 40px;
+    }
+    .card-popup-body {
+        position: relative;
+        width: 100%;
+        height: calc(100vh - 200px);
+        overflow-y: auto;
+        @include transparantScrollBar();
+    }
 }
 
 .card-full-popup {
@@ -659,5 +681,19 @@
     overflow: hidden;
     @media (max-width: $min-width) {
         width: 100%;
+    }
+}
+
+.card-value {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    background-color: $red;
+    .label {
+        @include post_center(absolute);
+        font-size: 12px;
+        font-weight: 600;
+        color: #fff;
     }
 }

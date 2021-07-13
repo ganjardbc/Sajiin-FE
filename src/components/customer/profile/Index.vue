@@ -129,7 +129,8 @@ export default {
             removeCookieAuth: 'auth/removeCookieAuth',
             signOut: 'auth/signOut',
             setToast: 'toast/setToast',
-            setUser: 'auth/setUser'
+            setUser: 'auth/setUser',
+            setShop: 'store/setData'
         }),
         makeToast (title) {
             const time = new Date().getTime()
@@ -252,6 +253,27 @@ export default {
                     this.removeCookieAuth()
                     this.$router.push({ name: 'home' })
                 }
+            }
+        },
+        async exitShop () {
+            this.visibleLoaderExit = true
+
+            const token = 'Bearer '.concat(this.$cookies.get('token'))
+            const payload = {
+                owner_id: this.dataUser.id
+            }
+
+            const rest = await axios.post('/api/shop/exit', payload, { headers: { Authorization: token } })
+            if (rest && rest.status === 200) {
+                this.visibleLoaderExit = false
+                this.setShop(null)
+                this.$cookies.remove('shop')
+                this.$cookies.remove('orderItem')
+                this.$cookies.remove('orderTable')
+                this.$cookies.remove('orderPayment')
+            } else {
+                this.makeToast('Proceed failed')
+                this.visibleLoaderExit = false
             }
         },
         async saveNotif (title, subtitle) {

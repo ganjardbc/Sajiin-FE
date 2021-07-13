@@ -34,22 +34,14 @@
                         </form>
                     </div>
                     <div style="width: 100%;" class="display-flex right">
-                        <router-link v-if="dataUser.role_name === 'customer'" :to="{name: 'customer-main'}" style="margin-left: 5px;" class="button-router-link">
-                            <button class="btn btn-white btn-radius" title="Reports">
-                                CUSTOMER
-                            </button>
-                        </router-link>
                         <router-link v-if="dataUser.role_name !== 'customer'" :to="{name: '404'}" style="margin-left: 5px;" class="button-router-link">
                             <button class="btn btn-white btn-icon btn-radius" title="Reports">
                                 <i class="fa fa-lg fa-calendar-alt" />
                             </button>
                         </router-link>
-                        <router-link :to="{name: 'notification'}" style="margin-left: 5px;" class="button-router-link">
-                            <button class="btn btn-white btn-icon btn-radius" title="Notifications">
-                                <i class="fa fa-lg fa-bell" />
-                                <span v-if="countNotif" class="notif">{{ countNotif }}</span>
-                            </button>
-                        </router-link>
+                        <div style="margin-left: 5px;">
+                            <AppPopupNotif :notif.sync="countNotif" />
+                        </div>
                         <router-link :to="{name: 'profile'}" class="card-small-profile" style="margin-left: 5px;">
                             <div class="image" style="text-align: center;">
                                 <img v-if="dataUser && dataUser.image" :src="dataUser && dataUser.image ? (adminImageThumbnailUrl + dataUser.image) : ''" alt="">
@@ -61,14 +53,6 @@
                         </router-link>
                         <div class="border-left" style="margin-left: 10px; padding-left: 10px;"></div>
                         <div class="display-flex">
-                            <!-- <AppButtonMenu 
-                                :icon="'icn fa fa-lg fa-chevron-down'"
-                                :image="selectedShop ? (shopImageThumbnailUrl + selectedShop.image) : ''"
-                                :label="selectedLabel"
-                                :button="'btn btn-white btn-radius-rounded'"
-                                :onChange="(data) => onChangeMenu(data)" 
-                                :isLoader="visibleLoader"
-                                :data="menuShops" /> -->
                             <router-link :to="{name: 'shop'}" class="card-small-profile">
                                 <div class="image" style="text-align: center;">
                                     <img v-if="selectedShop && selectedShop.image" :src="selectedShop ? (shopImageThumbnailUrl + selectedShop.image) : ''" alt="">
@@ -78,12 +62,6 @@
                                     <div class="post-center fonts fonts-10 semibold black" style="text-transform: uppercase;">{{ selectedLabel ? selectedLabel : 'CREATE SHOP' }}</div>
                                 </div>
                             </router-link>
-                            <!-- <router-link v-else :to="{name: 'admin-shop'}">
-                                <button class="btn btn-main btn-radius-rounded">
-                                    <i class="icn icn-left fa fa-lg fa-plus" />
-                                    CREATE SHOP 
-                                </button>
-                            </router-link> -->
                         </div>
                     </div>
                 </div>
@@ -110,6 +88,7 @@ import AppToast from '../modules/AppToast'
 import AppToastMessage from '../modules/AppToastMessage'
 import AppButtonMenu from '../modules/AppButtonMenu'
 import AppButtonQR from '../modules/AppButtonQR'
+import AppPopupNotif from '../modules/AppPopupNotif'
 
 const sidebarAdmin = [
     {icon: 'fa fa-lg fa-database', label: 'DASHBOARD', value: 0, menu: [
@@ -183,6 +162,7 @@ export default {
         this.getShop()
     },
     components: {
+        AppPopupNotif,
         AppButtonQR,
         AppButtonMenu,
         AppToastMessage,
