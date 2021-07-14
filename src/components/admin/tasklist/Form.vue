@@ -37,17 +37,31 @@
                         readonly>
                 </div>
                 <div class="field-group margin margin-bottom-15-px">
-                    <div class="field-label">EMPLOYEE ID</div>
+                    <div class="field-label">TABLE ID</div>
                     <input 
                         type="text" 
                         placeholder="" 
                         class="field field-sekunder" 
-                        name="employee_id" 
-                        id="employee_id" 
-                        v-model="formData.employee_id"
+                        name="table_id" 
+                        id="table_id" 
+                        v-model="formData.table_id"
                         readonly>
                     <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
-                        {{ formMessage && formMessage.employee_id && formMessage.employee_id[0] }}
+                        {{ formMessage && formMessage.table_id && formMessage.table_id[0] }}
+                    </div>
+                </div>
+                <div class="field-group margin margin-bottom-15-px">
+                    <div class="field-label">CODE</div>
+                    <input 
+                        type="text" 
+                        placeholder="" 
+                        class="field field-sekunder" 
+                        name="code" 
+                        id="code" 
+                        v-model="formData.code"
+                        :readonly="this.title === 'VIEW' ? true : false">
+                    <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
+                        {{ formMessage && formMessage.code && formMessage.code[0] }}
                     </div>
                 </div>
                 <div class="field-group margin margin-bottom-15-px">
@@ -62,34 +76,6 @@
                         :readonly="this.title === 'VIEW' ? true : false">
                     <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
                         {{ formMessage && formMessage.name && formMessage.name[0] }}
-                    </div>
-                </div>
-                <div class="field-group margin margin-bottom-15-px">
-                    <div class="field-label">EMAIL</div>
-                    <input 
-                        type="email" 
-                        placeholder="" 
-                        class="field field-sekunder" 
-                        name="email" 
-                        id="email" 
-                        v-model="formData.email"
-                        :readonly="this.title === 'VIEW' ? true : false">
-                    <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
-                        {{ formMessage && formMessage.email && formMessage.email[0] }}
-                    </div>
-                </div>
-                <div class="field-group margin margin-bottom-15-px">
-                    <div class="field-label">PHONE</div>
-                    <input 
-                        type="text" 
-                        placeholder="" 
-                        class="field field-sekunder" 
-                        name="phone" 
-                        id="phone" 
-                        v-model="formData.phone"
-                        :readonly="this.title === 'VIEW' ? true : false">
-                    <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
-                        {{ formMessage && formMessage.phone && formMessage.phone[0] }}
                     </div>
                 </div>
                 <div class="field-group margin margin-bottom-15-px">
@@ -146,7 +132,7 @@
                     <div class="field-label">AVAILABLE</div>
                     <div v-if="this.title !== 'VIEW' ? true : false">
                         <div class="display-flex space-between">
-                            <div class="fonts micro black">Is this employee still available ?</div>
+                            <div class="fonts micro black">Is this table still available ?</div>
                             <label class="switch green">
                                 <input 
                                     type="checkbox" 
@@ -176,70 +162,20 @@
                     </div>
                 </div>
                 <div class="field-group margin margin-bottom-15-px">
-                    <div class="field-label">ADDRESS</div>
+                    <div class="field-label">DESCRIPTION</div>
                     <textarea 
-                        name="address" 
-                        id="address" 
+                        name="description" 
+                        id="description" 
                         class="field field-sekunder field-textarea" 
-                        v-model="formData.address"
+                        v-model="formData.description"
                         :readonly="this.title === 'VIEW' ? true : false"></textarea>
                     <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
-                        {{ formMessage && formMessage.address && formMessage.address[0] }}
-                    </div>
-                </div>
-                <div class="field-group margin margin-bottom-15-px">
-                    <div class="field-label">ABOUT</div>
-                    <textarea 
-                        name="about" 
-                        id="about" 
-                        class="field field-sekunder field-textarea" 
-                        v-model="formData.about"
-                        :readonly="this.title === 'VIEW' ? true : false"></textarea>
-                    <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
-                        {{ formMessage && formMessage.about && formMessage.about[0] }}
+                        {{ formMessage && formMessage.description && formMessage.description[0] }}
                     </div>
                 </div>
             </div>
 
             <div v-if="selectedIndex === 1">
-                <div class="field-group margin margin-bottom-15-px">
-                    <div class="field-label">ID</div>
-                    <div v-if="this.title !== 'VIEW'" class="card-search full">
-                        <input 
-                            type="search" 
-                            placeholder="" 
-                            class="field"
-                            name="position_id" 
-                            id="position_id" 
-                            v-model="formData.position_id"
-                            readonly>
-                        <button class="btn btn-icon btn-white" @click="onButtonPosition">
-                            <i class="fa fa-1x fa-search" />
-                        </button>
-                    </div>
-                    <div v-else>
-                        <input 
-                            type="search" 
-                            placeholder="" 
-                            class="field field-sekunder"
-                            style="width: 100%;"
-                            name="position_id" 
-                            id="position_id" 
-                            v-model="formData.position_id"
-                            readonly>
-                    </div>
-                    <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
-                        {{ formMessage && formMessage.position_id && formMessage.position_id[0] }}
-                    </div>
-                </div>
-                <FormPosition
-                    :data.sync="selectedPosition"
-                    :enablePopup="openCreatePosition"
-                    :onChange="(data) => onChangePosition(data)"
-                />
-            </div>
-
-            <div v-if="selectedIndex === 2">
                 <div class="field-group margin margin-bottom-15-px">
                     <div class="field-label">ID</div>
                     <div v-if="this.title !== 'VIEW'" class="card-search full">
@@ -285,27 +221,22 @@ import AppSideForm from '../../modules/AppSideForm'
 import AppImage from '../../modules/AppImage'
 import AppTabs from '../../modules/AppTabs'
 import FormShop from '../shops/FormShop'
-import FormPosition from '../position/FormPosition'
 
 const tabs = [
     {label: 'Data', status: 'active'},
-    {label: 'Position', status: ''},
-    {label: 'Shops', status: ''}
+    {label: 'Shop', status: ''}
 ]
 
 const payload = {
     id: '',
-    employee_id: '',
+    table_id: '',
+    code: '',
     image: '',
     name: '',
-    phone: '',
-    email: '',
-    status: '',
+    status: 'active',
     is_available: 0,
-    about: '',
-    address: '',
-    position_id: 0,
-    shop_id: 0
+    description: '',
+    shop_id: ''
 }
 
 const shop = {
@@ -325,27 +256,16 @@ const shop = {
     is_available: 0
 }
 
-const position = {
-    id: '',
-    position_id: '',
-    image: '',
-    title: '',
-    description: '',
-    status: ''
-}
-
 export default {
     name: 'form',
     data () {
         return {
             selectedIndex: 0,
             openCreateShop: false,
-            openCreatePosition: false,
             tabs: tabs,
             isView: false,
             image: '',
             selectedShop: {...shop},
-            selectedPosition: {...position},
             formData: {...payload},
             formMessage: []
         }
@@ -354,7 +274,6 @@ export default {
         this.formData = {...payload}
     },
     components: {
-        FormPosition,
         FormShop,
         AppTabs,
         AppSideForm,
@@ -399,24 +318,14 @@ export default {
             }
             this.selectedShop = {...data}
         },
-        onChangePosition (data) {
-            this.formData = {
-                ...this.formData,
-                position_id: data.id
-            }
-            this.selectedPosition = {...data}
-        },
         onButtonShop () {
             this.openCreateShop = !this.openCreateShop
-        },
-        onButtonPosition () {
-            this.openCreatePosition = !this.openCreatePosition
         },
         onButtonSave () {
             const time = new Date().getTime()
             const newPayload = this.title === 'CREATE' ? {
                 ...this.formData,
-                employee_id: 'EE-' + time.toString()
+                table_id: 'CT-' + time.toString()
             } : {
                 ...this.formData
             }
@@ -428,18 +337,15 @@ export default {
             if (props) {
                 this.formData = {
                     ...this.formData,
-                    id: props.employee.id,
-                    employee_id: props.employee.employee_id,
-                    image: props.employee.image,
-                    name: props.employee.name,
-                    email: props.employee.email,
-                    phone: props.employee.phone,
-                    is_available: props.employee.is_available,
-                    status: props.employee.status,
-                    about: props.employee.about,
-                    address: props.employee.address,
-                    position_id: props.employee.position_id,
-                    shop_id: props.employee.shop_id
+                    id: props.table.id,
+                    table_id: props.table.table_id,
+                    code: props.table.code,
+                    image: props.table.image,
+                    name: props.table.name,
+                    is_available: props.table.is_available,
+                    status: props.table.status,
+                    description: props.table.description,
+                    shop_id: props.table.shop_id
                 }
                 this.selectedShop = {
                     ...this.selectedShop,
@@ -449,20 +355,10 @@ export default {
                     status: props.shop.status,
                     about: props.shop.about
                 }
-                this.selectedPosition = {
-                    ...this.selectedPosition,
-                    id: props.position.id,
-                    position_id: props.position.position_id,
-                    image: props.position.image,
-                    title: props.position.title,
-                    description: props.position.description,
-                    status: props.position.status
-                }
-                this.image = props.employee.image ? this.employeeImageThumbnailUrl + props.employee.image : ''
+                this.image = props.table.image ? this.tableImageThumbnailUrl + props.table.image : ''
             } else {
                 this.formData = {...payload}
                 this.selectedShop = {...shop}
-                this.selectedPosition = {...position}
                 this.image = ''
             }
             this.onChangeTabs(0)

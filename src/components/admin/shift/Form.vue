@@ -255,11 +255,9 @@ const tabs = [
     {label: 'Employees', status: ''}
 ]
 
-const time = new Date().getTime()
-
 const payload = {
     id: '',
-    shift_id: 'SH-' + time,
+    shift_id: '',
     code: '',
     image: '',
     title: '',
@@ -359,7 +357,13 @@ export default {
             this.openCreateShop = !this.openCreateShop
         },
         onButtonSave () {
-            const newPayload = this.formData
+            const time = new Date().getTime()
+            const newPayload = this.title === 'CREATE' ? {
+                ...this.formData,
+                shift_id: 'SH-' + time.toString()
+            } : {
+                ...this.formData
+            }
             this.onSave(newPayload)
         },
         onButtonCreate () {

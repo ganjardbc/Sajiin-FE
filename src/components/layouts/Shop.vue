@@ -19,12 +19,12 @@ const menus = [
     {label: 'Categories', icon: 'fa fa-lg fa-list-alt', link: 'category'},
     {label: 'Toppings', icon: 'fa fa-lg fa-list-alt', link: 'toping'},
     {label: 'Products', icon: 'fa fa-lg fa-box', link: 'listing'},
-    // {label: 'Shipments', icon: 'fa fa-lg fa-truck', link: 'shipment'},
-    // {label: 'Payments', icon: 'fa fa-lg fa-calculator', link: 'payment'},
-    // {label: 'Job Positions', icon: 'fa fa-lg fa-flag', link: 'position'},
-    // {label: 'Users', icon: 'fa fa-lg fa-users', link: 'shipment'},
-    // {label: 'Order History', icon: 'fa fa-lg fa-receipt', link: 'shipment'},
-    // {label: 'Reports', icon: 'fa fa-lg fa-calendar-alt', link: 'shipment'},
+    {label: 'Shipments', icon: 'fa fa-lg fa-truck', link: 'shipment'},
+    {label: 'Payments', icon: 'fa fa-lg fa-calculator', link: 'payment'},
+    {label: 'Job Positions', icon: 'fa fa-lg fa-flag', link: 'position'},
+    {label: 'Users', icon: 'fa fa-lg fa-users', link: 'shipment'},
+    {label: 'Order History', icon: 'fa fa-lg fa-receipt', link: 'shipment'},
+    {label: 'Reports', icon: 'fa fa-lg fa-calendar-alt', link: 'shipment'},
 ]
 
 export default {

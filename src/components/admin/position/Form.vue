@@ -29,7 +29,7 @@
                     readonly>
             </div>
             <div class="field-group margin margin-bottom-15-px">
-                <div class="field-label">ARTICLE ID</div>
+                <div class="field-label">POSITION ID</div>
                 <input 
                     type="text" 
                     placeholder="" 
@@ -123,11 +123,9 @@
 import AppSideForm from '../../modules/AppSideForm'
 import AppImage from '../../modules/AppImage'
 
-const time = new Date().getTime()
-
 const payload = {
     id: '',
-    position_id: 'PS-' + time,
+    position_id: '',
     image: '',
     title: '',
     description: '',
@@ -181,7 +179,13 @@ export default {
     },
     methods: {
         onButtonSave () {
-            const newPayload = this.formData
+            const time = new Date().getTime()
+            const newPayload = this.title === 'CREATE' ? {
+                ...this.formData,
+                position_id: 'PS-' + time.toString()
+            } : {
+                ...this.formData
+            }
             this.onSave(newPayload)
         }
     },

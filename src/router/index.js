@@ -6,6 +6,7 @@ import WebLayout from '@/components/layouts/Web.vue';
 import CustomerLayout from '@/components/layouts/Customer.vue';
 // import ShopLayout from '@/components/layouts/Shop.vue';
 import ProductLayout from '@/components/layouts/Product.vue';
+import EmployeeLayout from '@/components/layouts/Employee.vue';
 
 // admin
 import Dashboard from '@/components/admin/Index.vue';
@@ -54,10 +55,11 @@ import Cashier from '@/components/admin/cashier/Index.vue';
 // import Shops from '@/components/admin/shops/Index.vue';
 import ShopForm from '@/components/admin/shops/IndexForm.vue';
 import CatalogList from '@/components/admin/catalog/Index.vue';
-// import PositionList from '@/components/admin/position/Index.vue';
+import PositionList from '@/components/admin/position/Index.vue';
 import EmployeeList from '@/components/admin/employee/Index.vue';
 import ShiftList from '@/components/admin/shift/Index.vue';
 import Notification from '@/components/admin/notification/Index.vue';
+import TaskList from '@/components/admin/tasklist/Index.vue';
 
 // customer
 import CustomerMain from '@/components/customer/Index.vue';
@@ -239,7 +241,7 @@ export const routes = [
                 component: Feedback
             },
             {
-                name: 'benefit',
+                name: 'benefitlist',
                 path: '/admin-benefit',
                 component: Benefit
             },
@@ -279,16 +281,6 @@ export const routes = [
                 component: VisitorList
             },
             {
-                name: 'employee',
-                path: '/admin-employee',
-                component: EmployeeList
-            },
-            {
-                name: 'shift',
-                path: '/admin-shift',
-                component: ShiftList
-            },
-            {
                 name: 'shipment',
                 path: '/admin-shipments',
                 component: Shipment
@@ -302,6 +294,11 @@ export const routes = [
                 name: 'notification',
                 path: '/admin-notifications',
                 component: Notification
+            },
+            {
+                name: 'tasklist',
+                path: '/admin-tasklist',
+                component: TaskList
             },
 
             // info
@@ -340,6 +337,32 @@ export const routes = [
                     }
                 ]
             },
+
+            // layout
+            {
+                name: 'admin-employee',
+                path: '/admin-employee',
+                component: EmployeeLayout,
+                redirect: '/admin-employee/employees',
+                children: [
+                    {
+                        name: 'employee',
+                        path: 'employees',
+                        component: EmployeeList
+                    },
+                    {
+                        name: 'shift',
+                        path: 'shifts',
+                        component: ShiftList
+                    },
+                    {
+                        name: 'position',
+                        path: 'positions',
+                        component: PositionList
+                    }
+                ]
+            },
+
             // {
             //     name: 'admin-shop',
             //     path: '/admin-shop',

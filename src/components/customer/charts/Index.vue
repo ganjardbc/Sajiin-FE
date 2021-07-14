@@ -118,7 +118,8 @@ const payloadItem = {
     order_id: 0,
     product_id: 0,
     proddetail_id: 0,
-    toping_id: 0
+    toping_id: 0,
+    status: "waiting"
 }
 
 const payloadOrder = {

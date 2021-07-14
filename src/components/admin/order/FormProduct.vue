@@ -36,11 +36,15 @@
                     <div class="fonts micro black">Quantity</div>
                     <div class="fonts micro black semibold">{{ detail.quantity }}</div>
                 </div>
-                <div class="display-flex space-between margin margin-bottom-10-px">
+                <div class="display-flex space-between margin margin-bottom-5-px">
                     <div class="fonts micro black">Subtotal</div>
                     <div class="fonts micro black semibold">{{ detail.subtotal }}</div>
                 </div>
-                <div v-if="enableButton" class="display-flex space-between margin margin-bottom-0-px">
+                <div class="display-flex space-between margin margin-bottom-10-px">
+                    <div class="fonts micro black">Status</div>
+                    <div class="fonts micro black semibold" style="text-transform: capitalize;">{{ detail.status }}</div>
+                </div>
+                <div v-if="enableButton && detail.status === 'waiting'" class="display-flex space-between margin margin-bottom-0-px">
                     <div></div>
                     <div class="display-flex content-right">
                         <button class="btn btn-small-icon btn-sekunder" @click="onEdit(index)">
@@ -332,7 +336,8 @@ const payload = {
     "order_id": 0,
     "product_id": 0,
     "proddetail_id": 0,
-    "toping_id": 0
+    "toping_id": 0,
+    "status": "waiting"
 }
 
 export default {

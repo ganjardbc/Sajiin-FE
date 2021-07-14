@@ -95,15 +95,15 @@ const sidebarAdmin = [
         {icon: 'fa fa-lg fa-tachometer-alt', label: 'Dashboard', value: 1, link: 'dashboard', permission: 'dashboard'},
         {icon: 'fa fa-lg fa-laptop', label: 'Cashier', value: 0, link: 'cashier', permission: 'cashier'},
         {icon: 'fa fa-lg fa-receipt', label: 'Orders', value: 0, link: 'orderlist', permission: 'orders'},
-        {icon: 'fa fa-lg fa-utensils', label: 'Products', value: 0, link: 'admin-product', permission: 'products'},
+        {icon: 'fa fa-lg fa-clipboard', label: 'TaskLists', value: 0, link: 'tasklist', permission: 'employees'},
         {icon: 'fa fa-lg fa-calculator', label: 'Payments', value: 0, link: 'payment', permission: 'payments'},
         {icon: 'fa fa-lg fa-th-large', label: 'Tables', value: 0, link: 'table', permission: 'tables'},
-        {icon: 'fa fa-lg fa-users', label: 'Customers', value: 0, link: 'customer', permission: 'customers'},
-        // {icon: 'fa fa-lg fa-clipboard', label: 'Task List', value: 0, link: 'customer', permission: 'customers'}
+        {icon: 'fa fa-lg fa-utensils', label: 'Products', value: 0, link: 'admin-product', permission: 'products'},
+        {icon: 'fa fa-lg fa-users', label: 'Employees', value: 0, link: 'admin-employee', permission: 'employees'},
     ]},
     {icon: 'fa fa-lg fa-database', label: 'WEBSITE', value: 0, menu: [
         {icon: 'fa fa-lg fa-newspaper', label: 'Articles', value: 0, link: 'articlelist', permission: 'articles'},
-        {icon: 'fa fa-lg fa-check', label: 'Benefits', value: 0, link: 'benefit', permission: 'benefits'}
+        {icon: 'fa fa-lg fa-check', label: 'Benefits', value: 0, link: 'benefitlist', permission: 'benefits'}
     ]},
     {icon: 'fa fa-lg fa-database', label: 'USER N ROLES', value: 0, menu: [
         {icon: 'fa fa-lg fa-tag', label: 'Bizpars', value: 0, link: 'bizpar', permission: 'bizpars'},

@@ -2,13 +2,11 @@
     <div id="AppImageProduct">
         <div v-for="(detail, j) in data.slice(from ? from : 0, to ? to : data.length)" :key="j" class="display-flex" style="padding-top: 10px; padding-bottom: 10px;">
             <div style="width: 75px; margin-right: 15px;">
-                <!-- <router-link :to="{name: 'product', params: {id: detail.prod_id}}"> -->
-                    <div class="image image-padding">
-                        <img :src="productImageThumbnailUrl + detail.product_image" alt="" class="post-center">
-                    </div>
-                <!-- </router-link> -->
+                <div class="image image-padding">
+                    <img :src="productImageThumbnailUrl + detail.product_image" alt="" class="post-center">
+                </div>
             </div>
-            <div style="width: calc(100% - 90px);">
+            <div style="width: calc(100% - 190px);">
                 <div class="fonts fonts-11 semibold" style="margin-bottom: 5px;">
                     {{ detail.product_name }}
                 </div>
@@ -17,6 +15,27 @@
                 </div>
                 <div v-if="detail.product_toping" class="fonts fonts-9 grey">
                     {{ detail.quantity }} {{ detail.product_toping }} x Rp. {{ detail.toping_price }}
+                </div>
+            </div>
+            <div style="width: 100px;" class="display-flex align-right">
+                <div 
+                    :class="'card-capsule ' + (
+                    detail.status === 'waiting' 
+                        ? '' 
+                        : detail.status === 'done' 
+                            ? 'active' 
+                            : detail.status === 'cooking'
+                                ? 'inactive' 
+                                : 'active'
+                    )"  
+                    style="text-transform: capitalize;">
+                    {{ 
+                        detail.status === 'waiting' 
+                            ? 'Waiting' 
+                            : detail.status === 'cooking' 
+                                ? 'Cooking'
+                                : detail.status 
+                    }}
                 </div>
             </div>
         </div>
