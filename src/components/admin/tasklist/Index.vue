@@ -36,6 +36,19 @@
                                     </div>
                                     <div class="display-flex column space-between" style="width: 100px;">
                                         <div class="display-flex align-right">
+                                            <!-- <AppCapsuleMenu 
+                                                :title="dt.status"
+                                                :status="(
+                                                    dt.status === 'cooking' 
+                                                        ? 'inactive' 
+                                                        : dt.status === 'done' 
+                                                            ? 'active' 
+                                                            : ''
+                                                )"
+                                                :onChange="(data) => onChangeStatus(data, dt.id)" 
+                                                :data="bizparCapsule"
+                                                style="margin-left: 5px; text-transform: capitalize;"
+                                            /> -->
                                             <div 
                                                 :class="'card-capsule ' + (
                                                 dt.status === 'cooking' 
@@ -100,6 +113,7 @@ import AppLoader from '../../modules/AppLoader'
 import AppAlert from '../../modules/AppAlert'
 import SearchField from '../../modules/SearchField'
 import AppButtonMenu from '../../modules/AppButtonMenu'
+import AppCapsuleMenu from '../../modules/AppCapsuleMenu'
 import Form from './Form'
 
 export default {
@@ -113,6 +127,11 @@ export default {
             visibleLoadMore: false,
             formTitle: 'CREATE',
             formClass: false,
+            bizparCapsule: [
+                {label: 'Waiting'}, 
+                {label: 'Cooking'},
+                {label: 'Done'}
+            ],
             datas: [],
             selectedIndex: null,
             selectedData: null,
@@ -137,6 +156,7 @@ export default {
     components: {
         AppAlert,
         AppLoader,
+        AppCapsuleMenu,
         AppButtonMenu,
         SearchField,
         Form
@@ -189,6 +209,10 @@ export default {
         onFormSave (data = null) {
             this.onShowHideSave()
             this.selectedData = data ? data : null
+        },
+        onChangeStatus (index, id) {
+            const data = this.bizparCapsule[index].label.toLowerCase()
+            this.changeOrderItemStatus(id, data)
         },
         async removeData () {
             this.visibleLoaderAction = true
