@@ -4,7 +4,7 @@ import About from '@/components/About.vue';
 import AdminLayout from '@/components/layouts/Admin.vue';
 import WebLayout from '@/components/layouts/Web.vue';
 import CustomerLayout from '@/components/layouts/Customer.vue';
-import ShopLayout from '@/components/layouts/Shop.vue';
+// import ShopLayout from '@/components/layouts/Shop.vue';
 import ProductLayout from '@/components/layouts/Product.vue';
 
 // admin
@@ -25,6 +25,8 @@ import Pricing from '@/components/web/infos/Pricing.vue';
 import AboutUs from '@/components/web/infos/AboutUs.vue';
 import ArticlePublic from '@/components/web/articles/Index.vue';
 import ArticlePublicList from '@/components/web/articles/List.vue';
+import BenefitPublic from '@/components/web/benefits/Index.vue';
+import BenefitPublicList from '@/components/web/benefits/List.vue';
 
 // admin
 import Bizpar from '@/components/admin/bizpar/Index.vue';
@@ -128,6 +130,20 @@ export const routes = [
                 path: '/article/:id',
                 components: {
                     webfresh: ArticlePublic
+                }
+            },
+
+            // benefits
+            {
+                name: 'benefits',
+                path: '/benefits',
+                component: BenefitPublicList
+            },
+            {
+                name: 'benefit',
+                path: '/benefit/:id',
+                components: {
+                    webfresh: BenefitPublic
                 }
             },
 

@@ -86,6 +86,10 @@
   background-color: #fff !important;
 }
 
+.bg-placeholder {
+  background-color: #fce1e1 !important;
+}
+
 .cursor-pointer {
   cursor: pointer;
 }
@@ -41705,6 +41709,9 @@ a.btn {
 .image.image-center {
   margin: auto;
 }
+.image.no-overflow {
+  overflow: unset;
+}
 .image .status {
   position: absolute;
   bottom: 0;
@@ -41972,7 +41979,7 @@ a {
   z-index: 100;
 }
 #app #header #header-container {
-  width: 1200px;
+  width: 1100px;
   padding-top: 9px;
   margin: auto;
 }
@@ -41994,13 +42001,12 @@ a {
 #app #footer {
   position: relative;
   width: 100%;
-  margin-top: 50px;
+  margin-top: 0;
   padding-top: 50px;
   padding-bottom: 50px;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 #app #footer #footer-content {
-  width: 1200px;
+  width: 1100px;
   margin: auto;
 }
 @media (max-width: 720px) {
@@ -42073,7 +42079,7 @@ a {
   justify-content: end;
 }
 #app .main-screen {
-  width: 1200px;
+  width: 1100px;
   margin: auto;
 }
 @media (max-width: 720px) {
@@ -42130,7 +42136,7 @@ a {
 }
 #app .banner .banner-container {
   position: relative;
-  width: 1200px;
+  width: 1100px;
   margin: auto;
 }
 @media (max-width: 720px) {
@@ -42141,6 +42147,7 @@ a {
 #app .banner .banner-flex {
   display: flex;
   flex-wrap: nowrap;
+  flex-direction: row-reverse;
 }
 #app .banner .banner-flex .left {
   width: 60%;
@@ -42154,10 +42161,11 @@ a {
   }
   #app .banner .banner-flex .left {
     width: 100%;
+    padding-bottom: 32px;
   }
   #app .banner .banner-flex .right {
     width: 100%;
-    display: none;
+    padding-top: 32px;
   }
 }
 #app .banner .banner-benefit {

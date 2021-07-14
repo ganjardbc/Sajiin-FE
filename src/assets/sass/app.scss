@@ -62,10 +62,9 @@ a {
     #footer {
         position: relative;
         width: 100%;
-        margin-top: 50px;
+        margin-top: 0;
         padding-top: 50px;
         padding-bottom: 50px;
-        border-top: $border;
         #footer-content {
             width: $max-width;
             margin: auto; 
@@ -202,6 +201,7 @@ a {
         .banner-flex {
             display: flex;
             flex-wrap: nowrap;
+            flex-direction: row-reverse;
             .left {
                 width: 60%;
             }
@@ -212,10 +212,11 @@ a {
                 display: block;
                 .left {
                     width: 100%;
+                    padding-bottom: 32px;
                 }
                 .right {
                     width: 100%;
-                    display: none;
+                    padding-top: 32px;
                 }
             }
         }

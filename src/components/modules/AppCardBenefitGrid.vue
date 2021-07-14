@@ -9,22 +9,22 @@
             <div class="column-margin">
                 <div class="card no-padding box-shadow" style="margin-top: 30px;">
                     <div style="margin-bottom: 20px;">
-                        <router-link :to="{name: 'article', params: {id: dt.article_id}}">
+                        <!-- <router-link :to="{name: 'benefit', params: {id: dt.benefit_id}}"> -->
                             <div style="width: 100%; height: 240px; background-color: #fff; border-radius: 0; overflow: hidden;">
                                 <img :src="dt.image" alt="product" class="post-center" style="width: 100%;">
                             </div>
-                        </router-link>
+                        <!-- </router-link> -->
                     </div>
                     <div style="padding: 0 20px; width: calc(100% - 40px);">
-                        <router-link :to="{name: 'article', params: {id: dt.article_id}}" class="fonts semibold black" style="margin-top: 0;">
+                        <div class="fonts semibold black" style="margin-top: 0;">
                             {{ dt.title }}
-                        </router-link>
+                        </div>
                         <div class="fonts fonts-13px grey" style="margin-top: 5px;">{{ dt.description.substring(0, 150) }} ...</div>
-                        <div class="display-flex space-between" style="margin-top: 10px;">
-                            <router-link :to="{name: 'article', params: {id: dt.article_id}}" class="btn btn-main-reverse" style="padding-left: 0; padding-right: 0">
+                        <!-- <div class="display-flex space-between" style="margin-top: 10px;">
+                            <router-link :to="{name: 'benefit', params: {id: dt.benefit_id}}" class="btn btn-main-reverse" style="padding-left: 0; padding-right: 0">
                                 Read more <i class="icn fa fa-1x fa-arrow-right" />
                             </router-link>
-                        </div>
+                        </div> -->
                     </div>
                     <div style="padding-bottom: 20px;"></div>
                 </div>

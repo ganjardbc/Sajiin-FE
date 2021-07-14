@@ -62,6 +62,9 @@
 	&.image-center {
 		margin: auto;
 	}
+	&.no-overflow {
+		overflow: unset;
+	}
 	.status {
 		position: absolute;
 		bottom: 0;

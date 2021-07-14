@@ -10,8 +10,8 @@
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eligendi labore dolores dolorem beatae. Dolorum tempore nam temporibus!
             </p>
         </div>
-
-        <AppCardArticleGrid :data="articles" />
+        
+        <AppCardBenefitGrid :data="benefits" />
 
         <AppLoader v-if="visibleLoader" style="margin-top: 40px;" />
 
@@ -28,7 +28,7 @@ import axios from 'axios'
 import AppWrapper from '../../modules/AppWrapper'
 import AppButton from '../../modules/AppButton'
 import AppText from '../../modules/AppText'
-import AppCardArticleGrid from '../../modules/AppCardArticleGrid'
+import AppCardBenefitGrid from '../../modules/AppCardBenefitGrid'
 import AppCardGrid from '../../modules/AppCardGrid'
 import AppCardList from '../../modules/AppCardList'
 import AppLoader from '../../modules/AppLoader'
@@ -36,7 +36,7 @@ import AppLoader from '../../modules/AppLoader'
 export default {
     components: {
         AppLoader,
-        AppCardArticleGrid,
+        AppCardBenefitGrid,
         AppCardList,
         AppCardGrid,
         AppWrapper,
@@ -44,18 +44,18 @@ export default {
         AppText
     },
     mounted () {
-        this.getArticle(this.limit, this.offset)
+        this.getBenefit(this.limit, this.offset)
     },
     methods: {
-        async getArticle (limit, offset) {
+        async getBenefit (limit, offset) {
             this.visibleLoader = true 
 
-            let article = []
+            let benefit = []
 
             if (offset > 0) {
-                article = Object.assign([], this.articles)
+                benefit = Object.assign([], this.benefits)
             } else {
-                article = []
+                benefit = []
             }
 
             const payload = {
@@ -63,20 +63,20 @@ export default {
                 offset: offset
             }
 
-            const rest = await axios.post('/api/public/article', payload)
+            const rest = await axios.post('/api/public/benefit', payload)
 
             if (rest && rest.status === 200) {
                 const data = rest.data.data
                 data && data.map((dt) => {
-                    return article.push({
+                    return benefit.push({
                         ...dt,
                         id: dt.id,
-                        image: this.articleImageThumbnailUrl + dt.image,
+                        image: this.benefitImageThumbnailUrl + dt.image,
                         title: dt.title,
                         description: dt.description
                     })
                 })
-                this.articles = article
+                this.benefits = benefit
                 this.visibleLoader = false 
 
                 if (data.length > 0) {
@@ -93,7 +93,7 @@ export default {
             }
         },
         onMore () {
-            this.getArticle(this.limit, this.offset)
+            this.getBenefit(this.limit, this.offset)
         }
     },
     data () {
@@ -102,7 +102,7 @@ export default {
             limit: 9,
             offset: 0,
             visibleLoadMore: false,
-            articles: []
+            benefits: []
         }
     }
 }

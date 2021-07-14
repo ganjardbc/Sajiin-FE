@@ -1,28 +1,15 @@
 <template>
-    <div 
-        id="AppCardGrid" 
-        class="display-flex display-mobile nowrap space-bettween box-shadow border-radius"
-        style="width: 100%; background-color: #fff;">
-        <div 
-            v-for="(dt, index) in datas" 
-            :key="index" 
-            class="card" 
-            style="margin-left: 5px; margin-right: 5px;"
-        >
-            <div class="display-flex nowrap" style="padding-top: 20px; padding-bottom: 20px;">
-                <div style="width: 80px; margin-right: 20px;">
-                    <div style="width: 80px; height: 80px; border-radius: 100%; background-color: #000; margin: auto; overflow: hidden;">
-                        <img :src="dt.image" alt="SAJI-IN" class="post-center" style="width: 100%;">
+    <div id="AppCardGrid" class="display-flex display-mobile nowrap space-bettween">
+        <div v-for="(dt, index) in datas" :key="index" class="card">
+            <div class="display-flex column center" style="padding-top: 20px; padding-bottom: 20px;">
+                <div class="width width-70 width-center">
+                    <div class="image image-padding bg-white">
+                        <img :src="dt.image" alt="" class="post-center" style="width: 100%;">
                     </div>
                 </div>
-                <div style="width: calc(100% - 10px); padding-top: 7px;">
-                    <div class="fonts fonts-14px semibold black" style="margin-bottom: 5px;">{{ dt.title }}</div>
-                    <div class="fonts fonts-13px grey">{{ dt.description.substring(0, 50) }} ...</div>
-                    <!-- <div class="display-flex">
-                        <router-link :to="'/product'" class="btn btn-main-reverse" style="padding-left: 0; padding-right: 0">
-                            Read more <i class="icn fa fa-1x fa-arrow-right" />
-                        </router-link>
-                    </div> -->
+                <div style="width: calc(100% - 10px); padding-top: 0; text-align: center;">
+                    <div class="fonts fonts-14 semibold black" style="margin-bottom: 8px;">{{ dt.title }}</div>
+                    <div class="fonts fonts-12 grey">{{ dt.description }}</div>
                 </div>
             </div>
         </div>

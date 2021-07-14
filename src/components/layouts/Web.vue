@@ -1,6 +1,6 @@
 <template>
     <div id="WebLayouts">
-        <div id="header" class="box-shadow">
+        <div id="header" class="border-bottoms">
             <div id="header-container" class="header-mobile">
                 <div class="left">
                     <router-link :to="{name: 'home'}" style="position: relative; width: 100%; top: -2.5px; left: 0;">
@@ -46,9 +46,6 @@
                                         </button>
                                     </router-link>
                                 </div>
-                                <!-- <div class="header-menu-list header-search">
-                                    <SearchField :placeholder="'Search article ..'" />
-                                </div> -->
                             </div>
                         </div>
                     </div> 
@@ -71,6 +68,26 @@
                 <router-link :to="{name: 'customer-main'}" class="btn btn-main btn-radius-rounded">
                     Go To Customer Page <i class="icn fa fa-lg fa-arrow-right" />
                 </router-link>
+            </div>
+        </div>
+        <div id="contact" class="main-screen" style="padding-top: 64px; padding-bottom: 32px;">
+            <div type="center" class="self-padding">
+                <div class="width width-50 width-mobile width-center content-center">
+                    <h1 class="fonts fonts-16 semibold red" style="margin-bottom: 10px;">Ready to get started ?</h1>
+                    <h2 class="fonts fonts-34 bold black no-line-height">Let's join with Us</h2>
+                    <h2 class="fonts fonts-34 bold black no-line-height">and get better Products</h2>
+                    <div style="margin-top: 15px; margin-bottom: 15px;">
+                        <div class="bottom-line" style="margin: auto;"></div>
+                    </div>
+                    <div class="display-flex center" style="margin-bottom: 15px;">
+                        <span class="fonts fonts-12 grey">Questions? Call us at <span class="fonts fonts-11 red semibold">1-800-975-5304</span> or email <span class="fonts fonts-11 red semibold">hello@fleetio.com</span></span>
+                    </div>
+                </div>
+                <div class="display-flex center" style="margin-top: 32px;">
+                    <button class="btn btn-main" style="margin-left: 10px; margin-right: 10px;">
+                        Register Your Restaurant <i class="icn fa fa-lg fa-arrow-right" />
+                    </button>
+                </div>
             </div>
         </div>
         <div id="footer">
@@ -125,8 +142,8 @@
                                     </router-link>
                                 </li>
                                 <li class="ml-list">
-                                    <router-link :to="{name: 'articles'}" class="ml-link">
-                                        Events
+                                    <router-link :to="{name: 'benefits'}" class="ml-link">
+                                        Benefits
                                     </router-link>
                                 </li>
                             </ul>
@@ -195,9 +212,8 @@ import AppToast from '../modules/AppToast'
 const navbar = [
     {label: 'Home', link: 'home'},
     {label: 'Articles', link: 'articles'},
-    {label: 'About Us', link: 'about-us'},
-    {label: 'Pricing', link: 'pricing'},
-    {label: 'How to Join ?', link: 'how-to-join'}
+    {label: 'Benefits', link: 'benefits'},
+    {label: 'Pricing', link: 'pricing'}
 ]
 
 export default {
