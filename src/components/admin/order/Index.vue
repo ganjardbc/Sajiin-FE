@@ -19,9 +19,9 @@
                             :button="'btn btn-icon btn-white'"
                             :onChange="(data) => onChangeMenu(data)" 
                             :data="[{label: 'By ID'}, {label: 'By Total Price'}, {label: 'By Payment Status'}, {label: 'By Order Status'}]" />
-                        <!-- <button class="btn btn-white btn-icon btn-radius" @click="onChangeTabs(selectedTabIndex)">
+                        <button class="btn btn-white btn-icon btn-radius" @click="onChangeTabs(selectedTabIndex)">
                             <i class="fa fa-lw fa-retweet" />
-                        </button> -->
+                        </button>
                         <button class="btn btn-white btn-icon btn-radius" @click="onShow('CREATE')">
                             <i class="fa fa-lw fa-plus" />
                         </button>

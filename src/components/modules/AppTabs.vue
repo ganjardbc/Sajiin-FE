@@ -9,8 +9,10 @@
                 :key="index" 
                 :class="dt.status === 'active' ? 'active' : ''"
                 @click="onClick(index)">
-                <div class="tabs-label">{{ dt.label }}</div>
-                <div v-if="dt.val" class="tabs-val">{{ dt.val }}</div>
+                <div class="display-flex align-center">
+                    <div class="tabs-label">{{ dt.label }}</div>
+                    <div v-if="dt.val" class="tabs-val">{{ dt.val }}</div>
+                </div>
             </li>
         </ul>
         <button v-if="isScrollable" class="tabs-button" @click="toRight(path ? path : 'nav-topic')">
@@ -82,6 +84,9 @@ export default {
     watch: {
         selectedIndex: function (props, prevProps) {
             this.onClick(props)
+        },
+        data: function (props) {
+            this.datas = props 
         }
     }
 }

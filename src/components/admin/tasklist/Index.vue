@@ -4,8 +4,15 @@
             <div class="bg-white">
                 <div class="display-flex row space-between padding padding-10-px" style="height: 40px;">
                     <div>
-                        <h1 class="fonts small black">TASKLISTS</h1>
-                        <p class="fonts micro grey no-line-height">controll your datas</p>
+                        <!-- <h1 class="fonts small black">TASKLISTS</h1>
+                        <p class="fonts micro grey no-line-height">controll your datas</p> -->
+                        <AppTabs 
+                            :selectedIndex="selectedTabIndex" 
+                            :path="'main-topic'"
+                            :data.sync="tabs" 
+                            :isScrollable="false" 
+                            :onChange="(data) => onChangeTabs(data)" 
+                            class="margins margin-bottom-15-px" />
                     </div>
                     <div class="display-flex">
                         <AppButtonMenu 
@@ -13,6 +20,9 @@
                             :button="'btn btn-icon btn-white'"
                             :onChange="(data) => onChangeMenu(data)" 
                             :data="[{label: 'By ID'}, {label: 'By Name'}, {label: 'By Status'}]" />
+                        <button class="btn btn-icon btn-white" @click="onRefresh">
+                            <i class="fa fa-lw fa-retweet"></i>
+                        </button>
                         <SearchField :placeholder="'Search taskslist ..'" :enableResponsive="true" style="margin-left: 5px;" />
                     </div>
                 </div>
@@ -109,6 +119,7 @@
 <script>
 import axios from 'axios'
 import { mapGetters } from 'vuex'
+import AppTabs from '../../modules/AppTabs'
 import AppLoader from '../../modules/AppLoader'
 import AppAlert from '../../modules/AppAlert'
 import SearchField from '../../modules/SearchField'
@@ -127,12 +138,17 @@ export default {
             visibleLoadMore: false,
             formTitle: 'CREATE',
             formClass: false,
+            tabs: [
+                {label: 'All Task', status: 'active', val: 0},
+                {label: 'Assigned', status: '', val: 0}
+            ],
             bizparCapsule: [
                 {label: 'Waiting'}, 
                 {label: 'Cooking'},
                 {label: 'Done'}
             ],
             datas: [],
+            selectedTabIndex: null,
             selectedIndex: null,
             selectedData: null,
             selectedMessage: null,
@@ -154,6 +170,7 @@ export default {
         this.getData(this.limit, this.offset)
     },
     components: {
+        AppTabs,
         AppAlert,
         AppLoader,
         AppCapsuleMenu,
@@ -174,6 +191,19 @@ export default {
         },
         nameLength (row) {
             return row.key.length
+        },
+        onChangeTabs (index) {
+            this.selectedTabIndex = index
+            this.offset = 0
+            this.datas = []
+            switch (index) {
+                case 0:
+                    this.getData(this.limit, 0)
+                    break;
+                default:
+                    this.getData(this.limit, 0, this.dataUser.id)
+                    break;
+            }
         },
         onSearchData (id) {
             let payload = null
@@ -214,57 +244,13 @@ export default {
             const data = this.bizparCapsule[index].label.toLowerCase()
             this.changeOrderItemStatus(id, data)
         },
-        async removeData () {
-            this.visibleLoaderAction = true
-
-            const token = 'Bearer '.concat(this.$cookies.get('token'))
-            const id = this.onSearchData(this.selectedIndex).table_id
-            const payload = {
-                table_id: id
-            }
-
-            const rest = await axios.post('/api/table/delete', payload, { headers: { Authorization: token } })
-            // console.log('rest', rest)
-
-            if (rest && rest.status === 200) {
-                this.onShowHideDelete()
-                this.onClose()
-                this.visibleLoaderAction = false
-
-                const data = rest.data
-                if (data.status === 'ok') {
-                    this.getData(this.limit, 0)
-                } else {
-                    alert('Proceed failed')
-                }
+        onRefresh () {
+            this.offset = 0
+            this.datas = []
+            if (this.selectedTabIndex === 1) {
+                this.getData(this.limit, 0, this.dataUser.id)
             } else {
-                alert('Proceed failed')
-                this.visibleLoaderAction = false
-            }
-        },
-        async saveData () {
-            this.visibleLoaderAction = true
-
-            const token = 'Bearer '.concat(this.$cookies.get('token'))
-            const payload = this.selectedData
-            const url = this.formTitle === 'CREATE' ? '/api/table/post' : '/api/table/update' 
-
-            const rest = await axios.post(url, payload, { headers: { Authorization: token } })
-
-            if (rest && rest.status === 200) {
-                this.onShowHideSave()
-                this.visibleLoaderAction = false
-
-                const data = rest.data.data
-                if (data.length !== 0) {
-                    this.onClose()
-                    this.getData(this.limit, 0)
-                } else {
-                    this.selectedMessage = rest.data.message
-                }
-            } else {
-                alert('Proceed failed')
-                this.visibleLoaderAction = false
+                this.getData(this.limit, 0)
             }
         },
         async changeOrderItemStatus (id, status) {
@@ -287,7 +273,11 @@ export default {
 
                 const data = rest.data.data
                 if (data.length !== 0) {
-                    this.getData(this.limit, 0)
+                    if (this.selectedTabIndex === 1) {
+                        this.getData(this.limit, 0, this.dataUser.id)
+                    } else {
+                        this.getData(this.limit, 0)
+                    }
                 } else {
                     this.selectedMessage = rest.data.message
                 }
@@ -297,7 +287,7 @@ export default {
                 this.visibleLoaderAction = false
             }
         },
-        async getData (limit, offset) {
+        async getData (limit, offset, owner_id = null) {
             this.visibleLoader = true 
 
             let data = []
@@ -323,15 +313,28 @@ export default {
                 
                 newData && newData.map((dt) => {
                     dt.details && dt.details.map((sb) => {
-                        return data.push({...sb})
+                        if (sb.status !== 'done') {
+                            if (owner_id) {
+                                if (sb.updated_by === owner_id.toString()) {
+                                        data.push({...sb})
+                                }
+                            } else {
+                                data.push({...sb})
+                            }
+                        }
+                        return null 
                     })
                     return null 
                 })
 
-                this.datas = data 
+                this.datas = data
+                // this.tabs[0] = {
+                //     ...this.tabs[0],
+                //     val: this.datas.length
+                // }
                 this.visibleLoader = false 
 
-                console.log('newData', data)
+                // console.log('newData', this.datas)
 
                 if (newData.length > 0) {
                     this.offset += this.limit

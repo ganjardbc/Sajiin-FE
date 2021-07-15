@@ -364,9 +364,9 @@
     display: flex;
     flex-wrap: nowrap;
     .tabs-val {
-        position: absolute;
-        right: 2px;
-        top: 5px;
+        position: relative;
+        left: 5px;
+        top: 0;
         border-radius: 2px;
         padding: 3px 6px 2px 6px;
         color: #fff;
