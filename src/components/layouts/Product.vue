@@ -1,11 +1,9 @@
 <template>
-    <div id="Product" class="display-flex">
-        <div style="width: 210px; height: calc(100vh - 60px); padding-left: 20px; padding-right: 20px; overflow-y: auto; background-color: #fff;">
-            <div style="padding-top: 20px;">
-                <AppListDownMenu :data.sync="menus" :isSidebarSmall.sync="isSidebarSmall" />
-            </div>
+    <div id="App" class="content-sub">
+        <div class="cs-left">
+            <AppListDownMenu :data.sync="menus" :isSidebarSmall.sync="isSidebarSmall" />
         </div>
-        <div style="width: calc(100% - 250px);">
+        <div class="cs-right">
             <router-view />
         </div>
     </div>
@@ -20,7 +18,7 @@ const menus = [
 ]
 
 export default {
-    name: 'Product',
+    name: 'App',
     data () {
         return {
             menus: menus,

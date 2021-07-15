@@ -57,6 +57,7 @@ import ShopForm from '@/components/admin/shops/IndexForm.vue';
 import CatalogList from '@/components/admin/catalog/Index.vue';
 import PositionList from '@/components/admin/position/Index.vue';
 import EmployeeList from '@/components/admin/employee/Index.vue';
+import EmployeeForm from '@/components/admin/employee/IndexForm.vue';
 import ShiftList from '@/components/admin/shift/Index.vue';
 import Notification from '@/components/admin/notification/Index.vue';
 import TaskList from '@/components/admin/tasklist/Index.vue';
@@ -199,6 +200,11 @@ export const routes = [
                 name: 'shop',
                 path: '/admin-form-shop',
                 component: ShopForm
+            },
+            {
+                name: 'employeeform',
+                path: '/admin-form-employee',
+                component: EmployeeForm
             },
             {
                 name: 'cashier',

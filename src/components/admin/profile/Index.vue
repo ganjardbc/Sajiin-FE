@@ -32,7 +32,7 @@
                 <div class="card no-padding-mobile box-shadow bg-white">
                     <div class="width width-100">
                         <div class="display-flex display-mobile space-between">
-                            <div class="fonts bold big margin margin-bottom-20-px">Biodata</div>
+                            <div class="fonts bold big margin margin-bottom-20-px">User</div>
                         </div>
 
                         <div class="margin margin-bottom-20-px">

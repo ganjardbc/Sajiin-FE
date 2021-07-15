@@ -12,7 +12,8 @@ export default {
     rolename: null,
     permissions: null,
     token: null,
-    shop: null
+    shop: null,
+    employee: null 
   },
 
   getters: {
@@ -50,6 +51,10 @@ export default {
 
     shop (state) {
       return state.shop
+    },
+
+    employee (state) {
+      return state.employee
     }
   },
 
@@ -88,6 +93,10 @@ export default {
 
     SET_SHOP (state, value) {
       state.shop = value
+    },
+
+    SET_EMPLOYEE (state, value) {
+      state.employee = value
     }
   },
 
@@ -157,6 +166,7 @@ export default {
       $cookies.set('permissions', permissions)
       $cookies.set('rawUser', data)
       $cookies.set('shop', data && data.shop[0])
+      $cookies.set('employee', data.employee)
 
       commit('SET_AUTHENTICATED', true)
       commit('SET_USER', data && data.user)
@@ -164,6 +174,7 @@ export default {
       commit('SET_PERMISSIONS', data && data.permissions)
       commit('SET_TOKEN', AuthStr)
       commit('SET_SHOP', data && data.shop[0])
+      commit('SET_EMPLOYEE', data && data.employee)
     },
 
     removeCookieAuth ({commit}) {
@@ -181,12 +192,14 @@ export default {
       $cookies.remove('orderPayment')
       $cookies.remove('customer')
       $cookies.remove('shop')
+      $cookies.remove('employee')
 
       commit('SET_AUTHENTICATED', false)
       commit('SET_USER', null)
       commit('SET_ROLE', null)
       commit('SET_PERMISSIONS', null)
-      commit('SET_TOKEN', null)
+      commit('SET_TOKEN', null),
+      commit('SET_EMPLOYEE', null)
     },
 
     async register ({ dispatch }, credentials) {

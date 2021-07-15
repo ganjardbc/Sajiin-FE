@@ -1,7 +1,7 @@
 <template>
     <div id="App" :class="formClass ? 'content-form' : 'content-form hide'">
         <div class="left">
-            <div class="bg-white box-shadow">
+            <div class="bg-white">
                 <div class="display-flex row space-between padding padding-10-px" style="height: 40px;">
                     <div>
                         <h1 class="fonts small black">POSITIONS</h1>

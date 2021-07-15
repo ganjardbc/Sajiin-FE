@@ -26,13 +26,6 @@
                 <div style="width: 100%; margin-bottom: 30px;">
                     <input type="password" placeholder="password" class="field field-sekunder" name="password" id="password" required :readonly="visibleLoader" v-model="form.password">
                 </div>
-                
-                <!-- <div style="width: 100%; margin-bottom: 30px;">
-                    <input class="form-check-input" type="checkbox" name="remember" id="remember" v-model="form.remember">
-                    <label class="form-check-label" for="remember">
-                        Remember Me
-                    </label>
-                </div> -->
 
                 <div v-if="visibleError" class="content normal" style="color: red; text-align: center; margin-bottom: 15px;">
                     {{ textError }}

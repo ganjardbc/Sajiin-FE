@@ -34,7 +34,7 @@
                         </form>
                     </div>
                     <div style="width: 100%;" class="display-flex right">
-                        <router-link v-if="dataUser.role_name !== 'customer'" :to="{name: '404'}" style="margin-left: 5px;" class="button-router-link">
+                        <router-link v-if="dataUser.role_name === 'admin' || dataUser.role_name === 'owner'" :to="{name: '404'}" style="margin-left: 5px;" class="button-router-link">
                             <button class="btn btn-white btn-icon btn-radius" title="Reports">
                                 <i class="fa fa-lg fa-calendar-alt" />
                             </button>
@@ -52,7 +52,7 @@
                             </div>
                         </router-link>
                         <div class="border-left" style="margin-left: 10px; padding-left: 10px;"></div>
-                        <div class="display-flex">
+                        <div v-if="dataUser.role_name === 'admin' || dataUser.role_name === 'owner'" class="display-flex">
                             <router-link :to="{name: 'shop'}" class="card-small-profile">
                                 <div class="image" style="text-align: center;">
                                     <img v-if="selectedShop && selectedShop.image" :src="selectedShop ? (shopImageThumbnailUrl + selectedShop.image) : ''" alt="">
@@ -60,6 +60,17 @@
                                 </div>
                                 <div class="label">
                                     <div class="post-center fonts fonts-10 semibold black" style="text-transform: uppercase;">{{ selectedLabel ? selectedLabel : 'CREATE SHOP' }}</div>
+                                </div>
+                            </router-link>
+                        </div>
+                        <div v-else>
+                            <router-link :to="{name: 'employeeform'}" class="card-small-profile">
+                                <div class="image" style="text-align: center;">
+                                    <img v-if="selectedEmployee && selectedEmployee.image" :src="selectedEmployee ? (employeeImageThumbnailUrl + selectedEmployee.image) : ''" alt="">
+                                    <i v-else class="post-top fa fa-lw fa-id-card" style="color: #999;" />
+                                </div>
+                                <div class="label">
+                                    <div class="post-center fonts fonts-10 semibold black" style="text-transform: uppercase;">{{ selectedEmployee ? selectedEmployee.employee_id : '' }}</div>
                                 </div>
                             </router-link>
                         </div>
@@ -95,7 +106,7 @@ const sidebarAdmin = [
         {icon: 'fa fa-lg fa-tachometer-alt', label: 'Dashboard', value: 1, link: 'dashboard', permission: 'dashboard'},
         {icon: 'fa fa-lg fa-laptop', label: 'Cashier', value: 0, link: 'cashier', permission: 'cashier'},
         {icon: 'fa fa-lg fa-receipt', label: 'Orders', value: 0, link: 'orderlist', permission: 'orders'},
-        {icon: 'fa fa-lg fa-clipboard', label: 'TaskLists', value: 0, link: 'tasklist', permission: 'employees'},
+        {icon: 'fa fa-lg fa-clipboard', label: 'TaskLists', value: 0, link: 'tasklist', permission: 'tasklists'},
         {icon: 'fa fa-lg fa-calculator', label: 'Payments', value: 0, link: 'payment', permission: 'payments'},
         {icon: 'fa fa-lg fa-th-large', label: 'Tables', value: 0, link: 'table', permission: 'tables'},
         {icon: 'fa fa-lg fa-utensils', label: 'Products', value: 0, link: 'admin-product', permission: 'products'},
@@ -131,6 +142,7 @@ export default {
             menuShops: [],
             selectedLabel: 'CREATE SHOP',
             selectedShop: null,
+            selectedEmployee: null,
             code: null
         }
     },
@@ -147,6 +159,7 @@ export default {
         console.log('token', token)
 
         this.dataUser = this.user ? this.user : this.$cookies.get('user')
+        this.selectedEmployee = this.employee ? this.employee : this.$cookies.get('employee')
         this.selectedShop = this.choosedShop ? this.choosedShop : this.$cookies.get('shop')
         this.selectedLabel = this.selectedShop ? this.selectedShop.name : 'CHOOSE SHOP'
         this.code = this.deployUrl + (this.$router.mode === 'hash' ? '#' : '') + '/generate-customer/' + (this.selectedShop ? this.selectedShop.shop_id : token)
@@ -300,35 +313,12 @@ export default {
                 this.visibleLoader = false 
             }
         },
-        // async saveNotif (title, subtitle) {
-        //     const time = new Date().getTime()
-
-        //     const token = 'Bearer '.concat(this.$cookies.get('token'))
-        //     const payload = {
-        //         id: '',
-        //         notification_id: 'NF-' + time,
-        //         image: '',
-        //         title: title,
-        //         link: '',
-        //         status: 'active',
-        //         subtitle: subtitle,
-        //         is_read: 0
-        //     }
-
-        //     const rest = await axios.post('/api/notification/post', payload, { headers: { Authorization: token } })
-
-        //     if (rest && rest.status === 200) {
-        //         console.log('saveNotif', rest)
-        //         this.visibleLoader = false 
-        //     } else {
-        //         this.visibleLoader = false 
-        //     }
-        // }
     },
     computed: {
         ...mapGetters({
             authenticated: 'auth/authenticated',
             user: 'auth/user',
+            employee: 'auth/employee',
             token: 'auth/token',
             cart: 'cart/count',
             carts: 'cart/all',

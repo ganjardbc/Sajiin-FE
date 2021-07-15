@@ -1,8 +1,8 @@
 <template>
     <div id="AppListDownMenu">
         <ul :class="(isSidebarSmall 
-                ? 'content-scroll menu-list hover with-icon small' 
-                : 'content-scroll menu-list hover with-icon ' + (enableGridView ? 'display-flex wrap' : '')
+                ? 'content-scroll menu-list hover mobile-list with-icon small' 
+                : 'content-scroll menu-list hover mobile-list with-icon ' + (enableGridView ? 'display-flex wrap' : '')
             )">
             <li v-for="(dt, index) in data" :key="index" :class="'ml-list ' + (enableGridView ? 'fixed-column-3' : '')">
                 <router-link v-if="!dt.menu" :to="{name: dt.link}" class="ml-link">

@@ -310,6 +310,17 @@
             }
         }
     }
+    &.mobile-list {
+        @media (max-width: $min-width) {
+            position: relative;
+            overflow-x: auto;
+            overflow-y: hidden;
+            white-space: nowrap;
+            .ml-list {
+                display: inline-block;
+            }
+        }
+    }
     .submenu {
         position: relative;
         padding: 5px 0;

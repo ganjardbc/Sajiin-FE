@@ -7,25 +7,54 @@
                     <div class="card no-padding-mobile box-shadow bg-white">
                         <div class="width width-full">
                             <div class="image image-padding" style="margin: auto; text-align: center;">
-                                <i v-if="!image" class="post-middle-absolute fa fa-lg fa-store" style="font-size: 58px; color: #999;" />
+                                <i v-if="!image" class="post-middle-absolute fa fa-lg fa-id-card" style="font-size: 58px; color: #999;" />
                                 <img v-else :src="image ? image : ''" alt="">
-                                <button v-if="formTitle !== 'CREATE' ? true : false" class="btn btn-sekunder btn-icon" style="position: absolute; bottom: 10px; right: 10px; border-radius: 100%;" @click="onButtonUpload">
+                                <button class="btn btn-sekunder btn-icon" style="position: absolute; bottom: 10px; right: 10px; border-radius: 100%;" @click="onButtonUpload">
                                     <i class="post-center fa fa-lg fa-pencil-alt" style="font-size: 16px;" />
                                 </button>
                             </div>
-
-                            <AppButtonQR 
-                                v-if="dataUser && dataUser.role_name !== 'customer'"
-                                style="margin-top: 15px;"
-                                :buttonClass="'btn btn-sekunder btn-full'"
-                                :code="formData.code"
-                                title="Show QR" 
-                            />
                         </div>
                     </div>
                 </div>
 
                 <div class="width width-73 width-mobile">
+                    <div class="card box-shadow" style="margin-bottom: 20px;">
+                        <div class="fonts fonts-10 black semibold" style="margin-bottom: 10px;">Employee Info</div>
+                        <div class="display-flex space-between">
+                            <div class="width width-20">
+                                <div class="image image-padding" style="margin: auto; text-align: center;">
+                                    <i v-if="!dataShop" class="post-middle-absolute fa fa-lg fa-id-card" style="font-size: 58px; color: #999;" />
+                                    <img v-else :src="dataShop ? (shopImageThumbnailUrl + dataShop.image) : ''" alt="">
+                                </div>
+                            </div>
+                            <div class="width width-78">
+                                <div class="field-group margin margin-bottom-15-px">
+                                    <div class="field-label">SHOP</div>
+                                    <input 
+                                        type="text" 
+                                        placeholder="" 
+                                        class="field field-sekunder" 
+                                        name="shop" 
+                                        id="shop" 
+                                        v-model="dataShop.name"
+                                        readonly>
+                                </div>
+                                <div class="field-group margin margin-bottom-15-px">
+                                    <div class="field-label">POSITION</div>
+                                    <input 
+                                        type="text" 
+                                        placeholder="" 
+                                        class="field field-sekunder" 
+                                        name="position" 
+                                        id="position" 
+                                        v-model="dataPosition.title"
+                                        readonly>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+
                     <div class="card box-shadow" style="margin-bottom: 20px;">
                         <div class="fonts fonts-10 black semibold" style="margin-bottom: 10px;">General Info</div>
                         <div class="field-group margin margin-bottom-15-px">
@@ -40,17 +69,17 @@
                                 readonly>
                         </div>
                         <div class="field-group margin margin-bottom-15-px">
-                            <div class="field-label">SHOP ID</div>
+                            <div class="field-label">EMPLOYEE ID</div>
                             <input 
                                 type="text" 
                                 placeholder="" 
                                 class="field field-sekunder" 
-                                name="shop_id" 
-                                id="shop_id" 
-                                v-model="formData.shop_id"
+                                name="employee_id" 
+                                id="employee_id" 
+                                v-model="formData.employee_id"
                                 readonly>
                             <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
-                                {{ formMessage && formMessage.shop_id && formMessage.shop_id[0] }}
+                                {{ formMessage && formMessage.employee_id && formMessage.employee_id[0] }}
                             </div>
                         </div>
                         <div class="field-group margin margin-bottom-15-px">
@@ -77,70 +106,6 @@
                                 :readonly="formTitle === 'VIEW' ? true : false"></textarea>
                             <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
                                 {{ formMessage && formMessage.about && formMessage.about[0] }}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card box-shadow" style="margin-bottom: 20px;">
-                        <div class="fonts fonts-10 black semibold" style="margin-bottom: 10px;">Opening Hours</div>
-                        <div class="display-flex margin margin-bottom-15-px">
-                            <div class="field-group" style="width: calc(100% - 10px); margin-right: 10px;">
-                                <div class="field-label">OPEN DAY</div>
-                                <input 
-                                    type="text" 
-                                    placeholder="" 
-                                    class="field field-sekunder" 
-                                    name="open_day" 
-                                    id="open_day" 
-                                    v-model="formData.open_day"
-                                    :readonly="formTitle === 'VIEW' ? true : false">
-                                <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
-                                    {{ formMessage && formMessage.open_day && formMessage.open_day[0] }}
-                                </div>
-                            </div>
-                            <div class="field-group" style="width: calc(100% - 10px); margin-left: 10px;">
-                                <div class="field-label">CLOSE DAY</div>
-                                <input 
-                                    type="text" 
-                                    placeholder="" 
-                                    class="field field-sekunder" 
-                                    name="close_day" 
-                                    id="close_day" 
-                                    v-model="formData.close_day"
-                                    :readonly="formTitle === 'VIEW' ? true : false">
-                                <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
-                                    {{ formMessage && formMessage.close_day && formMessage.close_day[0] }}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="display-flex margin margin-bottom-0-px">
-                            <div class="field-group" style="width: calc(100% - 10px); margin-right: 10px;">
-                                <div class="field-label">OPEN TIME</div>
-                                <input 
-                                    type="text" 
-                                    placeholder="" 
-                                    class="field field-sekunder" 
-                                    name="open_time" 
-                                    id="open_time" 
-                                    v-model="formData.open_time"
-                                    :readonly="formTitle === 'VIEW' ? true : false">
-                                <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
-                                    {{ formMessage && formMessage.open_time && formMessage.open_time[0] }}
-                                </div>
-                            </div>
-                            <div class="field-group" style="width: calc(100% - 10px); margin-left: 10px;">
-                                <div class="field-label">CLOSE TIME</div>
-                                <input 
-                                    type="text" 
-                                    placeholder="" 
-                                    class="field field-sekunder" 
-                                    name="close_time" 
-                                    id="close_time" 
-                                    v-model="formData.close_time"
-                                    :readonly="formTitle === 'VIEW' ? true : false">
-                                <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
-                                    {{ formMessage && formMessage.close_time && formMessage.close_time[0] }}
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -182,13 +147,13 @@
                         <div class="field-group margin margin-bottom-0-px">
                             <div class="field-label">ADDRESS</div>
                             <textarea 
-                                name="location" 
-                                id="location" 
+                                name="address" 
+                                id="address" 
                                 class="field field-sekunder field-textarea" 
-                                v-model="formData.location"
+                                v-model="formData.address"
                                 :readonly="formTitle === 'VIEW' ? true : false"></textarea>
                             <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
-                                {{ formMessage && formMessage.location && formMessage.location[0] }}
+                                {{ formMessage && formMessage.address && formMessage.address[0] }}
                             </div>
                         </div>
                     </div>
@@ -243,39 +208,6 @@
                             </div>
                             <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
                                 {{ formMessage && formMessage.status && formMessage.status[0] }}
-                            </div>
-                        </div>
-                        <div class="field-group">
-                            <div class="field-label">AVAILABLE</div>
-                            <div v-if="formTitle !== 'VIEW' ? true : false">
-                                <div class="display-flex space-between">
-                                    <div class="fonts micro black">Is this shop still available ?</div>
-                                    <label class="switch green">
-                                        <input 
-                                            type="checkbox" 
-                                            name="is_available" 
-                                            id="is_available" 
-                                            v-model="formData.is_available"
-                                            :readonly="formTitle === 'VIEW' ? true : false" />
-                                        <span class="slider round" />
-                                    </label>
-                                </div>
-                            </div>
-                            <div v-else>
-                                <div style="width: 100%;">
-                                    <input 
-                                        type="text" 
-                                        placeholder="" 
-                                        class="field field-sekunder" 
-                                        name="is_available" 
-                                        id="is_available" 
-                                        style="text-transform: capitalize;"
-                                        :value="formData.is_available ? 'Available' : 'Unavailable'"
-                                        readonly>
-                                </div>
-                            </div>
-                            <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
-                                {{ formMessage && formMessage.is_available && formMessage.is_available[0] }}
                             </div>
                         </div>
                     </div>
@@ -340,6 +272,21 @@ import Form from './Form'
 
 const payload = {
     id: '',
+    employee_id: '',
+    image: '',
+    name: '',
+    phone: '',
+    email: '',
+    status: '',
+    is_available: 0,
+    about: '',
+    address: '',
+    position_id: 0,
+    shop_id: 0
+}
+
+const shop = {
+    id: '',
     shop_id: '',
     image: '',
     name: '',
@@ -353,6 +300,15 @@ const payload = {
     close_time: '',
     status: '',
     is_available: 0
+}
+
+const position = {
+    id: '',
+    position_id: '',
+    image: '',
+    title: '',
+    description: '',
+    status: 'active'
 }
 
 export default {
@@ -374,6 +330,8 @@ export default {
             selectedIndex: null,
             formData: {...payload},
             formMessage: null,
+            dataShop: {...shop},
+            dataPosition: {...position},
             filters: {
                 name: { value: '', keys: ['name'] }
             },
@@ -381,13 +339,15 @@ export default {
             currentPage: 1,
             totalPages: 0,
             dataUser: null,
+            dataEmployee: null,
             limit: 1,
             offset: 0
         }
     },
     mounted () {
         this.dataUser = this.$cookies.get('user')
-        this.getData(this.limit, this.offset)
+        this.dataEmployee = this.$cookies.get('employee')
+        this.getData()
     },
     components: {
         AppPopupForm,
@@ -437,7 +397,7 @@ export default {
         onSearchData (id) {
             let payload = null
             this.datas.map((dt) => {
-                if (dt.shop.id === id) {
+                if (dt.id === id) {
                     payload = {...dt}
                 }
                 return null 
@@ -474,20 +434,20 @@ export default {
                 image: data
             }
             this.image = this.formData.image ? this.shopImageThumbnailUrl + this.formData.image : ''
-            this.$cookies.set('shop', this.formData)
+            this.$cookies.set('employee', this.formData)
         },
         async removeData () {
             this.visibleLoaderAction = true
 
             const token = 'Bearer '.concat(this.$cookies.get('token'))
-            const id = this.onSearchData(this.selectedIndex).shop.shop_id
+            const id = this.onSearchData(this.selectedIndex).employee_id
             const payload = {
-                shop_id: id
+                employee_id: id
             }
 
             console.log('payload', id)
 
-            const rest = await axios.post('/api/shop/delete', payload, { headers: { Authorization: token } })
+            const rest = await axios.post('/api/employee/delete', payload, { headers: { Authorization: token } })
             console.log('rest', rest)
 
             if (rest && rest.status === 200) {
@@ -511,13 +471,10 @@ export default {
 
             const token = 'Bearer '.concat(this.$cookies.get('token'))
             const time = new Date().getTime()
-            const newPayload = this.title === 'CREATE' ? {
-                ...this.formData,
-                shop_id: 'SH-' + time.toString()
-            } : {
+            const newPayload = {
                 ...this.formData
             }
-            const url = this.formTitle === 'CREATE' ? '/api/shop/post' : '/api/shop/update' 
+            const url = '/api/employee/update' 
 
             const rest = await axios.post(url, newPayload, { headers: { Authorization: token } })
 
@@ -527,7 +484,7 @@ export default {
 
                 const data = rest.data.data
                 if (data.length !== 0) {
-                    this.$cookies.set('shop', this.formData)
+                    this.$cookies.set('employee', this.formData)
                     this.onClose()
                     this.getData(this.limit, 0)
                 } else {
@@ -543,10 +500,10 @@ export default {
 
             const token = 'Bearer '.concat(this.$cookies.get('token'))
             const payload = this.formData
-            const url = '/api/shop/uploadImage' 
+            const url = '/api/employee/uploadImage' 
 
             let formData = new FormData();
-            formData.append('shop_id', payload.shop_id);
+            formData.append('employee_id', payload.employee_id);
             formData.append('image', data);
 
             const rest = await axios.post(url, formData, { headers: { Authorization: token, 'Content-Type': 'multipart/form-data' } })
@@ -571,10 +528,10 @@ export default {
 
             const token = 'Bearer '.concat(this.$cookies.get('token'))
             const payload = this.formData
-            const url = '/api/shop/removeImage' 
+            const url = '/api/employee/removeImage'
 
             let formData = new FormData();
-            formData.append('shop_id', payload.shop_id);
+            formData.append('employee_id', payload.employee_id);
 
             var a = confirm('remove this image ?')
             if (a) {
@@ -591,74 +548,23 @@ export default {
                 }
             }
         },
-        async getData (limit, offset) {
+        async getData () {
             this.visibleLoader = true 
-
-            let data = []
-
-            if (offset > 0) {
-                data = Object.assign([], this.datas)
-            } else {
-                data = []
-            }
 
             const token = 'Bearer '.concat(this.$cookies.get('token'))
             const payload = {
-                limit: limit,
-                offset: offset
+                employee_id: this.dataEmployee.employee_id
             }
 
-            const rest = await axios.post('/api/shop/getAll', payload, { headers: { Authorization: token } })
+            const rest = await axios.post('/api/employee/getByID', payload, { headers: { Authorization: token } })
 
             if (rest && rest.status === 200) {
-                const newData = rest.data.data
-                
-                newData && newData.map((dt) => {
-                    const code = dt.shop ? dt.shop.shop_id : ''
-                    return data.push({...dt, code: code})
-                })
-
-                this.datas = data 
-                const selectShop = this.datas[0]
-
-                if (selectShop) {
-                    this.formData = this.datas ? {
-                        ...this.formData,
-                        id: selectShop.shop.id,
-                        shop_id: selectShop.shop.shop_id,
-                        image: selectShop.shop.image,
-                        name: selectShop.shop.name,
-                        about: selectShop.shop.about,
-                        email: selectShop.shop.email,
-                        phone: selectShop.shop.phone,
-                        location: selectShop.shop.location,
-                        open_day: selectShop.shop.open_day,
-                        close_day: selectShop.shop.close_day,
-                        open_time: selectShop.shop.open_time,
-                        close_time: selectShop.shop.close_time,
-                        status: selectShop.shop.status,
-                        is_available: selectShop.shop.is_available,
-                        code: selectShop.code
-                    } : {
-                        ...payload
-                    }
-                    this.image = this.formData.image ? this.shopImageThumbnailUrl + this.formData.image : ''
-                }
-
-                this.formTitle = selectShop ? 'EDIT' : 'CREATE'
+                const data = rest.data.data
+                this.formData = data 
+                this.dataShop = this.formData.shop 
+                this.dataPosition = this.formData.position
+                this.image = this.formData.image ? this.employeeImageThumbnailUrl + this.formData.image : ''
                 this.visibleLoader = false 
-
-                console.log('shop', this.datas)
-
-                if (newData.length > 0) {
-                    this.offset += this.limit
-                }
-
-                if (newData.length < this.limit) {
-                    this.visibleLoadMore = false
-                } else {
-                    this.visibleLoadMore = true
-                }
             } else {
                 this.visibleLoader = false 
             }

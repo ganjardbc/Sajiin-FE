@@ -521,6 +521,39 @@ a {
             width: 100%;
             height: calc(100vh - 60px);
             overflow-y: auto;
+            .content-sub {
+                position: relative;
+                display: flex;
+                flex-wrap: nowrap;
+                width: 100%;
+                .cs-left {
+                    position: relative;
+                    width: 210px; 
+                    height: calc(100vh - 80px); 
+                    padding-left: 20px; 
+                    padding-right: 20px; 
+                    padding-top: 20px;
+                    overflow-y: auto; 
+                    background-color: #fff;
+                }
+                .cs-right {
+                    position: relative;
+                    width: calc(100% - 250px);
+                }
+                @media (max-width: $min-width) {
+                    display: block;
+                    .cs-left {
+                        height: auto;
+                        width: 100%;
+                        padding-left: 0;
+                        padding-right: 0;
+                        padding-top: 0;
+                    }
+                    .cs-right {
+                        width: 100%;
+                    }
+                }
+            }
             .content-form {
                 position: relative;
                 display: flex;
@@ -530,7 +563,7 @@ a {
                 &.hide {
                     transition: 0.2s;
                     .left {
-                        width: calc(100% - 30px);
+                        width: 100%;
                         transition: 0.2s;
                     }
                     .right {
@@ -544,19 +577,20 @@ a {
                         width: 100%;
                         padding: 0;
                         .content-body {
-                            height: calc(100vh - 162px);
+                            height: calc(100vh - 122px);
                         }
                     }
                 }
                 .left {
                     position: relative;
-                    width: calc(100% - 40px);
-                    padding: 20px;
+                    width: 100%;
+                    width: calc(100% - 10px);
+                    padding-left: 10px;
                     transition: 0.2s;
                     .content-body {
                         position: relative;
                         width: 100%;
-                        height: calc(100vh - 165px);
+                        height: calc(100vh - 122px);
                         overflow-y: auto;
                     }
                 }
@@ -570,7 +604,8 @@ a {
                 }
                 @media (max-width: $min-width) {
                     .left {
-                        width: calc(100% - 30px);
+                        width: 100%;
+                        padding-left: 0;
                     }
                     .right {
                         width: 100%;

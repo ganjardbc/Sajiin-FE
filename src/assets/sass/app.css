@@ -1032,6 +1032,17 @@ a.btn {
     width: 100%;
   }
 }
+@media (max-width: 720px) {
+  .menu-list.mobile-list {
+    position: relative;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+  }
+  .menu-list.mobile-list .ml-list {
+    display: inline-block;
+  }
+}
 .menu-list .submenu {
   position: relative;
   padding: 5px 0;
@@ -41871,7 +41882,7 @@ table thead, table tbody tr {
 .table-container {
   position: relative;
   width: 100%;
-  height: calc(100vh - 225px);
+  height: calc(100vh - 185px);
   overflow: auto;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
@@ -42502,6 +42513,41 @@ a {
   height: calc(100vh - 60px);
   overflow-y: auto;
 }
+#admin .main .inner .content-sub {
+  position: relative;
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+#admin .main .inner .content-sub .cs-left {
+  position: relative;
+  width: 210px;
+  height: calc(100vh - 80px);
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+  overflow-y: auto;
+  background-color: #fff;
+}
+#admin .main .inner .content-sub .cs-right {
+  position: relative;
+  width: calc(100% - 250px);
+}
+@media (max-width: 720px) {
+  #admin .main .inner .content-sub {
+    display: block;
+  }
+  #admin .main .inner .content-sub .cs-left {
+    height: auto;
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+  }
+  #admin .main .inner .content-sub .cs-right {
+    width: 100%;
+  }
+}
 #admin .main .inner .content-form {
   position: relative;
   display: flex;
@@ -42513,7 +42559,7 @@ a {
   transition: 0.2s;
 }
 #admin .main .inner .content-form.hide .left {
-  width: calc(100% - 30px);
+  width: 100%;
   transition: 0.2s;
 }
 #admin .main .inner .content-form.hide .right {
@@ -42526,18 +42572,19 @@ a {
   padding: 0;
 }
 #admin .main .inner .content-form.no-padding .left .content-body {
-  height: calc(100vh - 162px);
+  height: calc(100vh - 122px);
 }
 #admin .main .inner .content-form .left {
   position: relative;
-  width: calc(100% - 40px);
-  padding: 20px;
+  width: 100%;
+  width: calc(100% - 10px);
+  padding-left: 10px;
   transition: 0.2s;
 }
 #admin .main .inner .content-form .left .content-body {
   position: relative;
   width: 100%;
-  height: calc(100vh - 165px);
+  height: calc(100vh - 122px);
   overflow-y: auto;
 }
 #admin .main .inner .content-form .right {
@@ -42550,7 +42597,8 @@ a {
 }
 @media (max-width: 720px) {
   #admin .main .inner .content-form .left {
-    width: calc(100% - 30px);
+    width: 100%;
+    padding-left: 0;
   }
   #admin .main .inner .content-form .right {
     width: 100%;
