@@ -2,16 +2,16 @@
     <div id="AppCardDashboard" style="padding: 0 10px; width: calc(100% - 20px);">
         <div 
             class="card box-shadow bg-white" 
-            style="height: 350px; padding: 0; width: 100%; border-radius: 5px; margin-bottom: 15px;">
+            :style="'padding: 0; border-radius: 5px; margin-bottom: 15px; width: 100%; height:' + (height ? height : '350px') + ';'">
             <div class="display-flex space-between" style="height: 30px; padding: 5px 10px;">
                 <div style="margin-top: 5px;">
-                    <div class="fonts font-9 semibold">TITLE</div>
+                    <div class="fonts fonts-10 semibold">{{ title ? title : "TITLE" }}</div>
                 </div>
                 <div class="display-flex">
-                    <button class="btn btn-small-icon btn-white">
+                    <button v-if="enableRefresh" class="btn btn-small-icon btn-white">
                         <i class="fa fa-lw fa-retweet"></i>
                     </button>
-                    <button class="btn btn-small-icon btn-white">
+                    <button v-if="enableZoom" class="btn btn-small-icon btn-white">
                         <i class="fa fa-lw fa-search-plus"></i>
                     </button>
                 </div>
@@ -24,6 +24,24 @@
 </template>
 <script>
 export default {
-    name: 'AppCardDashboard'
+    name: 'AppCardDashboard',
+    props: {
+        title: {
+            type: String,
+            required: false
+        },
+        height: {
+            type: String,
+            required: false
+        },
+        enableRefresh: {
+            type: Boolean,
+            required: false
+        },
+        enableZoom: {
+            type: Boolean,
+            required: false
+        }
+    }
 }
 </script>

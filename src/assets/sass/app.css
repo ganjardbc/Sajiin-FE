@@ -5540,6 +5540,14 @@ a.btn {
     width: 100%;
   }
 }
+.width.width-row-4 {
+  width: calc(100% / 4);
+}
+@media (max-width: 720px) {
+  .width.width-row-4 {
+    width: 100%;
+  }
+}
 @media (max-width: 720px) {
   .width.width-mobile {
     width: calc(100% - 0px);
@@ -35672,6 +35680,9 @@ a.btn {
 }
 .fonts.green {
   color: #38c172;
+}
+.fonts.teal {
+  color: #4dc0b5;
 }
 .fonts.no-line-height {
   line-height: 1.2;

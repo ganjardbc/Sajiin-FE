@@ -103,7 +103,7 @@ import AppPopupNotif from '../modules/AppPopupNotif'
 
 const sidebarAdmin = [
     {icon: 'fa fa-lg fa-database', label: 'DASHBOARD', value: 0, menu: [
-        {icon: 'fa fa-lg fa-tachometer-alt', label: 'Dashboard', value: 1, link: 'dashboard', permission: 'dashboard'},
+        {icon: 'fa fa-lg fa-tachometer-alt', label: 'Dashboard', value: 0, link: 'dashboard', permission: 'dashboard'},
         {icon: 'fa fa-lg fa-laptop', label: 'Cashier', value: 0, link: 'cashier', permission: 'cashier'},
         {icon: 'fa fa-lg fa-receipt', label: 'Orders', value: 0, link: 'orderlist', permission: 'orders'},
         {icon: 'fa fa-lg fa-clipboard', label: 'TaskLists', value: 0, link: 'tasklist', permission: 'tasklists'},

@@ -316,10 +316,10 @@ export default {
                         if (sb.status !== 'done') {
                             if (owner_id) {
                                 if (sb.updated_by === owner_id.toString()) {
-                                        data.push({...sb})
+                                        data.push({...sb, created_at: dt.order.created_at})
                                 }
                             } else {
-                                data.push({...sb})
+                                data.push({...sb, created_at: dt.order.created_at})
                             }
                         }
                         return null 
@@ -334,7 +334,7 @@ export default {
                 // }
                 this.visibleLoader = false 
 
-                // console.log('newData', this.datas)
+                console.log('newData', this.datas)
 
                 if (newData.length > 0) {
                     this.offset += this.limit

@@ -24,6 +24,12 @@
             width: 100%;
         }
     }
+    &.width-row-4 {
+        width: calc(100% / 4);
+        @media (max-width: $min-width) {
+            width: 100%;
+        }
+    }
     @media (max-width: $min-width) {
         &.width-mobile {
             width: calc(100% - 0px);
