@@ -5,16 +5,16 @@
                 <div class="width width-row-4">
                     <AppCardDashboard title="New Orders" height="250px">
                         <div class="post-top content-center">
-                            <div class="fonts fonts-48 teal semibold">{{ (nowOrders.confirmed + nowOrders.unconfirmed) }}<span class="fonts fonts-28 grey semibold">/{{ nowOrders.allAdmin }}</span></div>
-                            <div class="fonts fonts-10 grey">Orders Today</div>
+                            <div class="fonts fonts-48 teal semibold">{{ (nowOrders.confirmed + nowOrders.unconfirmed) }}</div>
+                            <div class="fonts fonts-10 grey">Current Orders</div>
                         </div>
                     </AppCardDashboard>
                 </div>
                 <div class="width width-row-4">
-                    <AppCardDashboard title="Cooking" height="250px">
+                    <AppCardDashboard title="On Progress" height="250px">
                         <div class="post-top content-center">
-                            <div class="fonts fonts-48 teal semibold">{{ nowOrders.cooking }}<span class="fonts fonts-28 grey semibold">/{{ nowOrders.allAdmin }}</span></div>
-                            <div class="fonts fonts-10 grey">Orders Today</div>
+                            <div class="fonts fonts-48 teal semibold">{{ nowOrders.cooking }}</div>
+                            <div class="fonts fonts-10 grey">Current Orders</div>
                         </div>
                     </AppCardDashboard>
                 </div>
@@ -22,7 +22,7 @@
                     <AppCardDashboard title="Done" height="250px">
                         <div class="post-top content-center">
                             <div class="fonts fonts-48 grey semibold">{{ nowOrders.done }}</div>
-                            <div class="fonts fonts-10 grey">Orders Today</div>
+                            <div class="fonts fonts-10 grey">Current Orders</div>
                         </div>
                     </AppCardDashboard>
                 </div>
@@ -30,7 +30,7 @@
                     <AppCardDashboard title="Canceled" height="250px">
                         <div class="post-top content-center">
                             <div class="fonts fonts-48 grey semibold">{{ nowOrders.canceled }}</div>
-                            <div class="fonts fonts-10 grey">Orders Today</div>
+                            <div class="fonts fonts-10 grey">Current Orders</div>
                         </div>
                     </AppCardDashboard>
                 </div>
@@ -38,62 +38,51 @@
         </div>
         <div class="display-flex display-mobile space-between" style="padding: 15px 0; padding-bottom: 0;">
             <div class="width width-row-2">
-                <AppCardDashboard title="Order Summary">
-                    <div style="width: 100%;"></div>
+                <AppCardDashboard title="Last 30 Days Order" height="500px">
+                    <apexchart width="98%" height="95%" type="line" :options="options" :series="series"></apexchart>
                 </AppCardDashboard>
             </div>
             <div class="width width-row-3">
-                <AppCardDashboard title="TaskLists">
+                <AppCardDashboard title="TaskLists" height="500px">
                     <div style="width: 100%;"></div>
                 </AppCardDashboard>
             </div>
         </div>
-        <!-- <div class="display-flex display-mobile space-between" style="padding: 15px 0; padding-bottom: 0;">
-            <div class="width width-row-3">
-                <AppCardDashboard>
-                    <div style="width: 100%;">CARD DASHBOARD</div>
-                </AppCardDashboard>
-            </div>
-            <div class="width width-row-3">
-                <AppCardDashboard>
-                    <div style="width: 100%;">CARD DASHBOARD</div>
-                </AppCardDashboard>
-            </div>
-            <div class="width width-row-3">
-                <AppCardDashboard>
-                    <div style="width: 100%;">CARD DASHBOARD</div>
-                </AppCardDashboard>
-            </div>
-        </div>
-        <div class="display-flex display-mobile space-between" style="padding: 15px 0; padding-bottom: 0;">
-            <div class="width width-row-3">
-                <AppCardDashboard>
-                    <div style="width: 100%;">CARD DASHBOARD</div>
-                </AppCardDashboard>
-            </div>
-            <div class="width width-row-3">
-                <AppCardDashboard>
-                    <div style="width: 100%;">CARD DASHBOARD</div>
-                </AppCardDashboard>
-            </div>
-            <div class="width width-row-3"></div>
-        </div> -->
     </div>
 </template>
 
 <script>
+import axios from 'axios'
 import { mapGetters, mapActions } from 'vuex'
 import AppCardDashboard from '../modules/AppCardDashboard'
+import moment from 'moment'
 
 export default {
     name: 'App',
     data () {
         return {
-            nowOrders: null
+            options: {
+                chart: {
+                    id: 'vuechart-example'
+                },
+                xaxis: {
+                    categories: []
+                }
+            },
+            series: [{
+                name: 'orders',
+                data: []
+            }],
+            nowOrders: null,
+            dataShop: null
         }
     },
     mounted () {
+        this.dataShop = this.$cookies.get('shop')
         this.nowOrders = this.orders 
+        console.log('nowOrders', this.nowOrders)
+
+        this.getDataOrder()
     },
     components: {
         AppCardDashboard
@@ -110,6 +99,7 @@ export default {
         orders: function (props) {
             if (props) {
                 this.nowOrders = props 
+                console.log('nowOrders', this.nowOrders)
             }
         }
     },
@@ -126,6 +116,44 @@ export default {
             const token = 'Bearer '.concat(this.$cookies.get('token'))
             this.getCountOrder(token)
         },
+        async getDataOrder () {
+            this.visibleLoader = true 
+
+            const token = 'Bearer '.concat(this.$cookies.get('token'))
+            const payload = {
+                shop_id: this.dataShop ? this.dataShop.id : ''
+            }
+
+            const rest = await axios.post('/api/order/getDashboard', payload, { headers: { Authorization: token } })
+
+            if (rest && rest.status === 200) {
+                let yAxis = []
+                let xAxis = []
+                const data = rest.data.data
+                data && data.map((dt) => {
+                    yAxis.push(moment(dt.date).format("MMM, Do"))
+                    xAxis.push(dt.count)
+                    return null 
+                })
+
+                this.options = {
+                    ...this.options,
+                    xaxis: {
+                        categories: yAxis
+                    }
+                }
+
+                this.series = [{
+                    ...this.series[0],
+                    data: xAxis
+                }]
+
+                this.visibleLoader = false 
+                console.log('dashboard order', xAxis)
+            } else {
+                this.visibleLoader = false 
+            }
+        }
     }
 }
 </script>

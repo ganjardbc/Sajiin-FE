@@ -13,6 +13,7 @@ import jquery from 'jquery';
 import VueSocketIO from 'vue-socket.io';
 import SocketIo from 'socket.io-client';
 import VueQrcodeReader from "vue-qrcode-reader";
+import VueApexCharts from 'vue-apexcharts';
 import "./assets/sass/app.css";
 import "./assets/icons/fontawesome/css/all.min.css";
 import Vue from 'vue';
@@ -28,6 +29,7 @@ axios.defaults.baseURL = api;
 
 window.$ = jquery;
 
+Vue.use(VueApexCharts);
 Vue.use(require('vue-moment'));
 Vue.use(VueQrcodeReader);
 Vue.use(Vuex);
@@ -40,6 +42,7 @@ Vue.use(new VueSocketIO({
     connection: SocketIo(socket)
 }));
 
+Vue.component('apexchart', VueApexCharts);
 
 Vue.$cookies.config('30d');
 Vue.prototype.deployUrl = deploy;
