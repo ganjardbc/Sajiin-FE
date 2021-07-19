@@ -37,14 +37,9 @@
             </div>
         </div>
         <div class="display-flex display-mobile space-between" style="padding: 15px 0; padding-bottom: 0;">
-            <div class="width width-row-2">
+            <div style="width: 100%;">
                 <AppCardDashboard title="Last 30 Days Order" height="500px">
                     <apexchart width="98%" height="95%" type="line" :options="options" :series="series"></apexchart>
-                </AppCardDashboard>
-            </div>
-            <div class="width width-row-3">
-                <AppCardDashboard title="TaskLists" height="500px">
-                    <div style="width: 100%;"></div>
                 </AppCardDashboard>
             </div>
         </div>
