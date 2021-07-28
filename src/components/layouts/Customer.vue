@@ -1,9 +1,9 @@
 <template>
     <div id="CustomerLayout" class="mobile">
-        <div class="navbar-header border-bottom">
+        <div class="navbar-header">
             <div class="navbar-header-content">
                 <div class="left">
-                    <router-link :to="{name: 'customer-home'}" style="position: relative; width: 100%; top: 3px;">
+                    <router-link :to="{name: 'customer-main'}" style="position: relative; width: 100%; top: 3px;">
                         <img :src="logo" alt="SAJI-IN" style="width: 80%;">
                     </router-link>
                 </div>
@@ -25,15 +25,15 @@
         </div>
         <div style="padding-bottom: 70px;"></div>
         <div class="navbar-bottom">
-            <div v-if="selectedShop && selectedShop.id" class="main-screen display-flex space-between">
+            <div class="main-screen display-flex space-between">
                 <ul class="menu-navbar">
                     <router-link :to="{name: 'customer-main'}">
                         <li>
                             <div class="icon">
-                                <i class="label-icon fa fa-lg fa-store" />
+                                <i class="label-icon fa fa-lg fa-home" />
                             </div>
                             <div class="label">
-                                Shop
+                                Home
                             </div>
                         </li>
                     </router-link>
@@ -61,7 +61,7 @@
                     </router-link>
                 </ul>
             </div>
-            <div v-else class="main-screen display-flex space-between">
+            <!-- <div v-else class="main-screen display-flex space-between">
                 <div style="margin-top: 8px; width: 100%;">
                     <AppButtonScanQr 
                         :title="'Scan QR Code'"
@@ -69,7 +69,7 @@
                         :buttonFull="true"
                     />
                 </div>
-            </div>
+            </div> -->
         </div>
 
         <AppToast />

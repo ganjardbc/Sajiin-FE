@@ -81,6 +81,7 @@ import CustomerProduct from '@/components/customer/products/Index.vue';
 import CustomerProductList from '@/components/customer/products/List.vue';
 import CustomerTable from '@/components/customer/table/Index.vue';
 import CustomerPayment from '@/components/customer/payment/Index.vue';
+import CustomerQR from '@/components/customer/qr/Index.vue';
 
 export const routes = [
     // web
@@ -513,6 +514,13 @@ export const routes = [
                 name: 'customer-order',
                 path: 'orders',
                 component: CustomerAccount
+            },
+
+            // modules
+            {
+                path: 'customer-qr',
+                name: 'customer-qr',
+                component: CustomerQR
             }
         ]
     }

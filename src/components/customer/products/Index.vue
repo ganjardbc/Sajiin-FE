@@ -83,7 +83,7 @@
                                 </ul>
                             </div>
 
-                            <div class="display-flexs space-between" style="padding-top: 0; padding-bottom: 15px;">
+                            <!-- <div class="display-flexs space-between" style="padding-top: 0; padding-bottom: 15px;">
                                 <AppShowHide :title="'Shipments (' + (shipment.length) + ')'" :disableSpaceBetween="true" style="padding-bottom: 10px;">
                                     <div class="display-flex" style="padding-bottom: 15px;" v-for="(dt, index) in shipment" :key="index">
                                         <div style="width: 45px; margin-right: 15px">
@@ -118,13 +118,51 @@
                                         </div>
                                     </div>
                                 </AppShowHide>
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="fonts fonts-10 semibold black" style="margin-bottom: 5px;">Add to Chart</div>
+                        <div class="left">
+                            <div style="padding-bottom: 10px;">
+                                <div class="fonts fonts-10 grey" style="padding-bottom: 5px;">Quantity</div>
+                                <div>
+                                    <AddQtyField :maximumValue="'10'" :onChange="(data) => this.changeQty(data)" />
+                                </div>
+                            </div>
+                            <div class="display-flex space-between" style="padding-bottom: 10px;">
+                                <div class="fonts fonts-10 grey">Product</div>
+                                <div class="fonts fonts-10 black semibold">Rp. {{ details[detailSelected] ? details[detailSelected].price : 0 }}</div>
+                            </div>
+                            <div class="display-flex space-between border-bottom" style="padding-bottom: 10px;">
+                                <div class="fonts fonts-10 grey">Toping</div>
+                                <div class="fonts fonts-10 black semibold">Rp. {{ topings[topingSelected] ? topings[topingSelected].price : 0 }}</div>
+                            </div>
+                            <div class="display-flex space-between" style="padding-top: 10px; padding-bottom: 10px;">
+                                <div class="fonts fonts-10 grey">Subtotal</div>
+                                <div class="fonts fonts-10 black semibold">Rp. {{ subtotalSelected }}</div>
+                            </div>
+                        </div>
+
+                        <div class="right">
+                            <div v-if="customer ? true : true">
+                                <button 
+                                    v-if="!visibleLoaderAction" 
+                                    :class="!visibleButton ? 'btn btn-primary btn-full' : 'btn btn-main btn-full'" 
+                                    @click="addToCart">
+                                    Add to Chart
+                                </button>
+                                <button v-else class="btn btn-primary btn-full">
+                                    Please Wait..
+                                </button>
                             </div>
                         </div>
                     </div>
 
                     <div style="padding-bottom: 15px;"></div>
 
-                    <div class="width width-100">
+                    <!-- <div class="width width-100">
                         <div class="width width-100 width-mobile">
                             <div class="component-mobile">
                                 <div class="component-mobile-content">
@@ -144,10 +182,6 @@
                                                 <div class="fonts fonts-10 grey">Toping</div>
                                                 <div class="fonts fonts-10 black semibold">Rp. {{ topings[topingSelected] ? topings[topingSelected].price : 0 }}</div>
                                             </div>
-                                            <!-- <div class="display-flex space-between border-bottom" style="padding-top: 10px; padding-bottom: 10px;">
-                                                <div class="fonts fonts-10 grey">PPN (2%)</div>
-                                                <div class="fonts fonts-10 black semibold">Rp. 0</div>
-                                            </div> -->
                                             <div class="display-flex space-between" style="padding-top: 10px; padding-bottom: 10px;">
                                                 <div class="fonts fonts-10 grey">Subtotal</div>
                                                 <div class="fonts fonts-10 black semibold">Rp. {{ subtotalSelected }}</div>
@@ -170,7 +204,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
                 </div>
             </div>
@@ -284,8 +318,13 @@ export default {
             this.onTotal()
         },
         changeToping (id) {
-            this.topingSelected = id
-            this.onTotal()
+            if (id === this.topingSelected) {
+                this.topingSelected = null 
+                this.onTotal()
+            } else {
+                this.topingSelected = id
+                this.onTotal()
+            }
         },
         onTotal () {
             let topingPrice = this.topings[this.topingSelected] ? this.topings[this.topingSelected].price : 0

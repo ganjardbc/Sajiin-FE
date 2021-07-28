@@ -30,7 +30,7 @@
                             </div>
                             <div class="display-flex display-mobile">
                                 <div class="header-menu-list display-flex display-mobile">
-                                    <router-link v-if="!dataUser ? false : true" :to="{name: dataUser.role_name === 'customer' ? 'customer-home' : 'dashboard'}" style="display: block;" class="margin margin-left-5-px no-margin-padding">
+                                    <router-link v-if="!dataUser ? false : true" :to="{name: dataUser.role_name === 'customer' ? 'customer-main' : 'dashboard'}" style="display: block;" class="margin margin-left-5-px no-margin-padding">
                                         <button class="btn btn-sekunder btn-mobile">
                                             {{ dataUser.role_name === 'customer' ? 'CUSTOMER' : 'DASHBOARD' }}
                                         </button>

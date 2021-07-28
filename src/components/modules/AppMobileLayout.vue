@@ -1,6 +1,6 @@
 <template>
     <div id="AppMobileLayout" class="card-full-popup">
-        <div class="navbar-header border-bottom">
+        <div class="navbar-header">
             <div class="navbar-header-content">
                 <div class="display-flex">
                     <button class="btn btn-icon btn-white" @click="onBack">

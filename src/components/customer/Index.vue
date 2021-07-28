@@ -1,109 +1,147 @@
 <template>
-    <div id="App" class="main-screen">
-        <div style="width: 100%; margin-bottom: 15px;">
-            <div style="padding-top: 15px; padding-bottom: 10px;">
-                <div class="display-flex space-between">
-                    <div style="width: 70px; margin-right: 15px;">
-                        <div class="image image-padding image-center border border-full" style="text-align: center; overflow: hidden;">
-                            <i v-if="selectedShop && !selectedShop.image" class="post-middle-absolute fa fa-lg fa-store" style="font-size: 32px; color: #999;" />
-                            <img v-else :src="selectedShop && selectedShop.image ? (shopImageThumbnailUrl + selectedShop.image) : ''" alt="">
+    <div id="App">
+        <div class="banner-mobile" style="padding-top: 0; padding-bottom: 15px;">
+            <carousel :per-page="1" :mouse-drag="false" :centerMode="true" :loop="true" :autoplay="true" :speed="1000" :autoplayTimeout="4000" :paginationEnabled="false" :paginationColor="'#fff'" :paginationPosition="'#ff0000'">
+                <slide v-for="(dt, i) in articles" :key="i">
+                    <div class="card no-padding box-shadow bg-white banner-mobile-content">
+                        <div class="padding padding-15px">
+                            <img :src="dt.image" alt="product" class="post-center" style="width: 100%;">
                         </div>
                     </div>
-                    <div style="position: relative; width: calc(100% - 85px;">
-                        <div class="display-flex space-between" style="margin-bottom: 5px;">
-                            <div class="display-flex">
-                                <div class="fonts fonts-11 semibold" style="margin-right: 10px;">{{ selectedShop && selectedShop.name }}</div>
-                                <div class="card-verified not" style="margin-right: 6px;" :title="selectedShop && selectedShop.about">
-                                    <i class="icn fa fa-lw fa-info"></i>
-                                </div>
+                </slide>
+            </carousel>
+        </div>
+
+        <div class="main-screen">
+            <div v-if="!selectedShop" style="width: 100%; padding-top: 0; padding-bottom: 15px;">
+                <div class="card box-shadow" style="padding-top: 5px; padding-bottom: 5px;">
+                    <div class="display-flex space-between display-mobile">
+                        <div style="margin-top: 10px; margin-bottom: 10px;">
+                            <div class="fonts fonts-11 black semibold">
+                                Make your orders
                             </div>
-                            <div>
-                                <div class="card-capsule active">Open</div>
+                            <div class="fonts fonts-10 grey">
+                                by scan the QR restaurant that have join with us
                             </div>
                         </div>
-                        <div style="padding-bottom: 15px;">
-                            <ul class="menu-info">
-                                <li>
-                                    <div class="icn">
-                                        <i class="icn-left far fa-lg fa-clock" />
-                                    </div>
-                                    <div class="label">
-                                        {{ selectedShop && selectedShop.open_time }} - {{ selectedShop && selectedShop.close_time }}
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="icn">
-                                        <i class="icn-left fa fa-lg fa-map-marker-alt" />
-                                    </div>
-                                    <div class="label">
-                                        {{ selectedShop && selectedShop.location }}
-                                    </div>
-                                </li>
-                            </ul>
+                        <div style="margin-top: 10px; margin-bottom: 10px;">
+                            <router-link :to="{name: 'customer-qr'}">
+                                <button class="btn btn-main">
+                                    <i class="icn icn-left fa fa-lw fa-qrcode"></i> Scan QR Code 
+                                </button>
+                            </router-link>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="display-flex space-between" style="padding-bottom: 20px;">
-                <div v-for="(dt, index) in infos" :key="index" style="width: 100%; text-align: center;">
-                    <div class="display-flex column">
-                        <div class="fonts fonts-8 grey">{{ dt.title }}</div>
-                        <div class="fonts fonts-16 semibold">{{ dt.qty }}</div>
-                    </div>
-                </div>
-            </div>
-
-            <div style="padding-bottom: 0;">
-                <button class="btn btn-sekunder btn-full" @click="onShowHideExit" title="Exit Shop">
-                    Exit Shop <i class="icn fa fa-1x fa-sign-out-alt"></i>
-                </button>
-            </div>
-        </div>
-
-        <div v-if="dataOrder" class="border border-bottoms" style="padding-top: 0; padding-bottom: 15px;">
-            <div class="fonts fonts-10 semibold" style="margin-bottom: 5px;">
-                You have an order
-            </div>
-            <div class="display-flex">
-                <router-link :to="{name: 'order'}" class="card-capsule active" style="width: 100%; text-align: center; padding-top: 10px; padding-bottom: 8px;">
-                    Continue to check out ?
-                </router-link>
-            </div>
-        </div>
-
-        <div style="margin-bottom: 20px;">
-            <div style="margin-bottom: 10px;">
-                <div class="fonts fonts-10 black semibold">Categories</div>
-            </div>
-            <div class="display-flex">
-                <div v-for="(dt, i) in categories" :key="i" style="width: calc(100% / 3);">
-                    <div style="padding: 0 10px;">
-                        <router-link :to="{name: 'product-list'}">
-                            <div class="card no-padding box-shadow">
-                                <div class="image image-half-padding" style="padding-bottom: 60%; border-radius: 0;">
-                                    <i v-if="!dt.image" class="post-middle-absolute fa fa-lg fa-image" style="font-size: 32px; color: #999;"></i>
-                                    <img v-else :src="dt.image" alt="">
-                                </div>
-                                <div class="padding padding-10-px" style="text-align: center;">
-                                    <div class="fonts fonts-10 black semibold">
-                                        {{ dt.name }}
-                                    </div>
+            <div v-if="selectedShop"> 
+                <div style="width: 100%; margin-bottom: 20px;">
+                    <div style="padding-top: 0; padding-bottom: 15px;">
+                        <div class="display-flex space-between">
+                            <div style="width: 70px; margin-right: 15px;">
+                                <div class="image image-padding image-center border border-full" style="text-align: center; overflow: hidden;">
+                                    <i v-if="selectedShop && !selectedShop.image" class="post-middle-absolute fa fa-lg fa-store" style="font-size: 32px; color: #999;" />
+                                    <img v-else :src="selectedShop && selectedShop.image ? (shopImageThumbnailUrl + selectedShop.image) : ''" alt="">
                                 </div>
                             </div>
+                            <div style="position: relative; width: calc(100% - 85px;">
+                                <div class="display-flex space-between" style="margin-bottom: 5px;">
+                                    <div class="display-flex">
+                                        <div class="fonts fonts-11 semibold" style="margin-right: 10px;">{{ selectedShop && selectedShop.name }}</div>
+                                        <div class="card-verified not" style="margin-right: 6px;" :title="selectedShop && selectedShop.about">
+                                            <i class="icn fa fa-lw fa-info"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="card-capsule active">Open</div>
+                                    </div>
+                                </div>
+                                <div style="padding-bottom: 15px;">
+                                    <ul class="menu-info">
+                                        <li>
+                                            <div class="icn">
+                                                <i class="icn-left far fa-lg fa-clock" />
+                                            </div>
+                                            <div class="label">
+                                                {{ selectedShop && selectedShop.open_time }} - {{ selectedShop && selectedShop.close_time }}
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="icn">
+                                                <i class="icn-left fa fa-lg fa-map-marker-alt" />
+                                            </div>
+                                            <div class="label">
+                                                {{ selectedShop && selectedShop.location }}
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="display-flex space-between" style="padding-bottom: 20px;">
+                        <div v-for="(dt, index) in infos" :key="index" style="width: 100%; text-align: center;">
+                            <div class="display-flex column">
+                                <div class="fonts fonts-8 grey">{{ dt.title }}</div>
+                                <div class="fonts fonts-16 semibold">{{ dt.qty }}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="padding-bottom: 0;">
+                        <button class="btn btn-sekunder btn-full" @click="onShowHideExit" title="Exit Shop">
+                            Exit Shop <i class="icn fa fa-1x fa-sign-out-alt"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div v-if="dataOrder" class="border border-bottoms" style="padding-top: 0; padding-bottom: 15px;">
+                    <div class="fonts fonts-10 semibold" style="margin-bottom: 5px;">
+                        You have an order
+                    </div>
+                    <div class="display-flex">
+                        <router-link :to="{name: 'order'}" class="card-capsule active" style="width: 100%; text-align: center; padding-top: 10px; padding-bottom: 8px;">
+                            Continue to check out ?
                         </router-link>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <div>
-            <div class="display-flex space-between">
-                <div class="fonts fonts-10 black semibold">Products</div>
-                <router-link :to="{name: 'product-list'}" class="fonts fonts-10 semibold link">View All</router-link>
+                <div style="margin-bottom: 20px;">
+                    <div style="margin-bottom: 0;">
+                        <div class="fonts fonts-10 black semibold">Categories</div>
+                    </div>
+                    <div class="display-flex wrap">
+                        <div v-for="(dt, i) in categories" :key="i" style="width: calc(100% / 3);">
+                            <div style="padding-right: 7.5px; padding-left: 7.5px; padding-top: 15px;">
+                                <router-link :to="{name: 'product-list'}">
+                                    <div class="card no-padding box-shadow">
+                                        <div class="image image-half-padding" style="padding-bottom: 60%; border-radius: 0;">
+                                            <i v-if="!dt.image" class="post-middle-absolute fa fa-lg fa-image" style="font-size: 32px; color: #999;"></i>
+                                            <img v-else :src="dt.image" alt="">
+                                        </div>
+                                        <div class="padding padding-10-px" style="text-align: center;">
+                                            <div class="fonts fonts-10 black">
+                                                {{ dt.name }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </router-link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="display-flex space-between">
+                        <div class="fonts fonts-10 black semibold">Products</div>
+                        <router-link :to="{name: 'product-list'}" class="fonts fonts-10 semibold link">View All</router-link>
+                    </div>
+                    <AppCardPostGrid :data="products" :isMobileCard="true" />
+                    <AppLoader v-if="visibleLoader" style="margin-top: 10px;" />
+                </div>
             </div>
-            <AppCardPostGrid :data="products" :isMobileCard="true" />
-            <AppLoader v-if="visibleLoader" style="margin-top: 10px;" />
         </div>
 
         <AppAlert 
@@ -151,8 +189,15 @@ export default {
             limit: 4,
             offset: 0,
             visibleLoadMore: false,
+            features: [
+                {icon: 'fa fa-lw fa-circle', title: 'Top-up OVO', value: 'Rp 4.150'},
+                {icon: 'fa fa-lw fa-circle', title: 'Top-up OVO', value: 'Rp 4.150'},
+                {icon: 'fa fa-lw fa-circle', title: 'Top-up OVO', value: 'Rp 4.150'},
+                {icon: 'fa fa-lw fa-circle', title: 'Top-up OVO', value: 'Rp 4.150'}
+            ],
             products: [],
             categories: [],
+            articles: [],
             dataUser: null,
             dataOrder: null,
             selectedCustomer: null,
@@ -166,6 +211,7 @@ export default {
         this.selectedCustomer = this.$cookies.get('customer')
         this.dataOrder = this.$cookies.get('orderItem')
         this.dataUser = this.$cookies.get('user')
+        this.getArticle()
         this.getProduct(this.limit, this.offset)
         this.getCategory(5, 0)
     },
@@ -208,6 +254,33 @@ export default {
         onShowHideExit () {
             this.visibleAlertExit = !this.visibleAlertExit
         },
+        async getArticle () {
+            this.visibleLoaderArticle = true
+
+            const payload = {
+                limit: 5,
+                offset: 0
+            }
+
+            const rest = await axios.post('/api/public/article', payload)
+
+            if (rest && rest.status === 200) {
+                const data = rest.data.data
+                const payload = data && data.map((dt) => {
+                    return {
+                        ...dt,
+                        id: dt.id,
+                        image: this.articleImageThumbnailUrl + dt.image,
+                        title: dt.title,
+                        description: dt.description
+                    }
+                })
+                this.articles = payload
+                this.visibleLoaderArticle = false 
+            } else {
+                this.visibleLoaderArticle = false 
+            }
+        },
         async exitShop () {
             this.visibleLoaderExit = true
 
@@ -226,7 +299,7 @@ export default {
                 this.$cookies.remove('orderItem')
                 this.$cookies.remove('orderTable')
                 this.$cookies.remove('orderPayment')
-                this.$router.push({ name: 'customer-home' })
+                this.$router.go()
             } else {
                 this.onShowHideExit()
                 this.makeToast('Proceed failed')
@@ -249,7 +322,7 @@ export default {
                 limit: limit,
                 offset: offset,
                 status: 'active',
-                shop_id: this.selectedShop.id 
+                shop_id: this.selectedShop ? this.selectedShop.id : null 
             }
 
             const rest = await axios.post('/api/category/getAll', payload, { headers: { Authorization: token } })
@@ -299,7 +372,7 @@ export default {
                 limit: limit,
                 offset: offset,
                 status: 'active',
-                shop_id: this.selectedShop.id 
+                shop_id: this.selectedShop ? this.selectedShop.id : null 
             }
 
             const rest = await axios.post('/api/product/getAll', payload, { headers: { Authorization: token } })

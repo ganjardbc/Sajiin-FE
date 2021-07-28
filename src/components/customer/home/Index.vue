@@ -34,10 +34,15 @@
                             </div>
                         </div>
                         <div style="margin-top: 10px; margin-bottom: 10px;">
-                            <AppButtonScanQr 
+                            <router-link :to="{name: 'customer-qr'}">
+                                <button class="btn btn-main">
+                                    <i class="icn icn-left fa fa-lw fa-qrcode"></i> Scan QR Code 
+                                </button>
+                            </router-link>
+                            <!-- <AppButtonScanQr 
                                 :title="'Scan QR Code'"
                                 :btnClass="'btn btn-main'"
-                            />
+                            /> -->
                         </div>
                     </div>
                 </div>
@@ -89,6 +94,7 @@
 </template>
 <script>
 import axios from 'axios'
+import { Carousel, Slide } from 'vue-carousel'
 import AppLoader from '../../modules/AppLoader'
 import AppCardOrder from '../../modules/AppCardOrder'
 import AppEmpty from '../../modules/AppEmpty'
@@ -113,6 +119,8 @@ export default {
         this.getArticle()
     },
     components: {
+        Carousel,
+        Slide,
         AppButtonScanQr,
         AppEmpty,
         AppCardOrder,
