@@ -214,8 +214,6 @@ export default {
         this.getArticle()
         this.getProduct(this.limit, this.offset)
         this.getCategory(5, 0)
-
-        console.log('shop', this.selectedShop)
     },
     components: {
         AppAlert,
