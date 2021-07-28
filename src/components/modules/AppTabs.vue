@@ -9,7 +9,7 @@
                 :key="index" 
                 :class="dt.status === 'active' ? 'active' : ''"
                 @click="onClick(index)">
-                <div class="display-flex align-center">
+                <div class="display-flex align-center center">
                     <div class="tabs-label">{{ dt.label }}</div>
                     <div v-if="dt.val" class="tabs-val">{{ dt.val }}</div>
                 </div>

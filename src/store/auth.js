@@ -165,7 +165,7 @@ export default {
       $cookies.set('role_name', data.role.role_name)
       $cookies.set('permissions', permissions)
       $cookies.set('rawUser', data)
-      $cookies.set('shop', data && data.shop[0])
+      $cookies.set('shop', data && data.shop && data.shop[0])
       $cookies.set('employee', data.employee)
 
       commit('SET_AUTHENTICATED', true)
@@ -173,7 +173,7 @@ export default {
       commit('SET_ROLE', data && data.role)
       commit('SET_PERMISSIONS', data && data.permissions)
       commit('SET_TOKEN', AuthStr)
-      commit('SET_SHOP', data && data.shop[0])
+      commit('SET_SHOP', data && data.shop && data.shop[0])
       commit('SET_EMPLOYEE', data && data.employee)
     },
 

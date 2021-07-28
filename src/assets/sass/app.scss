@@ -186,17 +186,19 @@ a {
     .banner-mobile {
         position: relative;
         width: 730px;
+        height: 250px; 
         margin: auto;
         @media (max-width: $min-width) {
             width: calc(100% - 20px);
+            height: 150px;
             padding: 0 10px;
         }
         .banner-mobile-content {
-            height: 250px; 
+            height: 220px; 
             width: calc(100% - 30px); 
             margin: 15px;
             @media (max-width: $min-width) {
-                height: 150px;
+                height: 120px;
             }
         }
     }

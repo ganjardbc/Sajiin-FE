@@ -97,6 +97,8 @@ export default {
                 console.log('token', data.token)
                 console.log('data', data)
 
+                this.visibleLoader = false
+
                 this.setCookieAuth(data)
 
                 const token = 'Bearer '.concat(data.token)
@@ -104,11 +106,11 @@ export default {
                 this.getCountOrder(token)
 
                 if (data.user.role_name === 'customer') {
-                    this.$router.push({ name: 'customer-home' })
+                    this.$cookies.remove('shop')
+                    this.$router.push({ name: 'customer-main' })
                 } else {
                     this.$router.push({ name: 'dashboard' })
                 }
-                // window.location = this.initUrl + '/home'
 
                 if (data) {
                     const payload = {

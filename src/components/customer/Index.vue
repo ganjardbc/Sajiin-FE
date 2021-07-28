@@ -1,15 +1,15 @@
 <template>
     <div id="App">
-        <div class="banner-mobile" style="padding-top: 0; padding-bottom: 15px;">
-            <carousel :per-page="1" :mouse-drag="false" :centerMode="true" :loop="true" :autoplay="true" :speed="1000" :autoplayTimeout="4000" :paginationEnabled="false" :paginationColor="'#fff'" :paginationPosition="'#ff0000'">
-                <slide v-for="(dt, i) in articles" :key="i">
-                    <div class="card no-padding box-shadow bg-white banner-mobile-content">
-                        <div class="padding padding-15px">
+        <div style="padding-top: 0; padding-bottom: 15px;">
+            <div class="banner-mobile">
+                <carousel :per-page="1" :mouse-drag="false" :centerMode="true" :loop="true" :autoplay="true" :speed="1000" :autoplayTimeout="4000" :paginationEnabled="false" :paginationColor="'#fff'" :paginationPosition="'#ff0000'">
+                    <slide v-for="(dt, i) in articles" :key="i">
+                        <div class="card no-padding box-shadow bg-white banner-mobile-content">
                             <img :src="dt.image" alt="product" class="post-center" style="width: 100%;">
                         </div>
-                    </div>
-                </slide>
-            </carousel>
+                    </slide>
+                </carousel>
+            </div>
         </div>
 
         <div class="main-screen">
@@ -35,7 +35,7 @@
                 </div>
             </div>
 
-            <div v-if="selectedShop"> 
+            <div v-else> 
                 <div style="width: 100%; margin-bottom: 20px;">
                     <div style="padding-top: 0; padding-bottom: 15px;">
                         <div class="display-flex space-between">
@@ -214,6 +214,8 @@ export default {
         this.getArticle()
         this.getProduct(this.limit, this.offset)
         this.getCategory(5, 0)
+
+        console.log('shop', this.selectedShop)
     },
     components: {
         AppAlert,
