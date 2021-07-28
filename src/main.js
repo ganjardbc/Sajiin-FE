@@ -21,8 +21,8 @@ import Vue from 'vue';
 
 const url = window.location.protocol+'//'+window.location.host;
 const socket = "https://sajiin-socket-v1.herokuapp.com";
-const api = "http://localhost:8000"; 
-// const api = "https://undangabi.com/projects/sajiin-api/public/";
+// const api = "http://localhost:8000"; 
+const api = "https://undangabi.com/projects/sajiin-api/public/";
 const deploy = "https://ganjardbc.github.io/Sajiin-FE/";
 
 axios.defaults.withCredentials = true;
