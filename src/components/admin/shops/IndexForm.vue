@@ -327,7 +327,7 @@
 
 <script>
 import axios from 'axios'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import AppLoader from '../../modules/AppLoader'
 import AppAlert from '../../modules/AppAlert'
 import SearchField from '../../modules/SearchField'
@@ -408,6 +408,16 @@ export default {
         })
     },
     methods: {
+        ...mapActions({
+            setToast: 'toast/setToast'
+        }),
+        makeToast (title) {
+            const payload = {
+                visible: true,
+                title: title
+            }
+            this.setToast(payload)
+        },
         onButtonUpload () {
             this.visiblePopup = !this.visiblePopup
         },
@@ -530,6 +540,7 @@ export default {
                     this.$cookies.set('shop', this.formData)
                     this.onClose()
                     this.getData(this.limit, 0)
+                    this.makeToast('Shop Updated')
                 } else {
                     this.formMessage = rest.data.message
                 }
@@ -558,6 +569,7 @@ export default {
                 if (data && data.image) {
                     this.onChangeImage(data && data.image)
                     this.onButtonUpload()
+                    this.makeToast('Shop Cover Updated')
                     this.formMessage = []
                 } else {
                     this.formMessage = rest.data.message
@@ -586,6 +598,7 @@ export default {
                     const data = rest.data.data
                     this.onChangeImage(data && data.image)
                     this.onButtonUpload()
+                    this.makeToast('Shop Cover Removed')
                 } else {
                     alert('Proceed failed')
                 }

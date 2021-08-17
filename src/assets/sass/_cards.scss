@@ -4,6 +4,14 @@
     padding: 20px;
     border-radius: 8px;
     overflow: hidden;
+    &.selected {
+        background-color: rgba($color: $green, $alpha: 0.1);
+        box-shadow: 0px 0px 8px $green !important;
+    }
+    &.small-padding {
+        width: calc(100% - 20px);
+        padding: 10px;
+    }
     &.no-padding {
         width: 100%;
         padding: 0;

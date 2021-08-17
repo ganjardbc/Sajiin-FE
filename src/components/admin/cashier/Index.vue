@@ -48,10 +48,10 @@
                                 <div class="fonts fonts-12 semibold orange">Rp. {{ order.order.total_price }}</div>
                             </div>
                             <div style="width: 30px;"></div>
-                            <div style="width: 100%;">
+                            <!-- <div style="width: 100%;">
                                 <div class="fonts fonts-10 grey">PPN (0%)</div>
                                 <div class="fonts fonts-12 semibold">Rp. 0</div>
-                            </div>
+                            </div> -->
                         </div>
                         <div style="margin-bottom: 15px;">
                             <div class="fonts fonts-10 grey">Payment Status</div>
@@ -405,7 +405,7 @@ export default {
                     ...this.order.order,
                     bills_price: bills,
                     change_price: ttl,
-                    payment_status: ttl > 0 ? 1 : 0
+                    payment_status: ttl >= 0 ? 1 : 0
                 }
             }
         },

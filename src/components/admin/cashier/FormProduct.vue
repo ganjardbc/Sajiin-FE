@@ -9,7 +9,7 @@
             </div>
             <div class="display-flex wrap" style="padding-left: 5px; padding-right: 5px;">
                 <div v-for="(dt, i) in dataCategories" :key="i" class="column-5">
-                    <CardCategory :data="dt" />
+                    <CardCategory :data="dt" :onClick="onClickCategory" />
                 </div>
                 <AppLoader v-if="visibleLoaderCategory" />
             </div>
@@ -79,6 +79,15 @@ export default {
         onCheckOut (data) {
             this.onChange(data)
         },
+        onClickCategory (data) {
+            const payload = this.dataCategories
+            let newPayload = payload && payload.map((dt) => {
+                const stt = dt.id === data.id ? true : false 
+                return {...dt, statusTab: stt}
+            })
+            this.dataCategories = newPayload
+            this.refresh()
+        },
         refresh () {
             this.datas = []
             this.offset = 0
@@ -88,13 +97,9 @@ export default {
             this.visibleLoaderCategory = true 
 
             const token = 'Bearer '.concat(this.$cookies.get('token'))
-            const payload = this.dataUser.role_name === 'admin' ? {
+            const payload = {
                 limit: 5,
                 offset: 0
-            } : {
-                limit: 5,
-                offset: 0,
-                user_id: this.dataUser.id
             }
             
             const rest = await axios.post('/api/category/getAll', payload, { headers: { Authorization: token } })
@@ -102,7 +107,15 @@ export default {
             // console.log('getDataCategory', rest)
 
             if (rest && rest.status === 200) {
-                const newData = rest.data.data
+                let newData = [{
+                    id: 0,
+                    name: 'All Products',
+                    image: '',
+                    statusTab: true
+                }]
+                rest.data.data && rest.data.data.map((dt) => {
+                    return newData.push({...dt, statusTab: false})
+                })
                 this.dataCategories = newData 
                 this.visibleLoaderCategory = false
             } else {

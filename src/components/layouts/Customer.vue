@@ -20,7 +20,9 @@
             </div>
         </div>
         <div id="body">
-            <router-view />
+            <keep-alive>
+                <router-view />
+            </keep-alive>
             <router-view name="customerfresh" />
         </div>
         <div style="padding-bottom: 70px;"></div>

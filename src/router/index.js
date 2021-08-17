@@ -436,12 +436,16 @@ export const routes = [
             {
                 name: 'product',
                 path: 'product/:id',
-                component: CustomerProduct
+                components: {
+                    customerfresh: CustomerProduct
+                }
             },
             {
                 name: 'product-list',
                 path: 'product-list',
-                component: CustomerProductList
+                components: {
+                    customerfresh: CustomerProductList
+                }
             },
 
             // notification
@@ -455,7 +459,9 @@ export const routes = [
             {
                 name: 'customer-chart',
                 path: 'carts',
-                component: CustomerChart
+                components: {
+                    customerfresh: CustomerChart
+                }
             },
 
             // orders
@@ -467,7 +473,9 @@ export const routes = [
             {
                 name: 'order-detail', 
                 path: 'order-detail/:id',
-                component: CustomerDetail
+                components: {
+                    customerfresh: CustomerDetail
+                }
             },
             {
                 name: 'tracking',
@@ -490,7 +498,9 @@ export const routes = [
             {
                 name: 'customer-order-list',
                 path: 'order-list',
-                component: CustomerOrderList
+                components: {
+                    customerfresh: CustomerOrderList
+                }
             },
 
             {

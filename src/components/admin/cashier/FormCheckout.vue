@@ -65,9 +65,13 @@
                         <div class="fonts fonts-10 semibold orange">Rp. {{ subTotal }}</div>
                     </div>
                     <div class="display-flex space-between" style="margin-bottom: 3px;">
+                        <div class="fonts fonts-10 grey">Quantity</div>
+                        <div class="fonts fonts-10 semibold">{{ quantity }} products</div>
+                    </div>
+                    <!-- <div class="display-flex space-between" style="margin-bottom: 3px;">
                         <div class="fonts fonts-10 grey">PPN (0%)</div>
                         <div class="fonts fonts-10 semibold">Rp. 0</div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="display-flex">
                     <!-- <button class="btn btn-full btn-primary">Save Order</button>
@@ -89,16 +93,20 @@ export default {
     data () {
         return {
             datas: [],
-            subTotal: 0
+            subTotal: 0,
+            quantity: 0
         }
     },
     mounted () {
         this.datas = this.data ? this.data : [] 
         let subTotal = 0
+        let quantity = 0
         this.datas && this.datas.map((dt) => {
             subTotal += dt.subtotal
+            quantity += dt.quantity
         })
         this.subTotal = subTotal
+        this.quantity = quantity
     },
     computed: {
         ...mapGetters({
@@ -142,6 +150,7 @@ export default {
                 }
             })
             this.datas = payload
+            this.quantity = qty 
             this.subTotal = subTotal
             this.onSave(this.datas)
         },
@@ -154,10 +163,13 @@ export default {
             if (props) {
                 this.datas = props 
                 let subTotal = 0
+                let quantity = 0
                 this.datas && this.datas.map((dt) => {
                     subTotal += dt.subtotal
+                    quantity += dt.quantity
                 })
                 this.subTotal = subTotal
+                this.quantity = quantity
             } else {
                 this.datas = null 
             }

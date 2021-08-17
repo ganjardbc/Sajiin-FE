@@ -33,7 +33,7 @@
             </div>
         </div>
 
-        <div class="main-screen" style="padding-top: 32px;">
+        <!-- <div class="main-screen" style="padding-top: 32px;">
             <div class="width width-50 width-mobile width-center content-center">
                 <h2 class="fonts fonts-28 bold black no-line-height">Our news</h2>
                 <h2 class="fonts fonts-28 bold black no-line-height">Find promos or events</h2>
@@ -75,7 +75,7 @@
             <div class="width width-80 width-mobile width-center" style="margin-top: 32px;">
                 <AppCardFeedback :data.sync="feedback" />
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
 

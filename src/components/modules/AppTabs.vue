@@ -82,9 +82,9 @@ export default {
 		}
     },
     watch: {
-        selectedIndex: function (props, prevProps) {
-            this.onClick(props)
-        },
+        // selectedIndex: function (props, prevProps) {
+        //     this.onClick(props)
+        // },
         data: function (props) {
             this.datas = props 
         }

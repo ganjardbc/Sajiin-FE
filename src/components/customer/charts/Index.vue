@@ -55,10 +55,10 @@
                                             <div class="fonts fonts-10 black">Total price ({{ totalProduct }} products)</div>
                                             <div class="fonts fonts-10 grey semibold">Rp {{ totalPrice }}</div>
                                         </div>
-                                        <div class="display-flex space-between margin margin-bottom-20-px">
+                                        <!-- <div class="display-flex space-between margin margin-bottom-20-px">
                                             <div class="fonts fonts-10 black">PPN ({{ ppn }}%)</div>
                                             <div class="fonts fonts-10 grey semibold">Rp {{ totalPPN }}</div>
-                                        </div>
+                                        </div> -->
 
                                         <div class="display-flex space-between margin">
                                             <div class="fonts fonts-11 black semibold" style="margin-bottom: 5px;">Total Payment</div>
@@ -119,6 +119,8 @@ const payloadItem = {
     product_id: 0,
     proddetail_id: 0,
     toping_id: 0,
+    shop_id: 0,
+    assigned_id: 0,
     status: "waiting"
 }
 
@@ -175,6 +177,7 @@ export default {
             datas: [],
             dataItems: [],
             dataUser: null,
+            dataShop: null,
             selectedCustomer: null,
             selectedTable: null
         }
@@ -183,6 +186,7 @@ export default {
         this.selectedCustomer = this.$cookies.get('customer')
         this.selectedTable = this.$cookies.get('table')
         this.dataUser = this.$cookies.get('user')
+        this.dataShop = this.$cookies.get('shop')
         this.getData(this.limit, this.offset)
     },
     components: {
@@ -242,7 +246,8 @@ export default {
                         promo_code: null,
                         product_id: dt.product_id,
                         proddetail_id: dt.proddetail_id,
-                        toping_id: dt.toping_id
+                        toping_id: dt.toping_id,
+                        shop_id: this.dataShop.id
                     }
                     newPayload.push(payload)
                 }
@@ -270,7 +275,8 @@ export default {
                     promo_code: null,
                     product_id: data.product_id,
                     proddetail_id: data.proddetail_id,
-                    toping_id: data.toping_id
+                    toping_id: data.toping_id,
+                    shop_id: this.dataShop.id
                 }
                 let newPayload = [
                     ...this.dataItems,

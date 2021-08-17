@@ -32,31 +32,46 @@
                 <div class="card no-padding-mobile box-shadow bg-white">
                     <div class="width width-100">
                         <div class="display-flex display-mobile space-between">
-                            <div class="fonts bold big margin margin-bottom-20-px">User</div>
+                            <div class="fonts bold big margin margin-bottom-20-px">Profile</div>
                         </div>
 
                         <div class="margin margin-bottom-20-px">
-                            <div class="fonts bold">Profil</div>
+                            <div class="fonts bold">General Info</div>
                         </div>
                         <div class="width width-100 display-flex display-mobile margin margin-bottom-20-px">
-                            <div class="width width-300-px width-mobile fonts fonts-11">ID</div>
-                            <div class="fonts fonts-11 semibold">{{ formData && formData.id }}</div>
+                            <div class="width width-30 width-mobile fonts fonts-11">ID</div>
+                            <div class="width width-70">
+                                <input 
+                                    type="text" 
+                                    placeholder="" 
+                                    class="field field-sekunder" 
+                                    name="id" 
+                                    id="id" 
+                                    v-model="formData.id"
+                                    readonly>
+                            </div>
                         </div>
                         <div class="width width-100 display-flex display-mobile margin margin-bottom-20-px">
-                            <div class="width width-300-px width-mobile fonts fonts-11">Nama</div>
-                            <div class="fonts fonts-11 semibold">{{ formData && formData.name }}</div>
+                            <div class="width width-30 width-mobile fonts fonts-11">Nama</div>
+                            <div class="width width-70">
+                                <input 
+                                    type="text" 
+                                    placeholder="" 
+                                    class="field field-sekunder" 
+                                    name="name" 
+                                    id="name" 
+                                    v-model="formData.name">
+                                <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
+                                    {{ formMessage && formMessage.name && formMessage.name[0] }}
+                                </div>
+                            </div>
                         </div>
                         <div class="width width-100 display-flex display-mobile margin margin-bottom-20-px">
-                            <div class="width width-300-px width-mobile fonts fonts-11">Role</div>
-                            <div class="fonts fonts-11 semibold">{{ formData && formData.role_name }}</div>
-                        </div>
-                        <div class="width width-100 display-flex display-mobile margin margin-bottom-20-px">
-                            <div class="width width-300-px">
+                            <div class="width width-30">
                                 <div class="fonts fonts-11">Enabled</div>
                                 <div class="fonts micro black" style="margin-bottom: 10px;">Is this user enable ?</div>
                             </div>
-                            <!-- <div class="fonts semibold">{{ user && user.enabled ? 'Enable' : 'Disable' }}</div> -->
-                            <div>
+                            <div class="width width-70">
                                 <label class="switch green">
                                     <input 
                                         type="checkbox" 
@@ -68,12 +83,11 @@
                             </div>
                         </div>
                         <div class="width width-100 display-flex display-mobile margin margin-bottom-20-px">
-                            <div class="width width-300-px">
+                            <div class="width width-30">
                                 <div class="fonts fonts-11">Status</div>
                                 <div class="fonts micro black" style="margin-bottom: 10px;">Is this user active ?</div>
                             </div>
-                            <!-- <div class="fonts semibold">{{ user && user.status && user.status === 'active' ? 'Active' : 'Inactive' }}</div> -->
-                            <div class="display-flex">
+                            <div class="width width-70 display-flex">
                                 <label class="radio">
                                     <input 
                                         type="radio" 
@@ -103,22 +117,46 @@
                         </div>
 
                         <div class="margin margin-bottom-20-px margin-top-40-px">
-                            <div class="fonts fonts-11 bold">Contact</div>
+                            <div class="fonts fonts-11 bold">Private Info</div>
                         </div>
                         <div class="width width-100 display-flex display-mobile margin margin-bottom-20-px">
-                            <div class="width width-300-px width-mobile fonts fonts-11">Email</div>
-                            <div class="fonts fonts-11 semibold">{{ formData && formData.email }}</div>
+                            <div class="width width-30 width-mobile fonts fonts-11">Email</div>
+                            <div class="width width-70">
+                                <input 
+                                    type="text" 
+                                    placeholder="" 
+                                    class="field field-sekunder" 
+                                    name="email" 
+                                    id="email" 
+                                    v-model="formData.email"
+                                    readonly>
+                                <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
+                                    {{ formMessage && formMessage.email && formMessage.email[0] }}
+                                </div>
+                            </div>
                         </div>
                         <div class="width width-100 display-flex display-mobile margin margin-bottom-20-px">
-                            <div class="width width-300-px width-mobile fonts fonts-11">No. Handphone</div>
-                            <div class="fonts fonts-11 semibold">-</div>
+                            <div class="width width-30 width-mobile fonts fonts-11">Role</div>
+                            <div class="width width-70">
+                                <input 
+                                    type="text" 
+                                    placeholder="" 
+                                    class="field field-sekunder" 
+                                    name="role_name" 
+                                    id="role_name" 
+                                    v-model="formData.role_name"
+                                    readonly>
+                                <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
+                                    {{ formMessage && formMessage.role_name && formMessage.role_name[0] }}
+                                </div>
+                            </div>
                         </div>
 
                         <div class="width width-100 width-mobile margin margin-top-40-px margin-bottom-40-px">
                             <div class="display-flex display-mobile">
-                                <div class="width width-300-px width-mobile"></div>
-                                <div>
-                                    <button class="btn btn-main">
+                                <div class="width width-30 width-mobile"></div>
+                                <div class="width width-70">
+                                    <button class="btn btn-main" @click="onShowHideSave">
                                         UPDATE PROFIL
                                     </button>
                                 </div>
@@ -144,6 +182,13 @@
                 />
             </div>
         </AppPopupForm>
+
+        <AppAlert 
+            v-if="visibleAlertSave" 
+            :isLoader="visibleLoaderAction"
+            :title="'Proceed this data ?'" 
+            :onClose="onShowHideSave" 
+            :onSave="saveData" />
     </div>
 </template>
 
@@ -158,6 +203,7 @@ import AppCardCharts from '../../modules/AppCardCharts'
 import AppButtonQR from '../../modules/AppButtonQR'
 import AppImage from '../../modules/AppImage'
 import AppPopupForm from '../../modules/AppPopupForm'
+import AppAlert from '../../modules/AppAlert'
 
 const payload = {
     id: '',
@@ -178,10 +224,13 @@ export default {
     name: 'Profile',
     data () {
         return {
+            visibleAlertSave: false,
+            visibleLoaderAction: false,
             visiblePopup: false,
             image: '',
             code: '',
             formData: {...payload},
+            formMessage: null,
             dataUser: null,
             dataShop: null
         }
@@ -194,6 +243,7 @@ export default {
             ...payload,
             id: this.dataUser.id,
             name: this.dataUser.name,
+            role_id: this.dataUser.role_id,
             role_name: this.dataUser.role_name,
             enabled: this.dataUser.enabled,
             status: this.dataUser.status,
@@ -213,14 +263,24 @@ export default {
         AppButton,
         AppText,
         AppCardCharts,
-        AppForm
+        AppForm,
+        AppAlert
     },
     methods: {
         ...mapActions({
+            setToast: 'toast/setToast',
             removeCookieAuth: 'auth/removeCookieAuth',
             signOut: 'auth/signOut',
             setUser: 'auth/setUser'
         }),
+
+        makeToast (title) {
+            const payload = {
+                visible: true,
+                title: title
+            }
+            this.setToast(payload)
+        },
 
         onChangeCustomer (data) {
             console.log('onChangecustomer', data)
@@ -228,6 +288,10 @@ export default {
 
         onButtonUpload () {
             this.visiblePopup = !this.visiblePopup
+        },
+
+        onShowHideSave () {
+            this.visibleAlertSave = !this.visibleAlertSave
         },
 
         onChangeImage (data) {
@@ -240,6 +304,34 @@ export default {
                 ...this.user,
                 image: data
             })
+        },
+
+        async saveData () {
+            this.visibleLoaderAction = true
+
+            const token = 'Bearer '.concat(this.$cookies.get('token'))
+            const newPayload = {
+                ...this.formData
+            }
+            const url = '/api/user/update'
+
+            const rest = await axios.post(url, newPayload, { headers: { Authorization: token } })
+
+            if (rest && rest.status === 200) {
+                this.onShowHideSave()
+                this.visibleLoaderAction = false
+
+                const data = rest.data.data
+                if (data.length !== 0) {
+                    this.$cookies.set('user', data)
+                    this.makeToast('Profile Updated')
+                } else {
+                    this.formMessage = rest.data.message
+                }
+            } else {
+                alert('Proceed failed')
+                this.visibleLoaderAction = false
+            }
         },
 
         async onLogout () {
@@ -277,6 +369,7 @@ export default {
                 if (data && data.image) {
                     this.onChangeImage(data && data.image)
                     this.onButtonUpload()
+                    this.makeToast('Profile Picture Updated')
                     this.selectedMessage = []
                 } else {
                     this.selectedMessage = rest.data.message
@@ -306,6 +399,7 @@ export default {
                     const data = rest.data.data
                     this.onChangeImage(data && data.image)
                     this.onButtonUpload()
+                    this.makeToast('Profile Picture Removed')
                 } else {
                     alert('Proceed failed')
                 }

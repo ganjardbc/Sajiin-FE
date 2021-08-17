@@ -12,8 +12,11 @@
                     <div class="fonts fonts-10 semibold" style="margin-bottom: 3px;">{{ data.product.name }}</div>
                     <div v-if="data.details.length > 0" class="fonts fonts-10 grey">Rp. {{ data.details ? data.details[0].price : 0 }}</div>
                 </div>
-                <button class="btn btn-full btn-sekunder" style="margin-bottom: 5px;" @click="openDetail">
+                <button class="btn btn-full btn-sekunder" style="margin-bottom: 10px;" @click="openDetail">
                     Choose Product
+                </button>
+                <button class="btn btn-full btn-grey" style="margin-bottom: 5px;">
+                    Mark as Unavailable
                 </button>
             </div>
             <div v-if="visiblePopup" class="card-full">
@@ -88,6 +91,8 @@ const payloadItem = {
     product_id: 0,
     proddetail_id: 0,
     toping_id: 0,
+    shop_id: 0,
+    assigned_id: 0,
     status: "waiting"
 }
 
@@ -100,11 +105,12 @@ export default {
             indexDetail: null,
             indexToping: null,
             selectedDetail: null,
-            selectedToping: null 
+            selectedToping: null,
+            dataShop: null 
         }
     },
     mounted () {
-        
+        this.dataShop = this.$cookies.get('shop')
     },
     props: {
         data: {
@@ -165,7 +171,8 @@ export default {
                 order_id: 0,
                 product_id: data && data.product.id,
                 proddetail_id: detail && detail.id,
-                toping_id: toping && toping.id 
+                toping_id: toping && toping.id,
+                shop_id: this.dataShop.id
             }
             this.indexDetail = null 
             this.selectedDetail = null

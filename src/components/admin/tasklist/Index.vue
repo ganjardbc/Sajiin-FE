@@ -31,58 +31,84 @@
                     <div style="padding-left: 15px; padding-right: 15px;">
                         <div v-for="(dt, i) in datas" :key="i" class="card box-shadow" style="margin-top: 15px; margin-bottom: 15px; overflow: unset;">
                             <div style="width: 100%;">
-                                <div class="display-flex space-between" style="padding-top: 5px; padding-bottom: 5px;">
+                                <div class="display-flex space-between" style="padding-top: 5px; padding-bottom: 10px;">
                                     <div style="width: 60px; margin-right: 15px;">
                                         <div class="image image-padding border border-full">
                                             <img v-if="dt.product_image" :src="productImageThumbnailUrl + dt.product_image" alt="" class="post-center">
                                             <i v-else class="post-middle-absolute icn fa fa-lg fa-image"></i>
                                         </div>
                                     </div>
-                                    <div style="width: calc(100% - 185px);">
-                                        <div class="fonts fonts-11 semibold" style="margin-bottom: 3px;">{{ dt.product_name }}</div>
-                                        <div class="fonts fonts-10 grey" style="margin-bottom: 0;">{{ dt.quantity }} x {{ dt.product_detail }}</div>
-                                        <div v-if="dt.product_toping" class="fonts fonts-10 grey" style="margin-bottom: 0;">{{ dt.quantity }} x {{ dt.product_toping }}</div>
-                                        <div class="fonts fonts-10 grey">{{ dt.created_at | moment("from", "now") }}</div>
-                                    </div>
-                                    <div class="display-flex column space-between" style="width: 100px;">
-                                        <div class="display-flex align-right">
-                                            <!-- <AppCapsuleMenu 
-                                                :title="dt.status"
-                                                :status="(
+                                    <div style="width: calc(100% - 350px);" class="display-flex">
+                                        <div style="width: calc(100% - 120px);">
+                                            <div class="fonts fonts-11 semibold" style="margin-bottom: 5px;">{{ dt.product_name }}</div>
+                                            <div class="fonts fonts-10 grey" style="margin-bottom: 0;">{{ dt.quantity }} x {{ dt.product_detail }}</div>
+                                            <div v-if="dt.product_toping" class="fonts fonts-10 grey" style="margin-bottom: 0;">{{ dt.quantity }} x {{ dt.product_toping }}</div>
+                                            <div class="fonts fonts-10 grey">{{ dt.created_at | moment("from", "now") }}</div>
+                                            <div class="fonts fonts-10 grey" style="margin-top: 5px;">{{ dt.order_uuid }}</div>
+                                        </div>
+
+                                        <div style="width: 120px;">
+                                            <div class="display-flex align-right">
+                                                <!-- <AppCapsuleMenu 
+                                                    :title="dt.status"
+                                                    :status="(
+                                                        dt.status === 'cooking' 
+                                                            ? 'inactive' 
+                                                            : dt.status === 'done' 
+                                                                ? 'active' 
+                                                                : ''
+                                                    )"
+                                                    :onChange="(data) => onChangeStatus(data, dt.id)" 
+                                                    :data="bizparCapsule"
+                                                    style="margin-right: 20px; text-transform: capitalize;"
+                                                /> -->
+                                                <div 
+                                                    :class="'card-capsule ' + (
                                                     dt.status === 'cooking' 
                                                         ? 'inactive' 
                                                         : dt.status === 'done' 
-                                                            ? 'active' 
+                                                            ? 'active'
                                                             : ''
-                                                )"
-                                                :onChange="(data) => onChangeStatus(data, dt.id)" 
-                                                :data="bizparCapsule"
-                                                style="margin-left: 5px; text-transform: capitalize;"
-                                            /> -->
-                                            <div 
-                                                :class="'card-capsule ' + (
-                                                dt.status === 'cooking' 
-                                                    ? 'inactive' 
-                                                    : dt.status === 'done' 
-                                                        ? 'active'
-                                                        : ''
-                                                )" 
-                                                style="margin-left: 10px; text-transform: capitalize;">
-                                                {{ dt.status }}
+                                                    )" 
+                                                    style="margin-right: 20px; text-transform: capitalize;">
+                                                    {{ dt.status }}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="display-flex align-right">
-                                    <button v-if="!dt.status" class="btn btn-grey" style="margin-left: 5px;" @click="changeOrderItemStatus(dt.id, 'waiting')">
-                                        Mark As Waiting
-                                    </button>
-                                    <button v-if="dt.status === 'waiting'" class="btn btn-orange" style="margin-left: 5px;" @click="changeOrderItemStatus(dt.id, 'cooking')">
-                                        Mark As Cooking
-                                    </button>
-                                    <button v-if="dt.status === 'cooking'" class="btn btn-green" style="margin-left: 5px;" @click="changeOrderItemStatus(dt.id, 'done')">
-                                        Mark As Done
-                                    </button>
+                                    <div class="border-left" style="width: 260px; padding-left: 20px;">
+                                        <div v-if="dt.employee">
+                                            <div class="fonts fonts-10 black" style="margin-bottom: 5px;">Handled by</div>
+                                            <div class="display-flex" style="margin-bottom: 15px;">
+                                                <div class="card-small-profile" style="cursor: default;">
+                                                    <div class="image" style="text-align: center; margin-right: 5px;">
+                                                        <img v-if="dt.employee && dt.employee.image" :src="dt.employee ? (employeeImageThumbnailUrl + dt.employee.image) : ''" alt="">
+                                                        <i v-else class="post-top fa fa-lw fa-store" style="color: #999;" />
+                                                    </div>
+                                                    <div class="label">
+                                                        <div class="post-center">
+                                                            <div class="fonts fonts-10 semibold black" style="text-transform: capitalize;">{{ dt.employee ? dt.employee.name : '' }}</div>
+                                                            <div class="fonts fonts-8 grey">{{ dt.employee ? dt.employee.employee_id : '' }} - {{ dt.employee ? dt.employee.position_name : '' }}</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div v-else></div>
+
+                                         <div class="width width-100">
+                                            <button v-if="!dt.status" class="btn btn-grey btn-full" @click="changeOrderItemStatus(dt.id, 'waiting')">
+                                                Mark As Waiting
+                                            </button>
+                                            <button v-if="dt.status === 'waiting'" class="btn btn-orange btn-full" @click="changeOrderItemStatus(dt.id, 'cooking')">
+                                                Mark As Cooking
+                                            </button>
+                                            <button v-if="dt.status === 'cooking'" class="btn btn-green btn-full" @click="changeOrderItemStatus(dt.id, 'done')">
+                                                Mark As Done
+                                            </button>
+                                        </div>
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -106,13 +132,6 @@
             :title="'This action will remove data permanently, delete this data ?'" 
             :onClose="onShowHideDelete" 
             :onSave="removeData" />
-        
-        <AppAlert 
-            v-if="visibleAlertSave" 
-            :isLoader="visibleLoaderAction"
-            :title="'Proceed this data ?'" 
-            :onClose="onShowHideSave" 
-            :onSave="saveData" />
     </div>
 </template>
 
@@ -139,8 +158,8 @@ export default {
             formTitle: 'CREATE',
             formClass: false,
             tabs: [
-                {label: 'All Task', status: 'active', val: 0},
-                {label: 'Assigned', status: '', val: 0}
+                {label: 'Assigned', status: 'active', val: 0},
+                {label: 'All Tasks', status: '', val: 0}
             ],
             bizparCapsule: [
                 {label: 'Waiting'}, 
@@ -148,7 +167,7 @@ export default {
                 {label: 'Done'}
             ],
             datas: [],
-            selectedTabIndex: null,
+            selectedTabIndex: 0,
             selectedIndex: null,
             selectedData: null,
             selectedMessage: null,
@@ -167,7 +186,7 @@ export default {
     mounted () {
         this.dataUser = this.$cookies.get('user')
         this.dataShop = this.$cookies.get('shop')
-        this.getData(this.limit, this.offset)
+        this.getData(this.limit, this.offset, this.dataUser.id)
     },
     components: {
         AppTabs,
@@ -198,10 +217,10 @@ export default {
             this.datas = []
             switch (index) {
                 case 0:
-                    this.getData(this.limit, 0)
+                    this.getData(this.limit, 0, this.dataUser.id)
                     break;
                 default:
-                    this.getData(this.limit, 0, this.dataUser.id)
+                    this.getData(this.limit, 0)
                     break;
             }
         },
@@ -247,9 +266,10 @@ export default {
         onRefresh () {
             this.offset = 0
             this.datas = []
-            if (this.selectedTabIndex === 1) {
+            if (this.selectedTabIndex === 0) {
                 this.getData(this.limit, 0, this.dataUser.id)
-            } else {
+            }
+            if (this.selectedTabIndex === 1) {
                 this.getData(this.limit, 0)
             }
         },
@@ -273,11 +293,7 @@ export default {
 
                 const data = rest.data.data
                 if (data.length !== 0) {
-                    if (this.selectedTabIndex === 1) {
-                        this.getData(this.limit, 0, this.dataUser.id)
-                    } else {
-                        this.getData(this.limit, 0)
-                    }
+                    this.onRefresh()
                 } else {
                     this.selectedMessage = rest.data.message
                 }
@@ -299,42 +315,37 @@ export default {
             }
 
             const token = 'Bearer '.concat(this.$cookies.get('token'))
-            const payload = {
+            let payload = {
                 limit: limit,
-                offset: offset,
-                shop_id: this.dataShop ? this.dataShop.id : '',
-                status: 'cooking'
+                offset: offset
             }
 
-            const rest = await axios.post('/api/order/getByStatus', payload, { headers: { Authorization: token } })
+            if (owner_id) {
+                payload = {
+                    ...payload,
+                    user_id: owner_id ? owner_id : '',
+                }
+            } else {
+                payload = {
+                    ...payload,
+                    shop_id: this.dataShop ? this.dataShop.id : '',
+                }
+            }
+
+            const rest = await axios.post('/api/orderItem/getAllTasks', payload, { headers: { Authorization: token } })
 
             if (rest && rest.status === 200) {
                 const newData = rest.data.data
                 
                 newData && newData.map((dt) => {
-                    dt.details && dt.details.map((sb) => {
-                        if (sb.status !== 'done') {
-                            if (owner_id) {
-                                if (sb.updated_by === owner_id.toString()) {
-                                        data.push({...sb, created_at: dt.order.created_at})
-                                }
-                            } else {
-                                data.push({...sb, created_at: dt.order.created_at})
-                            }
-                        }
-                        return null 
-                    })
+                    data.push({...dt.detail, order_uuid: dt.order.order_id, employee: dt.employee, created_at: dt.order.created_at})
                     return null 
                 })
 
                 this.datas = data
-                // this.tabs[0] = {
-                //     ...this.tabs[0],
-                //     val: this.datas.length
-                // }
                 this.visibleLoader = false 
 
-                console.log('newData', this.datas)
+                console.log('orderitem', this.datas)
 
                 if (newData.length > 0) {
                     this.offset += this.limit
