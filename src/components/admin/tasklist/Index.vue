@@ -31,15 +31,16 @@
                     <div style="padding-left: 15px; padding-right: 15px;">
                         <div v-for="(dt, i) in datas" :key="i" class="card box-shadow" style="margin-top: 15px; margin-bottom: 15px; overflow: unset;">
                             <div style="width: 100%;">
-                                <div class="display-flex space-between" style="padding-top: 5px; padding-bottom: 10px;">
-                                    <div style="width: 60px; margin-right: 15px;">
-                                        <div class="image image-padding border border-full">
-                                            <img v-if="dt.product_image" :src="productImageThumbnailUrl + dt.product_image" alt="" class="post-center">
-                                            <i v-else class="post-middle-absolute icn fa fa-lg fa-image"></i>
+                                <div class="display-flex space-between display-mobile" style="padding-top: 5px; padding-bottom: 10px;">
+                                    <div class="width width-70 width-mobile display-flex" style="padding-bottom: 10px;">
+                                        <div style="width: 60px; margin-right: 15px;">
+                                            <div class="image image-padding border border-full">
+                                                <img v-if="dt.product_image" :src="productImageThumbnailUrl + dt.product_image" alt="" class="post-center">
+                                                <i v-else class="post-middle-absolute icn fa fa-lg fa-image"></i>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div style="width: calc(100% - 350px);" class="display-flex">
-                                        <div style="width: calc(100% - 120px);">
+
+                                        <div style="width: calc(100% - 195px);">
                                             <div class="fonts fonts-11 semibold" style="margin-bottom: 5px;">{{ dt.product_name }}</div>
                                             <div class="fonts fonts-10 grey" style="margin-bottom: 0;">{{ dt.quantity }} x {{ dt.product_detail }}</div>
                                             <div v-if="dt.product_toping" class="fonts fonts-10 grey" style="margin-bottom: 0;">{{ dt.quantity }} x {{ dt.product_toping }}</div>
@@ -48,7 +49,7 @@
                                         </div>
 
                                         <div style="width: 120px;">
-                                            <div class="display-flex align-right">
+                                            <div style="padding-right: 20px;" class="display-flex align-right no-margin-padding">
                                                 <!-- <AppCapsuleMenu 
                                                     :title="dt.status"
                                                     :status="(
@@ -70,13 +71,13 @@
                                                             ? 'active'
                                                             : ''
                                                     )" 
-                                                    style="margin-right: 20px; text-transform: capitalize;">
+                                                    style="text-transform: capitalize;">
                                                     {{ dt.status }}
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="border-left" style="width: 260px; padding-left: 20px;">
+                                    <div style="padding-left: 20px;" class="width width-30 width-mobile border-left border-mobile-none no-margin-padding">
                                         <div v-if="dt.employee">
                                             <div class="fonts fonts-10 black" style="margin-bottom: 5px;">Handled by</div>
                                             <div class="display-flex" style="margin-bottom: 15px;">
@@ -85,7 +86,7 @@
                                                         <img v-if="dt.employee && dt.employee.image" :src="dt.employee ? (employeeImageThumbnailUrl + dt.employee.image) : ''" alt="">
                                                         <i v-else class="post-top fa fa-lw fa-store" style="color: #999;" />
                                                     </div>
-                                                    <div class="label">
+                                                    <div class="label label-mobile">
                                                         <div class="post-center">
                                                             <div class="fonts fonts-10 semibold black" style="text-transform: capitalize;">{{ dt.employee ? dt.employee.name : '' }}</div>
                                                             <div class="fonts fonts-8 grey">{{ dt.employee ? dt.employee.employee_id : '' }} - {{ dt.employee ? dt.employee.position_name : '' }}</div>

@@ -40,7 +40,7 @@
                         </div>
                         <div class="width width-100 display-flex display-mobile margin margin-bottom-20-px">
                             <div class="width width-30 width-mobile fonts fonts-11">ID</div>
-                            <div class="width width-70">
+                            <div class="width width-70 width-mobile">
                                 <input 
                                     type="text" 
                                     placeholder="" 
@@ -53,7 +53,7 @@
                         </div>
                         <div class="width width-100 display-flex display-mobile margin margin-bottom-20-px">
                             <div class="width width-30 width-mobile fonts fonts-11">Nama</div>
-                            <div class="width width-70">
+                            <div class="width width-70 width-mobile">
                                 <input 
                                     type="text" 
                                     placeholder="" 
@@ -71,7 +71,7 @@
                                 <div class="fonts fonts-11">Enabled</div>
                                 <div class="fonts micro black" style="margin-bottom: 10px;">Is this user enable ?</div>
                             </div>
-                            <div class="width width-70">
+                            <div class="width width-70 width-mobile">
                                 <label class="switch green">
                                     <input 
                                         type="checkbox" 
@@ -121,7 +121,7 @@
                         </div>
                         <div class="width width-100 display-flex display-mobile margin margin-bottom-20-px">
                             <div class="width width-30 width-mobile fonts fonts-11">Email</div>
-                            <div class="width width-70">
+                            <div class="width width-70 width-mobile">
                                 <input 
                                     type="text" 
                                     placeholder="" 
@@ -137,7 +137,7 @@
                         </div>
                         <div class="width width-100 display-flex display-mobile margin margin-bottom-20-px">
                             <div class="width width-30 width-mobile fonts fonts-11">Role</div>
-                            <div class="width width-70">
+                            <div class="width width-70 width-mobile">
                                 <input 
                                     type="text" 
                                     placeholder="" 
@@ -155,7 +155,7 @@
                         <div class="width width-100 width-mobile margin margin-top-40-px margin-bottom-40-px">
                             <div class="display-flex display-mobile">
                                 <div class="width width-30 width-mobile"></div>
-                                <div class="width width-70">
+                                <div class="width width-70 width-mobile">
                                     <button class="btn btn-main" @click="onShowHideSave">
                                         UPDATE PROFIL
                                     </button>

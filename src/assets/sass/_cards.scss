@@ -221,6 +221,9 @@
     @media (max-width: $min-width) {
         .label {
             display: none;
+            &.label-mobile {
+                display: block;
+            }
         }
     }
 }

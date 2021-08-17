@@ -1561,6 +1561,9 @@ a.btn {
   .card-small-profile .label {
     display: none;
   }
+  .card-small-profile .label.label-mobile {
+    display: block;
+  }
 }
 
 .card-search {
