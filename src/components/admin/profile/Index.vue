@@ -29,7 +29,7 @@
             </div>
 
             <div class="width width-73 width-mobile">
-                <div class="card no-padding-mobile box-shadow bg-white">
+                <div class="card no-padding-mobile box-shadow bg-white" style="margin-bottom: 20px;">
                     <div class="width width-100">
                         <div class="display-flex display-mobile space-between">
                             <div class="fonts bold big margin margin-bottom-20-px">Profile</div>
@@ -115,8 +115,12 @@
                                 </label>
                             </div>
                         </div>
+                    </div>
+                </div>
 
-                        <div class="margin margin-bottom-20-px margin-top-40-px">
+                <div class="card no-padding-mobile box-shadow bg-white" style="margin-bottom: 20px;">
+                    <div class="width width-100">
+                        <div class="margin margin-bottom-20-px">
                             <div class="fonts fonts-11 bold">Private Info</div>
                         </div>
                         <div class="width width-100 display-flex display-mobile margin margin-bottom-20-px">
@@ -151,18 +155,15 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
 
-                        <div class="width width-100 width-mobile margin margin-top-40-px margin-bottom-40-px">
-                            <div class="display-flex display-mobile">
-                                <div class="width width-30 width-mobile"></div>
-                                <div class="width width-70 width-mobile">
-                                    <button class="btn btn-main" @click="onShowHideSave">
-                                        UPDATE PROFIL
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
+                <div class="width width-100 width-mobile margin margin-bottom-10-px">
+                    <div class="display-flex space-between">
+                        <div></div>
+                        <button class="btn btn-main" @click="onShowHideSave">
+                            UPDATE PROFIL
+                        </button>
                     </div>
                 </div>
             </div>

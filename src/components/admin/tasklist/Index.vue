@@ -32,7 +32,7 @@
                         <div v-for="(dt, i) in datas" :key="i" class="card box-shadow" style="margin-top: 15px; margin-bottom: 15px; overflow: unset;">
                             <div style="width: 100%;">
                                 <div class="display-flex space-between display-mobile" style="padding-top: 5px; padding-bottom: 10px;">
-                                    <div class="width width-70 width-mobile display-flex" style="padding-bottom: 10px;">
+                                    <div class="width width-75 width-mobile display-flex" style="padding-bottom: 10px;">
                                         <div style="width: 60px; margin-right: 15px;">
                                             <div class="image image-padding border border-full">
                                                 <img v-if="dt.product_image" :src="productImageThumbnailUrl + dt.product_image" alt="" class="post-center">
@@ -50,7 +50,7 @@
 
                                         <div style="width: 120px;">
                                             <div style="padding-right: 20px;" class="display-flex align-right no-margin-padding">
-                                                <!-- <AppCapsuleMenu 
+                                                <AppCapsuleMenu 
                                                     :title="dt.status"
                                                     :status="(
                                                         dt.status === 'cooking' 
@@ -61,9 +61,9 @@
                                                     )"
                                                     :onChange="(data) => onChangeStatus(data, dt.id)" 
                                                     :data="bizparCapsule"
-                                                    style="margin-right: 20px; text-transform: capitalize;"
-                                                /> -->
-                                                <div 
+                                                    style="text-transform: capitalize;"
+                                                />
+                                                <!-- <div 
                                                     :class="'card-capsule ' + (
                                                     dt.status === 'cooking' 
                                                         ? 'inactive' 
@@ -73,11 +73,11 @@
                                                     )" 
                                                     style="text-transform: capitalize;">
                                                     {{ dt.status }}
-                                                </div>
+                                                </div> -->
                                             </div>
                                         </div>
                                     </div>
-                                    <div style="padding-left: 20px;" class="width width-30 width-mobile border-left border-mobile-none no-margin-padding">
+                                    <div style="padding-left: 20px;" class="width width-25 width-mobile border-left border-mobile-none no-margin-padding">
                                         <div v-if="dt.employee">
                                             <div class="fonts fonts-10 black" style="margin-bottom: 5px;">Handled by</div>
                                             <div class="display-flex" style="margin-bottom: 15px;">
@@ -159,8 +159,8 @@ export default {
             formTitle: 'CREATE',
             formClass: false,
             tabs: [
-                {label: 'Assigned', status: 'active', val: 0},
-                {label: 'All Tasks', status: '', val: 0}
+                {label: 'All Tasks', status: 'active', val: 0},
+                {label: 'Assigned', status: '', val: 0}
             ],
             bizparCapsule: [
                 {label: 'Waiting'}, 
@@ -187,7 +187,7 @@ export default {
     mounted () {
         this.dataUser = this.$cookies.get('user')
         this.dataShop = this.$cookies.get('shop')
-        this.getData(this.limit, this.offset, this.dataUser.id)
+        this.getData(this.limit, this.offset)
     },
     components: {
         AppTabs,
@@ -218,10 +218,10 @@ export default {
             this.datas = []
             switch (index) {
                 case 0:
-                    this.getData(this.limit, 0, this.dataUser.id)
+                    this.getData(this.limit, 0)
                     break;
                 default:
-                    this.getData(this.limit, 0)
+                    this.getData(this.limit, 0, this.dataUser.id)
                     break;
             }
         },
@@ -268,10 +268,10 @@ export default {
             this.offset = 0
             this.datas = []
             if (this.selectedTabIndex === 0) {
-                this.getData(this.limit, 0, this.dataUser.id)
+                this.getData(this.limit, 0)
             }
             if (this.selectedTabIndex === 1) {
-                this.getData(this.limit, 0)
+                this.getData(this.limit, 0, this.dataUser.id)
             }
         },
         async changeOrderItemStatus (id, status) {
