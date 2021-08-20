@@ -5,22 +5,22 @@
             <span v-if="notif" class="notif">{{ notif }}</span>
         </button>
 
-        <div v-if="visiblePopup" class="card-popup small no-padding bg-white box-shadow" style="position: absolute; top: 40px; right: 0; z-index: 1000;">
+        <div v-if="visiblePopup" class="card-popup mobile small no-padding bg-white box-shadow" style="position: absolute; top: 40px; right: 0; z-index: 1000;">
             <div class="card-popoup-header display-flex space-between">
                 <div>
                     <div class="post-top display-flex align-center">
-                        <div class="fonts fonts-10 black semibold" style="margin-right: 5px;">Notifications</div>
+                        <div class="fonts fonts-11 black semibold" style="margin-right: 5px;">Notifications</div>
                         <div class="card-value">
                             <div class="label">{{ notif }}</div>
                         </div>
                     </div>
                 </div>
                 <div class="display-flex align-center">
-                    <!-- <router-link :to="{name: 'notification'}">
-                        <div class="post-top fonts fonts-10 red pointer">View All Notifications</div>
-                    </router-link> -->
-                    <button class="btn btn-small-icon btn-white" @click="onRefresh">
+                    <button class="btn btn-icon btn-white" @click="onRefresh">
                         <i class="fa fa-lw fa-retweet"></i>
+                    </button>
+                    <button class="btn btn-icon btn-white mobile-visible" @click="opPopup">
+                        <i class="fa fa-lw fa-times"></i>
                     </button>
                 </div>
             </div>

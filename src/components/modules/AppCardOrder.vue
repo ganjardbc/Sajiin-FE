@@ -129,6 +129,8 @@
             v-if="visibleDetail"
             :enableRadius="true"
             :title="'Order Detail'"
+            :enablePrintButton="true"
+            :onPrint="onPrint"
             :onClose="onButtonDetail"
         >
             <FormOrder :data.sync="selectedData" />
@@ -208,6 +210,9 @@ export default {
                 title: title
             }
             this.setToast(payload)
+        },
+        onPrint () {
+            alert('print')
         },
         onChangeMenuOwner (data, id) {
             switch (data) {

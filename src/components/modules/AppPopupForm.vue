@@ -4,15 +4,18 @@
             <div class="card-popup bg-white box-shadow">
                 <div class="width width-100 width-center width-mobile">
                     <div class="display-flex justify-content">
-                        <div style="width: calc(100% - 90px); margin-top: 8px;">
+                        <div style="width: calc(100% - 150px); margin-top: 8px;">
                             <div class="fonts normal semibold">{{ appTitle }}</div>
                         </div>
                         <div class="display-flex align-right" style="width: 150px;">
                             <button v-if="enableSaveButton" class="btn btn-icon btn-white" @click="onSave">
                                 <i class="fa fa-lw fa-save" />
                             </button>
+                            <button v-if="enablePrintButton" class="btn btn-icon btn-white" @click="onPrint">
+                                <i class="fa fa-lw fa-print" />
+                            </button>
                             <button class="btn btn-icon btn-white" @click="onClose">
-                                <i class="fa fa-lg fa-times" />
+                                <i class="fa fa-lw fa-times" />
                             </button>
                         </div>
                     </div>
@@ -47,6 +50,14 @@ export default {
         },
         enableSaveButton: {
             type: Boolean,
+            required: false
+        },
+        enablePrintButton: {
+            type: Boolean,
+            required: false 
+        },
+        onPrint: {
+            type: Function,
             required: false
         },
         onSave: {

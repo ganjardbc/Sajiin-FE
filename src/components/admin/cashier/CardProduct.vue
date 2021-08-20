@@ -24,7 +24,7 @@
                     <div class="display-flex space-between" style="margin-bottom: 5px;">
                         <div class="fonts fonts-10 semibold" style="margin-top: 4px;">Choose</div>
                         <button class="btn btn-small-icon btn-white" @click="openDetail">
-                            <i class="fa fa-lg fa-times"></i>
+                            <i class="fa fa-lw fa-times"></i>
                         </button>
                     </div>
                     <div class="card-info-content">

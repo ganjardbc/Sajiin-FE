@@ -4,7 +4,7 @@
             <div class="display-flex space-between" style="padding: 10px; padding-top: 0; padding-left: 15px; padding-right: 15px;">
                 <div class="fonts fonts-small black bold" style="margin-top: 5px;">Categories</div>
                 <!-- <button class="btn btn-icon btn-white" @click="refresh">
-                    <i class="fa fa-lg fa-retweet"></i>
+                    <i class="fa fa-lw fa-retweet"></i>
                 </button> -->
             </div>
             <div class="display-flex wrap" style="padding-left: 5px; padding-right: 5px;">
@@ -18,7 +18,7 @@
             <div class="display-flex space-between" style="padding: 10px; padding-left: 15px; padding-right: 15px;">
                 <div class="fonts small black bold" style="margin-top: 5px;">Products</div>
                 <button class="btn btn-icon btn-white" @click="refresh">
-                    <i class="fa fa-lg fa-retweet"></i>
+                    <i class="fa fa-lw fa-retweet"></i>
                 </button>
             </div>
 
