@@ -141,6 +141,7 @@
 import axios from 'axios'
 import { mapActions } from 'vuex'
 import AppPopupForm from './AppPopupForm'
+import AppSideForm from './AppSideForm'
 import AppButtonMenu from './AppButtonMenu'
 import AppDote from './AppDote'
 import AppShowHide from './AppShowHide'
@@ -169,7 +170,8 @@ export default {
         AppButtonMenu,
         AppDote,
         AppShowHide,
-        AppImageProduct
+        AppImageProduct,
+        AppSideForm
     },
     props: {
         type: {

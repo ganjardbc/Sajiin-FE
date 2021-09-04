@@ -3,8 +3,13 @@
         <div class="card bg-white box-shadow" style="margin: 0; padding: 0; width: 100%;">
             <div style="padding: 15px;">
                 <div style="width: 100%;">
-                    <div class="image image-padding border border-full" style="cursor: pointer;" @click="openDetail">
-                        <img v-if="data.images[0] && data.images[0].image" :src="productImageThumbnailUrl + data.images[0].image" alt="" class="post-center">
+                    <div class="image image-padding" style="cursor: pointer;" @click="openDetail">
+                        <VueLoadImage v-if="data.images[0] && data.images[0].image">
+                            <img slot="image" :src="productImageThumbnailUrl + data.images[0].image" alt="" class="post-center">
+                            <div slot="preloader">
+                                <i class="post-middle-absolute fa fa-lg fa-spin fa-spinner" style="color: #999;"></i>
+                            </div>
+                        </VueLoadImage>
                         <i v-else class="post-middle-absolute icn fa fa-lg fa-image"></i>
                     </div>
                 </div>
@@ -75,6 +80,8 @@
     </div>
 </template>
 <script>
+import VueLoadImage from 'vue-load-image'
+
 const payloadItem = {
     id: 0,
     toping_price: 0,
@@ -111,6 +118,9 @@ export default {
     },
     mounted () {
         this.dataShop = this.$cookies.get('shop')
+    },
+    components: {
+        VueLoadImage
     },
     props: {
         data: {

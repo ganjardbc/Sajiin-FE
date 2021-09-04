@@ -5,7 +5,6 @@
     border-radius: 8px;
     overflow: hidden;
     &.selected {
-        background-color: rgba($color: $green, $alpha: 0.1);
         box-shadow: 0px 0px 8px $green !important;
     }
     &.small-padding {
@@ -674,6 +673,10 @@
     position: relative;
     width: calc(100% - 20px);
     padding: 5px 10px;
+    &.no-padding {
+        width: 100%;
+        padding: 0 0;
+    }
     .check-out-header {
         position: relative;
         width: 100%;
@@ -683,15 +686,27 @@
         position: relative;
         width: calc(100% - 10px);
         padding: 0 5px;
-        padding-top: 5px;
-        height: calc(100vh - 245px);
+        height: calc(100vh - 230px);
         overflow-y: auto;
+        @media (max-width: $min-width) {
+            height: calc(100vh - 200px);
+        }
     }
     .check-out-footer {
         position: relative;
         width: 100%;
         height: 95px;
         padding-top: 15px;
+    }
+}
+
+.card-check-out-fixed {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 350px;
+    @media (max-width: $min-width) {
+        width: calc(100% - 40px);
     }
 }
 

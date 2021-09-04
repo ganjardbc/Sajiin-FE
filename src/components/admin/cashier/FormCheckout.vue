@@ -1,9 +1,6 @@
 <template>
     <div id="App">
-        <div class="card-check-out">
-            <div class="check-out-header">
-                <div class="fonts small black bold">Carts</div>
-            </div>
+        <div class="card-check-out no-padding">
             <div class="check-out-body">
                 <div v-if="datas.length > 0">
                     <div v-for="(dt, i) in datas" :key="i" class="card bg-white border-full" style="margin-bottom: 15px;">
@@ -68,14 +65,8 @@
                         <div class="fonts fonts-10 grey">Quantity</div>
                         <div class="fonts fonts-10 semibold">{{ quantity }} products</div>
                     </div>
-                    <!-- <div class="display-flex space-between" style="margin-bottom: 3px;">
-                        <div class="fonts fonts-10 grey">PPN (0%)</div>
-                        <div class="fonts fonts-10 semibold">Rp. 0</div>
-                    </div> -->
                 </div>
                 <div class="display-flex">
-                    <!-- <button class="btn btn-full btn-primary">Save Order</button>
-                    <div style="width: 20px;"></div> -->
                     <button v-if="datas.length > 0" class="btn btn-full btn-main" @click="onButtonSave">Check Out</button>
                     <button v-else class="btn btn-full btn-primary" style="cursor: not-allowed;">Check Out</button>
                 </div>
@@ -118,6 +109,10 @@ export default {
         AppEmpty
     },
     props: {
+        onClickClose: {
+            type: Function,
+            required: false
+        },
         onSave: {
             type: Function,
             required: false

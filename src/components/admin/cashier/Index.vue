@@ -1,39 +1,30 @@
 <template>
     <div id="App">
-        <div class="form-checkout">
-            <div class="left">
-                <div class="scroll">
-                    <!-- <div>
-                        <AppTabs 
-                            :selectedIndex="selectedTabIndex" 
-                            :path="'main-topic'"
-                            :data="tabs" 
-                            :isScrollable="false" 
-                            :onChange="(data) => onChangeTabs(data)" 
-                            class="margin margin-bottom-15-px" />
-                    </div> -->
-                    <div v-if="selectedTabIndex === 0">
-                        <FormProduct 
-                            :onChange="(data) => onChange(data)" />
-                    </div>
-                    <div v-if="selectedTabIndex === 1">
-                        <FormOrders 
-                            :onChange="(data) => onChangeOrders(data)" />
-                    </div>
-                </div>
-            </div>
+        <div>
+            <FormProduct 
+                :onChange="(data) => onChange(data)" />
+ 
+            <div style="padding-bottom: 85px;"></div>
+        </div>
+
+        <div :class="`content-form ' ${!visibleCart ? 'hide' : ''}`">
             <div class="right">
-                <div class="scroll">
+                <AppSideForm
+                    :title="'Carts'"
+                    :enableSaveButton="false"
+                    :onClose="onVisibleCart"
+                >
                     <FormCheckout 
                         :data.sync="items"
+                        :onClickClose="onVisibleCart"
                         :onCheckOut="(data) => onCheckOut(data)"
                         :onSave="(data) => onSave(data)"
                         :onDelete="(data) => onDelete(data)" />
-                </div>
+                </AppSideForm>
             </div>
         </div>
 
-        <div :class="visibleCheckOut ? 'content-form' : 'content-form hide'">
+        <div :class="`content-form ' ${!visibleCheckOut ? 'hide' : ''}`">
             <div class="right">
                 <AppSideForm
                     :title="'Check Out'"
@@ -48,10 +39,6 @@
                                 <div class="fonts fonts-12 semibold orange">Rp. {{ order.order.total_price }}</div>
                             </div>
                             <div style="width: 30px;"></div>
-                            <!-- <div style="width: 100%;">
-                                <div class="fonts fonts-10 grey">PPN (0%)</div>
-                                <div class="fonts fonts-12 semibold">Rp. 0</div>
-                            </div> -->
                         </div>
                         <div style="margin-bottom: 15px;">
                             <div class="fonts fonts-10 grey">Payment Status</div>
@@ -183,6 +170,12 @@
             :onChange="(data) => onChangeTable(data)"
         />
 
+        <FormCheckoutSmall 
+            v-if="!visibleCart"
+            :data.sync="items"
+            :onClick="onVisibleCart"
+        />
+
         <AppAlert 
             v-if="visibleAlertCancel" 
             :title="'Cancel this order ?'" 
@@ -204,10 +197,10 @@ import axios from 'axios'
 import FormProduct from './FormProduct'
 import FormOrders from './FormOrders'
 import FormCheckout from './FormCheckout'
+import FormCheckoutSmall from './FormCheckoutSmall'
 import CardPayment from './CardPayment'
 import AppPopupForm from '../../modules/AppPopupForm'
 import AppAlert from '../../modules/AppAlert'
-import AppTabs from '../../modules/AppTabs'
 import AppSideForm from '../../modules/AppSideForm'
 import FormTable from './FormTable'
 import FormPayment from './FormPayment'
@@ -253,11 +246,7 @@ export default {
     name: 'App',
     data () {
         return {
-            tabs: [
-                {label: 'Products', status: 'active'},
-                {label: 'Orders', status: ''},
-            ],
-            selectedTabIndex: 0,
+            visibleCart: false,
             visibleLoaderSave: false,
             visibleAlertSave: false,
             visibleAlertCancel: false,
@@ -298,12 +287,12 @@ export default {
     components: {
         CardPayment,
         AppSideForm,
-        AppTabs,
         AppAlert,
         AppPopupForm,
         FormProduct,
         FormOrders,
         FormCheckout,
+        FormCheckoutSmall,
         FormTable,
         FormPayment
     },
@@ -334,8 +323,8 @@ export default {
             const token = 'Bearer '.concat(this.$cookies.get('token'))
             this.getCountOrder(token)
         },
-        onChangeTabs (index) {
-            this.selectedTabIndex = index
+        onVisibleCart () {
+            this.visibleCart = !this.visibleCart
         },
 
         // order
@@ -373,6 +362,7 @@ export default {
                 this.order = {...payloadOrder}
                 this.visibleLoaderSave = false
                 this.visibleCheckOut = false
+                this.visibleCart = false
                 this.visibleAlertSave = false
                 this.getLocalCartCount()
                 this.getLocalOrderCount()

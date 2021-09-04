@@ -307,49 +307,6 @@
                                 type="search" 
                                 placeholder="" 
                                 class="field"
-                                name="customer_id" 
-                                id="customer_id" 
-                                v-model="formData.order.customer_id"
-                                readonly>
-                            <button class="btn btn-icon btn-white" @click="onButtonCustomer">
-                                <i class="fa fa-1x fa-search" />
-                            </button>
-                        </div>
-                        <div v-else>
-                            <input 
-                                type="search" 
-                                placeholder="" 
-                                class="field field-sekunder"
-                                style="width: 100%;"
-                                name="customer_id" 
-                                id="customer_id" 
-                                v-model="formData.order.customer_id"
-                                readonly>
-                        </div>
-                        <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
-                            {{ formMessage && formMessage.customer_id && formMessage.customer_id[0] }}
-                        </div>
-                    </div>
-                    <FormCustomer
-                        :data.sync="formData.customer"
-                        :enablePopup="openCreateCustomer"
-                        :onChange="(data) => onChangeCustomer(data)"
-                    />
-                </div>
-                <div v-else style="text-align: center;">
-                    <div class="fonts micro semibold" >You have got owner access</div>
-                </div>
-            </div>
-
-            <div v-if="selectedIndex === 4">
-                <div v-if="roleName !== 'customer'">
-                    <div class="field-group margin margin-bottom-15-px">
-                        <div class="field-label">ID</div>
-                        <div v-if="this.title !== 'VIEW'" class="card-search full">
-                            <input 
-                                type="search" 
-                                placeholder="" 
-                                class="field"
                                 name="payment_id" 
                                 id="payment_id" 
                                 v-model="formData.order.payment_id"
@@ -384,7 +341,7 @@
                 </div>
             </div>
 
-            <div v-if="selectedIndex === 5">
+            <div v-if="selectedIndex === 4">
                 <div v-if="title !== 'CREATE' ? true : false">
                     <FormProduct 
                         :selectedId.sync="formData.order.id"
@@ -418,7 +375,6 @@ const tabs = [
     {label: 'Data', status: 'active'},
     {label: 'Shop', status: ''},
     {label: 'Table', status: ''},
-    {label: 'Customer', status: ''},
     {label: 'Payment', status: ''},
     {label: 'Products', status: ''}
 ]

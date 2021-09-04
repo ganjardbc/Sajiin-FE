@@ -1,38 +1,42 @@
 <template>
     <div id="App">
-        <div style="margin-bottom: 5px;">
-            <div class="display-flex space-between" style="padding: 10px; padding-top: 0; padding-left: 15px; padding-right: 15px;">
-                <div class="fonts fonts-small black bold" style="margin-top: 5px;">Categories</div>
-                <!-- <button class="btn btn-icon btn-white" @click="refresh">
-                    <i class="fa fa-lw fa-retweet"></i>
-                </button> -->
-            </div>
-            <div class="display-flex wrap" style="padding-left: 5px; padding-right: 5px;">
-                <div v-for="(dt, i) in dataCategories" :key="i" class="column-5">
+        <div style="padding: 15px 0;">
+            <!-- <AppLoader v-if="visibleLoaderCategory" /> -->
+            <div class="display-flex overflow-y" style="padding-left: 10px; padding-right: 10px;">
+                <div v-for="(dt, i) in dataCategories" :key="i">
                     <CardCategory :data="dt" :onClick="onClickCategory" />
                 </div>
-                <AppLoader v-if="visibleLoaderCategory" />
             </div>
         </div>
+
         <div>
             <div class="display-flex space-between" style="padding: 10px; padding-left: 15px; padding-right: 15px;">
-                <div class="fonts small black bold" style="margin-top: 5px;">Products</div>
+                <div>
+                    <AppTabs 
+                        :selectedIndex="selectedTabIndex" 
+                        :path="'main-topic'"
+                        :data="tabs" 
+                        :isScrollable="false" 
+                        :onChange="(data) => onChangeTabs(data)" />
+                </div>
                 <button class="btn btn-icon btn-white" @click="refresh">
                     <i class="fa fa-lw fa-retweet"></i>
                 </button>
             </div>
 
-            <div class="display-flex wrap" style="padding-left: 5px; padding-right: 5px;">
-                <div v-for="(dt, i) in datas" :key="i" class="column-3">
-                    <CardProduct :data="dt" :onCheckOut="(data) => onCheckOut(data)" />
+            <div v-if="selectedTabIndex === 0">
+                <div class="display-flex wrap" style="padding-left: 5px; padding-right: 5px;">
+                    <div v-for="(dt, i) in datas" :key="i" class="column-4 mobile-column-2">
+                        <CardProduct :data="dt" :onCheckOut="(data) => onCheckOut(data)" />
+                    </div>
+                    <AppLoader v-if="visibleLoader" />
                 </div>
-                <AppLoader v-if="visibleLoader" />
-            </div>
 
-            <div v-if="!visibleLoader" class="display-flex center">
-                <button v-if="visibleLoadMore" class="btn btn-sekunder" style="margin-top: 20px; margin-bottom: 20px;" @click="getData(limit, offset)">
-                    Load More
-                </button>
+                <div v-if="!visibleLoader" class="display-flex center">
+                    <button v-if="visibleLoadMore" class="btn btn-sekunder" style="margin-top: 20px; margin-bottom: 20px;" @click="getData(limit, offset)">
+                        Load More
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -42,11 +46,16 @@ import axios from 'axios'
 import AppLoader from '../../modules/AppLoader'
 import CardProduct from './CardProduct'
 import CardCategory from './CardCategory'
+import AppTabs from '../../modules/AppTabs'
 
 export default {
     name: 'App',
     data () {
         return {
+            tabs: [
+                {label: 'Available', status: 'active'},
+                {label: 'Unavailable', status: ''},
+            ],
             visibleLoaderCategory: false,
             visibleLoader: false,
             visibleLoadMore: false,
@@ -54,6 +63,7 @@ export default {
             dataShop: null,
             datas: [],
             dataCategories: [],
+            selectedTabIndex: 0,
             limit: 6,
             offset: 0 
         }
@@ -67,7 +77,8 @@ export default {
     components: {
         CardCategory,
         CardProduct,
-        AppLoader
+        AppLoader,
+        AppTabs
     },
     props: {
         onChange: {
@@ -88,12 +99,22 @@ export default {
             this.dataCategories = newPayload
             this.refresh()
         },
+        onChangeTabs (index) {
+            this.selectedTabIndex = index
+        },
         refresh () {
             this.datas = []
             this.offset = 0
             this.getData(this.limit, this.offset)
         },
         async getDataCategory () {
+            let newData = [{
+                id: 0,
+                name: 'All Products',
+                image: '',
+                statusTab: true
+            }]
+            this.dataCategories = newData
             this.visibleLoaderCategory = true 
 
             const token = 'Bearer '.concat(this.$cookies.get('token'))
@@ -107,12 +128,6 @@ export default {
             // console.log('getDataCategory', rest)
 
             if (rest && rest.status === 200) {
-                let newData = [{
-                    id: 0,
-                    name: 'All Products',
-                    image: '',
-                    statusTab: true
-                }]
                 rest.data.data && rest.data.data.map((dt) => {
                     return newData.push({...dt, statusTab: false})
                 })
