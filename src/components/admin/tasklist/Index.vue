@@ -4,8 +4,6 @@
             <div class="bg-white">
                 <div class="display-flex row space-between padding padding-10-px" style="height: 40px;">
                     <div>
-                        <!-- <h1 class="fonts small black">TASKLISTS</h1>
-                        <p class="fonts micro grey no-line-height">controll your datas</p> -->
                         <AppTabs 
                             :selectedIndex="selectedTabIndex" 
                             :path="'main-topic'"
@@ -35,7 +33,12 @@
                                     <div class="width width-75 width-mobile display-flex" style="padding-bottom: 10px;">
                                         <div style="width: 60px; margin-right: 15px;">
                                             <div class="image image-padding border border-full">
-                                                <img v-if="dt.product_image" :src="productImageThumbnailUrl + dt.product_image" alt="" class="post-center">
+                                                <VueLoadImage v-if="dt.product_image">
+                                                    <img slot="image" :src="productImageThumbnailUrl + dt.product_image" alt="" class="post-center">
+                                                    <div slot="preloader">
+                                                        <i class="post-middle-absolute fa fa-lg fa-spin fa-spinner" style="color: #999;"></i>
+                                                    </div>
+                                                </VueLoadImage>
                                                 <i v-else class="post-middle-absolute icn fa fa-lg fa-image"></i>
                                             </div>
                                         </div>
@@ -50,7 +53,7 @@
 
                                         <div style="width: 120px;">
                                             <div style="padding-right: 20px;" class="display-flex align-right no-margin-padding">
-                                                <AppCapsuleMenu 
+                                                <!-- <AppCapsuleMenu 
                                                     :title="dt.status"
                                                     :status="(
                                                         dt.status === 'cooking' 
@@ -62,8 +65,8 @@
                                                     :onChange="(data) => onChangeStatus(data, dt.id)" 
                                                     :data="bizparCapsule"
                                                     style="text-transform: capitalize;"
-                                                />
-                                                <!-- <div 
+                                                /> -->
+                                                <div 
                                                     :class="'card-capsule ' + (
                                                     dt.status === 'cooking' 
                                                         ? 'inactive' 
@@ -73,7 +76,7 @@
                                                     )" 
                                                     style="text-transform: capitalize;">
                                                     {{ dt.status }}
-                                                </div> -->
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -117,7 +120,7 @@
                     </div>
 
                     <div v-if="!visibleLoader" class="display-flex center" style="margin-top: 20px; margin-bottom: 20px;">
-                        <button v-if="visibleLoadMore" class="btn btn-sekunder" @click="getData(limit, offset)">
+                        <button v-if="visibleLoadMore" class="btn btn-sekunder" @click="onLoadMore()">
                             Load More
                         </button>
                     </div>
@@ -139,6 +142,7 @@
 <script>
 import axios from 'axios'
 import { mapGetters } from 'vuex'
+import VueLoadImage from 'vue-load-image'
 import AppTabs from '../../modules/AppTabs'
 import AppLoader from '../../modules/AppLoader'
 import AppAlert from '../../modules/AppAlert'
@@ -159,8 +163,9 @@ export default {
             formTitle: 'CREATE',
             formClass: false,
             tabs: [
-                {label: 'All Tasks', status: 'active', val: 0},
-                {label: 'Assigned', status: '', val: 0}
+                {label: 'New Tasks', status: 'active', val: 0},
+                {label: 'On Progress', status: '', val: 0},
+                {label: 'History', status: '', val: 0}
             ],
             bizparCapsule: [
                 {label: 'Waiting'}, 
@@ -190,6 +195,7 @@ export default {
         this.getData(this.limit, this.offset)
     },
     components: {
+        VueLoadImage,
         AppTabs,
         AppAlert,
         AppLoader,
@@ -220,8 +226,25 @@ export default {
                 case 0:
                     this.getData(this.limit, 0)
                     break;
-                default:
+                case 1:
                     this.getData(this.limit, 0, this.dataUser.id)
+                    break;
+                default:
+                    this.getData(this.limit, 0, this.dataUser.id, 'history')
+                    break;
+            }
+        },
+        onLoadMore () {
+            let index = this.selectedTabIndex
+            switch (index) {
+                case 0:
+                    this.getData(this.limit, this.offset)
+                    break;
+                case 1:
+                    this.getData(this.limit, this.offset, this.dataUser.id)
+                    break;
+                default:
+                    this.getData(this.limit, this.offset, this.dataUser.id, 'history')
                     break;
             }
         },
@@ -273,6 +296,9 @@ export default {
             if (this.selectedTabIndex === 1) {
                 this.getData(this.limit, 0, this.dataUser.id)
             }
+            if (this.selectedTabIndex === 2) {
+                this.getData(this.limit, 0, this.dataUser.id, 'history')
+            }
         },
         async changeOrderItemStatus (id, status) {
             this.visibleAlertSave = true 
@@ -304,7 +330,7 @@ export default {
                 this.visibleLoaderAction = false
             }
         },
-        async getData (limit, offset, owner_id = null) {
+        async getData (limit, offset, owner_id = null, type = null) {
             this.visibleLoader = true 
 
             let data = []
@@ -333,7 +359,13 @@ export default {
                 }
             }
 
-            const rest = await axios.post('/api/orderItem/getAllTasks', payload, { headers: { Authorization: token } })
+            const rest = await axios.post(
+                type === 'history' ? '/api/orderItem/getAllHistory' : '/api/orderItem/getAllTasks', 
+                payload, 
+                { 
+                    headers: { Authorization: token } 
+                }
+            )
 
             if (rest && rest.status === 200) {
                 const newData = rest.data.data

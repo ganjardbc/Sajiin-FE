@@ -46,7 +46,7 @@ Vue.use(new VueSocketIO({
 
 Vue.component('apexchart', VueApexCharts);
 
-Vue.$cookies.config('30d');
+Vue.$cookies.config('10d');
 Vue.prototype.deployUrl = deploy;
 Vue.prototype.apiUrl = api;
 Vue.prototype.initUrl = url;

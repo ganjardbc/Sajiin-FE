@@ -29,7 +29,12 @@
                             <div class="display-flex space-between" style="padding-top: 5px; padding-bottom: 5px;">
                                 <div style="width: 60px; margin-right: 15px;">
                                     <div class="image image-padding border border-full">
-                                        <img v-if="dt.table.image" :src="tableImageThumbnailUrl + dt.table.image" alt="" class="post-center">
+                                        <VueLoadImage v-if="dt.table.image">
+                                            <img slot="image" :src="tableImageThumbnailUrl + dt.table.image" alt="" class="post-center">
+                                            <div slot="preloader">
+                                                <i class="post-middle-absolute fa fa-lg fa-spin fa-spinner" style="color: #999;"></i>
+                                            </div>
+                                        </VueLoadImage>
                                         <i v-else class="post-middle-absolute icn fa fa-lg fa-image"></i>
                                     </div>
                                 </div>
@@ -109,6 +114,7 @@
 <script>
 import axios from 'axios'
 import { mapGetters } from 'vuex'
+import VueLoadImage from 'vue-load-image'
 import AppLoader from '../../modules/AppLoader'
 import AppAlert from '../../modules/AppAlert'
 import SearchField from '../../modules/SearchField'
@@ -148,6 +154,7 @@ export default {
         this.getData(this.limit, this.offset)
     },
     components: {
+        VueLoadImage,
         AppAlert,
         AppLoader,
         AppButtonMenu,

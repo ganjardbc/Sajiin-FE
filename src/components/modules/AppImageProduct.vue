@@ -3,7 +3,13 @@
         <div v-for="(detail, j) in data.slice(from ? from : 0, to ? to : data.length)" :key="j" class="display-flex" style="padding-top: 10px; padding-bottom: 10px;">
             <div style="width: 75px; margin-right: 15px;">
                 <div class="image image-padding">
-                    <img :src="productImageThumbnailUrl + detail.product_image" alt="" class="post-center">
+                    <VueLoadImage v-if="detail.product_image">
+                        <img slot="image" :src="productImageThumbnailUrl + detail.product_image" alt="" class="post-center">
+                        <div slot="preloader">
+                            <i class="post-middle-absolute fa fa-lg fa-spin fa-spinner" style="color: #999;"></i>
+                        </div>
+                    </VueLoadImage>
+                    <i v-else class="post-middle-absolute fa fa-lg fa-image" style="color: #999;" />
                 </div>
             </div>
             <div style="width: calc(100% - 190px);">
@@ -43,6 +49,7 @@
 </template>
 <script>
 import AppDote from './AppDote'
+import VueLoadImage from 'vue-load-image'
 
 export default {
     name: 'AppImageProduct',
@@ -55,7 +62,8 @@ export default {
         this.datas = this.data ? this.data : []
     },
     components: {
-        AppDote
+        AppDote,
+        VueLoadImage
     },
     props: {
         from: {

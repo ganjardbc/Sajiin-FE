@@ -80,7 +80,7 @@
                         <div class="bottom-line" style="margin: auto;"></div>
                     </div>
                     <div class="display-flex center" style="margin-bottom: 15px;">
-                        <span class="fonts fonts-12 grey">Questions? Call us at <span class="fonts fonts-11 red semibold">1-800-975-5304</span> or email <span class="fonts fonts-11 red semibold">hello@fleetio.com</span></span>
+                        <span class="fonts fonts-12 grey">Questions? Call us at <span class="fonts fonts-11 red semibold">1-800-975-5304</span> or email <span class="fonts fonts-11 red semibold">hello@sajiin.com</span></span>
                     </div>
                 </div>
                 <div class="display-flex center" style="margin-top: 32px;">

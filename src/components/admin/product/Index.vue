@@ -28,12 +28,15 @@
                         <div v-for="(dt, i) in datas" :key="i" class="card box-shadow" style="margin-top: 15px; margin-bottom: 15px; overflow: unset;">
                             <div class="display-flex space-between" style="padding-top: 5px; padding-bottom: 5px;">
                                 <div style="width: 60px; margin-right: 15px;">
-                                    <!-- <router-link :to="{name: 'product', params: {id: dt.product.product_id}}"> -->
-                                        <div class="image image-padding border border-full">
-                                            <img v-if="dt.images[0] && dt.images[0].image" :src="productImageThumbnailUrl + dt.images[0].image" alt="" class="post-center">
-                                            <i v-else class="post-middle-absolute icn fa fa-lg fa-image"></i>
-                                        </div>
-                                    <!-- </router-link> -->
+                                    <div class="image image-padding border border-full">
+                                        <VueLoadImage v-if="dt.images[0] && dt.images[0].image">
+                                            <img slot="image" :src="productImageThumbnailUrl + dt.images[0].image" alt="" class="post-center">
+                                            <div slot="preloader">
+                                                <i class="post-middle-absolute fa fa-lg fa-spin fa-spinner" style="color: #999;"></i>
+                                            </div>
+                                        </VueLoadImage>
+                                        <i v-else class="post-middle-absolute icn fa fa-lg fa-image"></i>
+                                    </div>
                                 </div>
                                 <div style="width: calc(100% - 185px);">
                                     <div class="display-flex" style="margin-bottom: 5px;">
@@ -113,6 +116,7 @@
 <script>
 import axios from 'axios'
 import { mapGetters } from 'vuex'
+import VueLoadImage from 'vue-load-image'
 import AppLoader from '../../modules/AppLoader'
 import AppAlert from '../../modules/AppAlert'
 import SearchField from '../../modules/SearchField'
@@ -153,6 +157,7 @@ export default {
         this.getDataCategory()
     },
     components: {
+        VueLoadImage,
         AppAlert,
         AppLoader,
         AppButtonMenu,

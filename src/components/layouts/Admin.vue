@@ -55,7 +55,12 @@
                         <div v-if="dataUser.role_name === 'admin' || dataUser.role_name === 'owner'" class="display-flex">
                             <router-link :to="{name: 'shop'}" class="card-small-profile">
                                 <div class="image" style="text-align: center;">
-                                    <img v-if="selectedShop && selectedShop.image" :src="selectedShop ? (shopImageThumbnailUrl + selectedShop.image) : ''" alt="">
+                                    <VueLoadImage v-if="selectedShop && selectedShop.image">
+                                        <img slot="image" :src="selectedShop ? (shopImageThumbnailUrl + selectedShop.image) : ''" alt="">
+                                        <div slot="preloader">
+                                            <i class="post-middle-absolute fa fa-lg fa-spin fa-spinner" style="color: #999;"></i>
+                                        </div>
+                                    </VueLoadImage>
                                     <i v-else class="post-top fa fa-lw fa-store" style="color: #999;" />
                                 </div>
                                 <div class="label">
@@ -66,7 +71,12 @@
                         <div v-else>
                             <router-link :to="{name: 'employeeform'}" class="card-small-profile">
                                 <div class="image" style="text-align: center;">
-                                    <img v-if="selectedEmployee && selectedEmployee.image" :src="selectedEmployee ? (employeeImageThumbnailUrl + selectedEmployee.image) : ''" alt="">
+                                    <VueLoadImage v-if="selectedEmployee && selectedEmployee.image">
+                                        <img slot="image" :src="selectedEmployee ? (employeeImageThumbnailUrl + selectedEmployee.image) : ''" alt="">
+                                        <div slot="preloader">
+                                            <i class="post-middle-absolute fa fa-lg fa-spin fa-spinner" style="color: #999;"></i>
+                                        </div>
+                                    </VueLoadImage>
                                     <i v-else class="post-top fa fa-lw fa-id-card" style="color: #999;" />
                                 </div>
                                 <div class="label">
@@ -92,6 +102,7 @@
 <script>
 import axios from 'axios'
 import { mapGetters, mapActions } from 'vuex'
+import VueLoadImage from 'vue-load-image'
 import AppListMenu from '../modules/AppListMenu'
 import logo from '@/assets/img/logo.png'
 import icon from '@/assets/img/icon.png'
@@ -175,6 +186,7 @@ export default {
         this.getShop()
     },
     components: {
+        VueLoadImage,
         AppPopupNotif,
         AppButtonQR,
         AppButtonMenu,
