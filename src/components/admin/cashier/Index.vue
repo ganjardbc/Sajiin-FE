@@ -171,7 +171,6 @@
         />
 
         <FormCheckoutSmall 
-            v-if="!visibleCart"
             :data.sync="items"
             :onClick="onVisibleCart"
         />
