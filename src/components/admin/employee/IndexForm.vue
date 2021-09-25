@@ -44,6 +44,17 @@
                                         readonly>
                                 </div>
                                 <div class="field-group margin margin-bottom-15-px">
+                                    <div class="field-label">ADDRESS</div>
+                                    <input 
+                                        type="text" 
+                                        placeholder="" 
+                                        class="field field-sekunder" 
+                                        name="shop_address" 
+                                        id="shop_address" 
+                                        v-model="dataShop.location"
+                                        readonly>
+                                </div>
+                                <div class="field-group margin margin-bottom-15-px">
                                     <div class="field-label">POSITION</div>
                                     <input 
                                         type="text" 

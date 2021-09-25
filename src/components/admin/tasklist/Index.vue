@@ -95,7 +95,7 @@
                                             <div class="fonts fonts-11 semibold" style="margin-bottom: 5px;">{{ dt.product_name }}</div>
                                             <div class="fonts fonts-10 grey" style="margin-bottom: 0;">{{ dt.quantity }} x {{ dt.product_detail }}</div>
                                             <div v-if="dt.product_toping" class="fonts fonts-10 grey" style="margin-bottom: 0;">{{ dt.quantity }} x {{ dt.product_toping }}</div>
-                                            <div class="fonts fonts-10 grey">{{ dt.created_at | moment("from", "now") }}</div>
+                                            <div class="fonts fonts-10 grey">{{ dt.updated_at | moment("from", "now") }}</div>
                                             <div class="fonts fonts-10 grey" style="margin-top: 5px;">{{ dt.order_uuid }}</div>
                                         </div>
                                     </div>
