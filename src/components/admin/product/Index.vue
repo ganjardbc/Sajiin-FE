@@ -32,7 +32,9 @@
                                         <VueLoadImage v-if="dt.images[0] && dt.images[0].image">
                                             <img slot="image" :src="productImageThumbnailUrl + dt.images[0].image" alt="" class="post-center">
                                             <div slot="preloader">
-                                                <i class="post-middle-absolute fa fa-lg fa-spin fa-spinner" style="color: #999;"></i>
+                                                <div class="post-middle-absolute icn">
+                                                    <i class="fa fa-lg fa-spin fa-spinner" style="color: #999;"></i>
+                                                </div>
                                             </div>
                                         </VueLoadImage>
                                         <i v-else class="post-middle-absolute icn fa fa-lg fa-image"></i>

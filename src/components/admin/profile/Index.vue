@@ -1,6 +1,10 @@
 <template>
-    <div id="Profile" style="padding-top: 10px; padding-left: 15px; padding-right: 15px;">
+    <div id="Profile" style="padding-top: 0; padding-left: 15px; padding-right: 15px;">
         <div class="display-flex display-mobile space-between">
+            <div class="fonts bold big margin" style="margin-top: 15px; margin-bottom: 15px;">Profile</div>
+        </div>
+
+        <div class="display-flex display-mobile space-between" style="padding-top: 10px; padding-bottom: 10px;">
             <div class="width width-25 width-mobile" style="margin-bottom: 30px;">
                 <div class="card no-padding-mobile box-shadow bg-white">
                     <div class="content-center" style="margin-bottom: 20px;">
@@ -31,12 +35,8 @@
             <div class="width width-73 width-mobile">
                 <div class="card no-padding-mobile box-shadow bg-white" style="margin-bottom: 20px;">
                     <div class="width width-100">
-                        <div class="display-flex display-mobile space-between">
-                            <div class="fonts bold big margin margin-bottom-20-px">Profile</div>
-                        </div>
-
                         <div class="margin margin-bottom-20-px">
-                            <div class="fonts bold">General Info</div>
+                            <div class="fonts fonts-10 black semibold">General Info</div>
                         </div>
                         <div class="width width-100 display-flex display-mobile margin margin-bottom-20-px">
                             <div class="width width-30 width-mobile fonts fonts-11">ID</div>
@@ -121,7 +121,7 @@
                 <div class="card no-padding-mobile box-shadow bg-white" style="margin-bottom: 20px;">
                     <div class="width width-100">
                         <div class="margin margin-bottom-20-px">
-                            <div class="fonts fonts-11 bold">Private Info</div>
+                            <div class="fonts fonts-10 black semibold">Private Info</div>
                         </div>
                         <div class="width width-100 display-flex display-mobile margin margin-bottom-20-px">
                             <div class="width width-30 width-mobile fonts fonts-11">Email</div>
@@ -158,11 +158,11 @@
                     </div>
                 </div>
 
-                <div class="width width-100 width-mobile margin margin-bottom-10-px">
+                <div class="width width-100 width-mobile">
                     <div class="display-flex space-between">
                         <div></div>
                         <button class="btn btn-main" @click="onShowHideSave">
-                            UPDATE PROFIL
+                            Save & Submit
                         </button>
                     </div>
                 </div>

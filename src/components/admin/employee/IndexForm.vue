@@ -2,6 +2,10 @@
     <div id="App">
         <AppLoader v-if="visibleLoader" />
         <div v-else style="padding-top: 0; padding-left: 15px; padding-right: 15px;">
+            <div class="display-flex display-mobile space-between">
+                <div class="fonts bold big margin" style="margin-top: 15px; margin-bottom: 15px;">Employee</div>
+            </div>
+
             <div class="display-flex display-mobile space-between" style="padding-top: 10px; padding-bottom: 10px;">
                 <div class="width width-25 width-mobile" style="margin-bottom: 20px;">
                     <div class="card no-padding-mobile box-shadow bg-white">
@@ -19,7 +23,7 @@
 
                 <div class="width width-73 width-mobile">
                     <div class="card box-shadow" style="margin-bottom: 20px;">
-                        <div class="fonts fonts-10 black semibold" style="margin-bottom: 10px;">Employee Info</div>
+                        <div class="fonts fonts-10 black semibold" style="margin-bottom: 10px;">Working Place</div>
                         <div class="display-flex space-between">
                             <div class="width width-20">
                                 <div class="image image-padding" style="margin: auto; text-align: center;">
@@ -215,7 +219,7 @@
                     <div class="display-flex space-between">
                         <div></div>
                         <button class="btn btn-main" @click="onSave">
-                            Save Info
+                            Save & Submit
                         </button>
                     </div>
                 </div>

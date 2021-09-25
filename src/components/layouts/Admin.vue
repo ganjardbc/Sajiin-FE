@@ -42,6 +42,11 @@
                         <div style="margin-left: 5px;">
                             <AppPopupNotif :notif.sync="countNotif" />
                         </div>
+                        <router-link :to="{name: 'employeeform'}" style="margin-left: 5px;" class="button-router-link">
+                            <button class="btn btn-white btn-icon btn-radius" title="Reports">
+                                <i class="fa fa-lg fa-id-card" />
+                            </button>
+                        </router-link>
                         <router-link :to="{name: 'profile'}" class="card-small-profile" style="margin-left: 5px;">
                             <div class="image" style="text-align: center;">
                                 <img v-if="dataUser && dataUser.image" :src="dataUser && dataUser.image ? (adminImageThumbnailUrl + dataUser.image) : ''" alt="">
@@ -51,7 +56,7 @@
                                 <div class="post-center fonts fonts-10 semibold black" style="text-transform: uppercase;">{{ dataUser && dataUser.name }}</div>
                             </div>
                         </router-link>
-                        <div class="border-left" style="margin-left: 10px; padding-left: 10px;"></div>
+                        <div v-if="dataUser.role_name === 'admin' || dataUser.role_name === 'owner'" class="border-left" style="margin-left: 10px; padding-left: 10px;"></div>
                         <div v-if="dataUser.role_name === 'admin' || dataUser.role_name === 'owner'" class="display-flex">
                             <router-link :to="{name: 'shop'}" class="card-small-profile">
                                 <div class="image" style="text-align: center;">
@@ -65,22 +70,6 @@
                                 </div>
                                 <div class="label">
                                     <div class="post-center fonts fonts-10 semibold black" style="text-transform: uppercase;">{{ selectedLabel ? selectedLabel : 'CREATE SHOP' }}</div>
-                                </div>
-                            </router-link>
-                        </div>
-                        <div v-else>
-                            <router-link :to="{name: 'employeeform'}" class="card-small-profile">
-                                <div class="image" style="text-align: center;">
-                                    <VueLoadImage v-if="selectedEmployee && selectedEmployee.image">
-                                        <img slot="image" :src="selectedEmployee ? (employeeImageThumbnailUrl + selectedEmployee.image) : ''" alt="">
-                                        <div slot="preloader">
-                                            <i class="post-middle-absolute fa fa-lg fa-spin fa-spinner" style="color: #999;"></i>
-                                        </div>
-                                    </VueLoadImage>
-                                    <i v-else class="post-top fa fa-lw fa-id-card" style="color: #999;" />
-                                </div>
-                                <div class="label">
-                                    <div class="post-center fonts fonts-10 semibold black" style="text-transform: uppercase;">{{ selectedEmployee ? selectedEmployee.employee_id : '' }}</div>
                                 </div>
                             </router-link>
                         </div>

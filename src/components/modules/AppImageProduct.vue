@@ -6,7 +6,9 @@
                     <VueLoadImage v-if="detail.product_image">
                         <img slot="image" :src="productImageThumbnailUrl + detail.product_image" alt="" class="post-center">
                         <div slot="preloader">
-                            <i class="post-middle-absolute fa fa-lg fa-spin fa-spinner" style="color: #999;"></i>
+                            <div class="post-middle-absolute icn">
+                                <i class="fa fa-lg fa-spin fa-spinner" style="color: #999;"></i>
+                            </div>
                         </div>
                     </VueLoadImage>
                     <i v-else class="post-middle-absolute fa fa-lg fa-image" style="color: #999;" />
