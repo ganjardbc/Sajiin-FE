@@ -22,9 +22,9 @@
                         <button class="btn btn-white btn-icon btn-radius" @click="onChangeTabs(selectedTabIndex)">
                             <i class="fa fa-lw fa-retweet" />
                         </button>
-                        <button class="btn btn-white btn-icon btn-radius" @click="onShow('CREATE')">
+                        <!-- <button class="btn btn-white btn-icon btn-radius" @click="onShow('CREATE')">
                             <i class="fa fa-lw fa-plus" />
-                        </button>
+                        </button> -->
                         <SearchField :placeholder="'Search orders ..'" :enableResponsive="true" style="margin-left: 5px;" />
                     </div>
                 </div>

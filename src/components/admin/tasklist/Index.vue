@@ -26,11 +26,57 @@
                 </div>
                 
                 <div class="content-body">
-                    <div style="padding-left: 15px; padding-right: 15px;">
-                        <div v-for="(dt, i) in datas" :key="i" class="card box-shadow" style="margin-top: 15px; margin-bottom: 15px; overflow: unset;">
-                            <div style="width: 100%;">
-                                <div class="display-flex space-between display-mobile" style="padding-top: 5px; padding-bottom: 10px;">
-                                    <div class="width width-75 width-mobile display-flex" style="padding-bottom: 10px;">
+                    <div class="display-flex wrap" style="padding-left: 15px; padding-right: 15px;">
+                        <div v-for="(dt, i) in datas" :key="i" class="width width-row-3">
+                            <div style="margin: 7.5px;">
+                                <div class="card box-shadow" style="overflow: unset; padding: 0; width: 100%;">
+                                    <div class="border-bottom" style="padding: 10px;">
+                                        <div class="display-flex align-center space-between">
+                                            <div class="card-small-profile" style="cursor: default;">
+                                                <div class="image" style="text-align: center; margin-right: 5px;">
+                                                    <img v-if="dt.employee && dt.employee.image" :src="dt.employee ? (employeeImageThumbnailUrl + dt.employee.image) : ''" alt="">
+                                                    <i v-else class="post-top fa fa-lw fa-store" style="color: #999;" />
+                                                </div>
+                                                <div class="label label-mobile">
+                                                    <div class="post-center">
+                                                        <div class="fonts fonts-10 semibold black" style="text-transform: capitalize;">{{ dt.employee ? dt.employee.name : '' }}</div>
+                                                        <div class="fonts fonts-8 grey">{{ dt.employee ? dt.employee.employee_id : '' }} - {{ dt.employee ? dt.employee.position_name : '' }}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div style="width: 120px;">
+                                                <div class="display-flex align-right">
+                                                    <!-- <AppCapsuleMenu 
+                                                        :title="dt.status"
+                                                        :status="(
+                                                            dt.status === 'cooking' 
+                                                                ? 'inactive' 
+                                                                : dt.status === 'done' 
+                                                                    ? 'active' 
+                                                                    : ''
+                                                        )"
+                                                        :onChange="(data) => onChangeStatus(data, dt.id)" 
+                                                        :data="bizparCapsule"
+                                                        style="text-transform: capitalize;"
+                                                    /> -->
+                                                    <div 
+                                                        :class="'card-capsule ' + (
+                                                        dt.status === 'cooking' 
+                                                            ? 'inactive' 
+                                                            : dt.status === 'done' 
+                                                                ? 'active'
+                                                                : ''
+                                                        )" 
+                                                        style="text-transform: capitalize;">
+                                                        {{ dt.status }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="display-flex" style="padding: 10px;">
                                         <div style="width: 60px; margin-right: 15px;">
                                             <div class="image image-padding border border-full">
                                                 <VueLoadImage v-if="dt.product_image">
@@ -45,75 +91,31 @@
                                             </div>
                                         </div>
 
-                                        <div style="width: calc(100% - 195px);">
+                                        <div style="width: calc(100% - 75px);">
                                             <div class="fonts fonts-11 semibold" style="margin-bottom: 5px;">{{ dt.product_name }}</div>
                                             <div class="fonts fonts-10 grey" style="margin-bottom: 0;">{{ dt.quantity }} x {{ dt.product_detail }}</div>
                                             <div v-if="dt.product_toping" class="fonts fonts-10 grey" style="margin-bottom: 0;">{{ dt.quantity }} x {{ dt.product_toping }}</div>
                                             <div class="fonts fonts-10 grey">{{ dt.created_at | moment("from", "now") }}</div>
                                             <div class="fonts fonts-10 grey" style="margin-top: 5px;">{{ dt.order_uuid }}</div>
                                         </div>
-
-                                        <div style="width: 120px;">
-                                            <div style="padding-right: 20px;" class="display-flex align-right no-margin-padding">
-                                                <!-- <AppCapsuleMenu 
-                                                    :title="dt.status"
-                                                    :status="(
-                                                        dt.status === 'cooking' 
-                                                            ? 'inactive' 
-                                                            : dt.status === 'done' 
-                                                                ? 'active' 
-                                                                : ''
-                                                    )"
-                                                    :onChange="(data) => onChangeStatus(data, dt.id)" 
-                                                    :data="bizparCapsule"
-                                                    style="text-transform: capitalize;"
-                                                /> -->
-                                                <div 
-                                                    :class="'card-capsule ' + (
-                                                    dt.status === 'cooking' 
-                                                        ? 'inactive' 
-                                                        : dt.status === 'done' 
-                                                            ? 'active'
-                                                            : ''
-                                                    )" 
-                                                    style="text-transform: capitalize;">
-                                                    {{ dt.status }}
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
-                                    <div style="padding-left: 20px;" class="width width-25 width-mobile border-left border-mobile-none no-margin-padding">
-                                        <div v-if="dt.employee">
-                                            <div class="fonts fonts-10 black" style="margin-bottom: 5px;">Handled by</div>
-                                            <div class="display-flex" style="margin-bottom: 15px;">
-                                                <div class="card-small-profile" style="cursor: default;">
-                                                    <div class="image" style="text-align: center; margin-right: 5px;">
-                                                        <img v-if="dt.employee && dt.employee.image" :src="dt.employee ? (employeeImageThumbnailUrl + dt.employee.image) : ''" alt="">
-                                                        <i v-else class="post-top fa fa-lw fa-store" style="color: #999;" />
-                                                    </div>
-                                                    <div class="label label-mobile">
-                                                        <div class="post-center">
-                                                            <div class="fonts fonts-10 semibold black" style="text-transform: capitalize;">{{ dt.employee ? dt.employee.name : '' }}</div>
-                                                            <div class="fonts fonts-8 grey">{{ dt.employee ? dt.employee.employee_id : '' }} - {{ dt.employee ? dt.employee.position_name : '' }}</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div v-else></div>
+                                    
+                                    <div v-if="dataUser.id === dt.assigned_id && dt.status === 'cooking'" class="border-top" style="padding: 10px;">
+                                        <button class="btn btn-green btn-full" @click="changeOrderItemStatus(dt.id, 'done')">
+                                            Mark As Done
+                                        </button>
+                                    </div>
 
-                                         <div class="width width-100">
-                                            <button v-if="!dt.status" class="btn btn-grey btn-full" @click="changeOrderItemStatus(dt.id, 'waiting')">
-                                                Mark As Waiting
-                                            </button>
-                                            <button v-if="dt.status === 'waiting'" class="btn btn-orange btn-full" @click="changeOrderItemStatus(dt.id, 'cooking')">
-                                                Mark As Cooking
-                                            </button>
-                                            <button v-if="dt.status === 'cooking'" class="btn btn-green btn-full" @click="changeOrderItemStatus(dt.id, 'done')">
-                                                Mark As Done
-                                            </button>
-                                        </div>
+                                    <div v-if="!dt.status" class="border-top" style="padding: 10px;">
+                                        <button class="btn btn-grey btn-full" @click="changeOrderItemStatus(dt.id, 'waiting')">
+                                            Mark As Waiting
+                                        </button>
+                                    </div>
 
+                                    <div v-if="dt.status === 'waiting'" class="border-top" style="padding: 10px;">
+                                        <button class="btn btn-orange btn-full" @click="changeOrderItemStatus(dt.id, 'cooking')">
+                                            Mark As Cooking
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -165,9 +167,9 @@ export default {
             formTitle: 'CREATE',
             formClass: false,
             tabs: [
-                {label: 'New Tasks', status: 'active', val: 0},
+                {label: 'Todo', status: 'active', val: 0},
                 {label: 'On Progress', status: '', val: 0},
-                {label: 'History', status: '', val: 0}
+                {label: 'Done', status: '', val: 0}
             ],
             bizparCapsule: [
                 {label: 'Waiting'}, 
@@ -229,10 +231,10 @@ export default {
                     this.getData(this.limit, 0)
                     break;
                 case 1:
-                    this.getData(this.limit, 0, this.dataUser.id)
+                    this.getData(this.limit, 0, 'cooking')
                     break;
                 default:
-                    this.getData(this.limit, 0, this.dataUser.id, 'history')
+                    this.getData(this.limit, 0, 'done')
                     break;
             }
         },
@@ -243,10 +245,26 @@ export default {
                     this.getData(this.limit, this.offset)
                     break;
                 case 1:
-                    this.getData(this.limit, this.offset, this.dataUser.id)
+                    this.getData(this.limit, this.offset, 'cooking')
                     break;
                 default:
-                    this.getData(this.limit, this.offset, this.dataUser.id, 'history')
+                    this.getData(this.limit, this.offset, 'done')
+                    break;
+            }
+        },
+        onRefresh () {
+            this.offset = 0
+            this.datas = []
+            let index = this.selectedTabIndex
+            switch (index) {
+                case 0:
+                    this.getData(this.limit, 0)
+                    break;
+                case 1:
+                    this.getData(this.limit, 0, 'cooking')
+                    break;
+                default:
+                    this.getData(this.limit, 0, 'done')
                     break;
             }
         },
@@ -289,19 +307,6 @@ export default {
             const data = this.bizparCapsule[index].label.toLowerCase()
             this.changeOrderItemStatus(id, data)
         },
-        onRefresh () {
-            this.offset = 0
-            this.datas = []
-            if (this.selectedTabIndex === 0) {
-                this.getData(this.limit, 0)
-            }
-            if (this.selectedTabIndex === 1) {
-                this.getData(this.limit, 0, this.dataUser.id)
-            }
-            if (this.selectedTabIndex === 2) {
-                this.getData(this.limit, 0, this.dataUser.id, 'history')
-            }
-        },
         async changeOrderItemStatus (id, status) {
             this.visibleAlertSave = true 
             this.visibleLoaderAction = true
@@ -332,7 +337,7 @@ export default {
                 this.visibleLoaderAction = false
             }
         },
-        async getData (limit, offset, owner_id = null, type = null) {
+        async getData (limit, offset, type = null) {
             this.visibleLoader = true 
 
             let data = []
@@ -346,28 +351,44 @@ export default {
             const token = 'Bearer '.concat(this.$cookies.get('token'))
             let payload = {
                 limit: limit,
-                offset: offset
+                offset: offset,
+                shop_id: this.dataShop ? this.dataShop.id : ''
             }
 
-            if (owner_id) {
+            if (type) {
                 payload = {
                     ...payload,
-                    user_id: owner_id ? owner_id : '',
-                }
-            } else {
-                payload = {
-                    ...payload,
-                    shop_id: this.dataShop ? this.dataShop.id : '',
+                    type: type
                 }
             }
 
             const rest = await axios.post(
-                type === 'history' ? '/api/orderItem/getAllHistory' : '/api/orderItem/getAllTasks', 
+                type ? '/api/orderItem/getAllByType' : '/api/orderItem/getAllTasks', 
                 payload, 
                 { 
                     headers: { Authorization: token } 
                 }
             )
+
+            // if (owner_id) {
+            //     payload = {
+            //         ...payload,
+            //         user_id: owner_id ? owner_id : '',
+            //     }
+            // } else {
+            //     payload = {
+            //         ...payload,
+            //         shop_id: this.dataShop ? this.dataShop.id : '',
+            //     }
+            // }
+
+            // const rest = await axios.post(
+            //     type === 'history' ? '/api/orderItem/getAllHistory' : '/api/orderItem/getAllTasks', 
+            //     payload, 
+            //     { 
+            //         headers: { Authorization: token } 
+            //     }
+            // )
 
             if (rest && rest.status === 200) {
                 const newData = rest.data.data
