@@ -5711,6 +5711,15 @@ a.btn {
   .width.width-mobile {
     width: calc(100% - 0px);
   }
+  .width.width-mobile-row-2 {
+    width: calc(100% / 2);
+  }
+  .width.width-mobile-row-3 {
+    width: calc(100% / 3);
+  }
+  .width.width-mobile-row-4 {
+    width: calc(100% / 4);
+  }
 }
 
 .post-middle {

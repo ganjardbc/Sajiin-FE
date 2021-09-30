@@ -1,7 +1,6 @@
 <template>
     <div id="product">
-        <!-- <AppMobileLayout :title="'Carts'"></AppMobileLayout> -->
-        <div class="main-screen">
+        <AppMobileLayout :title="'Carts'">
             <div style="padding: 10px 0; width: 100%; overflow: unset;">
                 <div class="width width-100">
                     <div class="width width-100 width-mobile">
@@ -47,7 +46,7 @@
                         </div>
                     </div>
                     <div class="width width-100 width-mobile">
-                        <div class="component-mobile" style="bottom: 57px;">
+                        <div class="component-mobile">
                             <div class="component-mobile-content">
                                 <AppShowHide :title="'Rp. ' + subtotalPrice" style="margin-bottom: 10px;">
                                     <div>
@@ -78,7 +77,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </AppMobileLayout>
 
         <AppAlert 
             v-if="visibleAlertDelete" 

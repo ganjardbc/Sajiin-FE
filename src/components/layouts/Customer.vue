@@ -11,9 +11,12 @@
                     <div class="header-menu-content display-flex space-between display-mobile">
                         <div></div>
                         <div class="header-menu-list display-flex">
-                            <router-link :to="{name: 'customer-profile'}" class="btn btn-sekunder btn-radius-rounded" style="padding: 9px 12px; margin-top: 2px;">
+                            <!-- <router-link :to="{name: 'customer-profile'}" class="btn btn-sekunder btn-radius-rounded" style="padding: 9px 12px; margin-top: 2px;">
                                 <i class="icn icn-left far fa-lg fa-user" /> {{ dataUser && dataUser.name }}
-                            </router-link>
+                            </router-link> -->
+                            <button class="btn btn-sekunder btn-radius-rounded" style="padding: 9px 12px; margin-top: 2px;" @click="onLogout">
+                                <i class="icn icn-left fa fa-lw fa-power-off" /> Logout
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -25,55 +28,6 @@
             </keep-alive>
             <router-view name="customerfresh" />
         </div>
-        <div style="padding-bottom: 70px;"></div>
-        <div class="navbar-bottom">
-            <div class="main-screen display-flex space-between">
-                <ul class="menu-navbar">
-                    <router-link :to="{name: 'customer-main'}">
-                        <li>
-                            <div class="icon">
-                                <i class="label-icon fa fa-lg fa-home" />
-                            </div>
-                            <div class="label">
-                                Home
-                            </div>
-                        </li>
-                    </router-link>
-                    <router-link :to="{name: 'customer-chart'}">
-                        <li>
-                            <div class="icon">
-                                <i class="label-icon fa fa-lg fa-shopping-basket" />
-                                <span v-if="countCart" class="notif">{{ countCart }}</span>
-                            </div>
-                            <div class="label">
-                                Carts
-                            </div>
-                        </li>
-                    </router-link>
-                    <router-link :to="{name: 'customer-order-list'}">
-                        <li>
-                            <div class="icon">
-                                <i class="label-icon fa fa-lg fa-list-ol" />
-                                <span v-if="countOrder" class="notif">{{ countOrder }}</span>
-                            </div>
-                            <div class="label">
-                                Orders
-                            </div>
-                        </li>
-                    </router-link>
-                </ul>
-            </div>
-            <!-- <div v-else class="main-screen display-flex space-between">
-                <div style="margin-top: 8px; width: 100%;">
-                    <AppButtonScanQr 
-                        :title="'Scan QR Code'"
-                        :btnClass="'btn btn-main'"
-                        :buttonFull="true"
-                    />
-                </div>
-            </div> -->
-        </div>
-
         <AppToast />
     </div>
 </template>
@@ -180,7 +134,7 @@ export default {
     },
     methods: {
         ...mapActions({
-            removeCookieAuth: 'auth/removeCookieCustomerAuth',
+            removeCookieAuth: 'auth/removeCookieAuth',
             signOut: 'customer/removeData',
             setDataTableSelected: 'table/setData',
             getDataTable: 'table/getData',
@@ -193,7 +147,7 @@ export default {
             if (a) {
                 this.removeCookieAuth()
                 this.signOut()
-                this.$router.push({ name: 'home' })
+                this.$router.replace({ name: 'home' })
             }
         },
         onOpenMenu () {

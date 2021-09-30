@@ -107,9 +107,9 @@ export default {
 
                 if (data.user.role_name === 'customer') {
                     this.$cookies.remove('shop')
-                    this.$router.push({ name: 'customer-main' })
+                    this.$router.replace({ name: 'customer-main' })
                 } else {
-                    this.$router.push({ name: 'dashboard' })
+                    this.$router.replace({ name: 'dashboard' })
                 }
 
                 if (data) {

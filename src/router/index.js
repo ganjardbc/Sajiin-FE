@@ -414,22 +414,30 @@ export const routes = [
             {
                 name: 'customer-home',
                 path: 'home',
-                component: CustomerHome
+                components: {
+                    customerfresh: CustomerHome
+                }
             },
             {
                 name: 'customer-main',
                 path: 'main',
-                component: CustomerMain
+                components: {
+                    customerfresh: CustomerMain
+                }
             },
             {
                 name: 'customer-table',
                 path: 'tables',
-                component: CustomerTable
+                components: {
+                    customerfresh: CustomerTable
+                }
             },
             {
                 name: 'customer-payment',
                 path: 'payments',
-                component: CustomerPayment
+                components: {
+                    customerfresh: CustomerPayment
+                }
             },
 
             // product
@@ -530,7 +538,9 @@ export const routes = [
             {
                 path: 'customer-qr',
                 name: 'customer-qr',
-                component: CustomerQR
+                components: {
+                    customerfresh: CustomerQR
+                }
             }
         ]
     }

@@ -190,7 +190,7 @@ export default {
             this.setShop(this.selectedShop)
             this.$cookies.set('shop', this.selectedShop)
             this.$cookies.remove('table')
-            this.$router.push({ name: 'customer-main' })
+            this.$router.replace({ name: 'customer-home' })
         },
         async getByID (id) {
             this.visibleLoader = true 

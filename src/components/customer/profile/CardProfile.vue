@@ -1,24 +1,24 @@
 <template>
     <div id="App">
-        <AppMobileLayout :title="'Profile'">
+        <div>
             <div style="padding: 10px 0; width: 100%; overflow: unset;">
                 <div style="padding-top: 5px; width: 100%;">
-                    <div class="display-flex border border-bottoms" style="padding-bottom: 15px;">
-                        <div style="width: 45px; margin-right: 15px;">
-                            <div class="image image-circle image-45px" style="margin: auto; text-align: center;">
+                    <div>
+                        <div style="width: 150px; margin: auto;">
+                            <div class="image image-circle image-150px" style="margin: auto; text-align: center;">
                                 <i v-if="user && !user.image" class="post-top fa fa-lg fa-user-circle" style="color: #999;" />
                                 <img v-else :src="user && user.image ? (adminImageThumbnailUrl + user.image) : ''" alt="">
                             </div>
                         </div>
-                        <div style="width: calc(100% - 125px);">
-                            <div class="fonts fonts-13 semibold">{{ user && user.name }}</div>
-                            <div class="fonts fonts-10 grey">{{ user && user.role_name }}</div>
+                        <div style="width: 100%; text-align: center; padding-top: 15px; padding-bottom: 15px;">
+                            <div class="fonts fonts-16 semibold">{{ user && user.name }}</div>
+                            <div class="fonts fonts-11 grey">{{ user && user.role_name }}</div>
                         </div>
-                        <div class="display-flex space-between" style="width: 70px;">
-                            <button class="btn btn-small-icon btn-sekunder" @click="sendSocketOrder">
+                        <div class="display-flex center">
+                            <button class="btn btn-icon btn-sekunder" style="margin-left: 5px; margin-right: 5px;" @click="sendSocketOrder">
                                 <i class="fa fa-1x fa-paper-plane"></i>
                             </button>
-                            <button class="btn btn-small-icon btn-sekunder" @click="onShowEdit">
+                            <button class="btn btn-icon btn-sekunder" style="margin-left: 5px; margin-right: 5px;" @click="onShowEdit">
                                 <i class="fa fa-1x fa-cog"></i>
                             </button>
                         </div>
@@ -34,22 +34,17 @@
                             </router-link>
                         </div>
                     </div>
-
-                    <div class="border border-bottoms">
-                        <div class="fonts fonts-10 black semibold" style="margin-bottom: 10px;">Menus</div>
-                        <AppListDownMenu :data.sync="sidebar" :isSidebarSmall="isSidebarSmall" />
-                    </div>
                 </div>
 
-                <div class="navbar-bottom">
+                <!-- <div class="navbar-bottom">
                     <div class="main-screen display-flex space-between" style="margin-top: 8px;">
                         <button class="btn btn-danger btn-full" @click="onLogout">
                             LOGOUT
                         </button>
                     </div>
-                </div>
+                </div> -->
             </div>
-        </AppMobileLayout>
+        </div>
 
         <FormUser 
             v-if="visiblePopup"

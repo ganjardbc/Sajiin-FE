@@ -34,5 +34,14 @@
         &.width-mobile {
             width: calc(100% - 0px);
         }
+        &.width-mobile-row-2 {
+            width: calc(100% / 2);
+        }
+        &.width-mobile-row-3 {
+            width: calc(100% / 3);
+        }
+        &.width-mobile-row-4 {
+            width: calc(100% / 4);
+        }
     }
 }
