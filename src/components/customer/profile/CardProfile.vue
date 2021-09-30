@@ -24,7 +24,7 @@
                         </div>
                     </div>
 
-                    <div v-if="dataOrder" class="border border-bottoms" style="padding-top: 5px; padding-bottom: 15px;">
+                    <div v-if="dataOrder" class="border border-bottoms" style="padding-top: 15px;">
                         <div class="fonts fonts-10 semibold" style="margin-bottom: 5px;">
                             You have an order
                         </div>
