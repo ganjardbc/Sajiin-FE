@@ -6,39 +6,36 @@
             :class="(isMobileCard ? 'column-1' : 'column-3')"
             :style="'position: relative; padding: 0;'"
         >
-            <div :class="isMobileCard ? '' : 'column-margin'">
-                <div :class="'card no-padding ' + (isMobileCard && 'card-mobile ') + ' box-shadow'" :style="isMobileCard ? 'margin-top: 15px;' : 'margin-top: 30px;'">
-                    <div class="left">
-                        <router-link :to="{name: 'product', params: {id: dt.product_id}}">
+            <router-link :to="{name: 'product', params: {id: dt.product_id}}">
+                <div :class="isMobileCard ? '' : 'column-margin'">
+                    <div :class="'card no-padding ' + (isMobileCard && 'card-mobile ') + ' box-shadow'" :style="isMobileCard ? 'margin-top: 15px;' : 'margin-top: 30px;'">
+                        <div class="left">
                             <div class="cover">
                                 <img :src="dt.image" alt="product" class="post-center" style="width: 100%;">
                             </div>
-                        </router-link>
-                    </div>
-                    <div class="right">
-                        <div style="position: relative; width: 100%; margin-bottom: 10px;">
-                            <router-link :to="{name: 'product', params: {id: dt.product_id}}" class="fonts fonts-10 semibold black" style="margin-top: 0;">
-                                {{ dt.title }}
-                            </router-link>
-                            <div class="fonts fonts-9 grey" style="margin-top: 3px;">{{ dt.category }}</div>
-                            <div class="fonts fonts-10 semibold black" style="margin-top: 3px;">Rp {{ dt.price }}</div>
                         </div>
-                        <div class="display-flex space-between">
-                            <div class="display-flex">
-                                <div :class="dt.is_available ? 'card-capsule active' : 'card-capsule'" style="margin-top: 4px; margin-right: 10px;">{{ dt.available }}</div>
+                        <div class="right">
+                            <div style="position: relative; width: 100%; margin-bottom: 10px;">
+                                <div class="fonts fonts-10 semibold black" style="margin-top: 0;">
+                                    {{ dt.title }}
+                                </div>
+                                <div class="fonts fonts-9 grey" style="margin-top: 3px;">{{ dt.category }}</div>
+                                <div class="fonts fonts-10 semibold black" style="margin-top: 3px;">Rp {{ dt.price }}</div>
                             </div>
-                            <!-- <div>
-                                <AppLikeButton :productID.sync="dt.id" />
-                            </div> -->
-                            <router-link :to="{name: 'product', params: {id: dt.product_id}}">
-                                <button class="btn btn-small btn-main-reverse">
-                                    Detail <i class="icn fa fa-1x fa-arrow-right" />
-                                </button>
-                            </router-link>
+                            <div class="display-flex space-between">
+                                <div class="display-flex">
+                                    <div :class="dt.is_available ? 'card-capsule active' : 'card-capsule'" style="margin-top: 4px; margin-right: 10px;">{{ dt.available }}</div>
+                                </div>
+                                <router-link :to="{name: 'product', params: {id: dt.product_id}}">
+                                    <button class="btn btn-small btn-main-reverse">
+                                        Detail <i class="icn fa fa-1x fa-arrow-right" />
+                                    </button>
+                                </router-link>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </router-link>
         </div>
     </div>
 </template>
