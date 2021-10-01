@@ -75,10 +75,10 @@ export default {
             menus: [
                 {icon: 'fa fa-lw fa-qrcode', title: 'Scan QR Code', value: 0, route: 'customer-qr'},
                 {icon: 'fa fa-lg fa-store', title: 'Visit Shop', value: 0, route: 'customer-home'},
+                {icon: 'fa fa-lg fa-list-ol', title: 'Order History', value: 0, route: 'customer-order'},
                 {icon: 'fa fa-lg fa-shopping-cart', title: 'Carts', value: 0, route: 'customer-chart'},
                 {icon: 'fa fa-lg fa-heart', title: 'Wishelists', value: 0, route: 'customer-whiselist'},
-                {icon: 'fa fa-lg fa-list-ol', title: 'Order History', value: 0, route: 'customer-order'},
-                // {icon: 'fa fa-lg fa-star', title: 'Feedbacks', value: 0, route: 'customer-feedback'},
+                {icon: 'fa fa-lg fa-star', title: 'Feedbacks', value: 0, route: 'customer-feedback'},
             ],
             products: [],
             categories: [],

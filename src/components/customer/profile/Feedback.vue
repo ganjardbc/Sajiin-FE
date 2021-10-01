@@ -36,36 +36,37 @@
                 <div v-else>
                     <div v-if="datas.length > 0">
                         <div v-for="(dt, i) in datas" :key="i" class="card box-shadow" style="margin-top: 15px; margin-bottom: 15px; overflow: unset;">
-                            <div class="display-flex display-mobile space-between" style="padding-top: 5px; padding-bottom: 5px;">
-                                <div class="width width-10 width-mobile" style="margin-bottom: 20px;">
-                                    <div class="image image-50px image-circle">
-                                        <i v-if="!dt.image" class="post-middle-absolute fa fa-lg fa-user-circle" style="font-size: 22px; color: #999;" />
-                                        <img v-else :src="feedbackImageThumbnailUrl + dt.image" alt="" class="post-center">
+                            <div>
+                                <div class="display-flex space-between" style="padding-top: 5px;">
+                                    <div class="width width-10" style="margin-bottom: 20px;">
+                                        <div class="image image-50px image-circle">
+                                            <i v-if="!dt.image" class="post-middle-absolute fa fa-lg fa-user-circle" style="font-size: 22px; color: #999;" />
+                                            <img v-else :src="feedbackImageThumbnailUrl + dt.image" alt="" class="post-center">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="width width-90 width-mobile">
-                                    <div class="display-flex" style="margin-bottom: 5px;">
-                                        <div class="fonts fonts-12 semibold">{{ dt.name }}</div>
-                                        <div class="fa fa-1x fa-circle" style="color: #999; font-size: 5px; margin-left: 5px; margin-right: 5px; margin-top: 10px;"></div>
-                                        <div class="fonts fonts-12 grey">{{ dt.work }}</div>
+                                    <div class="width width-90 width-mobile">
+                                        <div style="padding-left: 10px;">
+                                            <div class="fonts fonts-12 semibold">{{ dt.name }}</div>
+                                            <div class="fonts fonts-12 grey">{{ dt.created_at | moment("from", "now") }}</div>
+                                        </div>
                                     </div>
-                                    <div class="fonts fonts-12 grey">"{{ dt.feedback }}"</div>
-                                </div>
-                                <div style="position: absolute; top: 15px; right: 10px;">
-                                    <!-- <div class="card-capsule active" style="margin-left: 15px; text-transform: capitalize;">{{ dt.status }}</div> -->
-                                    <div class="display-flex space-between">
-                                        <div></div>
-                                        <div 
-                                            :class="'card-capsule ' + (
-                                            dt.status === 'active' 
-                                                ? 'active' 
-                                                : ''
-                                            )" 
-                                            style="margin-left: 15px; text-transform: capitalize;">
-                                            {{ dt.status }}
+                                    <div style="position: absolute; top: 15px; right: 10px;">
+                                        <!-- <div class="card-capsule active" style="margin-left: 15px; text-transform: capitalize;">{{ dt.status }}</div> -->
+                                        <div class="display-flex space-between">
+                                            <div></div>
+                                            <div 
+                                                :class="'card-capsule ' + (
+                                                dt.status === 'active' 
+                                                    ? 'active' 
+                                                    : ''
+                                                )" 
+                                                style="margin-left: 15px; text-transform: capitalize;">
+                                                {{ dt.status }}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="fonts fonts-12 grey">"{{ dt.feedback }}"</div>
                             </div>
                             <!-- <div class="display-flex space-between" style="padding-top: 15px;">
                                 <div></div>

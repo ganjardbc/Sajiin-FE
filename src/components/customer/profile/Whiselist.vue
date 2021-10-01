@@ -25,7 +25,7 @@
             </div>
         </AppMobileLayout>
 
-        <AppCardSmallCart />
+        <!-- <AppCardSmallCart /> -->
     </div>
 </template>
 <script>
