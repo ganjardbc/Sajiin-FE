@@ -21,7 +21,7 @@ export default {
         }
     },
     mounted () {
-        // this.getLocalCartCount()
+        this.getLocalCartCount()
     },
     computed: {
         ...mapGetters({
