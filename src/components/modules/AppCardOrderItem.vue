@@ -58,6 +58,7 @@ export default {
     },
     watch: {
         data (props) {
+            console.log('appcardorderitem', props)
             if (props) {
                 this.datas = props
             } else {

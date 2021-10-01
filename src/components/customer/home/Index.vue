@@ -121,6 +121,8 @@
                         <AppCardPostGrid :data="products" :isMobileCard="true" />
                         <AppLoader v-if="visibleLoader" style="margin-top: 10px;" />
                     </div>
+
+                    <div style="padding-bottom: 45px;"></div>
                 </div>
             </div>
         </AppMobileLayout>
@@ -132,6 +134,8 @@
             :subtitle="'It will remove your Carts and Wishelists.'"
             :onClose="onShowHideExit" 
             :onSave="exitShop" />
+        
+        <AppCardSmallCart />
     </div>
 </template>
 <script>
@@ -147,6 +151,7 @@ import AppLoader from '../../modules/AppLoader'
 import AppButtonTable from '../../modules/AppButtonTable'
 import AppAlert from '../../modules/AppAlert'
 import AppMobileLayout from '../../modules/AppMobileLayout'
+import AppCardSmallCart from '../../modules/AppCardSmallCart'
 
 export default {
     name: 'App',
@@ -176,10 +181,9 @@ export default {
         // this.getArticle()
         this.getCategory(5, 0)
         this.getProduct(this.limit, this.offset)
-
-        console.log('selectedShop', this.selectedShop)
     },
     components: {
+        AppCardSmallCart,
         AppAlert,
         AppButtonTable,
         AppLoader,

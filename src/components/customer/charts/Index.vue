@@ -1,10 +1,10 @@
 <template>
     <div id="product">
-        <AppMobileLayout :title="'Carts'">
+        <AppMobileLayout :title="`Carts (${datas ? datas.length : '0'})`">
             <div style="padding: 10px 0; width: 100%; overflow: unset;">
                 <div class="width width-100">
                     <div class="width width-100 width-mobile">
-                        <div style="width: 100%; margin-bottom: 80px;">
+                        <div style="width: 100%; margin-bottom: 85px;">
                             <div class="display-flex space-between border-bottom" style="padding-bottom: 5px; margin-bottom: 10px;">
                                 <div class="display-flex" style="padding-top: 6px;">
                                     <div style="margin-right: 10px;">
@@ -123,36 +123,6 @@ const payloadItem = {
     status: "waiting"
 }
 
-const payloadOrder = {
-    order: {
-        id: '',
-        order_id: '',
-        delivery_fee: 0,
-        total_price: 0,
-        total_item: 0,
-        bills_price: 0,
-        change_price: 0,
-        payment_status: 0,
-        proof_of_payment: '',
-        status: 'unconfirmed',
-        type: 'personal',
-        note: '',
-        customer_name: '',
-        shop_name: '',
-        table_name: '',
-        payment_name: '',
-        shop_id: '',
-        customer_id: '',
-        table_id: '',
-        payment_id: ''
-    },
-    details: null,
-    customer: null,
-    table: null,
-    payment: null,
-    shop: null
-}
-
 export default {
     name: 'product',
     data () {
@@ -178,7 +148,8 @@ export default {
             dataUser: null,
             dataShop: null,
             selectedCustomer: null,
-            selectedTable: null
+            selectedTable: null,
+            limitOrders: 4
         }
     },
     mounted () {
@@ -187,6 +158,8 @@ export default {
         this.dataUser = this.$cookies.get('user')
         this.dataShop = this.$cookies.get('shop')
         this.getData(this.limit, this.offset)
+
+        console.log('orderitem', this.$cookies.get('orderItem'))
     },
     components: {
         AppShowHide,
@@ -228,7 +201,8 @@ export default {
         },
         onChangeAll (status) {
             let newPayload = []
-            this.datas = this.datas && this.datas.map((dt) => {
+            this.datas = this.datas && this.datas.map((dt, i) => {
+                let stt = false 
                 if (status) {
                     const payload = {
                         ...payloadItem,
@@ -250,7 +224,9 @@ export default {
                     }
                     newPayload.push(payload)
                 }
-                const stt = status
+                if (i < this.limitOrders) {
+                    stt = status
+                }
                 return {...dt, disableButton: stt}
             })
             this.dataItems = newPayload
@@ -292,14 +268,14 @@ export default {
                 this.dataItems = payload
             }
 
-            this.visibleDeleteButton = this.dataItems.length > 0 ? true : false
-            
+            this.visibleDeleteButton = this.dataItems.length > 0 ? true : false  
+
             this.datas = this.datas && this.datas.map((dt) => {
                 const stt = dt.cart_id === data.cart_id 
-                                ? status 
-                                : dt.disableButton 
-                                    ? true 
-                                    : false 
+                            ? status 
+                            : dt.disableButton 
+                                ? true 
+                                : false 
                 return {...dt, disableButton: stt}
             })
 
@@ -314,7 +290,7 @@ export default {
 
             this.setCart(data)
             this.$cookies.set('orderItem', JSON.stringify(data))
-            this.$router.push({ name: 'order' })
+            this.$router.replace({ name: 'order' })
 
             this.makeToast('Order Saved to Draft')
         },
@@ -439,7 +415,8 @@ export default {
                     data && data.map((dt) => {
                         return carts.push({
                             ...dt,
-                            disableButton: false
+                            disableButton: false,
+                            disableSelect: false
                         })
                     })
 

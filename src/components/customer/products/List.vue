@@ -32,8 +32,12 @@
                         Load More
                     </button>
                 </div>
+
+                <div style="padding-bottom: 45px;"></div>
             </div>
         </AppMobileLayout>
+
+        <AppCardSmallCart />
     </div>
 </template>
 
@@ -47,6 +51,7 @@ import AppCardGrid from '../../modules/AppCardGrid'
 import AppCardList from '../../modules/AppCardList'
 import AppLoader from '../../modules/AppLoader'
 import AppMobileLayout from '../../modules/AppMobileLayout'
+import AppCardSmallCart from '../../modules/AppCardSmallCart'
 
 export default {
     name: 'ProductList',
@@ -63,6 +68,7 @@ export default {
         }
     },
     components: {
+        AppCardSmallCart,
         AppMobileLayout,
         AppLoader,
         AppCardPostGrid,

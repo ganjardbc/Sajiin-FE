@@ -160,7 +160,7 @@
                         </div>
                     </div>
 
-                    <div style="padding-bottom: 15px;"></div>
+                    <div style="padding-bottom: 65px;"></div>
 
                     <!-- <div class="width width-100">
                         <div class="width width-100 width-mobile">
@@ -209,6 +209,8 @@
                 </div>
             </div>
         </AppMobileLayout>
+
+        <AppCardSmallCart />
     </div>
 </template>
 
@@ -223,6 +225,7 @@ import AddQtyField from '../../modules/AddQtyField'
 import AppLikeButton from '../../modules/AppLikeButton'
 import AppShowHide from '../../modules/AppShowHide'
 import AppMobileLayout from '../../modules/AppMobileLayout'
+import AppCardSmallCart from '../../modules/AppCardSmallCart'
 
 const cartPayload = {
     id: '',
@@ -268,6 +271,7 @@ export default {
         }
     },
     components: {
+        AppCardSmallCart,
         AppMobileLayout,
         AppShowHide,
         AppLikeButton,

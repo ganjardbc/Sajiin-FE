@@ -23,10 +23,11 @@
             </div>
         </div>
         <div id="body">
+            <router-view />
+            
             <keep-alive>
-                <router-view />
+                <router-view name="customerKeepAlive" />
             </keep-alive>
-            <router-view name="customerfresh" />
         </div>
         <AppToast />
     </div>
@@ -118,8 +119,8 @@ export default {
         const token = this.$cookies.get('token')
         console.log('token', token)
 
-        this.getLocalCartCount()
-        this.getLocalOrderCount()
+        // this.getLocalCartCount()
+        // this.getLocalOrderCount()
         // this.getDataTable()
     },
     components: {

@@ -414,46 +414,34 @@ export const routes = [
             {
                 name: 'customer-home',
                 path: 'home',
-                components: {
-                    customerfresh: CustomerHome
-                }
+                component: CustomerHome
             },
             {
                 name: 'customer-main',
                 path: 'main',
-                components: {
-                    customerfresh: CustomerMain
-                }
+                component: CustomerMain
             },
             {
                 name: 'customer-table',
                 path: 'tables',
-                components: {
-                    customerfresh: CustomerTable
-                }
+                component: CustomerTable
             },
             {
                 name: 'customer-payment',
                 path: 'payments',
-                components: {
-                    customerfresh: CustomerPayment
-                }
+                component: CustomerPayment
             },
 
             // product
             {
                 name: 'product',
                 path: 'product/:id',
-                components: {
-                    customerfresh: CustomerProduct
-                }
+                component: CustomerProduct
             },
             {
                 name: 'product-list',
                 path: 'product-list',
-                components: {
-                    customerfresh: CustomerProductList
-                }
+                component: CustomerProductList
             },
 
             // notification
@@ -467,9 +455,7 @@ export const routes = [
             {
                 name: 'customer-chart',
                 path: 'carts',
-                components: {
-                    customerfresh: CustomerChart
-                }
+                component: CustomerChart
             },
 
             // orders
@@ -481,9 +467,7 @@ export const routes = [
             {
                 name: 'order-detail', 
                 path: 'order-detail/:id',
-                components: {
-                    customerfresh: CustomerDetail
-                }
+                component: CustomerDetail
             },
             {
                 name: 'tracking',
@@ -506,9 +490,7 @@ export const routes = [
             {
                 name: 'customer-order-list',
                 path: 'order-list',
-                components: {
-                    customerfresh: CustomerOrderList
-                }
+                component: CustomerOrderList
             },
 
             {
@@ -538,9 +520,7 @@ export const routes = [
             {
                 path: 'customer-qr',
                 name: 'customer-qr',
-                components: {
-                    customerfresh: CustomerQR
-                }
+                component: CustomerQR
             }
         ]
     }

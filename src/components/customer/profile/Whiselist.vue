@@ -20,8 +20,12 @@
                         </button>
                     </div>
                 </div>
+
+                <div style="padding-bottom: 45px;"></div>
             </div>
         </AppMobileLayout>
+
+        <AppCardSmallCart />
     </div>
 </template>
 <script>
@@ -32,6 +36,7 @@ import SearchField from '../../modules/SearchField'
 import AppButtonMenu from '../../modules/AppButtonMenu'
 import AppEmpty from '../../modules/AppEmpty'
 import AppMobileLayout from '../../modules/AppMobileLayout'
+import AppCardSmallCart from '../../modules/AppCardSmallCart'
 
 export default {
     name: 'App',
@@ -54,6 +59,7 @@ export default {
         this.getProduct(this.limit, this.offset)
     },
     components: {
+        AppCardSmallCart,
         SearchField,
         AppMobileLayout,
         AppEmpty,

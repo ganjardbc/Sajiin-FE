@@ -1,11 +1,11 @@
 <template>
     <div id="App">
         <div class="main-screen">
-            <div style="padding-bottom: 20px;">
+            <div style="padding-bottom: 10px;">
                 <CardProfile />
             </div>
 
-            <div v-if="menus" class="display-flex wrap" style="padding-bottom: 30px;">
+            <div v-if="menus" class="display-flex wrap" style="padding-bottom: 60px;">
                 <div v-for="(dt, i) in menus" :key="i" class="width width-row-3 width-mobile-row-2">
                     <div style="margin: 7.5px;">
                         <router-link :to="{name: dt.route ? dt.route : '404WEB'}">
@@ -32,6 +32,8 @@
             :subtitle="'It will remove your Carts and Wishelists.'"
             :onClose="onShowHideExit" 
             :onSave="exitShop" />
+        
+        <AppCardSmallCart />
     </div>
 </template>
 
@@ -47,6 +49,7 @@ import AppCardList from '../modules/AppCardList'
 import AppLoader from '../modules/AppLoader'
 import AppButtonTable from '../modules/AppButtonTable'
 import AppAlert from '../modules/AppAlert'
+import AppCardSmallCart from '../modules/AppCardSmallCart'
 import CardProfile from './profile/CardProfile'
 
 const infos = [
@@ -75,7 +78,7 @@ export default {
                 {icon: 'fa fa-lg fa-shopping-cart', title: 'Carts', value: 0, route: 'customer-chart'},
                 {icon: 'fa fa-lg fa-heart', title: 'Wishelists', value: 0, route: 'customer-whiselist'},
                 {icon: 'fa fa-lg fa-list-ol', title: 'Order History', value: 0, route: 'customer-order'},
-                {icon: 'fa fa-lg fa-star', title: 'Feedbacks', value: 0, route: 'customer-feedback'},
+                // {icon: 'fa fa-lg fa-star', title: 'Feedbacks', value: 0, route: 'customer-feedback'},
             ],
             products: [],
             categories: [],
@@ -96,6 +99,7 @@ export default {
     },
     components: {
         CardProfile,
+        AppCardSmallCart,
         AppAlert,
         AppButtonTable,
         AppLoader,

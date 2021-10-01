@@ -3,6 +3,7 @@
         <div v-for="(dt, index) in datas" :key="index" class="display-flex border-bottom" style="padding-top: 10px; padding-bottom: 10px;">
             <div style="margin-right: 10px;">
                 <AppButtonChecklist 
+                    :disabled="dt.disableSelect"
                     :checked="dt.disableButton"
                     :onChange="(status) => onChangeList(status, dt)" 
                 />

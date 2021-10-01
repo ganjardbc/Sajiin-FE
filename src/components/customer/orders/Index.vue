@@ -412,7 +412,7 @@ export default {
             this.$cookies.remove('orderItem')
             this.$cookies.remove('orderTable')
             this.$cookies.remove('orderPayment')
-            this.$router.push({ name: 'customer-main' })
+            this.$router.replace({ name: 'customer-main' })
         },
         async onSaveOrder () {
             this.visibleLoaderSave = true
@@ -439,7 +439,7 @@ export default {
                 this.$cookies.remove('orderItem')
                 this.$cookies.remove('orderTable')
                 this.$cookies.remove('orderPayment')
-                this.$router.push({ name: 'customer-order-list' })
+                this.$router.replace({ name: 'customer-order' })
             } else {
                 this.visibleAlertSave = false
                 this.onShowHideSave()

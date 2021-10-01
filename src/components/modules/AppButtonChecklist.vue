@@ -1,10 +1,14 @@
 <template>
     <div id="AppButtonChecklist">
         <button 
+            v-if="!disabled"
             :class="'btn btn-small-icon ' + (isChecked ? 'btn-main' : 'btn-sekunder')" 
             style="width: 22px; height: 22px; padding: 0; border-radius: 100%;"
             @click="onChecked">
             <i :class="'post-center ' + (isChecked ? 'fa fa-lw fa-check' : '')"></i>
+        </button>
+        <button v-else class="btn btn-small-icon btn-primary" style="width: 22px; height: 22px; padding: 0; border-radius: 100%; cursor: default;">
+            <i class="post-center fa fa-lw fa-minus"></i>
         </button>
     </div>
 </template>
@@ -23,6 +27,10 @@ export default {
         },
         onChange: {
             type: Function,
+            required: false
+        },
+        disabled: {
+            type: Boolean,
             required: false
         }
     },
