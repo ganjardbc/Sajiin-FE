@@ -1,5 +1,5 @@
 <template>
-    <div id="Login" class="main-screen" style="padding-top: 50px;">
+    <div id="Login" class="post-top">
         <div class="card card-login border-full border-radius" style="margin: auto;">
             <form action="#" @submit.prevent="submit" style="width: 100%;">
                 <div class="image image-all" style="
@@ -130,6 +130,18 @@ export default {
             // console.log('rest', rest)
         }
     },
+
+    beforeCreate: function () {
+        if (this.$cookies.get('token')) 
+        {
+            const user = this.$cookies.get('user')
+            if (user.role_name === 'customer') {
+                this.$router.replace({ name: 'customer-main' })
+            } else {
+                this.$router.replace({ name: 'dashboard' })
+            }
+        }
+    }
 }
 
 </script>

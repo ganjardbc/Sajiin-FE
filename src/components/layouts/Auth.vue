@@ -1,0 +1,7 @@
+<template>
+    <div id="Auth" class="display-popup bg-white">
+        <keep-alive>
+            <router-view />
+        </keep-alive>
+    </div>
+</template>
