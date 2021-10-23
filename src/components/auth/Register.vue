@@ -1,7 +1,17 @@
 <template>
-    <div id="register" class="post-top">
-        <div class="card card-login border-full border-radius" style="margin: auto;">
+    <div id="register" class="post-top" style="padding-left: 10px; padding-right: 10px;">
+        <div class="card card-login border-radius box-shadow bg-white" style="margin: auto;">
             <form action="#" @submit.prevent="submit" style="width: 100%;">
+                <div class="image image-all" style="
+                    width: 200px;
+                    padding-bottom: 30%;
+                    margin: auto;
+                    margin-bottom: 30px;
+                    background-color: rgba(0,0,0,0)
+                ">
+                    <img :src="logo" alt="HNF" class="post-center" style="width: 100%;">
+                </div>
+
                 <div class="display-flex space-between" style="margin-bottom: 20px;">
                     <h3 style="margin-top: 8px;">Register</h3>
                     <router-link :to="{name: 'login'}" class="btn btn-main-reverse" style="padding-left: 0; padding-right: 0">
@@ -41,9 +51,8 @@
 </template>
 
 <script>
-import axios from 'axios'
 import { mapActions } from 'vuex'
-import logo from '@/assets/img/icon.png'
+import logo from '@/assets/img/logo.png'
 import AppWrapper from '../modules/AppWrapper'
 import AppButton from '../modules/AppButton'
 import AppForm from '../modules/AppForm'

@@ -1,5 +1,5 @@
 <template>
-    <div id="Auth" class="display-popup bg-white">
+    <div id="Auth" class="display-popup-normal bg-white">
         <keep-alive>
             <router-view />
         </keep-alive>

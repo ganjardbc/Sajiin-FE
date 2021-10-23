@@ -1,6 +1,6 @@
 <template>
-    <div id="Login" class="post-top">
-        <div class="card card-login border-full border-radius" style="margin: auto;">
+    <div id="Login" class="post-top" style="padding-left: 10px; padding-right: 10px;">
+        <div class="card card-login border-radius box-shadow bg-white" style="margin: auto;">
             <form action="#" @submit.prevent="submit" style="width: 100%;">
                 <div class="image image-all" style="
                     width: 200px;
@@ -38,9 +38,9 @@
                 </div>
                 
                 <div style="margin-bottom: 10px;" type="center">
-                    <router-link :to="{name: 'register'}" class="btn btn-white" style="padding-left: 0; padding-right: 0">
+                    <button class="btn btn-white" style="width: 100%;" type="button">
                         Forgot Password
-                    </router-link>
+                    </button>
                 </div>
             </form>
         </div>
@@ -48,7 +48,6 @@
 </template>
 
 <script>
-// import axios from 'axios'
 import { mapActions } from 'vuex'
 import logo from '@/assets/img/logo.png'
 import AppWrapper from '../modules/AppWrapper'
