@@ -281,9 +281,6 @@ export default {
         this.onChangeOnlyShop(this.dataShop)
         this.onChangeOnlyPayment(this.selectedPayment)
         this.onChangeOnlyTable(this.selectedTable)
-
-        // console.log('formPayload', this.formPayload)
-        // console.log('selectedTable', this.selectedTable)
     },
     components: {
         FormPayment,

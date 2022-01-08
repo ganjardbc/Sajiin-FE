@@ -12,6 +12,27 @@ let payload = {
     unconfirmed: 0
 }
 
+let defaultPayload = {
+    id: 0,
+    toping_price: 0,
+    price: 0,
+    discount: 0,
+    quantity: 0,
+    subtotal: 0,
+    product_image: "",
+    product_name: "",
+    product_detail: "",
+    product_toping: "",
+    promo_code: null,
+    order_id: 0,
+    product_id: 0,
+    proddetail_id: 0,
+    toping_id: 0,
+    shop_id: 0,
+    assigned_id: 0,
+    status: "waiting"
+}
+
 export default {
     namespaced: true,
 
@@ -19,7 +40,9 @@ export default {
         count: 0,
         countCustomer: 0,
         all: {...payload},
-        allCustomer: {...payload}
+        allCustomer: {...payload},
+        order: {...defaultPayload},
+        orderList: [],
     },
 
     getters: {
@@ -34,6 +57,12 @@ export default {
         },
         allCustomer (state) {
             return state.allCustomer
+        },
+        order (state) {
+            return state.order
+        },
+        orderList (state) {
+            return state.orderList
         }
     },
 
@@ -49,10 +78,22 @@ export default {
         },
         SET_ALL_CUSTOMER (state, value) {
             state.allCustomer = value
+        },
+        SET_ORDER (state, value) {
+            state.order = value 
+        },
+        SET_ORDER_LIST (state, value) {
+            state.orderList = value
         }
     },
 
     actions: {
+        setOrder ({ commit }, data) {
+            commit('SET_ORDER', data)
+        },
+        setOrderList ({ commit }, data) {
+            commit('SET_ORDER_LIST', data)
+        },
         async getCountCustomer ({ commit }, token = '') {
             const customerData = $cookies.get('user')
             const payload = {

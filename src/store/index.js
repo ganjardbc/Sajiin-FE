@@ -8,6 +8,7 @@ import wishelist from './wishelist'
 import customer from './customer'
 import table from './table'
 import store from './store'
+import visitor from './visitor'
 import toastmessage from './toastmessage'
 import notification from './notification'
 
@@ -23,6 +24,7 @@ export default new Vuex.Store({
     customer,
     table,
     store,
+    visitor,
     toastmessage,
     notification
   }

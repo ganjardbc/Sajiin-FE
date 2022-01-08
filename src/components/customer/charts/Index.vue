@@ -177,7 +177,7 @@ export default {
         ...mapActions({
             setToast: 'toast/setToast',
             getCount: 'cart/getCountCustomer',
-            setCart: 'cart/setData'
+            setCart: 'cart/setData',
         }),
         onTotal (data) {
             let qty = 0

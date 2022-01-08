@@ -5,6 +5,30 @@ let payload = {
     allAdmin: 0
 }
 
+let defaultCart = {
+    id: '',
+    cart_id: '',
+    toping_price: 0,
+    price: 0,
+    discount: 0,
+    quantity: 0,
+    subtotal: 0,
+    product_image: "",
+    product_name: "",
+    product_detail: "",
+    product_toping: "",
+    promo_code: null,
+    owner_id: null,
+    product_id: null,
+    proddetail_id: null,
+    toping_id: null,
+    shop_id: null,
+    assigned_id: null,
+    status: "waiting",
+    disableButton: false,
+    disableSelect: false
+}
+
 export default {
     namespaced: true,
 
@@ -12,6 +36,8 @@ export default {
         count: 0,
         countCustomer: 0,
         data: null,
+        cart: {...defaultCart},
+        cartList: [],
         all: {...payload}
     },
 
@@ -27,6 +53,12 @@ export default {
         },
         all (state) {
             return state.all
+        },
+        cart (state) {
+            return state.cart
+        },
+        cartList (state) {
+            return state.cartList
         }
     },
 
@@ -42,12 +74,30 @@ export default {
         },
         SET_ALL (state, value) {
             state.all = value
+        },
+        SET_CART_LIST (state, value) {
+            state.cartList.push(value)
+        },
+        REPLACE_CART_LIST (state, value) {
+            state.cartList = value
+        },
+        RESET_CART_LIST (state) {
+            state.cartList = []
         }
     },
 
     actions: {
         async setData ({ commit }, data = null) {
             commit('SET_DATA', data)
+        },
+        async setCartList ({ commit }, data) {
+            commit('SET_CART_LIST', data)
+        },
+        async replaceCartList ({ commit }, data) {
+            commit('REPLACE_CART_LIST', data)
+        },
+        async resetCartList ({ commit }) {
+            commit('RESET_CART_LIST')
         },
         async getCountCustomer ({ commit }, token = '') {
             const customerData = $cookies.get('user')

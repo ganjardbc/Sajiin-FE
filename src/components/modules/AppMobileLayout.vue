@@ -6,12 +6,15 @@
                     <button class="btn btn-icon btn-white" @click="onBack">
                         <i class="fa fa-lg fa-arrow-left"></i>
                     </button>
-                    <div style="margin-left: 10px;">
+                    <div style="margin-left: 10px; margin-right: 10px;">
                         <div class="post-top">
                             <div class="fonts fonts-12 semibold black">
                                 {{ title ? title : 'Title' }}
                             </div>
                         </div>
+                    </div>
+                    <div style="position: absolute; right: 10px;">
+                        <slot name="right-button" />
                     </div>
                 </div>
             </div>
@@ -28,7 +31,7 @@ export default {
         title: {
             type: String,
             required: false
-        }
+        },
     },
     methods: {
         onBack () {
