@@ -22,7 +22,15 @@
                                 style="margin-top: 15px;"
                                 :buttonClass="'btn btn-sekunder btn-full'"
                                 :code="formData.code"
-                                title="Show QR" 
+                                title="Show QR Customer" 
+                            />
+
+                            <AppButtonQR 
+                                v-if="dataUser && dataUser.role_name !== 'customer'"
+                                style="margin-top: 15px;"
+                                :buttonClass="'btn btn-sekunder btn-full'"
+                                :code="formData.codeVisitor"
+                                title="Show QR Visitor" 
                             />
                         </div>
                     </div>
@@ -654,7 +662,8 @@ export default {
                         close_time: selectShop.shop.close_time,
                         status: selectShop.shop.status,
                         is_available: selectShop.shop.is_available,
-                        code: selectShop.code
+                        code: selectShop.code,
+                        codeVisitor: `${this.initUrl}/visit-shop/${selectShop.code}`,
                     } : {
                         ...payload
                     }

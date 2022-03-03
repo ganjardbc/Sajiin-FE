@@ -130,17 +130,17 @@ export default {
         }
     },
 
-    // beforeCreate: function () {
-    //     if (this.$cookies.get('token')) 
-    //     {
-    //         const user = this.$cookies.get('user')
-    //         if (user.role_name === 'customer') {
-    //             this.$router.replace({ name: 'customer-main' })
-    //         } else {
-    //             this.$router.replace({ name: 'dashboard' })
-    //         }
-    //     }
-    // }
+    beforeCreate: function () {
+        if (this.$cookies.get('token')) 
+        {
+            const user = this.$cookies.get('user')
+            if (user.role_name === 'customer') {
+                this.$router.replace({ name: 'customer-main' })
+            } else {
+                this.$router.replace({ name: 'dashboard' })
+            }
+        }
+    }
 }
 
 </script>
