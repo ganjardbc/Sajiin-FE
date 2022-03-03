@@ -663,7 +663,7 @@ export default {
                         status: selectShop.shop.status,
                         is_available: selectShop.shop.is_available,
                         code: selectShop.code,
-                        codeVisitor: `${this.initUrl}/visit-shop/${selectShop.code}`,
+                        codeVisitor: `${this.deployUrl}#/visit-shop/${selectShop.code}`,
                     } : {
                         ...payload
                     }
