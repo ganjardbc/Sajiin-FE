@@ -15,6 +15,7 @@ import SocketIo from 'socket.io-client';
 import VueQrcodeReader from "vue-qrcode-reader";
 import VueApexCharts from 'vue-apexcharts';
 import VueCarousel from 'vue-carousel';
+import VueSession from 'vue-session';
 import "./assets/sass/app.css";
 import "./assets/icons/fontawesome/css/all.min.css";
 import Vue from 'vue';
@@ -30,6 +31,7 @@ axios.defaults.baseURL = api;
 
 window.$ = jquery;
 
+Vue.use(VueSession);
 Vue.use(VueCarousel);
 Vue.use(VueApexCharts);
 Vue.use(require('vue-moment'));

@@ -167,7 +167,6 @@ export default {
         }
     },
     mounted () {
-        console.log('selectedShop', this.selectedShop)
         this.getCategory(5, 0)
         this.getProduct(this.limit, this.offset)
     },
@@ -192,13 +191,13 @@ export default {
             order: 'order/count'
         }),
         selectedShop() {
-            return this.$cookies.get('visitorShop')
+            return this.$session.get('visitorShop')
         },
         visitorTable() {
-            return this.$cookies.get('visitorTable')
+            return this.$session.get('visitorTable')
         },
         visitorCatalog() {
-            return this.$cookies.get('visitorCatalog')
+            return this.$session.get('visitorCatalog')
         }
     },
     methods: {
@@ -213,10 +212,6 @@ export default {
                 title: title
             }
             this.setToast(payload)
-        },
-        getLocalCartCount () {
-            const token = 'Bearer '.concat(this.$cookies.get('token'))
-            this.getCount(token)
         },
         onShowHideExit () {
             this.visibleAlertExit = !this.visibleAlertExit

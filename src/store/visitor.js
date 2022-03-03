@@ -28,7 +28,6 @@ export default {
 
     actions: {
         async setData ({commit}, data = '') {
-            $cookies.set('shop', data)
             commit('SET_SELECTED', data)
         },
         async getShop ({commit}, payload) {
@@ -37,9 +36,6 @@ export default {
             .then((res) => {
                 if (res && res.status === 200) {
                     const data = res.data.data
-                    $cookies.set('visitorShop', data.shop)
-                    $cookies.set('visitorTable', data.tables)
-                    $cookies.set('visitorCatalog', data.catalogs)
                     commit('SET_DATA', data)
                 } else {
                     commit('SET_DATA', null)

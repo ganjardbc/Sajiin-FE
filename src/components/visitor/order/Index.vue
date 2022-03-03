@@ -246,12 +246,12 @@ export default {
         }
     },
     mounted() {
-        const orderItem = this.$cookies.get('orderItem')
+        const orderItem = this.$session.get('orderItem')
 
         this.data = JSON.parse(orderItem)
-        this.dataShop = this.$cookies.get('visitorShop')
-        this.selectedTable = this.$cookies.get('orderTable')
-        this.selectedPayment = this.$cookies.get('orderPayment')
+        this.dataShop = this.$session.get('visitorShop')
+        this.selectedTable = this.$session.get('orderTable')
+        this.selectedPayment = this.$session.get('orderPayment')
         this.formPayload = {
             ...payloadOrder,
             details: this.data
@@ -379,9 +379,9 @@ export default {
         },
         onCancelOrder () {
             this.makeToast('Order Canceled')
-            this.$cookies.remove('orderItem')
-            this.$cookies.remove('orderTable')
-            this.$cookies.remove('orderPayment')
+            this.$session.remove('orderItem')
+            this.$session.remove('orderTable')
+            this.$session.remove('orderPayment')
             this.$router.replace({ name: 'customer-main' })
         },
         async onSaveOrder () {
@@ -404,9 +404,10 @@ export default {
                 this.makeToast('Your Order Created')
                 this.sendSocketOrder(data.order.order_id)
                 this.resetCartList()
-                this.$cookies.remove('orderItem')
-                this.$cookies.remove('orderTable')
-                this.$cookies.remove('orderPayment')
+                this.$session.remove('orderItem')
+                this.$session.remove('orderTable')
+                this.$session.remove('orderPayment')
+                this.$session.remove('cartList')
                 this.$router.replace({ name: 'visitor-shop' })
             } else {
                 this.visibleAlertSave = false

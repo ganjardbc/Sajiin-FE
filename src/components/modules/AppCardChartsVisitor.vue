@@ -1,5 +1,5 @@
 <template>
-    <div id="AppCardCharts">
+    <div id="AppCardChartsVisitor">
         <div v-for="(dt, index) in datas" :key="index" class="display-flex border-bottom" style="padding-top: 10px; padding-bottom: 10px;">
             <div style="margin-right: 10px;">
                 <AppButtonChecklist 
@@ -78,7 +78,7 @@ import AddQtyField from './AddQtyField'
 import AppLikeButton from './AppLikeButton'
 
 export default {
-    name: 'AppCardCharts',
+    name: 'AppCardChartsVisitor',
     data () {
         return {
             icon: '',
@@ -140,6 +140,7 @@ export default {
     },
     watch: {
         data (props) {
+            console.log('data', props)
             if (props) {
                 this.datas = props && props.map((dt) => {
                     return {

@@ -3,7 +3,7 @@
         <AppMobileLayout :title="'Carts'">
             <div class="width width-100">
                 <div style="width: 100%; margin-bottom: 100px;">
-                    <div v-if="cartList.length > 0">
+                    <div v-if="cartList && cartList.length > 0">
                         <div class="display-flex space-between border-bottom" style="padding-bottom: 5px; margin-bottom: 10px;">
                             <div class="display-flex" style="padding-top: 6px;">
                                 <div style="margin-right: 10px;">
@@ -72,6 +72,7 @@ export default {
             totalProduct: 0,
             totalPPN: 0,
             dataShop: null,
+            // cartList: [],
             datas: [],
             dataItems: [],
             visibleButton: false,
@@ -79,7 +80,8 @@ export default {
         }
     },
     mounted() {
-        this.dataShop = this.$cookies.get('visitorShop')
+        this.dataShop = this.$session.get('visitorShop')
+        this.setCartList(this.$session.get('cartList'))
     },
     components: {
         AppMobileLayout,
@@ -96,7 +98,9 @@ export default {
             orderList: 'order/orderList'
         }),
         cartList() {
-            return this.carts
+            // console.log('cartList', this.$session.get('cartList'))
+            // return this.$session.get('cartList')
+            return this.carts 
         }
     },
     methods: {
@@ -105,6 +109,10 @@ export default {
             setOrder: 'order/setOrder',
             setOrderList: 'order/setOrderList',
         }),
+        setCartList(data) {
+            this.$session.set('cartList', data)
+            this.replaceCartList(data)
+        },
         onTotal(data) {
             let qty = 0
             let price = 0
@@ -128,7 +136,7 @@ export default {
         onChangeAll(status) {
             let newPayload = []
             let prevPayload = this.cartList && this.cartList.map((dt, i) => {
-                let stt = false 
+                let stt = status   
                 if (status) {
                     const payload = {
                         ...this.cart,
@@ -150,14 +158,11 @@ export default {
                     }
                     newPayload.push(payload)
                 }
-                if (i < this.limitOrders) {
-                    stt = status
-                }
                 return {...dt, disableButton: stt}
             })
             this.dataItems = newPayload
             this.visibleDeleteButton = status
-            this.replaceCartList(prevPayload)
+            this.setCartList(prevPayload)
             this.onTotal(this.dataItems)
         },
         onSave(data) {
@@ -170,7 +175,7 @@ export default {
                     subtotal: totalPrice,
                 }
             })
-            this.replaceCartList(prevPayload)
+            this.setCartList(prevPayload)
         },
         onShowHideDelete(data) {
             let payload = []
@@ -180,7 +185,7 @@ export default {
                 }
             })
             this.dataItems = payload
-            this.replaceCartList(payload)
+            this.setCartList(payload)
         },
         onChangeList (status, data) {
             if (status) {
@@ -224,12 +229,12 @@ export default {
                 return {...dt, disableButton: stt}
             })
 
-            this.replaceCartList(prevPayload)
+            this.setCartList(prevPayload)
             this.onTotal(this.dataItems)
         },
         makeOrder() {
             this.setOrderList(this.dataItems)
-            this.$cookies.set('orderItem', JSON.stringify(this.dataItems))
+            this.$session.set('orderItem', JSON.stringify(this.dataItems))
             this.$router.push({ name: 'visitor-create-order' })
         }
     }

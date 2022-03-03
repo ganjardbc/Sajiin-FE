@@ -83,11 +83,11 @@ export default {
         }
     },
     mounted () {
-        const orderPayment = this.$cookies.get('orderPayment')
+        const orderPayment = this.$session.get('orderPayment')
         this.formPayload = orderPayment ? orderPayment : null 
         this.selectedData = orderPayment ? orderPayment : null
         this.selectedID = this.selectedData ? this.selectedData.id : null 
-        this.dataShop = this.$cookies.get('visitorShop')
+        this.dataShop = this.$session.get('visitorShop')
         this.getData()
     },
     components: {
@@ -121,7 +121,7 @@ export default {
             this.formPayload = {
                 ...this.selectedData
             }
-            this.$cookies.set('orderPayment', JSON.stringify(this.formPayload))
+            this.$session.set('orderPayment', this.formPayload)
             this.onShowHideSave()
             this.makeToast('Payment Selected')
             this.$router.back()

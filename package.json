@@ -28,6 +28,7 @@
     "vue-qrcode": "^0.4.0",
     "vue-qrcode-reader": "^3.0.3",
     "vue-router": "^3.0.1",
+    "vue-session": "^1.0.0",
     "vue-socket.io": "^3.0.10",
     "vue-websocket": "^0.2.3",
     "vuejs-smart-table": "^0.0.7",

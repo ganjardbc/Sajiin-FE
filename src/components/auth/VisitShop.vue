@@ -42,6 +42,11 @@ export default {
             .then(() => {
                 const data = this.dataShop
                 if (data) {
+                    this.$session.set('shop', data)
+                    this.$session.set('visitorShop', data.shop)
+                    this.$session.set('visitorTable', data.tables)
+                    this.$session.set('visitorCatalog', data.catalogs)
+
                     this.visibleTitle = 'proceed success.'
                     this.$router.replace({ name: 'visitor-shop' })
 

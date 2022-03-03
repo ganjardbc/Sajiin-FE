@@ -84,11 +84,11 @@ export default {
         }
     },
     mounted () {
-        const orderTable = this.$cookies.get('orderTable')
+        const orderTable = this.$session.get('orderTable')
         this.formPayload = orderTable ? orderTable : null 
         this.selectedData = orderTable ? orderTable : null
         this.selectedID = this.selectedData ? this.selectedData.id : null 
-        this.dataShop = this.$cookies.get('visitorShop')
+        this.dataShop = this.$session.get('visitorShop')
         this.getData()
     },
     components: {
@@ -122,8 +122,8 @@ export default {
             this.formPayload = {
                 ...this.selectedData
             }
-            this.$cookies.set('orderTable', JSON.stringify(this.formPayload))
-            this.$cookies.set('table', this.selectedData)
+            this.$session.set('orderTable', this.formPayload)
+            this.$session.set('table', this.selectedData)
             this.onShowHideSave()
             this.makeToast('Table choosed')
             this.$router.back()

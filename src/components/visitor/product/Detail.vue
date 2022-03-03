@@ -4,7 +4,7 @@
             <template slot="right-button">
                 <router-link :to="{name: 'visitor-cart'}">
                     <button class="btn btn-main btn-radius-rounded" style="display: flex; align-items: center; margin-top: 3px;">
-                        <div class="fonts fonts-11 white semibold" style="line-height: 0;">Carts ({{ cartList.length || 0 }})</div>
+                        <div class="fonts fonts-11 white semibold" style="line-height: 0;">Carts ({{ cartList && cartList.length ? cartList.length : 0 }})</div>
                         <i class="icn icn-right fa fa-lg fa-shopping-cart"></i>
                     </button>
                 </router-link>
@@ -176,6 +176,9 @@ export default {
         }
     },
     mounted () {
+        const payload = this.$session.get('cartList')
+        this.$session.set('cartList', payload)
+        this.replaceCartList(payload)
         this.getProduct()
     },
     components: {
@@ -196,8 +199,12 @@ export default {
             table: 'table/selected',
             status: 'wishelist/status',
             cart: 'cart/cart',
-            cartList: 'cart/cartList'
+            carts: 'cart/cartList'
         }),
+        cartList() {
+            // return this.$session.get('cartList')
+            return this.carts
+        },
         selectedShop() {
             return this.$cookies.get('visitorShop')
         },
@@ -212,7 +219,7 @@ export default {
         ...mapActions({
             setToast: 'toast/setToast',
             getCount: 'cart/getCountCustomer',
-            setCartList: 'cart/setCartList',
+            replaceCartList: 'cart/replaceCartList',
         }),
         makeToast (title) {
             const payload = {
@@ -253,6 +260,21 @@ export default {
                 this.visibleButton = false 
             }
         },
+        setCartList (data) {
+            let payload = []
+            if (this.$session.get('cartList')) {
+                payload = [
+                    ...this.$session.get('cartList'),
+                    data
+                ]
+            } else {
+                payload = [
+                    data
+                ]
+            }
+            this.$session.set('cartList', payload)
+            this.replaceCartList(payload)
+        },
         addToCart () {
             if (this.visibleButton) {
                 const time = new Date().getTime()
@@ -283,6 +305,7 @@ export default {
                 }
 
                 this.setCartList(payload)
+                // this.$session.set('cartList', payload)
                 this.makeToast('Product added to cart')
 
             } else {
