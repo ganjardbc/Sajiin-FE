@@ -110,7 +110,7 @@ const sidebarAdmin = [
         {icon: 'fa fa-lg fa-laptop', label: 'Cashier', value: 0, link: 'cashier', permission: 'cashier'},
         {icon: 'fa fa-lg fa-receipt', label: 'Orders', value: 0, link: 'orderlist', permission: 'orders'},
         // {icon: 'fa fa-lg fa-clipboard', label: 'TaskLists', value: 0, link: 'tasklist', permission: 'tasklists'},
-        {icon: 'fa fa-lg fa-utensils', label: 'Products', value: 0, link: 'admin-product', permission: 'products'},
+        {icon: 'fa fa-lg fa-list-alt', label: 'Products', value: 0, link: 'admin-product', permission: 'products'},
         {icon: 'fa fa-lg fa-th-large', label: 'Tables', value: 0, link: 'table', permission: 'tables'},
         {icon: 'fa fa-lg fa-calculator', label: 'Payments', value: 0, link: 'payment', permission: 'payments'},
         // {icon: 'fa fa-lg fa-users', label: 'Employees', value: 0, link: 'admin-employee', permission: 'employees'}
