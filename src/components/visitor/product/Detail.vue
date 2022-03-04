@@ -206,13 +206,13 @@ export default {
             return this.carts
         },
         selectedShop() {
-            return this.$cookies.get('visitorShop')
+            return this.$session.get('visitorShop')
         },
         visitorTable() {
-            return this.$cookies.get('visitorTable')
+            return this.$session.get('visitorTable')
         },
         visitorCatalog() {
-            return this.$cookies.get('visitorCatalog')
+            return this.$session.get('visitorCatalog')
         }
     },
     methods: {
