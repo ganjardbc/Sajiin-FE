@@ -142,8 +142,9 @@
                                     </button>
                                 </div>
                                 <div class="width width-49">
+                                    <!-- selectedTable && selectedPayment &&  -->
                                     <button 
-                                        v-if="selectedTable && selectedPayment && cartList && dataShop && formPayload.order.note"
+                                        v-if="cartList && dataShop && formPayload.order.note"
                                         class="btn btn-main btn-full" 
                                         @click="onShowHideSave">
                                         Order Now
