@@ -81,14 +81,14 @@
                         </div>
                     </div>
 
-                    <div style="margin-bottom: 20px;">
+                    <!-- <div style="margin-bottom: 20px;">
                         <div style="margin-bottom: 0;">
                             <div class="fonts fonts-10 black semibold">Categories</div>
                         </div>
                         <div class="display-flex wrap">
                             <div v-for="(dt, i) in categories" :key="i" style="width: calc(100% / 3);">
                                 <div style="padding-right: 7.5px; padding-left: 7.5px; padding-top: 15px;">
-                                    <!-- <router-link :to="{name: 'product-list'}"> -->
+                                    <router-link :to="{name: 'product-list'}">
                                         <div class="card no-padding box-shadow">
                                             <div class="image image-half-padding" style="padding-bottom: 60%; border-radius: 0;">
                                                 <i v-if="!dt.image" class="post-middle-absolute fa fa-lg fa-image" style="font-size: 32px; color: #999;"></i>
@@ -100,12 +100,12 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    <!-- </router-link> -->
+                                    </router-link>
                                 </div>
                             </div>
                         </div>
                         <AppLoader v-if="visibleLoaderCategory" style="margin-top: 10px;" />
-                    </div>
+                    </div> -->
 
                     <div>
                         <div class="display-flex space-between">
@@ -167,7 +167,7 @@ export default {
         }
     },
     mounted () {
-        this.getCategory(5, 0)
+        // this.getCategory(5, 0)
         this.getProduct(this.limit, this.offset)
     },
     components: {
