@@ -4,7 +4,7 @@ import AuthLayout from '@/components/layouts/Auth.vue';
 import Login from '@/components/auth/Login.vue';
 // import Register from '@/components/auth/Register.vue';
 // import GenerateCustomer from '@/components/auth/GenerateCustomer.vue';
-// import VisitShop from '@/components/auth/VisitShop.vue';
+import VisitShop from '@/components/auth/VisitShop.vue';
 
 const routes = {
     path: '/',
@@ -30,11 +30,11 @@ const routes = {
         //     path: '/generate-customer/:token',
         //     component: GenerateCustomer
         // },
-        // {
-        //     name: 'visit-shop',
-        //     path: '/visit-shop/:idshop',
-        //     component: VisitShop
-        // }
+        {
+            name: 'visit-shop',
+            path: '/visit-shop/:idshop',
+            component: VisitShop
+        }
     ]
 }
 
