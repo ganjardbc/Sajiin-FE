@@ -1,7 +1,7 @@
 <template>
     <div id="Login" class="post-top" style="padding-left: 10px; padding-right: 10px;">
         <div class="card card-login border-radius box-shadow bg-white" style="margin: auto;">
-            <form action="#" @submit.prevent="submit" style="width: 100%;">
+            <form action="#" @submit.prevent="submit" style="width: 100%; padding: 15px 0;">
                 <div class="image image-all" style="
                     width: 200px;
                     padding-bottom: 30%;
@@ -37,11 +37,11 @@
                     </button>
                 </div>
                 
-                <div style="margin-bottom: 10px;" type="center">
+                <!-- <div style="margin-bottom: 10px;" type="center">
                     <button class="btn btn-white" style="width: 100%;" type="button">
                         Forgot Password
                     </button>
-                </div>
+                </div> -->
             </form>
         </div>
     </div>

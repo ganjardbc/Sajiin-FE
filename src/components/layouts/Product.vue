@@ -12,7 +12,7 @@
 import AppListDownMenu from '../modules/AppListDownMenu'
 
 const menus = [
-    {label: 'Products', icon: 'fa fa-lg fa-box', link: 'listing'},
+    {label: 'Products', icon: 'fa fa-lg fa-list-alt', link: 'listing'},
     {label: 'Toppings', icon: 'fa fa-lg fa-list-alt', link: 'toping'},
     {label: 'Categories', icon: 'fa fa-lg fa-list-alt', link: 'category'}
 ]

@@ -1,42 +1,39 @@
 <template>
     <div id="App">
-        <div style="padding: 15px 0;">
-            <!-- <AppLoader v-if="visibleLoaderCategory" /> -->
+        <!-- <div style="padding: 15px 0;">
             <div class="display-flex overflow-y" style="padding-left: 10px; padding-right: 10px;">
                 <div v-for="(dt, i) in dataCategories" :key="i">
                     <CardCategory :data="dt" :onClick="onClickCategory" />
                 </div>
             </div>
+        </div> -->
+
+        <div class="display-flex space-between" style="padding: 10px; padding-left: 15px; padding-right: 15px;">
+            <div>
+                <AppTabs 
+                    :selectedIndex="selectedTabIndex" 
+                    :path="'main-topic'"
+                    :data="tabs" 
+                    :isScrollable="false" 
+                    :onChange="(data) => onChangeTabs(data)" />
+            </div>
+            <button class="btn btn-icon btn-white" @click="refresh">
+                <i class="fa fa-lw fa-retweet"></i>
+            </button>
         </div>
 
-        <div>
-            <div class="display-flex space-between" style="padding: 10px; padding-left: 15px; padding-right: 15px;">
-                <div>
-                    <AppTabs 
-                        :selectedIndex="selectedTabIndex" 
-                        :path="'main-topic'"
-                        :data="tabs" 
-                        :isScrollable="false" 
-                        :onChange="(data) => onChangeTabs(data)" />
+        <div v-if="selectedTabIndex === 0">
+            <div class="display-flex wrap" style="padding-left: 5px; padding-right: 5px;">
+                <div v-for="(dt, i) in datas" :key="i" class="column-4 mobile-column-2">
+                    <CardProduct :data="dt" :onCheckOut="(data) => onCheckOut(data)" />
                 </div>
-                <button class="btn btn-icon btn-white" @click="refresh">
-                    <i class="fa fa-lw fa-retweet"></i>
-                </button>
+                <AppLoader v-if="visibleLoader" />
             </div>
 
-            <div v-if="selectedTabIndex === 0">
-                <div class="display-flex wrap" style="padding-left: 5px; padding-right: 5px;">
-                    <div v-for="(dt, i) in datas" :key="i" class="column-4 mobile-column-2">
-                        <CardProduct :data="dt" :onCheckOut="(data) => onCheckOut(data)" />
-                    </div>
-                    <AppLoader v-if="visibleLoader" />
-                </div>
-
-                <div v-if="!visibleLoader" class="display-flex center">
-                    <button v-if="visibleLoadMore" class="btn btn-sekunder" style="margin-top: 20px; margin-bottom: 20px;" @click="getData(limit, offset)">
-                        Load More
-                    </button>
-                </div>
+            <div v-if="!visibleLoader" class="display-flex center">
+                <button v-if="visibleLoadMore" class="btn btn-sekunder" style="margin-top: 20px; margin-bottom: 20px;" @click="getData(limit, offset)">
+                    Load More
+                </button>
             </div>
         </div>
     </div>
@@ -71,7 +68,7 @@ export default {
     mounted () {
         this.dataUser = this.$cookies.get('user')
         this.dataShop = this.$cookies.get('shop')
-        this.getDataCategory()
+        // this.getDataCategory()
         this.getData(this.limit, this.offset)
     },
     components: {
