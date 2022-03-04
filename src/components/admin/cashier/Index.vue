@@ -283,8 +283,6 @@ export default {
         this.order = order ? order : payloadOrder
         this.dataUser = this.$cookies.get('user')
         this.dataShop = this.$cookies.get('shop')
-
-        console.log('order', order)
     },
     components: {
         CardPayment,

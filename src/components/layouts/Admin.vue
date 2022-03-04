@@ -16,7 +16,10 @@
                 </div>
             </div>
             <div class="content">
-                <AppListMenu :data.sync="sidebar" :showBar.sync="showBar" />
+                <AppListMenu 
+                    :data.sync="sidebar" 
+                    :showBar.sync="showBar"
+                    :onPress="onSidebar" />
             </div>
         </div>
         <div class="main">
