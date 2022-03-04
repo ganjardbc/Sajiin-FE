@@ -12,11 +12,11 @@
                     <img :src="logo" alt="HNF" class="post-center" style="width: 100%;">
                 </div>
                 
-                <div class="display-flex space-between" style="margin-bottom: 20px;">
+                <div class="display-flex center" style="margin-bottom: 20px;">
                     <h3 style="margin-top: 8px;">Sign-In</h3>
-                    <router-link :to="{name: 'register'}" class="btn btn-main-reverse" style="padding-left: 0; padding-right: 0">
+                    <!-- <router-link :to="{name: 'register'}" class="btn btn-main-reverse" style="padding-left: 0; padding-right: 0">
                         Create account ?
-                    </router-link>
+                    </router-link> -->
                 </div>
                 
                 <div style="width: 100%; margin-bottom: 10px;">
@@ -92,9 +92,7 @@ export default {
             const rest = await this.signIn(this.form)
 
             if (rest.data.status === 'ok') {
-                const data = rest.data.data
-                console.log('token', data.token)
-                console.log('data', data)
+                const data = rest.data.data 
 
                 this.visibleLoader = false
 
@@ -104,12 +102,14 @@ export default {
                 this.getCount(token)
                 this.getCountOrder(token)
 
-                if (data.user.role_name === 'customer') {
-                    this.$cookies.remove('shop')
-                    this.$router.replace({ name: 'customer-main' })
-                } else {
-                    this.$router.replace({ name: 'dashboard' })
-                }
+                // if (data.user.role_name === 'customer') {
+                //     this.$cookies.remove('shop')
+                //     this.$router.replace({ name: 'customer-main' })
+                // } else {
+                //     this.$router.replace({ name: 'dashboard' })
+                // }
+
+                this.$router.replace({ name: 'dashboard' })
 
                 if (data) {
                     const payload = {
@@ -133,12 +133,14 @@ export default {
     beforeCreate: function () {
         if (this.$cookies.get('token')) 
         {
-            const user = this.$cookies.get('user')
-            if (user.role_name === 'customer') {
-                this.$router.replace({ name: 'customer-main' })
-            } else {
-                this.$router.replace({ name: 'dashboard' })
-            }
+            // const user = this.$cookies.get('user')
+            // if (user.role_name === 'customer') {
+            //     this.$router.replace({ name: 'customer-main' })
+            // } else {
+            //     this.$router.replace({ name: 'dashboard' })
+            // }
+
+            this.$router.replace({ name: 'dashboard' })
         }
     }
 }

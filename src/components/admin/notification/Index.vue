@@ -210,7 +210,6 @@ export default {
             }
 
             const rest = await axios.post('/api/notification/delete', payload, { headers: { Authorization: token } })
-            // console.log('rest', rest)
 
             if (rest && rest.status === 200) {
                 this.onShowHideDelete()
@@ -283,8 +282,6 @@ export default {
 
                 this.datas = data 
                 this.visibleLoader = false 
-
-                console.log('newdata', newData)
 
                 if (newData.length > 0) {
                     this.offset += this.limit

@@ -52,7 +52,7 @@ export default {
     mounted () {
         const customerData = this.$cookies.get('customer')
         this.selectedCustomer = customerData ? customerData : customer
-        this.validCode = this.code ? this.code : 'https://www.instagram.com/ganjar_hadiatna/'
+        this.validCode = this.code ? this.code : 'NULL'
     },
     components: {
         VueQrcode,

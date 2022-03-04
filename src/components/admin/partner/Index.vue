@@ -233,7 +233,6 @@ export default {
                 offset: 0
             }
             
-            console.log('token', token)
             const rest = await axios.post('/api/partner/getAll', payload, { headers: { Authorization: token } })
 
             if (rest && rest.status === 200) {

@@ -211,7 +211,6 @@ export default {
             console.log('onChange', index)
         },
         onChangeMenuShop (index, id) {
-            console.log('onChange', index)
             switch (index) {
                 case 1:
                     this.onShowHideDelete(id)
@@ -408,8 +407,6 @@ export default {
 
                 this.datas = data 
                 this.visibleLoader = false 
-
-                console.log('shop', this.datas)
 
                 if (newData.length > 0) {
                     this.offset += this.limit

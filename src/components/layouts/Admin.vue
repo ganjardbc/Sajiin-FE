@@ -42,11 +42,11 @@
                         <div style="margin-left: 5px;">
                             <AppPopupNotif :notif.sync="countNotif" />
                         </div>
-                        <router-link :to="{name: 'employeeform'}" style="margin-left: 5px;" class="button-router-link">
+                        <!-- <router-link :to="{name: 'employeeform'}" style="margin-left: 5px;" class="button-router-link">
                             <button class="btn btn-white btn-icon btn-radius" title="Reports">
                                 <i class="fa fa-lg fa-id-card" />
                             </button>
-                        </router-link>
+                        </router-link> -->
                         <router-link :to="{name: 'profile'}" class="card-small-profile" style="margin-left: 5px;">
                             <div class="image" style="text-align: center;">
                                 <img v-if="dataUser && dataUser.image" :src="dataUser && dataUser.image ? (adminImageThumbnailUrl + dataUser.image) : ''" alt="">
@@ -106,11 +106,11 @@ const sidebarAdmin = [
         {icon: 'fa fa-lg fa-tachometer-alt', label: 'Dashboard', value: 0, link: 'dashboard', permission: 'dashboard'},
         {icon: 'fa fa-lg fa-laptop', label: 'Cashier', value: 0, link: 'cashier', permission: 'cashier'},
         {icon: 'fa fa-lg fa-receipt', label: 'Orders', value: 0, link: 'orderlist', permission: 'orders'},
-        {icon: 'fa fa-lg fa-clipboard', label: 'TaskLists', value: 0, link: 'tasklist', permission: 'tasklists'},
+        // {icon: 'fa fa-lg fa-clipboard', label: 'TaskLists', value: 0, link: 'tasklist', permission: 'tasklists'},
         {icon: 'fa fa-lg fa-utensils', label: 'Products', value: 0, link: 'admin-product', permission: 'products'},
         {icon: 'fa fa-lg fa-th-large', label: 'Tables', value: 0, link: 'table', permission: 'tables'},
         {icon: 'fa fa-lg fa-calculator', label: 'Payments', value: 0, link: 'payment', permission: 'payments'},
-        {icon: 'fa fa-lg fa-users', label: 'Employees', value: 0, link: 'admin-employee', permission: 'employees'}
+        // {icon: 'fa fa-lg fa-users', label: 'Employees', value: 0, link: 'admin-employee', permission: 'employees'}
     ]},
     {icon: 'fa fa-lg fa-database', label: 'USER N ROLES', value: 0, menu: [
         {icon: 'fa fa-lg fa-tag', label: 'Bizpars', value: 0, link: 'bizpar', permission: 'bizpars'},
@@ -146,14 +146,11 @@ export default {
         if (!this.$cookies.get('token')) {
             this.$router.push({ name: 'home' })
         }
-        if (this.$cookies.get('user').role_name === 'customer') {
-            this.$router.push({ name: 'home' })
-        }
+        // if (this.$cookies.get('user').role_name === 'customer') {
+        //     this.$router.push({ name: 'home' })
+        // }
     },
     mounted () {
-        const token = this.$cookies.get('token')
-        console.log('token', token)
-
         this.dataUser = this.user ? this.user : this.$cookies.get('user')
         this.selectedEmployee = this.employee ? this.employee : this.$cookies.get('employee')
         this.selectedShop = this.choosedShop ? this.choosedShop : this.$cookies.get('shop')
@@ -162,7 +159,6 @@ export default {
 
         const permissions = this.$cookies.get('permissions')
         this.permissions = permissions.permissions
-        console.log('permissions', permissions)
 
         this.countNotif = this.notif ? this.notif : 0
         this.onCheckMenus(sidebarAdmin)
@@ -352,7 +348,6 @@ export default {
     },
     sockets: {
         orderList: function (data) {
-            console.log('orderList', data)
             const lth = data.length
             const payload = data && data[lth - 1]
             // this.saveNotif(payload.title, payload.subtitle)

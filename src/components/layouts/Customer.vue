@@ -116,9 +116,6 @@ export default {
         this.countCart = this.cart
         this.countOrder = this.order
 
-        const token = this.$cookies.get('token')
-        console.log('token', token)
-
         // this.getLocalCartCount()
         // this.getLocalOrderCount()
         // this.getDataTable()

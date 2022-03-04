@@ -6,11 +6,11 @@
             :onSave="onButtonSave"
             :onClose="onClose">
 
-            <AppTabs 
+            <!-- <AppTabs 
                 :selectedIndex="selectedIndex" 
                 :data="tabs" 
                 :onChange="(data) => onChangeTabs(data)" 
-                class="margin margin-bottom-15-px" />
+                class="margin margin-bottom-15-px" /> -->
 
             <div v-if="selectedIndex === 0">
                 <div v-if="this.title !== 'CREATE' ? true : false" class="field-group margin margin-bottom-15-px">
@@ -37,7 +37,7 @@
                         readonly>
                 </div>
                 <div class="field-group margin margin-bottom-15-px">
-                    <div class="field-label">ROLE ID</div>
+                    <div class="field-label">ROLE</div>
                     <select 
                         class="cf-input slc slc-sekunder"
                         name="category_id" 

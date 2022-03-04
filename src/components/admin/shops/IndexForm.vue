@@ -3,7 +3,7 @@
         <AppLoader v-if="visibleLoader" />
         <div v-else style="padding-top: 0; padding-left: 15px; padding-right: 15px;">
             <div class="display-flex display-mobile space-between">
-                <div class="fonts bold big margin" style="margin-top: 15px; margin-bottom: 15px;">Shop</div>
+                <div class="fonts bold big margin" style="margin-top: 15px; margin-bottom: 15px;">{{ formTitle === 'CREATE' ? 'Create Shop' : 'Shop' }}</div>
             </div>
             <div class="display-flex display-mobile space-between" style="padding-top: 10px; padding-bottom: 10px;">
                 <div class="width width-25 width-mobile" style="margin-bottom: 20px;">
@@ -17,13 +17,13 @@
                                 </button>
                             </div>
 
-                            <AppButtonQR 
+                            <!-- <AppButtonQR 
                                 v-if="dataUser && dataUser.role_name !== 'customer'"
                                 style="margin-top: 15px;"
                                 :buttonClass="'btn btn-sekunder btn-full'"
                                 :code="formData.code"
                                 title="Show QR Customer" 
-                            />
+                            /> -->
 
                             <AppButtonQR 
                                 v-if="dataUser && dataUser.role_name !== 'customer'"
@@ -439,7 +439,6 @@ export default {
             console.log('onChange', index)
         },
         onChangeMenuShop (index, id) {
-            console.log('onChange', index)
             switch (index) {
                 case 1:
                     this.onShowHideDelete(id)
@@ -506,10 +505,7 @@ export default {
                 shop_id: id
             }
 
-            console.log('payload', id)
-
             const rest = await axios.post('/api/shop/delete', payload, { headers: { Authorization: token } })
-            console.log('rest', rest)
 
             if (rest && rest.status === 200) {
                 this.onShowHideDelete()
@@ -532,7 +528,7 @@ export default {
 
             const token = 'Bearer '.concat(this.$cookies.get('token'))
             const time = new Date().getTime()
-            const newPayload = this.title === 'CREATE' ? {
+            const newPayload = this.formTitle === 'CREATE' ? {
                 ...this.formData,
                 shop_id: 'SH-' + time.toString()
             } : {
@@ -672,8 +668,6 @@ export default {
 
                 this.formTitle = selectShop ? 'EDIT' : 'CREATE'
                 this.visibleLoader = false 
-
-                console.log('shop', this.datas)
 
                 if (newData.length > 0) {
                     this.offset += this.limit

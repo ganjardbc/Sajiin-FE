@@ -1,8 +1,9 @@
 <template>
     <div id="App">
+        <!-- :enableSaveButton="selectedTable && selectedPayment ?  true : false" -->
         <AppSideForm
             :title="'Check Out'"
-            :enableSaveButton="selectedTable && selectedPayment ?  true : false"
+            :enableSaveButton="true"
             :onSave="onButtonSave"
             :onClose="onClose"
         >
@@ -75,7 +76,7 @@
                                 </div>
                             </div>
                             <div v-else>
-                                <div class="fonts fonts-10 semibold" style="margin-top: 10px; margin-left: 10px;">Choose visible table</div>
+                                <div class="fonts fonts-10 semibold" style="padding: 5px 0; margin-left: 10px;">Choose visible table</div>
                             </div>
                         </div>
                     </div>
@@ -100,7 +101,7 @@
                                 </div>
                             </div>
                             <div v-else>
-                                <div class="fonts fonts-10 semibold" style="margin-top: 10px; margin-left: 10px;">Choose payment method</div>
+                                <div class="fonts fonts-10 semibold" style="padding: 5px 0; margin-left: 10px;">Choose payment method</div>
                             </div>
                         </div>
                     </div>

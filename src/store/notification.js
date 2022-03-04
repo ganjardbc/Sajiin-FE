@@ -47,8 +47,6 @@ export default {
             .then((rest) => {
                 const data = rest.data.data
                 commit('SET_COUNT', data)
-
-                console.log('count notif', data)
             })
             .catch(() => {
                 commit('SET_COUNT', 0)

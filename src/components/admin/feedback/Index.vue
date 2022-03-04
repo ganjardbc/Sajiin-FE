@@ -337,7 +337,6 @@ export default {
                 user_id: this.dataUser.id
             }
             
-            console.log('token', this.dataUser)
             const rest = await axios.post('/api/feedback/getAll', payload, { headers: { Authorization: token } })
 
             if (rest && rest.status === 200) {

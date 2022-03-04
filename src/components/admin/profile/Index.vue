@@ -253,8 +253,6 @@ export default {
         }
         this.image = this.dataUser.image ? this.adminImageThumbnailUrl + this.dataUser.image : ''
         this.code = this.deployUrl + (this.$router.mode === 'hash' ? '#' : '') + '/generate-customer/' + token
-
-        console.log('user', this.dataUser)
     },
     components: {
         AppPopupForm,
@@ -345,8 +343,6 @@ export default {
                     this.$router.push({ name: 'home' })
                     // window.location = this.initUrl
                 }
-
-                console.log('LOGOUT', rest)
             }
         },
 

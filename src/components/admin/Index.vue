@@ -5,7 +5,7 @@
                 <div class="width width-row-4">
                     <AppCardDashboard title="New Orders" height="250px">
                         <div class="post-top content-center">
-                            <div class="fonts fonts-48 teal semibold">{{ (nowOrders.confirmed + nowOrders.unconfirmed) }}</div>
+                            <div class="fonts fonts-48 teal semibold">{{ nowOrders ? (nowOrders.confirmed + nowOrders.unconfirmed) : 0 }}</div>
                             <div class="fonts fonts-10 grey">Current Orders</div>
                         </div>
                     </AppCardDashboard>
@@ -13,7 +13,7 @@
                 <div class="width width-row-4">
                     <AppCardDashboard title="On Progress" height="250px">
                         <div class="post-top content-center">
-                            <div class="fonts fonts-48 teal semibold">{{ nowOrders.cooking }}</div>
+                            <div class="fonts fonts-48 teal semibold">{{ nowOrders ? nowOrders.cooking : 0 }}</div>
                             <div class="fonts fonts-10 grey">Current Orders</div>
                         </div>
                     </AppCardDashboard>
@@ -21,7 +21,7 @@
                 <div class="width width-row-4">
                     <AppCardDashboard title="Done" height="250px">
                         <div class="post-top content-center">
-                            <div class="fonts fonts-48 grey semibold">{{ nowOrders.done }}</div>
+                            <div class="fonts fonts-48 grey semibold">{{ nowOrders ? nowOrders.done : 0 }}</div>
                             <div class="fonts fonts-10 grey">Current Orders</div>
                         </div>
                     </AppCardDashboard>
@@ -29,7 +29,7 @@
                 <div class="width width-row-4">
                     <AppCardDashboard title="Canceled" height="250px">
                         <div class="post-top content-center">
-                            <div class="fonts fonts-48 grey semibold">{{ nowOrders.canceled }}</div>
+                            <div class="fonts fonts-48 grey semibold">{{ nowOrders ? nowOrders.canceled : 0 }}</div>
                             <div class="fonts fonts-10 grey">Current Orders</div>
                         </div>
                     </AppCardDashboard>
@@ -75,7 +75,6 @@ export default {
     mounted () {
         this.dataShop = this.$cookies.get('shop')
         this.nowOrders = this.orders 
-        console.log('nowOrders', this.nowOrders)
 
         this.getDataOrder()
     },
@@ -94,7 +93,6 @@ export default {
         orders: function (props) {
             if (props) {
                 this.nowOrders = props 
-                console.log('nowOrders', this.nowOrders)
             }
         }
     },
@@ -144,7 +142,6 @@ export default {
                 }]
 
                 this.visibleLoader = false 
-                console.log('dashboard order', xAxis)
             } else {
                 this.visibleLoader = false 
             }

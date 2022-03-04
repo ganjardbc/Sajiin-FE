@@ -125,8 +125,6 @@ export default {
             
             const rest = await axios.post('/api/category/getAll', payload, { headers: { Authorization: token } })
 
-            // console.log('getDataCategory', rest)
-
             if (rest && rest.status === 200) {
                 rest.data.data && rest.data.data.map((dt) => {
                     return newData.push({...dt, statusTab: false})
@@ -166,8 +164,6 @@ export default {
                 this.datas = data 
                 this.visibleLoader = false 
 
-                // console.log('newData', newData)
-
                 if (newData.length > 0) {
                     this.offset += this.limit
                 }
@@ -180,8 +176,6 @@ export default {
             } else {
                 this.visibleLoader = false 
             }
-
-            // console.log('getData', rest)
         },
     }
 }

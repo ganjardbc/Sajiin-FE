@@ -116,8 +116,6 @@ export default {
     },
 
     setCookieCustomerAuth ({commit}, data) {
-      console.log('setCookieCustomerAuth', data)
-
       const AuthStr = 'Bearer '.concat(data.token)
 
       $cookies.set('authenticated', true)
@@ -135,8 +133,6 @@ export default {
     },
 
     removeCookieCustomerAuth ({commit}) {
-      console.log('removeCookieCustomerAuth')
-
       $cookies.remove('authenticated')
       $cookies.remove('token')
       $cookies.remove('admin')
@@ -153,8 +149,6 @@ export default {
     },
 
     setCookieAuth ({commit}, data) {
-      console.log('setCookieAuth', data)
-
       const AuthStr = 'Bearer '.concat(data.token)
       const permissions = data ? {permissions: [...data.permissions]} : null 
 
@@ -178,8 +172,6 @@ export default {
     },
 
     removeCookieAuth ({commit}) {
-      console.log('removeCookieAuth')
-
       $cookies.set('authenticated', false)
       $cookies.remove('token')
       $cookies.remove('user')
@@ -203,20 +195,15 @@ export default {
     },
 
     async register ({ dispatch }, credentials) {
-      const csrf = await axios.get('/sanctum/csrf-cookie')
+      // const csrf = await axios.get('/sanctum/csrf-cookie')
       const rest = await axios.post('/api/auth/register', credentials)
-
-      console.log('csrf', csrf)
-      console.log('rest', rest)
 
       return rest
     },
 
     async signIn ({ dispatch }, credentials) {
-      const csrf = await axios.get('/sanctum/csrf-cookie')
+      // const csrf = await axios.get('/sanctum/csrf-cookie')
       const rest = await axios.post('/api/auth/login', credentials)
-
-      console.log('csrf', csrf)
 
       dispatch('token', rest.data.data.token)
       dispatch('me', rest.data.data.token)
@@ -239,15 +226,11 @@ export default {
         commit('SET_ADMIN', data && data.user)
         commit('SET_TOKEN', AuthStr)
         commit('SET_CUSTOMER', null)
-
-        console.log('vuex register', data)
       } else {
         commit('SET_AUTHENTICATED', false)
         commit('SET_ADMIN', false)
         commit('SET_TOKEN', null)
         commit('SET_CUSTOMER', null)
-
-        console.log('vuex unregister')
       } 
       return response
     },
@@ -275,11 +258,7 @@ export default {
           commit('SET_ADMIN', data && data.user)
           commit('SET_ROLENAME', 'customer')
         }
-
-        console.log('vuex register', data)
       } else {
-        console.log('vuex unregister')
-
         commit('SET_AUTHENTICATED', false)
         commit('SET_USER', null)
         commit('SET_ADMIN', null)

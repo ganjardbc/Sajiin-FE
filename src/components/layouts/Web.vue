@@ -240,7 +240,6 @@ export default {
 
         const token = this.$cookies.get('token')
         this.token = token
-        console.log('token', token)
 
         this.customer = this.$cookies.get('customer')
 

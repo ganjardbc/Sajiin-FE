@@ -172,7 +172,7 @@ export default {
     },
     methods: {
         onChangeMenu (index) {
-            // console.log('onChange', index)
+            console.log('onChange', index)
         },
         nameLength (row) {
             return row.key.length
@@ -236,7 +236,6 @@ export default {
             }
 
             const rest = await axios.post('/api/table/delete', payload, { headers: { Authorization: token } })
-            // console.log('rest', rest)
 
             if (rest && rest.status === 200) {
                 this.onShowHideDelete()
@@ -361,8 +360,6 @@ export default {
 
                 this.datas = data 
                 this.visibleLoader = false 
-
-                console.log('newData', newData)
 
                 if (newData.length > 0) {
                     this.offset += this.limit

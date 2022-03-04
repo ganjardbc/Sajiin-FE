@@ -39,12 +39,11 @@ export default {
     },
     sockets: {
         connect: function () {
-            console.log('socket connected')
             this.makeToast('Connected to Socket')
         },
-        adminList: function (data) {
-            console.log('adminList', data)
-        }
+        // adminList: function (data) {
+        //     console.log('adminList', data)
+        // }
     }
 }
 </script>

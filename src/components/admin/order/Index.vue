@@ -237,7 +237,6 @@ export default {
                 }
                 return null 
             })
-            console.log(payload)
             return payload
         },
         onSave () {
@@ -341,7 +340,6 @@ export default {
             }
 
             const rest = await axios.post('/api/order/delete', payload, { headers: { Authorization: token } })
-            console.log('rest', rest)
 
             if (rest && rest.status === 200) {
                 this.onShowHideDelete()
@@ -459,8 +457,6 @@ export default {
 
                 this.datas = data 
                 this.visibleLoader = false 
-
-                console.log('newData', newData)
 
                 if (newData.length > 0) {
                     this.offset += this.limit

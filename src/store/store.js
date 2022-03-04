@@ -48,7 +48,6 @@ export default {
                 } else {
                     commit('SET_DATA', null)
                 }
-                console.log('shop', rest)
             })
             .catch(() => {
                 commit('SET_DATA', null)

@@ -14,7 +14,7 @@
                     <i v-else class="post-middle-absolute fa fa-lg fa-image" style="color: #999;" />
                 </div>
             </div>
-            <div style="width: calc(100% - 190px);">
+            <div style="width: calc(100% - 90px);">
                 <div class="fonts fonts-11 semibold" style="margin-bottom: 5px;">
                     {{ detail.product_name }}
                 </div>
@@ -25,7 +25,7 @@
                     {{ detail.quantity }} {{ detail.product_toping }} x Rp. {{ detail.toping_price }}
                 </div>
             </div>
-            <div style="width: 100px;" class="display-flex align-right">
+            <!-- <div style="width: 100px;" class="display-flex align-right">
                 <div 
                     :class="'card-capsule ' + (
                     detail.status === 'waiting' 
@@ -45,7 +45,7 @@
                                 : detail.status 
                     }}
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>

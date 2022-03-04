@@ -148,7 +148,6 @@ export default {
 
                 commit('SET_COUNT', count.all)
                 commit('SET_ALL', newPayload)
-                console.log('count order', count)
             })
             .catch(() => {
                 commit('SET_COUNT', 0)

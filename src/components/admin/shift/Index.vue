@@ -162,7 +162,7 @@ export default {
     },
     methods: {
         onChangeMenu (index) {
-            // console.log('onChange', index)
+            console.log('onChange', index)
         },
         nameLength (row) {
             return row.key.length
@@ -226,7 +226,6 @@ export default {
             }
 
             const rest = await axios.post('/api/shift/delete', payload, { headers: { Authorization: token } })
-            // console.log('rest', rest)
 
             if (rest && rest.status === 200) {
                 this.onShowHideDelete()
@@ -340,8 +339,6 @@ export default {
                 shop_id: this.dataShop ? this.dataShop.id : ''
             }
 
-            console.log('payload', payload)
-
             const rest = await axios.post('/api/shift/getAll', payload, { headers: { Authorization: token } })
 
             if (rest && rest.status === 200) {
@@ -353,8 +350,6 @@ export default {
 
                 this.datas = data 
                 this.visibleLoader = false 
-
-                console.log('newData', newData)
 
                 if (newData.length > 0) {
                     this.offset += this.limit

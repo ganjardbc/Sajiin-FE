@@ -284,8 +284,6 @@ export default {
                 this.datas = data 
                 this.visibleLoader = false 
 
-                console.log('newData', newData)
-
                 if (newData.length > 0) {
                     this.offset += this.limit
                 }

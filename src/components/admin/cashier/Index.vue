@@ -26,9 +26,10 @@
 
         <div :class="`content-form ' ${!visibleCheckOut ? 'hide' : ''}`">
             <div class="right">
+                <!-- :enableSaveButton="selectedTable && selectedPayment ?  true : false" -->
                 <AppSideForm
                     :title="'Check Out'"
-                    :enableSaveButton="selectedTable && selectedPayment ?  true : false"
+                    :enableSaveButton="true"
                     :onSave="onShowHideSave"
                     :onClose="onButtonCheckOut"
                 >
@@ -282,6 +283,8 @@ export default {
         this.order = order ? order : payloadOrder
         this.dataUser = this.$cookies.get('user')
         this.dataShop = this.$cookies.get('shop')
+
+        console.log('order', order)
     },
     components: {
         CardPayment,
