@@ -3,26 +3,28 @@
         <div class="main-screen">
             <div style="padding-top: 10px; padding-bottom: 20px;"> 
                 <div v-if="!selectedShop" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%;">
-                    <div class="post-center width width-400-px width-mobile width-center">
-                        <div class="card box-shadow" style="padding-top: 30px; padding-bottom: 30px;">
-                            <div class="display-flex column align-center">
-                                <div class="content-center" style="margin-top: 10px; margin-bottom: 10px;">
-                                    <div class="image image-circle image-130px" style="margin: auto;">
-                                        <i class="post-center fa fa-2x fa-store-alt" style="font-size: 32pt;"></i>
+                    <div class="post-center" style="padding: 15px;">
+                        <div class="width width-400-px width-mobile width-center">
+                            <div class="card box-shadow" style="padding-top: 30px; padding-bottom: 30px;">
+                                <div class="display-flex column align-center">
+                                    <div class="content-center" style="margin-top: 10px; margin-bottom: 10px;">
+                                        <div class="image image-circle image-130px" style="margin: auto;">
+                                            <i class="post-center fa fa-2x fa-store-alt" style="font-size: 32pt;"></i>
+                                        </div>
+                                        <div class="fonts fonts-16 black semibold" style="margin-top: 30px;">
+                                            Make your orders
+                                        </div>
+                                        <div class="fonts fonts-10 grey">
+                                            by scan the QR restaurant that have join with us
+                                        </div>
                                     </div>
-                                    <div class="fonts fonts-16 black semibold" style="margin-top: 30px;">
-                                        Make your orders
+                                    <div style="margin-top: 10px; margin-bottom: 10px;">
+                                        <router-link :to="{name: 'visitor-qr'}">
+                                            <button class="btn btn-main">
+                                                <i class="icn icn-left fa fa-lw fa-qrcode"></i> Scan QR Code 
+                                            </button>
+                                        </router-link>
                                     </div>
-                                    <div class="fonts fonts-10 grey">
-                                        by scan the QR restaurant that have join with us
-                                    </div>
-                                </div>
-                                <div style="margin-top: 10px; margin-bottom: 10px;">
-                                    <router-link :to="{name: 'visitor-qr'}">
-                                        <button class="btn btn-main">
-                                            <i class="icn icn-left fa fa-lw fa-qrcode"></i> Scan QR Code 
-                                        </button>
-                                    </router-link>
                                 </div>
                             </div>
                         </div>
