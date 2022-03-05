@@ -12,13 +12,6 @@
                     <img :src="logo" alt="HNF" class="post-center" style="width: 100%;">
                 </div>
                 
-                <div class="display-flex center" style="margin-bottom: 20px;">
-                    <h3 style="margin-top: 8px;">Sign-In</h3>
-                    <!-- <router-link :to="{name: 'register'}" class="btn btn-main-reverse" style="padding-left: 0; padding-right: 0">
-                        Create account ?
-                    </router-link> -->
-                </div>
-                
                 <div style="width: 100%; margin-bottom: 10px;">
                     <input type="email" placeholder="email" class="field field-sekunder" name="email" id="email" required :readonly="visibleLoader" v-model="form.email">
                 </div>
@@ -33,15 +26,19 @@
 
                 <div style="margin-bottom: 10px;">
                     <button :class="visibleLoader ? 'btn btn-grey' : 'btn btn-main'" style="width: 100%;" :type="visibleLoader ? 'button' : 'submit'" :disabled="visibleLoader">
-                        {{visibleLoader ? 'Please Wait..' : 'Check Account' }}
+                        {{visibleLoader ? 'Please Wait..' : 'Login' }}
                     </button>
                 </div>
+
+                <div class="display-flex center" style="margin-bottom: 20px; margin-top: 20px;">
+                    <div class="fonts fonts-11 black">Or</div>
+                </div>
                 
-                <!-- <div style="margin-bottom: 10px;" type="center">
-                    <button class="btn btn-white" style="width: 100%;" type="button">
-                        Forgot Password
-                    </button>
-                </div> -->
+                <div style="margin-bottom: 10px;" type="center">
+                    <router-link :to="{name: 'visitor-shop'}" class="btn btn-primary btn-div" type="button">
+                        Login as Visitor
+                    </router-link>
+                </div>
             </form>
         </div>
     </div>
