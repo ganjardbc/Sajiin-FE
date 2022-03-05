@@ -3,7 +3,7 @@
         <div class="main-screen">
             <div style="padding-top: 10px; padding-bottom: 20px;"> 
                 <div v-if="!selectedShop" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%;">
-                    <div class="post-center width width-400-px width-center">
+                    <div class="post-center width width-400-px width-mobile width-center">
                         <div class="card box-shadow" style="padding-top: 30px; padding-bottom: 30px;">
                             <div class="display-flex column align-center">
                                 <div class="content-center" style="margin-top: 10px; margin-bottom: 10px;">
