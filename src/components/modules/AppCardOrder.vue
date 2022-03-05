@@ -101,13 +101,20 @@
                 </div>
                 <div class="display-flex">
                     <button 
-                        v-if="dt.order.payment_status ? false : true"
+                        v-if="dt.order.status != 'canceled' && !dt.order.payment_status"
                         @click="onCheckOut(dt.order.id)"
                         class="btn btn-main"
                         style="margin-right: 15px;">
                         Check Out Order
                     </button>
-                    <AppButtonMenu :onChange="(data) => onChangeMenuOwner(data, dt.order.id)" :data="[{icon: 'fa fa-1x fa-pencil-alt', label: 'Edit'}, {icon: 'fa fa-1x fa-trash-alt', label: 'Delete'}, {icon: 'fa fa-1x fa-ellipsis-h', label: 'View'}]" />
+                    <AppButtonMenu 
+                        v-if="dt.order.status != 'canceled'"
+                        :onChange="(data) => onChangeMenuOwner(data, dt.order.id)" 
+                        :data="[
+                            {icon: 'fa fa-1x fa-pencil-alt', label: 'Edit'}, 
+                            {icon: 'fa fa-1x fa-trash-alt', label: 'Delete'}, 
+                            {icon: 'fa fa-1x fa-ellipsis-h', label: 'View'}
+                        ]" />
                 </div>
             </div>
             <div v-else class="display-flex row space-between">
