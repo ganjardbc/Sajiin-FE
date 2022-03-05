@@ -409,6 +409,10 @@ export default {
                 this.$session.remove('orderTable')
                 this.$session.remove('orderPayment')
                 this.$session.remove('cartList')
+                this.$session.remove('shop')
+                this.$session.remove('visitorShop')
+                this.$session.remove('visitorTable')
+                this.$session.remove('visitorCatalog')
                 this.$router.replace({ name: 'visitor-shop' })
             } else {
                 this.visibleAlertSave = false

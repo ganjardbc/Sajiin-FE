@@ -46,6 +46,10 @@ export default {
                     this.$session.set('visitorShop', data.shop)
                     this.$session.set('visitorTable', data.tables)
                     this.$session.set('visitorCatalog', data.catalogs)
+                    this.$session.remove('orderItem')
+                    this.$session.remove('orderTable')
+                    this.$session.remove('orderPayment')
+                    this.$session.remove('cartList')
 
                     this.visibleTitle = 'proceed success.'
                     this.$router.replace({ name: 'visitor-shop' })

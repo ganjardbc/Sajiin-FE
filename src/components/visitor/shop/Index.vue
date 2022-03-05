@@ -2,28 +2,33 @@
     <div id="App">
         <div class="main-screen">
             <div style="padding-top: 10px; padding-bottom: 20px;"> 
-                <div v-if="!selectedShop" style="width: 100%; padding-top: 0; padding-bottom: 15px;">
-                    <div class="card box-shadow" style="padding-top: 5px; padding-bottom: 5px;">
-                        <div class="display-flex space-between display-mobile">
-                            <div style="margin-top: 10px; margin-bottom: 10px;">
-                                <div class="fonts fonts-11 black semibold">
-                                    Make your orders
+                <div v-if="!selectedShop" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%;">
+                    <div class="post-center width width-400-px width-center">
+                        <div class="card box-shadow" style="padding-top: 30px; padding-bottom: 30px;">
+                            <div class="display-flex column align-center">
+                                <div class="content-center" style="margin-top: 10px; margin-bottom: 10px;">
+                                    <div class="image image-circle image-130px" style="margin: auto;">
+                                        <i class="post-center fa fa-2x fa-store-alt" style="font-size: 32pt;"></i>
+                                    </div>
+                                    <div class="fonts fonts-16 black semibold" style="margin-top: 30px;">
+                                        Make your orders
+                                    </div>
+                                    <div class="fonts fonts-10 grey">
+                                        by scan the QR restaurant that have join with us
+                                    </div>
                                 </div>
-                                <div class="fonts fonts-10 grey">
-                                    by scan the QR restaurant that have join with us
+                                <div style="margin-top: 10px; margin-bottom: 10px;">
+                                    <router-link :to="{name: 'visitor-qr'}">
+                                        <button class="btn btn-main">
+                                            <i class="icn icn-left fa fa-lw fa-qrcode"></i> Scan QR Code 
+                                        </button>
+                                    </router-link>
                                 </div>
-                            </div>
-                            <div style="margin-top: 10px; margin-bottom: 10px;">
-                                <router-link :to="{name: 'customer-qr'}">
-                                    <button class="btn btn-main">
-                                        <i class="icn icn-left fa fa-lw fa-qrcode"></i> Scan QR Code 
-                                    </button>
-                                </router-link>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div v-else>
+                <div v-if="selectedShop">
                     <div style="width: 100%;">
                         <div style="padding-top: 0; padding-bottom: 0;">
                             <div class="display-flex space-between">
@@ -110,7 +115,6 @@
                     <div>
                         <div class="display-flex space-between">
                             <div class="fonts fonts-10 black semibold">Products</div>
-                            <!-- <router-link :to="{name: 'product-list'}" class="fonts fonts-10 semibold link">View All</router-link> -->
                         </div>
                         <AppCardPostGrid :data="products" :isMobileCard="true" />
                         <AppLoader v-if="visibleLoader" style="margin-top: 10px;" />
@@ -129,7 +133,8 @@
             :onClose="onShowHideExit" 
             :onSave="exitShop" />
         
-        <AppCardSmallCart />
+        <AppCardSmallCart
+            v-if="selectedShop" />
     </div>
 </template>
 <script>

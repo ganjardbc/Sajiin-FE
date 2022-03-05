@@ -5,6 +5,7 @@ import VisitorCart from '@/components/visitor/cart/Index.vue';
 import VisitorOrder from '@/components/visitor/order/Index.vue';
 import VisitorPayment from '@/components/visitor/payment/Index.vue';
 import VisitorTable from '@/components/visitor/table/Index.vue';
+import VisitorQR from '@/components/visitor/qr/Index.vue';
 
 const routes = {
     path: '/visitor',
@@ -39,6 +40,11 @@ const routes = {
             name: 'visitor-chose-table',
             path: 'chose-table',
             component: VisitorTable
+        },
+        {
+            path: 'visitor-qr',
+            name: 'visitor-qr',
+            component: VisitorQR
         }
     ]
 }
