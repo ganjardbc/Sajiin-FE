@@ -1,7 +1,7 @@
 <template>
-    <div id="Profile" style="padding-top: 0; padding-left: 15px; padding-right: 15px;">
-        <div class="display-flex display-mobile space-between">
-            <div class="fonts bold big margin" style="margin-top: 15px; margin-bottom: 15px;">Profile</div>
+    <div id="Profile" style="padding: 0 10px;">
+        <div style="padding-bottom: 15px;">
+            <h1 class="fonts big black bold">Profile</h1>
         </div>
 
         <div class="display-flex display-mobile space-between" style="padding-top: 10px; padding-bottom: 10px;">

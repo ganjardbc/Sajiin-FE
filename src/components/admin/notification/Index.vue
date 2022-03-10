@@ -2,10 +2,9 @@
     <div id="App" :class="formClass ? 'content-form' : 'content-form hide'">
         <div class="left">
             <div class="bg-white">
-                <div class="display-flex row space-between padding padding-10-px" style="height: 40px;">
+                <div class="display-flex space-between" style="padding-bottom: 15px;">
                     <div>
-                        <h1 class="fonts small black">NOTIFICATIONS</h1>
-                        <p class="fonts micro grey no-line-height">controll your datas</p>
+                        <h1 class="fonts big black bold">Notifications</h1>
                     </div>
                     <div class="display-flex">
                         <AppButtonMenu 
@@ -16,58 +15,55 @@
                         <SearchField :placeholder="'Search notifications ..'" :enableResponsive="true" style="margin-left: 5px;" />
                     </div>
                 </div>
-                
-                <div class="content-body">
-                    <div style="padding-left: 15px; padding-right: 15px;">
-                        <div v-for="(dt, i) in datas" :key="i" class="card box-shadow" style="margin-top: 15px; margin-bottom: 15px; overflow: unset;">
-                            <div class="display-flex space-between" style="padding-top: 5px; padding-bottom: 5px;">
-                                <div style="width: 60px; margin-right: 15px;">
-                                    <div class="image image-padding border border-full">
-                                        <img v-if="dt.image" :src="notificationImageThumbnailUrl + dt.image" alt="" class="post-center">
-                                        <i v-else class="post-middle-absolute icn fa fa-lg fa-bell"></i>
-                                    </div>
-                                </div>
-                                <div style="width: calc(100% - 185px);">
-                                    <div class="display-flex" style="margin-bottom: 5px;">
-                                        <div class="fonts fonts-11 semibold" style="margin-top: 3px;">{{ dt.title }}</div>
-                                        <div 
-                                            :class="'card-capsule ' + (
-                                            dt.is_read 
-                                                ? 'active' 
-                                                : ''
-                                            )" 
-                                            style="margin-left: 10px; text-transform: capitalize;">
-                                            {{ dt.is_read ? 'Read' : 'Unread' }}
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="fonts fonts-10 grey">{{ dt.subtitle }}</div>
-                                        <div class="fonts fonts-10 grey">{{ dt.created_at | moment("from", "now") }}</div>
-                                    </div>
-                                </div>
-                                <div class="display-flex column space-between" style="width: 100px;">
-                                    <div class="display-flex space-between">
-                                        <button class="btn btn-small-icon btn-sekunder" @click="onShow('EDIT', dt.id)">
-                                            <i class="fa fa-1x fa-pencil-alt"></i>
-                                        </button>
-                                        <button class="btn btn-small-icon btn-sekunder" @click="onShowHideDelete(dt.id)">
-                                            <i class="fa fa-1x fa-trash-alt"></i>
-                                        </button>
-                                        <button class="btn btn-small-icon btn-sekunder" @click="onShow('VIEW', dt.id)">
-                                            <i class="fa fa-1x fa-ellipsis-v"></i>
-                                        </button>
-                                    </div>
-                                </div>
+
+                <div v-for="(dt, i) in datas" :key="i" class="card box-shadow" style="margin-top: 15px; margin-bottom: 15px; overflow: unset;">
+                    <div class="display-flex space-between" style="padding-top: 5px; padding-bottom: 5px;">
+                        <div style="width: 60px; margin-right: 15px;">
+                            <div class="image image-padding border border-full">
+                                <img v-if="dt.image" :src="notificationImageThumbnailUrl + dt.image" alt="" class="post-center">
+                                <i v-else class="post-middle-absolute icn fa fa-lg fa-bell"></i>
                             </div>
                         </div>
-                        <AppLoader v-if="visibleLoader" />
+                        <div style="width: calc(100% - 185px);">
+                            <div class="display-flex" style="margin-bottom: 5px;">
+                                <div class="fonts fonts-11 semibold" style="margin-top: 3px;">{{ dt.title }}</div>
+                                <div 
+                                    :class="'card-capsule ' + (
+                                    dt.is_read 
+                                        ? 'active' 
+                                        : ''
+                                    )" 
+                                    style="margin-left: 10px; text-transform: capitalize;">
+                                    {{ dt.is_read ? 'Read' : 'Unread' }}
+                                </div>
+                            </div>
+                            <div>
+                                <div class="fonts fonts-10 grey">{{ dt.subtitle }}</div>
+                                <div class="fonts fonts-10 grey">{{ dt.created_at | moment("from", "now") }}</div>
+                            </div>
+                        </div>
+                        <div class="display-flex column space-between" style="width: 100px;">
+                            <AppCapsuleMenu 
+                                :title="dt.is_read ? 'Read' : 'Unread'"
+                                :status="(
+                                    dt.is_read 
+                                        ? 'active' 
+                                        : ''
+                                )"
+                                :onChange="(data) => onChangeStatus(data, dt.id)" 
+                                :data="bizparCapsule"
+                                style="margin-left: 10px; capitalize;"
+                            />
+                        </div>
                     </div>
+                </div>
 
-                    <div v-if="!visibleLoader" class="display-flex center" style="margin-top: 20px; margin-bottom: 20px;">
-                        <button v-if="visibleLoadMore" class="btn btn-sekunder" @click="getData(limit, offset)">
-                            Load More
-                        </button>
-                    </div>
+                <AppLoader v-if="visibleLoader" />
+
+                <div v-if="!visibleLoader" class="display-flex center" style="margin-top: 20px; margin-bottom: 20px;">
+                    <button v-if="visibleLoadMore" class="btn btn-sekunder" @click="getData(limit, offset)">
+                        Load More
+                    </button>
                 </div>
             </div>
         </div>
@@ -81,13 +77,6 @@
                 :onClose="onClose">
             </Form>
         </div>
-
-        <AppAlert 
-            v-if="visibleAlertDelete" 
-            :isLoader="visibleLoaderAction"
-            :title="'This action will remove data permanently, delete this data ?'" 
-            :onClose="onShowHideDelete" 
-            :onSave="removeData" />
         
         <AppAlert 
             v-if="visibleAlertSave" 
@@ -105,6 +94,7 @@ import AppLoader from '../../modules/AppLoader'
 import AppAlert from '../../modules/AppAlert'
 import SearchField from '../../modules/SearchField'
 import AppButtonMenu from '../../modules/AppButtonMenu'
+import AppCapsuleMenu from '../../modules/AppCapsuleMenu'
 import Form from './Form'
 
 export default {
@@ -116,14 +106,21 @@ export default {
             visibleLoader: false,
             visibleLoaderAction: false,
             visibleLoadMore: false,
-            formTitle: 'CREATE',
+            formTitle: 'UPDATE',
             formClass: false,
             datas: [],
             selectedIndex: null,
             selectedData: null,
             selectedMessage: null,
+            bizparCapsule: [
+                {label: 'Read'}, 
+                {label: 'Unread'}
+            ],
             filters: {
-                name: { value: '', keys: ['name'] }
+                name: { 
+                    value: '', 
+                    keys: ['name'] 
+                }
             },
             limitPage: 10,
             currentPage: 1,
@@ -141,6 +138,7 @@ export default {
         AppAlert,
         AppLoader,
         AppButtonMenu,
+        AppCapsuleMenu,
         SearchField,
         Form
     },
@@ -148,7 +146,7 @@ export default {
         ...mapGetters({
             authenticated: 'auth/authenticated',
             user: 'auth/user',
-            token: 'auth/token'
+            token: 'auth/token',
         })
     },
     methods: {
@@ -200,51 +198,42 @@ export default {
             const token = 'Bearer '.concat(this.$cookies.get('token'))
             this.getCountNotif(token)
         },
-        async removeData () {
-            this.visibleLoaderAction = true
-
-            const token = 'Bearer '.concat(this.$cookies.get('token'))
-            const id = this.onSearchData(this.selectedIndex).notification_id
-            const payload = {
-                notification_id: id
+        onChangeStatus (index, id) {
+            const data = index === 1 ? 0 : 1
+            const result = this.onSearchData(id)
+            this.selectedData = {
+                ...this.selectedData,
+                id: result.id,
+                notification_id: result.notification_id,
+                image: result.image,
+                title: result.title,
+                link: result.link,
+                status: result.status,
+                subtitle: result.subtitle,
+                is_read: data 
             }
 
-            const rest = await axios.post('/api/notification/delete', payload, { headers: { Authorization: token } })
-
-            if (rest && rest.status === 200) {
-                this.onShowHideDelete()
-                this.onClose()
-                this.visibleLoaderAction = false
-
-                const data = rest.data
-                if (data.status === 'ok') {
-                    this.getData(this.limit, 0)
-                    this.getLocalNotifCount()
-                } else {
-                    alert('Proceed failed')
-                }
-            } else {
-                alert('Proceed failed')
-                this.visibleLoaderAction = false
-            }
+            this.saveData(id, data)
         },
-        async saveData () {
+        async saveData (id, status) {
             this.visibleLoaderAction = true
 
             const token = 'Bearer '.concat(this.$cookies.get('token'))
             const payload = this.selectedData
-            const url = this.formTitle === 'CREATE' ? '/api/notification/post' : '/api/notification/update' 
+            const url = '/api/notification/update' 
 
             const rest = await axios.post(url, payload, { headers: { Authorization: token } })
 
             if (rest && rest.status === 200) {
-                this.onShowHideSave()
                 this.visibleLoaderAction = false
 
                 const data = rest.data.data
                 if (data.length !== 0) {
-                    this.onClose()
-                    this.getData(this.limit, 0)
+                    const newPayload = this.datas && this.datas.map((dt) => {
+                        const stt = dt.id === id ? status : dt.is_read
+                        return {...dt, is_read: stt}
+                    })
+                    this.datas = newPayload
                     this.getLocalNotifCount()
                 } else {
                     this.selectedMessage = rest.data.message

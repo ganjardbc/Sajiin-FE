@@ -1,6 +1,7 @@
 import AdminLayout from '@/components/layouts/Admin.vue';
 import ProductLayout from '@/components/layouts/Product.vue';
 import ShopLayout from '@/components/layouts/Shop.vue';
+import SettingLayout from '@/components/layouts/Setting.vue';
 import EmployeeLayout from '@/components/layouts/Employee.vue';
 import Dashboard from '@/components/admin/Index.vue';
 import NotFoundAdmin from '@/components/admin/404.vue';
@@ -68,11 +69,6 @@ const routes = {
             component: Cashier
         },
         {
-            name: 'bizpar',
-            path: '/admin-bizpar',
-            component: Bizpar
-        },
-        {
             name: 'customer',
             path: '/admin-customer',
             component: Customer
@@ -106,21 +102,6 @@ const routes = {
             name: 'benefitlist',
             path: '/admin-benefit',
             component: Benefit
-        },
-        {
-            name: 'role',
-            path: '/admin-role',
-            component: Role
-        },
-        {
-            name: 'permission',
-            path: '/admin-permission',
-            component: Permission
-        },
-        {
-            name: 'userlist',
-            path: '/admin-user-list',
-            component: UserList
         },
         {
             name: 'wishelist',
@@ -224,12 +205,11 @@ const routes = {
                 }
             ]
         },
-
         {
             name: 'admin-shop',
             path: '/admin-shop',
             component: ShopLayout,
-            redirect: '/admin-shop/shops',
+            redirect: '/admin-shop/form',
             children: [
                 {
                     name: 'shops',
@@ -237,25 +217,53 @@ const routes = {
                     component: Shops
                 },
                 {
-                    name: 'category',
-                    path: 'categories',
-                    component: Category
+                    name: 'admin-shop-form',
+                    path: 'form',
+                    component: ShopForm
                 },
                 {
-                    name: 'toping',
-                    path: 'topings',
-                    component: Toping
+                    name: 'admin-shop-payment',
+                    path: 'payments',
+                    component: Payment
                 },
                 {
-                    name: 'listing',
-                    path: 'listing',
-                    component: ProductAdmin
+                    name: 'admin-shop-table',
+                    path: 'tables',
+                    component: TableList
+                },
+            ]
+        },
+        {
+            name: 'admin-setting',
+            path: '/admin-setting',
+            component: SettingLayout,
+            redirect: '/admin-setting/bizpar',
+            children: [
+                // {
+                //     name: 'profile',
+                //     path: 'profile',
+                //     component: Profile
+                // },
+                {
+                    name: 'bizpar',
+                    path: 'bizpar',
+                    component: Bizpar
                 },
                 {
-                    name: 'position',
-                    path: 'positions',
-                    component: PositionList
-                }
+                    name: 'role',
+                    path: 'role',
+                    component: Role
+                },
+                {
+                    name: 'permission',
+                    path: 'permission',
+                    component: Permission
+                },
+                {
+                    name: 'userlist',
+                    path: 'user-list',
+                    component: UserList
+                },
             ]
         }
     ]

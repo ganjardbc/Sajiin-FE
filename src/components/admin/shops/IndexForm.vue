@@ -1,9 +1,9 @@
 <template>
     <div id="App">
         <AppLoader v-if="visibleLoader" />
-        <div v-else style="padding-top: 0; padding-left: 15px; padding-right: 15px;">
+        <div v-else class="card-dashboard-container">
             <div class="display-flex display-mobile space-between">
-                <div class="fonts bold big margin" style="margin-top: 15px; margin-bottom: 15px;">{{ formTitle === 'CREATE' ? 'Create Shop' : 'Shop' }}</div>
+                <div class="fonts bold big margin" style="margin-bottom: 15px;">{{ formTitle === 'CREATE' ? 'Create Shop' : 'Shop' }}</div>
             </div>
             <div class="display-flex display-mobile space-between" style="padding-top: 10px; padding-bottom: 10px;">
                 <div class="width width-25 width-mobile" style="margin-bottom: 20px;">
@@ -659,7 +659,7 @@ export default {
                         status: selectShop.shop.status,
                         is_available: selectShop.shop.is_available,
                         code: selectShop.code,
-                        codeVisitor: `${this.deployUrl}#/visit-shop/${selectShop.code}`,
+                        codeVisitor: this.deployUrl + (this.$router.mode === 'hash' ? '#' : '') + '/visit-shop/' + (selectShop.shop ? selectShop.shop.shop_id : ''),
                     } : {
                         ...payload
                     }

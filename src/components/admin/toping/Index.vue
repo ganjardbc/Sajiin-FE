@@ -2,10 +2,9 @@
     <div id="App" :class="formClass ? 'content-form' : 'content-form hide'">
         <div class="left">
             <div class="bg-white">
-                <div class="display-flex row space-between padding padding-10-px" style="height: 40px;">
+                <div class="display-flex space-between" style="padding-bottom: 15px;">
                     <div>
-                        <h1 class="fonts small black">TOPPINGS</h1>
-                        <p class="fonts micro grey no-line-height">controll your datas</p>
+                        <h1 class="fonts big black bold">Topings</h1>
                     </div>
                     <div class="display-flex">
                         <AppButtonMenu 
@@ -23,64 +22,57 @@
                     </div>
                 </div>
                 
-                <div class="content-body">
-                    <div style="padding-left: 15px; padding-right: 15px;">
-                        <div v-for="(dt, i) in datas" :key="i" class="card box-shadow" style="margin-top: 15px; margin-bottom: 15px; overflow: unset;">
-                            <div class="display-flex space-between" style="padding-top: 5px; padding-bottom: 5px;">
-                                <div style="width: 60px; margin-right: 15px;">
-                                    <div class="image image-padding border border-full">
-                                        <VueLoadImage v-if="dt.image">
-                                            <img slot="image" :src="topingImageThumbnailUrl + dt.image" alt="" class="post-center">
-                                            <div slot="preloader">
-                                                <div class="post-middle-absolute icn">
-                                                    <i class="fa fa-lg fa-spin fa-spinner" style="color: #999;"></i>
-                                                </div>
-                                            </div>
-                                        </VueLoadImage>
-                                        <i v-else class="post-middle-absolute icn fa fa-lg fa-list-alt"></i>
-                                    </div>
-                                </div>
-                                <div style="width: calc(100% - 185px);">
-                                    <div class="display-flex" style="margin-bottom: 5px;">
-                                        <div class="fonts fonts-11 semibold" style="margin-top: 3px;">{{ dt.name }}</div>
-                                        <div 
-                                            :class="'card-capsule ' + (
-                                            dt.status === 'active' 
-                                                ? 'active' 
-                                                : ''
-                                            )" 
-                                            style="margin-left: 10px; text-transform: capitalize;">
-                                            {{ dt.status }}
+                <div v-for="(dt, i) in datas" :key="i" class="card box-shadow" style="margin-top: 15px; margin-bottom: 15px; overflow: unset;">
+                    <div class="display-flex space-between" style="padding-top: 5px; padding-bottom: 5px;">
+                        <div style="width: 60px; margin-right: 15px;">
+                            <div class="image image-padding border border-full">
+                                <VueLoadImage v-if="dt.image">
+                                    <img slot="image" :src="topingImageThumbnailUrl + dt.image" alt="" class="post-center">
+                                    <div slot="preloader">
+                                        <div class="post-middle-absolute icn">
+                                            <i class="fa fa-lg fa-spin fa-spinner" style="color: #999;"></i>
                                         </div>
                                     </div>
-                                    <div>
-                                        <div class="fonts fonts-11 orange semibold" style="margin-bottom: 3px;">Rp. {{ dt.price }}</div>
-                                        <div class="fonts fonts-10 grey">{{ dt.created_at | moment("from", "now") }}</div>
-                                    </div>
-                                </div>
-                                <div class="display-flex column space-between" style="width: 100px;">
-                                    <div class="display-flex space-between">
-                                        <button class="btn btn-small-icon btn-sekunder" @click="onShow('EDIT', dt.id)">
-                                            <i class="fa fa-1x fa-pencil-alt"></i>
-                                        </button>
-                                        <button class="btn btn-small-icon btn-sekunder" @click="onShowHideDelete(dt.id)">
-                                            <i class="fa fa-1x fa-trash-alt"></i>
-                                        </button>
-                                        <button class="btn btn-small-icon btn-sekunder" @click="onShow('VIEW', dt.id)">
-                                            <i class="fa fa-1x fa-ellipsis-v"></i>
-                                        </button>
-                                    </div>
-                                </div>
+                                </VueLoadImage>
+                                <i v-else class="post-middle-absolute icn fa fa-lg fa-list-alt"></i>
                             </div>
                         </div>
-                        <AppLoader v-if="visibleLoader" />
+                        <div style="width: calc(100% - 115px);">
+                            <div class="display-flex" style="margin-bottom: 5px;">
+                                <div class="fonts fonts-11 semibold" style="margin-top: 3px;">{{ dt.name }}</div>
+                                <div 
+                                    :class="'card-capsule ' + (
+                                    dt.status === 'active' 
+                                        ? 'active' 
+                                        : ''
+                                    )" 
+                                    style="margin-left: 10px; text-transform: capitalize;">
+                                    {{ dt.status }}
+                                </div>
+                            </div>
+                            <div>
+                                <div class="fonts fonts-11 orange semibold" style="margin-bottom: 3px;">Rp. {{ dt.price }}</div>
+                                <div class="fonts fonts-10 grey">{{ dt.created_at | moment("from", "now") }}</div>
+                            </div>
+                        </div>
+                        <div class="display-flex row space-between" style="width: 40px;">
+                            <AppButtonMenu 
+                                :onChange="(data) => onChangeMenuOwner(data, dt.id)" 
+                                :data="[
+                                    {icon: 'fa fa-1x fa-pencil-alt', label: 'Edit'}, 
+                                    {icon: 'fa fa-1x fa-trash-alt', label: 'Delete'}, 
+                                    {icon: 'fa fa-1x fa-ellipsis-h', label: 'View'}
+                                ]" />
+                        </div>
                     </div>
+                </div>
 
-                    <div v-if="!visibleLoader" class="display-flex center" style="margin-top: 20px; margin-bottom: 20px;">
-                        <button v-if="visibleLoadMore" class="btn btn-sekunder" @click="getData(limit, offset)">
-                            Load More
-                        </button>
-                    </div>
+                <AppLoader v-if="visibleLoader" />
+
+                <div v-if="!visibleLoader" class="display-flex center" style="margin-top: 20px; margin-bottom: 20px;">
+                    <button v-if="visibleLoadMore" class="btn btn-sekunder" @click="getData(limit, offset)">
+                        Load More
+                    </button>
                 </div>
             </div>
         </div>
@@ -171,6 +163,22 @@ export default {
     methods: {
         onChangeMenu (index) {
             console.log('onChange', index)
+        },
+        onChangeMenuOwner (data, id) {
+            switch (data) {
+                case 0:
+                    this.onShow('EDIT', id)
+                    break
+                case 1:
+                    this.onShowHideDelete(id)
+                    break
+                case 2:
+                    this.onShow('VIEW', id)
+                    break
+                default:
+                    this.onShow('VIEW', id)
+                    break
+            }
         },
         nameLength (row) {
             return row.key.length

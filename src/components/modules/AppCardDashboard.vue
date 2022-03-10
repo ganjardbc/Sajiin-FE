@@ -1,9 +1,9 @@
 <template>
-    <div id="AppCardDashboard" style="padding: 0 10px; width: calc(100% - 20px);">
+    <div id="AppCardDashboard" class="card-dashboard-container">
         <div 
             class="card box-shadow bg-white" 
             :style="'padding: 0; border-radius: 5px; margin-bottom: 15px; width: 100%; height:' + (height ? height : '350px') + ';'">
-            <div class="display-flex space-between" style="height: 30px; padding: 5px 10px;">
+            <div v-if="title" class="display-flex space-between" style="height: 30px; padding: 5px 10px;">
                 <div style="margin-top: 5px;">
                     <div class="fonts fonts-10 semibold">{{ title ? title : "TITLE" }}</div>
                 </div>

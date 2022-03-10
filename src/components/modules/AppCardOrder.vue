@@ -91,24 +91,24 @@
                 </div>
             </div>
             <div v-if="type === 'owner'" class="display-flex row space-between">
-                <div>
+                <div></div>
+                <div class="display-flex">
                     <button 
                         @click="onButtonDetail(dt)"
                         class="btn btn-primary"
-                        style="margin-right: 15px;">
+                        style="margin-left: 15px;">
                         View Order Detail
                     </button>
-                </div>
-                <div class="display-flex">
                     <button 
                         v-if="dt.order.status != 'canceled' && !dt.order.payment_status"
                         @click="onCheckOut(dt.order.id)"
                         class="btn btn-main"
-                        style="margin-right: 15px;">
+                        style="margin-left: 15px;">
                         Check Out Order
                     </button>
                     <AppButtonMenu 
-                        v-if="dt.order.status != 'canceled'"
+                        v-if="dt.order.status != 'canceled' && dt.order.status != 'done'"
+                        style="margin-left: 15px;"
                         :onChange="(data) => onChangeMenuOwner(data, dt.order.id)" 
                         :data="[
                             {icon: 'fa fa-1x fa-pencil-alt', label: 'Edit'}, 

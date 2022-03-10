@@ -1,68 +1,43 @@
 <template>
     <div id="App" style="position: relative;">
-        <button :class="'btn btn-icon btn-radius btn-white'" :style="'background-color: ' + (visiblePopup ? '#f5f5f5' : '' )" title="Notifications" @click="opPopup">
-            <i class="fa fa-lg fa-bell" />
-            <span v-if="notif" class="notif">{{ notif }}</span>
-        </button>
-
-        <div v-if="visiblePopup" class="card-popup mobile small no-padding bg-white box-shadow" style="position: absolute; top: 40px; right: 0; z-index: 1000;">
-            <div class="card-popoup-header display-flex space-between">
-                <div>
-                    <div class="post-top display-flex align-center">
-                        <div class="fonts fonts-11 black semibold" style="margin-right: 5px;">Notifications</div>
-                        <div class="card-value">
-                            <div class="label">{{ notif }}</div>
+        <div style="padding-bottom: 5px;">
+            <div v-for="(dt, i) in datas" :key="i" :class="'card small-padding ' + (dt.is_read === 0 ? 'border-full bg-white-grey' : 'border-full')" style="margin-top: 15px; margin-bottom: 15px; overflow: unset;">
+                <div class="display-flex space-between" style="padding-top: 5px; padding-bottom: 5px;">
+                    <div style="width: 40px; margin-right: 15px;">
+                        <div class="image image-padding border border-full bg-white">
+                            <img v-if="dt.image" :src="notificationImageThumbnailUrl + dt.image" alt="" class="post-center">
+                            <i v-else class="post-middle-absolute icn fa fa-lw fa-bell"></i>
                         </div>
                     </div>
-                </div>
-                <div class="display-flex align-center">
-                    <button class="btn btn-icon btn-white" @click="onRefresh">
-                        <i class="fa fa-lw fa-retweet"></i>
-                    </button>
-                    <button class="btn btn-icon btn-white mobile-visible" @click="opPopup">
-                        <i class="fa fa-lw fa-times"></i>
-                    </button>
+                    <div style="width: calc(100% - 55px);">
+                        <div>
+                            <div class="fonts fonts-11 semibold" style="margin-bottom: 3px;">{{ dt.title }}</div>
+                            <div class="fonts fonts-10 grey">{{ dt.subtitle }}</div>
+                            <div class="fonts fonts-10 grey">{{ dt.created_at | moment("from", "now") }}</div>
+                        </div>
+                    </div>
+                    <div style="position: absolute; top: 15px; right: 10px;">
+                        <AppCapsuleMenu 
+                            :title="dt.is_read ? 'Read' : 'Unread'"
+                            :status="(
+                                dt.is_read 
+                                    ? 'active' 
+                                    : ''
+                            )"
+                            :onChange="(data) => onChangeStatus(data, dt.id)" 
+                            :data="bizparCapsule"
+                            style="margin-left: 10px; capitalize;"
+                        />
+                    </div>
                 </div>
             </div>
-            <div class="card-popup-body">
-                <div style="padding-left: 15px; padding-right: 15px;">
-                    <div v-for="(dt, i) in datas" :key="i" :class="'card small-padding ' + (dt.is_read === 0 ? 'border-full bg-white-grey' : 'border-full')" style="margin-top: 15px; margin-bottom: 15px; overflow: unset;">
-                        <div class="display-flex space-between" style="padding-top: 5px; padding-bottom: 5px;">
-                            <div style="width: 40px; margin-right: 15px;">
-                                <div class="image image-padding border border-full bg-white">
-                                    <img v-if="dt.image" :src="notificationImageThumbnailUrl + dt.image" alt="" class="post-center">
-                                    <i v-else class="post-middle-absolute icn fa fa-lw fa-bell"></i>
-                                </div>
-                            </div>
-                            <div style="width: calc(100% - 55px);">
-                                <div>
-                                    <div class="fonts fonts-11 semibold" style="margin-bottom: 3px;">{{ dt.title }}</div>
-                                    <div class="fonts fonts-10 grey">{{ dt.subtitle }}</div>
-                                    <div class="fonts fonts-10 grey">{{ dt.created_at | moment("from", "now") }}</div>
-                                </div>
-                            </div>
-                            <div style="position: absolute; top: 15px; right: 10px;">
-                                <AppCapsuleMenu 
-                                    :title="dt.is_read ? 'Read' : 'Unread'"
-                                    :status="(
-                                        dt.is_read 
-                                            ? 'active' 
-                                            : ''
-                                    )"
-                                    :onChange="(data) => onChangeStatus(data, dt.id)" 
-                                    :data="bizparCapsule"
-                                    style="margin-left: 10px; capitalize;"
-                                />
-                            </div>
-                        </div>
-                    </div>
-                    <AppLoader v-if="visibleLoader" />
-                </div>
-                <div v-if="!visibleLoader" class="display-flex center">
-                    <button v-if="visibleLoadMore" class="btn btn-sekunder" style="margin-top: 10px; margin-bottom: 20px;" @click="getData(limit, offset)">
-                        Load More
-                    </button>
-                </div>
+
+            <AppLoader v-if="visibleLoader" />
+
+            <div v-if="!visibleLoader" class="display-flex center">
+                <button v-if="visibleLoadMore" class="btn btn-sekunder" style="margin-top: 10px; margin-bottom: 20px;" @click="getData(limit, offset)">
+                    Load More
+                </button>
             </div>
         </div>
     </div>
@@ -99,7 +74,7 @@ export default {
                 {label: 'Unread'}
             ],
             dataUser: null,
-            limit: 4,
+            limit: 10,
             offset: 0
         }
     },

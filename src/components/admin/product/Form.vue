@@ -62,7 +62,7 @@
                         name="category_id" 
                         id="category_id" 
                         v-model="formData.product.category_id"
-                        :readonly="this.title === 'VIEW' ? true : false">
+                        :disabled="this.title === 'VIEW' ? true : false">
                         <option v-for="(ctr, index) in formCategory" :value="ctr.id" :key="index">
                             {{ ctr.name }}
                         </option>
@@ -93,7 +93,7 @@
                                 id="active"
                                 value="active"
                                 v-model="formData.product.status"
-                                :readonly="this.title === 'VIEW' ? true : false" />
+                                :disabled="this.title === 'VIEW' ? true : false" />
                             <span class="checkmark" />
                             <span class="fonts micro">
                                 Active
@@ -107,7 +107,7 @@
                                 id="inactive"
                                 value="inactive"
                                 v-model="formData.product.status"
-                                :readonly="this.title === 'VIEW' ? true : false" />
+                                :disabled="this.title === 'VIEW' ? true : false" />
                             <span class="checkmark" />
                             <span class="fonts micro">
                                 Inactive
@@ -128,7 +128,7 @@
                                 name="is_available" 
                                 id="is_available" 
                                 v-model="formData.product.is_available"
-                                :readonly="this.title === 'VIEW' ? true : false" />
+                                :disabled="this.title === 'VIEW' ? true : false" />
                             <span class="slider round" />
                         </label>
                     </div>
@@ -146,7 +146,7 @@
                                 name="is_pinned" 
                                 id="is_pinned" 
                                 v-model="formData.product.is_pinned" 
-                                :readonly="this.title === 'VIEW' ? true : false" />
+                                :disabled="this.title === 'VIEW' ? true : false" />
                             <span class="slider round" />
                         </label>
                     </div>

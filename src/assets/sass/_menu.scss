@@ -10,12 +10,6 @@
         cursor: pointer;
         display: inline-block;
         font-family: 'GraphikSemibold' , 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        // &:hover {
-        //     color: $main-color;
-        //     a {
-        //         color: $main-color;
-        //     }
-        // }
         &.active {
             color: $main-color;
         }
@@ -31,9 +25,6 @@
             &.router-link-exact-active {
                 color: $main-color;
             }
-            // &.router-link-active {
-            //     color: #151f2d;
-            // }
         }
     }
     &.mobile {
@@ -144,31 +135,26 @@
         .ml-list {
             .ml-link {
                 position: relative;
-                width: calc(100% - 20px);
-                margin: 0 10px;
+                width: calc(100% - 26px);
+                margin: 0 13px;
                 display: block;
                 text-align: center;
                 border-radius: 8px;
-                // @media (max-width: $min-width) {
-                //     width: 100%;
-                //     margin: 0 0;
-                //     border-radius: 0;
-                // }
                 .ml-icon {
                     margin: auto;
-                    width: 45px;
-                    height: 42px;
-                    line-height: 42px;
+                    width: 40px;
+                    height: 60px;
+                    line-height: 60px;
                     text-align: center;
-                    margin-top: 5px;
                     font-size: 16px;
                     color: $grey;
                 }
                 .ml-label {
                     width: 100%;
                     font-size: 11px;
-                    margin-bottom: 5px;
                     color: $grey;
+                    margin-bottom: 5px;
+                    display: none;
                     .label {
                         @include post_top(relative);
                     }
@@ -491,7 +477,7 @@
         display: flex;
         flex-wrap: wrap;
         flex-direction: row;
-        margin-bottom: 5px;
+        padding: 7.5px 0;
         .icn {
             width: 20px;
             .icn-left {
@@ -502,7 +488,12 @@
             width: calc(100% - 30px);
             font-size: 13px;
             color: $black;
-            margin-top: 4px;
+            font-weight: bold;
+        }
+        .router-link-active {
+            .label {
+                color: $main-color;
+            }
         }
     }
 }

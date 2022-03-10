@@ -1,5 +1,5 @@
 <template>
-    <div id="App" style="padding: 10px;">
+    <div id="App" class="card-dashboard-container" style="padding-top: 10px; padding-bottom: 10px;">
         <div class="card bg-white box-shadow" style="margin: 0; padding: 0; width: 100%;">
             <div style="padding: 15px;">
                 <div style="width: 100%;">
@@ -19,9 +19,6 @@
                 </div>
                 <button class="btn btn-full btn-sekunder" style="margin-bottom: 10px;" @click="openDetail">
                     Choose Product
-                </button>
-                <button class="btn btn-full btn-grey" style="margin-bottom: 5px;">
-                    Mark as Unavailable
                 </button>
             </div>
             <div v-if="visiblePopup" class="card-full">
@@ -65,7 +62,7 @@
                     <button 
                         v-if="indexDetail"
                         :class="'btn btn-full btn-main'" 
-                        @click="addCheckOut(data)">
+                        @click="addToCart(data)">
                         Add To Cart
                     </button>
                     <button 
@@ -80,6 +77,7 @@
     </div>
 </template>
 <script>
+import { mapActions } from 'vuex'
 import VueLoadImage from 'vue-load-image'
 
 const payloadItem = {
@@ -132,6 +130,16 @@ export default {
         }
     },
     methods: {
+        ...mapActions({
+            setToast: 'toast/setToast',
+        }),
+        makeToast (title) {
+            const payload = {
+                visible: true,
+                title: title
+            }
+            this.setToast(payload)
+        },
         selectToping (id) {
             if (id === this.indexToping) {
                 this.indexToping = null 
@@ -161,7 +169,7 @@ export default {
         openDetail () {
             this.visiblePopup = !this.visiblePopup
         },
-        addCheckOut (data) {
+        addToCart (data) {
             const toping = this.selectedToping
             const detail = this.selectedDetail
             const price = detail ? detail.price : 0
@@ -190,6 +198,7 @@ export default {
             this.selectedToping = null 
             this.openDetail()
             this.onCheckOut(payload)
+            this.makeToast('Product added to cart')
         }
     }
 }

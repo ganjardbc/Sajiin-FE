@@ -1,87 +1,31 @@
 <template>
     <div id="admin">
-        <div :class="showBar ? 'sidebar show' : 'sidebar'">
-            <div class="header">
-                <div class="header-content display-flex space-between">
-                    <router-link :to="{name: 'home'}" class="logo" style="width: 85%; margin: auto; margin-top: 13px;">
+        <div :class="showBar ? 'sidebar show' : 'sidebar show'">
+            <div class="header header-left">
+                <div class="width width-84-px">
+                    <router-link :to="{name: 'home'}" class="logo">
                         <img :src="logo" alt="SAJI-IN" style="width: 100%;">
                     </router-link>
-                    <div class="mobile-visible" style="width: calc(100% - 8px); padding-left: 4px; padding-right: 4px;">
-                        <div class="display-flex space-between">
-                            <button class="close btn btn-white" @click="onSidebar">
-                                <i class="icn icn-left fa fa-lg fa-times" style="margin-top: 2px;" /> CLOSE
-                            </button>
-                        </div>
-                    </div>
                 </div>
             </div>
-            <div class="content">
+            <div class="content display-flex column center display-mobile">
                 <AppListMenu 
                     :data.sync="sidebar" 
                     :showBar.sync="showBar"
-                    :onPress="onSidebar" />
+                />
+            </div>
+            <div class="header header-right">
+                <AppPopupProfile 
+                    :dataUser.sync="dataUser"
+                    :notif.sync="countNotif" />
             </div>
         </div>
         <div class="main">
-            <div class="header">
-                <div class="set-padding display-flex space-between">
-                    <div class="display-flex">
-                        <button class="mobile-visible btn btn-icon btn-radius-rounded btn-primary" style="margin-right: 5px;" @click="onSidebar">
-                            <i class="fa fa-lg fa-bars"></i>
-                        </button>
-                        <form action="#" class="card-search mobile flat">
-                            <button class="btn btn-icon btn-white" type="submite">
-                                <i class="fa fa-1x fa-search" />
-                            </button>
-                            <input type="search" placeholder="Search products or orders.." required class="field" style="border-radius: 0;">
-                        </form>
-                    </div>
-                    <div style="width: 100%;" class="display-flex right">
-                        <router-link v-if="dataUser.role_name === 'admin' || dataUser.role_name === 'owner'" :to="{name: '404'}" style="margin-left: 5px;" class="button-router-link">
-                            <button class="btn btn-white btn-icon btn-radius" title="Reports">
-                                <i class="fa fa-lg fa-calendar-alt" />
-                            </button>
-                        </router-link>
-                        <div style="margin-left: 5px;">
-                            <AppPopupNotif :notif.sync="countNotif" />
-                        </div>
-                        <!-- <router-link :to="{name: 'employeeform'}" style="margin-left: 5px;" class="button-router-link">
-                            <button class="btn btn-white btn-icon btn-radius" title="Reports">
-                                <i class="fa fa-lg fa-id-card" />
-                            </button>
-                        </router-link> -->
-                        <router-link :to="{name: 'profile'}" class="card-small-profile" style="margin-left: 5px;">
-                            <div class="image" style="text-align: center;">
-                                <img v-if="dataUser && dataUser.image" :src="dataUser && dataUser.image ? (adminImageThumbnailUrl + dataUser.image) : ''" alt="">
-                                <i v-else class="post-top fa fa-lg fa-user-circle" style="color: #999;" />
-                            </div>
-                            <div class="label">
-                                <div class="post-center fonts fonts-10 semibold black" style="text-transform: uppercase;">{{ dataUser && dataUser.name }}</div>
-                            </div>
-                        </router-link>
-                        <div v-if="dataUser.role_name === 'admin' || dataUser.role_name === 'owner'" class="border-left" style="margin-left: 10px; padding-left: 10px;"></div>
-                        <div v-if="dataUser.role_name === 'admin' || dataUser.role_name === 'owner'" class="display-flex">
-                            <router-link :to="{name: 'shop'}" class="card-small-profile">
-                                <div class="image" style="text-align: center;">
-                                    <VueLoadImage v-if="selectedShop && selectedShop.image">
-                                        <img slot="image" :src="selectedShop ? (shopImageThumbnailUrl + selectedShop.image) : ''" alt="">
-                                        <div slot="preloader">
-                                            <i class="post-middle-absolute fa fa-lg fa-spin fa-spinner" style="color: #999;"></i>
-                                        </div>
-                                    </VueLoadImage>
-                                    <i v-else class="post-top fa fa-lw fa-store" style="color: #999;" />
-                                </div>
-                                <div class="label">
-                                    <div class="post-center fonts fonts-10 semibold black" style="text-transform: uppercase;">{{ selectedLabel ? selectedLabel : 'CREATE SHOP' }}</div>
-                                </div>
-                            </router-link>
-                        </div>
-                    </div>
+            <div class="main-content">
+                <div class="main-content-smalls">
+                    <router-view />
+                    <router-view name="adminfresh" />
                 </div>
-            </div>
-            <div class="inner">
-                <router-view />
-                <router-view name="adminfresh" />
             </div>
         </div>
 
@@ -102,25 +46,18 @@ import AppToast from '../modules/AppToast'
 import AppToastMessage from '../modules/AppToastMessage'
 import AppButtonMenu from '../modules/AppButtonMenu'
 import AppButtonQR from '../modules/AppButtonQR'
-import AppPopupNotif from '../modules/AppPopupNotif'
+import AppPopupProfile from '../modules/AppPopupProfile'
 
 const sidebarAdmin = [
     {icon: 'fa fa-lg fa-database', label: 'DASHBOARD', value: 0, menu: [
         {icon: 'fa fa-lg fa-tachometer-alt', label: 'Dashboard', value: 0, link: 'dashboard', permission: 'dashboard'},
+        // {icon: 'fa fa-lg fa-bell', label: 'Notifications', value: 0, link: 'notification', permission: 'notifications'},
         {icon: 'fa fa-lg fa-laptop', label: 'Cashier', value: 0, link: 'cashier', permission: 'cashier'},
         {icon: 'fa fa-lg fa-receipt', label: 'Orders', value: 0, link: 'orderlist', permission: 'orders'},
-        // {icon: 'fa fa-lg fa-clipboard', label: 'TaskLists', value: 0, link: 'tasklist', permission: 'tasklists'},
-        {icon: 'fa fa-lg fa-list-alt', label: 'Products', value: 0, link: 'admin-product', permission: 'products'},
-        {icon: 'fa fa-lg fa-th-large', label: 'Tables', value: 0, link: 'table', permission: 'tables'},
-        {icon: 'fa fa-lg fa-calculator', label: 'Payments', value: 0, link: 'payment', permission: 'payments'},
-        // {icon: 'fa fa-lg fa-users', label: 'Employees', value: 0, link: 'admin-employee', permission: 'employees'}
+        {icon: 'fa fa-lg fa-utensils', label: 'Products', value: 0, link: 'admin-product', permission: 'products'},
+        {icon: 'fa fa-lg fa-store', label: 'Shop', value: 0, link: 'admin-shop', permission: 'shops'},
+        // {icon: 'fa fa-lg fa-cogs', label: 'Settings', value: 0, link: 'admin-setting', permission: 'users'},
     ]},
-    {icon: 'fa fa-lg fa-database', label: 'USER N ROLES', value: 0, menu: [
-        {icon: 'fa fa-lg fa-tag', label: 'Bizpars', value: 0, link: 'bizpar', permission: 'bizpars'},
-        {icon: 'fa fa-lg fa-lock', label: 'Permissions', value: 0, link: 'permission', permission: 'permissions'},
-        {icon: 'fa fa-lg fa-flag', label: 'Roles', value: 0, link: 'role', permission: 'roles'},
-        {icon: 'fa fa-lg fa-user', label: 'Users', value: 0, link: 'userlist', permission: 'users'}
-    ]}
 ]
 
 export default {
@@ -171,7 +108,7 @@ export default {
     },
     components: {
         VueLoadImage,
-        AppPopupNotif,
+        AppPopupProfile,
         AppButtonQR,
         AppButtonMenu,
         AppToastMessage,
@@ -269,9 +206,6 @@ export default {
                 })
             })
         },
-        onSidebar () {
-            this.showBar = !this.showBar
-        },
         getLocalCartCount () {
             const token = 'Bearer '.concat(this.$cookies.get('token'))
             this.getCountCart(token)
@@ -347,6 +281,7 @@ export default {
             } else {
                 this.countNotif = 0
             }
+            this.onSetNotif('dashboard', this.countNotif)
         }
     },
     sockets: {

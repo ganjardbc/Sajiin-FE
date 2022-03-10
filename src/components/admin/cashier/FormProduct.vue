@@ -8,23 +8,18 @@
             </div>
         </div> -->
 
-        <div class="display-flex space-between" style="padding: 10px; padding-left: 15px; padding-right: 15px;">
+        <div class="display-flex space-between card-dashboard-container">
             <div>
-                <AppTabs 
-                    :selectedIndex="selectedTabIndex" 
-                    :path="'main-topic'"
-                    :data="tabs" 
-                    :isScrollable="false" 
-                    :onChange="(data) => onChangeTabs(data)" />
+                <h1 class="fonts big black bold">Cashier</h1>
             </div>
             <button class="btn btn-icon btn-white" @click="refresh">
                 <i class="fa fa-lw fa-retweet"></i>
             </button>
         </div>
 
-        <div v-if="selectedTabIndex === 0">
-            <div class="display-flex wrap" style="padding-left: 5px; padding-right: 5px;">
-                <div v-for="(dt, i) in datas" :key="i" class="column-4 mobile-column-2">
+        <div style="padding-top: 15px;">
+            <div class="display-flex wrap">
+                <div v-for="(dt, i) in datas" :key="i" class="column-4 mobile-column">
                     <CardProduct :data="dt" :onCheckOut="(data) => onCheckOut(data)" />
                 </div>
                 <AppLoader v-if="visibleLoader" />
@@ -61,7 +56,7 @@ export default {
             datas: [],
             dataCategories: [],
             selectedTabIndex: 0,
-            limit: 6,
+            limit: 10,
             offset: 0 
         }
     },

@@ -1,45 +1,57 @@
 <template>
-    <div id="App" style="padding: 5px 10px;">
+    <div id="App">
+        <div class="card-dashboard-container">
+            <div style="padding-bottom: 15px;">
+                <h1 class="fonts big black bold">Dashboard</h1>
+            </div>
+        </div>
         <div style="padding: 15px 0; padding-bottom: 0;">
             <div class="display-flex display-mobile space-between">
                 <div class="width width-row-4">
-                    <AppCardDashboard title="New Orders" height="250px">
+                    <AppCardDashboard height="210px">
                         <div class="post-top content-center">
                             <div class="fonts fonts-48 teal semibold">{{ nowOrders ? (nowOrders.confirmed + nowOrders.unconfirmed) : 0 }}</div>
-                            <div class="fonts fonts-10 grey">Current Orders</div>
+                            <div class="fonts fonts-10 grey">New Orders</div>
+                            <!-- <div style="padding: 20px;"></div> -->
                         </div>
                     </AppCardDashboard>
                 </div>
                 <div class="width width-row-4">
-                    <AppCardDashboard title="On Progress" height="250px">
+                    <AppCardDashboard height="210px">
                         <div class="post-top content-center">
                             <div class="fonts fonts-48 teal semibold">{{ nowOrders ? nowOrders.cooking : 0 }}</div>
-                            <div class="fonts fonts-10 grey">Current Orders</div>
+                            <div class="fonts fonts-10 grey">On Progress Orders</div>
+                            <!-- <div style="padding: 20px;"></div> -->
                         </div>
                     </AppCardDashboard>
                 </div>
                 <div class="width width-row-4">
-                    <AppCardDashboard title="Done" height="250px">
+                    <AppCardDashboard height="210px">
                         <div class="post-top content-center">
                             <div class="fonts fonts-48 grey semibold">{{ nowOrders ? nowOrders.done : 0 }}</div>
-                            <div class="fonts fonts-10 grey">Current Orders</div>
+                            <div class="fonts fonts-10 grey">Done Orders</div>
+                            <!-- <div style="padding: 20px;"></div> -->
                         </div>
                     </AppCardDashboard>
                 </div>
                 <div class="width width-row-4">
-                    <AppCardDashboard title="Canceled" height="250px">
+                    <AppCardDashboard height="210px">
                         <div class="post-top content-center">
                             <div class="fonts fonts-48 grey semibold">{{ nowOrders ? nowOrders.canceled : 0 }}</div>
-                            <div class="fonts fonts-10 grey">Current Orders</div>
+                            <div class="fonts fonts-10 grey">Canceled Orders</div>
+                            <!-- <div style="padding: 20px;"></div> -->
                         </div>
                     </AppCardDashboard>
                 </div>
             </div>
         </div>
         <div class="display-flex display-mobile space-between" style="padding: 15px 0; padding-bottom: 0;">
-            <div style="width: 100%;">
-                <AppCardDashboard title="Last 30 Days Order" height="500px">
-                    <apexchart width="98%" height="95%" type="line" :options="options" :series="series"></apexchart>
+            <div class="display-flex display-mobile" style="width: 100%;">
+                <AppCardDashboard title="Last 30 Day's Orders" height="600px">
+                    <apexchart width="98%" height="98%" type="line" :options="options" :series="series"></apexchart>
+                </AppCardDashboard>
+                <AppCardDashboard :title="`Notifications (${ notif })`" height="600px">
+                    <AppPopupNotif :notif.sync="countNotif" />
                 </AppCardDashboard>
             </div>
         </div>
@@ -50,6 +62,7 @@
 import axios from 'axios'
 import { mapGetters, mapActions } from 'vuex'
 import AppCardDashboard from '../modules/AppCardDashboard'
+import AppPopupNotif from '../modules/AppPopupNotif'
 import moment from 'moment'
 
 export default {
@@ -69,7 +82,8 @@ export default {
                 data: []
             }],
             nowOrders: null,
-            dataShop: null
+            dataShop: null,
+            countNotif: 0
         }
     },
     mounted () {
@@ -79,14 +93,16 @@ export default {
         this.getDataOrder()
     },
     components: {
-        AppCardDashboard
+        AppCardDashboard,
+        AppPopupNotif
     },
     computed: {
         ...mapGetters({
             cart: 'cart/count',
             carts: 'cart/all',
             order: 'order/count',
-            orders: 'order/all'
+            orders: 'order/all',
+            notif: 'notification/count',
         })
     },
     watch: {

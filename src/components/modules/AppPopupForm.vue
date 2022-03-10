@@ -1,10 +1,10 @@
 <template>
     <div id="AppPopupForm" class="display-popup">
         <div class="card-container-popup">
-            <div class="card-popup bg-white box-shadow">
+            <div class="card-popup no-padding mobile bg-white box-shadow">
                 <div class="width width-100 width-center width-mobile">
-                    <div class="display-flex justify-content">
-                        <div style="width: calc(100% - 150px); margin-top: 8px;">
+                    <div class="card-popoup-header display-flex align-center space-between">
+                        <div style="width: calc(100% - 150px);">
                             <div class="fonts normal semibold">{{ appTitle }}</div>
                         </div>
                         <div class="display-flex align-right" style="width: 150px;">
@@ -19,7 +19,7 @@
                             </button>
                         </div>
                     </div>
-                    <div style="max-height: calc(100vh - 200px); overflow-y: auto; padding-right: 2px;">
+                    <div class="card-popup-body">
                         <slot />
                     </div>
                 </div>

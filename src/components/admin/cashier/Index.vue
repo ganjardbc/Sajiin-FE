@@ -1,20 +1,36 @@
 <template>
     <div id="App">
+        <!-- <div class="left-form">
+            <FormProduct 
+                :onChange="(data) => onChange(data)" />
+        </div> -->
+
+        <!-- <div class="right-form">
+            <div style="padding: 15px;">
+                <FormCarts 
+                    :data.sync="items"
+                    :onClickClose="onVisibleCart"
+                    :onCheckOut="(data) => onCheckOut(data)"
+                    :onSave="(data) => onSave(data)"
+                    :onDelete="(data) => onDelete(data)" />
+            </div>
+        </div> -->
+
         <div>
             <FormProduct 
                 :onChange="(data) => onChange(data)" />
- 
-            <div style="padding-bottom: 85px;"></div>
+            
+            <div style="padding: 45px;"></div>
         </div>
 
-        <div :class="`content-form ' ${!visibleCart ? 'hide' : ''}`">
+        <div :class="`content-form ${!visibleCart ? 'hide' : ''}`">
             <div class="right">
                 <AppSideForm
                     :title="'Carts'"
                     :enableSaveButton="false"
                     :onClose="onVisibleCart"
                 >
-                    <FormCheckout 
+                    <FormCarts 
                         :data.sync="items"
                         :onClickClose="onVisibleCart"
                         :onCheckOut="(data) => onCheckOut(data)"
@@ -24,7 +40,7 @@
             </div>
         </div>
 
-        <div :class="`content-form ' ${!visibleCheckOut ? 'hide' : ''}`">
+        <div :class="`content-form ${!visibleCheckOut ? 'hide' : ''}`">
             <div class="right">
                 <!-- :enableSaveButton="selectedTable && selectedPayment ?  true : false" -->
                 <AppSideForm
@@ -33,124 +49,15 @@
                     :onSave="onShowHideSave"
                     :onClose="onButtonCheckOut"
                 >
-                    <div>
-                        <div class="display-flex" style="margin-bottom: 15px;">
-                            <div style="width: 100%;">
-                                <div class="fonts fonts-10 grey">Subtotal</div>
-                                <div class="fonts fonts-12 semibold orange">Rp. {{ order.order.total_price }}</div>
-                            </div>
-                            <div style="width: 30px;"></div>
-                        </div>
-                        <div style="margin-bottom: 15px;">
-                            <div class="fonts fonts-10 grey">Payment Status</div>
-                            <div class="fonts fonts-12 semibold">{{ order.order.payment_status ? 'Paid' : 'Unpaid' }}</div>
-                        </div>
-                        <div class="display-flex">
-                            <div class="field-group margin margin-bottom-15-px">
-                                <div class="fonts fonts-10 grey" style="margin-bottom: 5px;">Bills</div>
-                                <input 
-                                    type="number" 
-                                    placeholder="" 
-                                    class="field field-sekunder" 
-                                    name="bills_price" 
-                                    id="bills_price" 
-                                    @keyup="onChangeBills"
-                                    v-model="order.order.bills_price">
-                                <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
-                                    {{ formMessage && formMessage.bills_price && formMessage.bills_price[0] }}
-                                </div>
-                            </div>
-                            <div style="width: 30px;"></div>
-                            <div class="field-group margin margin-bottom-15-px">
-                                <div class="fonts fonts-10 grey" style="margin-bottom: 5px;">Change</div>
-                                <input 
-                                    type="number" 
-                                    placeholder="" 
-                                    class="field field-sekunder" 
-                                    name="change_price" 
-                                    id="change_price" 
-                                    v-model="order.order.change_price"
-                                    readonly>
-                                <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
-                                    {{ formMessage && formMessage.change_price && formMessage.change_price[0] }}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="width width-100 margin margin-bottom-20-px">
-                            <div class="fonts fonts-10 grey" style="margin-bottom: 5px;">Table</div>
-                            <div class="card border-full" style="padding: 10px; width: calc(100% - 20px);">
-                                <div class="display-flex space-between">
-                                    <div v-if="selectedTable" class="display-flex">
-                                        <div style="width: 45px; margin-right: 15px">
-                                            <div class="image image-padding" style="background-color: rgba(0, 0, 0, 0)">
-                                                <img alt="" :src="selectedTable ? (tableImageThumbnailUrl + selectedTable.image) : ''" />
-                                            </div>
-                                        </div>
-                                        <div style="width: calc(100% - 60px);">
-                                            <div style="width: 100%;">
-                                                <div class="fonts fonts-10 semibold black">
-                                                    {{ selectedTable && selectedTable.name }}
-                                                </div>
-                                                <div class="fonts fonts-10 grey">
-                                                    {{ selectedTable && selectedTable.code }} | {{ selectedTable && selectedTable.description }}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div v-else>
-                                        <div class="fonts fonts-10 semibold" style="margin-top: 10px; margin-left: 10px;">Choose visible table</div>
-                                    </div>
-                                    <div style="width: 40px;">
-                                        <button class="btn btn-icon btn-main-reverse with-hover" @click="openTable">
-                                            <i class="fa fa-lg fa-arrow-right" />
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="width width-100 margin margin-bottom-20-px">
-                            <div class="fonts fonts-10 grey" style="margin-bottom: 5px;">Payment</div>
-                            <div class="card border-full" style="padding: 10px; width: calc(100% - 20px);">
-                                <div class="display-flex space-between">
-                                    <div v-if="selectedPayment" class="display-flex">
-                                        <div style="width: 45px; margin-right: 15px">
-                                            <div class="image image-padding" style="background-color: rgba(0, 0, 0, 0)">
-                                                <img alt="" :src="selectedPayment ? (paymentImageThumbnailUrl + selectedPayment.image) : ''" />
-                                            </div>
-                                        </div>
-                                        <div class="display-flex space-between" style="width: calc(100% - 60px);">
-                                            <div class="post-tops">
-                                                <div class="fonts fonts-10 semibold black">
-                                                    {{ selectedPayment && selectedPayment.name }}
-                                                </div>
-                                                <div class="fonts fonts-10 grey">{{ selectedPayment && selectedPayment.description }}</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div v-else>
-                                        <div class="fonts fonts-10 semibold" style="margin-top: 10px; margin-left: 10px;">Choose payment method</div>
-                                    </div>
-                                    <div style="width: 40px;">
-                                        <button class="btn btn-icon btn-main-reverse with-hover" @click="openPayment">
-                                            <i class="fa fa-lg fa-arrow-right" />
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="field-group margin margin-bottom-15-px">
-                            <div class="fonts fonts-10 grey" style="margin-bottom: 0;">Notes</div>
-                            <div class="fonts fonts-10 grey" style="margin-bottom: 10px;">You can put the initial name order</div>
-                            <textarea 
-                                name="note" 
-                                id="note" 
-                                class="field field-sekunder field-textarea" 
-                                v-model="order.order.note"></textarea>
-                            <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
-                                {{ formMessage && formMessage.note && formMessage.note[0] }}
-                            </div>
-                        </div>
-                    </div>
+                    <FormCheckout 
+                        :order.sync="order"
+                        :formMessage.sync="formMessage"
+                        :selectedTable.sync="selectedTable"
+                        :selectedPayment.sync="selectedPayment"
+                        :onChangeBills="onChangeBills"
+                        :onTable="openTable"
+                        :onPayment="openPayment"
+                    />
                 </AppSideForm>
             </div>
         </div>
@@ -171,7 +78,7 @@
             :onChange="(data) => onChangeTable(data)"
         />
 
-        <FormCheckoutSmall 
+        <FormCartsSmall 
             :data.sync="items"
             :onClick="onVisibleCart"
         />
@@ -196,8 +103,9 @@ import { mapActions, mapGetters } from 'vuex'
 import axios from 'axios'
 import FormProduct from './FormProduct'
 import FormOrders from './FormOrders'
+import FormCarts from './FormRightCarts'
+import FormCartsSmall from './FormCartsSmall'
 import FormCheckout from './FormCheckout'
-import FormCheckoutSmall from './FormCheckoutSmall'
 import CardPayment from './CardPayment'
 import AppPopupForm from '../../modules/AppPopupForm'
 import AppAlert from '../../modules/AppAlert'
@@ -291,8 +199,9 @@ export default {
         AppPopupForm,
         FormProduct,
         FormOrders,
+        FormCarts,
+        FormCartsSmall,
         FormCheckout,
-        FormCheckoutSmall,
         FormTable,
         FormPayment
     },
@@ -353,8 +262,6 @@ export default {
                     shop_name: this.dataShop.name 
                 }
             }
-
-            console.log('payload', data)
             
             const rest = await axios.post('/api/order/postAdmin', data, { headers: { Authorization: token } })
 
@@ -374,11 +281,6 @@ export default {
                 this.visibleAlertSave = false
                 this.makeToast('Order Failed to Create')
             }
-        },
-
-        // orders
-        onChangeOrders (data) {
-            console.log('onChangeOrders', data)
         },
 
         // check out
@@ -499,7 +401,8 @@ export default {
             const payload = {
                 limit: 1000,
                 offset: 0,
-                status: 'active'
+                status: 'active',
+                user_id: this.dataUser.id
             }
             const rest = await axios.post('/api/payment/getAll', payload, { headers: { Authorization: token } })
 
@@ -513,7 +416,8 @@ export default {
             const payload = {
                 limit: 1000,
                 offset: 0,
-                status: 'active'
+                status: 'active',
+                user_id: this.dataUser.id
             }
             const rest = await axios.post('/api/table/getAll', payload, { headers: { Authorization: token } })
 

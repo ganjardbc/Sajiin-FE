@@ -159,6 +159,12 @@
             width: calc(100% - 30px);
         }
     }
+    &.micro {
+        width: 300px;
+        @media (max-width: $min-width) {
+            width: calc(100% - 30px);
+        }
+    }
     &.no-padding {
         padding: 0;
     }
@@ -170,14 +176,15 @@
     }
     .card-popup-body {
         position: relative;
-        width: 100%;
+        width: calc(100% - 30px);
         height: calc(100vh - 200px);
+        padding: 0 15px;
         overflow-y: auto;
         @include transparantScrollBar();
     }
     &.mobile {
         @media (max-width: $min-width) {
-            position: fixed !important;
+            position: relative !important;
             top: 0 !important;
             left: 0 !important;
             border-radius: 0;
@@ -236,6 +243,19 @@
                 display: block;
             }
         }
+    }
+}
+
+.card-profile-menu {
+    position: absolute; 
+    bottom: 55px; 
+    left: 0; 
+    z-index: 1000;
+    @media (max-width: $min-width) {
+        bottom: unset;
+        top: 50px;
+        left: unset;
+        right: 10px;
     }
 }
 
@@ -707,6 +727,7 @@
     width: 350px;
     @media (max-width: $min-width) {
         width: calc(100% - 40px);
+        bottom: 70px;
     }
 }
 
@@ -733,5 +754,14 @@
         font-size: 12px;
         font-weight: 600;
         color: #fff;
+    }
+}
+
+.card-dashboard-container {
+    padding: 0 10px;
+    width: calc(100% - 20px);
+    @media (max-width: $min-width) {
+        padding: 0 0;
+        width: 100%;
     }
 }

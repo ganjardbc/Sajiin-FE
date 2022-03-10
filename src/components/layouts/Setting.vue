@@ -14,9 +14,14 @@
 import AppListDownMenu from '../modules/AppListDownMenu'
 
 const menus = [
-    {label: 'Products', icon: 'fa fa-lg fa-list-alt', link: 'listing'},
-    {label: 'Toppings', icon: 'fa fa-lg fa-list-alt', link: 'toping'},
-    {label: 'Categories', icon: 'fa fa-lg fa-list-alt', link: 'category'}
+    // {label: 'Products', icon: 'fa fa-lg fa-list-alt', link: 'listing'},
+    // {label: 'Toppings', icon: 'fa fa-lg fa-list-alt', link: 'toping'},
+    // {label: 'Categories', icon: 'fa fa-lg fa-list-alt', link: 'category'},
+    // {icon: 'fa fa-lg fa-user', label: 'Profile', link: 'profile'},
+    {icon: 'fa fa-lg fa-tag', label: 'Bizpars', link: 'bizpar'},
+    {icon: 'fa fa-lg fa-lock', label: 'Permissions', link: 'permission'},
+    {icon: 'fa fa-lg fa-flag', label: 'Roles', link: 'role'},
+    {icon: 'fa fa-lg fa-users', label: 'Users', link: 'userlist'},
 ]
 
 export default {

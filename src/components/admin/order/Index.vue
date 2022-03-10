@@ -2,15 +2,9 @@
     <div id="App" :class="formClass ? 'content-form' : 'content-form hide'">
         <div class="left">
             <div class="bg-white">
-                <div class="display-flex row space-between padding padding-10-px" style="height: 40px;">
+                <div class="display-flex space-between" style="padding-bottom: 15px;">
                     <div>
-                        <AppTabs 
-                            :selectedIndex="selectedTabIndex" 
-                            :path="'main-topic'"
-                            :data="tabs" 
-                            :isScrollable="false" 
-                            :onChange="(data) => onChangeTabs(data)" 
-                            class="margins margin-bottom-15-px" />
+                        <h1 class="fonts big black bold">Orders</h1>
                     </div>
                     <div class="display-flex">
                         <AppButtonMenu 
@@ -22,15 +16,24 @@
                         <button class="btn btn-white btn-icon btn-radius" @click="onChangeTabs(selectedTabIndex)">
                             <i class="fa fa-lw fa-retweet" />
                         </button>
-                        <!-- <button class="btn btn-white btn-icon btn-radius" @click="onShow('CREATE')">
-                            <i class="fa fa-lw fa-plus" />
-                        </button> -->
                         <SearchField :placeholder="'Search orders ..'" :enableResponsive="true" style="margin-left: 5px;" />
                     </div>
                 </div>
+
+                <div style="padding-bottom: 15px;">
+                    <div class="width width-100 border-bottom">
+                        <AppTabs 
+                            :selectedIndex="selectedTabIndex" 
+                            :path="'main-topic'"
+                            :data="tabs" 
+                            :isScrollable="false" 
+                            :onChange="(data) => onChangeTabs(data)" 
+                            class="width width-300-px" />
+                    </div>
+                </div>
                 
-                <div class="content-body">
-                    <div style="padding-left: 15px; padding-right: 15px;">
+                <div>
+                    <div>
                         <AppCardOrder 
                             :data.sync="datas" 
                             :type="'owner'" 
