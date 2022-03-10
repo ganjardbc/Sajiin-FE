@@ -34,11 +34,9 @@
                     </div>
 
                     <div class="border-top" style="padding-top: 15px;">
-                        <router-link 
-                            :to="{name: 'profile'}"
+                        <div
                             :class="`card-small-profile display-flex align-center`" 
-                            style="height: 40px;"
-                            @click="visiblePopup = !visiblePopup">
+                            style="height: 40px; cursor: default;">
                             <div 
                                 class="image" 
                                 style="text-align: center; width: 40px; height: 40px; margin-right: 10px;">
@@ -55,7 +53,7 @@
                                 <div class="fonts fonts-10 semibold black">{{ dataUser && dataUser.name }}</div>
                                 <div class="fonts fonts-10 black">{{ dataUser && dataUser.email }}</div>
                             </div>
-                        </router-link>
+                        </div>
                     </div>
                 </div>
             </div>

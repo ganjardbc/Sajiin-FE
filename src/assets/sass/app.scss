@@ -23,6 +23,11 @@
     @include transparantScrollBarHover();
 }
 
+html, body {
+    height: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+
 a {
     text-decoration: none;
 }
@@ -492,7 +497,7 @@ a {
         .content {
             position: relative;
             width: 100%;
-            height: calc(100vh - 120px);
+            height: calc(100% - 120px);
             overflow-x: hidden;
             overflow-y: auto;
         }
