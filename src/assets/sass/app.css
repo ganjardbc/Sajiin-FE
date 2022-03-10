@@ -1518,8 +1518,9 @@ a.btn {
 .card-popup .card-popup-body {
   position: relative;
   width: calc(100% - 30px);
-  height: calc(100vh - 200px);
+  max-height: calc(100vh - 200px);
   padding: 0 15px;
+  padding-bottom: 15px;
   overflow-y: auto;
 }
 .card-popup .card-popup-body::-moz-scrollbar {
@@ -1558,7 +1559,9 @@ a.btn {
     height: 100%;
   }
   .card-popup.mobile .card-popup-body {
+    padding-bottom: 0;
     height: calc(100vh - 50px);
+    max-height: calc(100vh - 50px);
   }
 }
 
