@@ -50,9 +50,9 @@
                 <AppCardDashboard title="Last 30 Day's Orders" height="600px">
                     <apexchart width="98%" height="98%" type="line" :options="options" :series="series"></apexchart>
                 </AppCardDashboard>
-                <AppCardDashboard :title="`Notifications (${ notif })`" height="600px">
+                <!-- <AppCardDashboard :title="`Notifications (${ notif })`" height="600px">
                     <AppPopupNotif :notif.sync="countNotif" />
-                </AppCardDashboard>
+                </AppCardDashboard> -->
             </div>
         </div>
     </div>

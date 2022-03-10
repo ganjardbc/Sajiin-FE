@@ -52,8 +52,8 @@
                                     style="color: #999;" />
                             </div>
                             <div style="width: calc(100% - 50px);">
-                                <div class="fonts fonts-11 semibold black">{{ dataUser && dataUser.name }}</div>
-                                <div class="fonts fonts-11 black">{{ dataUser && dataUser.email }}</div>
+                                <div class="fonts fonts-10 semibold black">{{ dataUser && dataUser.name }}</div>
+                                <div class="fonts fonts-10 black">{{ dataUser && dataUser.email }}</div>
                             </div>
                         </router-link>
                     </div>
@@ -66,6 +66,7 @@
 import AppListDownMenu from './AppListDownMenu'
 
 const menus = [
+    {icon: 'fa fa-lg fa-tachometer-alt', label: 'Dashboard', link: 'dashboard'},
     {icon: 'fa fa-lg fa-user', label: 'Profile', link: 'profile'},
     {icon: 'fa fa-lg fa-calendar-alt', label: 'Reports', link: '404'},
     {icon: 'fa fa-lg fa-cogs', label: 'Settings', link: 'admin-setting'},

@@ -1,5 +1,5 @@
 <template>
-    <div id="Profile" style="padding: 0 10px;">
+    <div id="Profile" class="card-dashboard-container">
         <div style="padding-bottom: 15px;">
             <h1 class="fonts big black bold">Profile</h1>
         </div>
@@ -67,7 +67,7 @@
                             </div>
                         </div>
                         <div class="width width-100 display-flex display-mobile margin margin-bottom-20-px">
-                            <div class="width width-30">
+                            <div class="width width-30 width-mobile">
                                 <div class="fonts fonts-11">Enabled</div>
                                 <div class="fonts micro black" style="margin-bottom: 10px;">Is this user enable ?</div>
                             </div>
@@ -83,7 +83,7 @@
                             </div>
                         </div>
                         <div class="width width-100 display-flex display-mobile margin margin-bottom-20-px">
-                            <div class="width width-30">
+                            <div class="width width-30 width-mobile">
                                 <div class="fonts fonts-11">Status</div>
                                 <div class="fonts micro black" style="margin-bottom: 10px;">Is this user active ?</div>
                             </div>

@@ -6,43 +6,41 @@
                     <div>
                         <h1 class="fonts big black bold">Notifications</h1>
                     </div>
-                    <div class="display-flex">
+                    <button class="btn btn-icon btn-white" @click="refresh">
+                        <i class="fa fa-lw fa-retweet"></i>
+                    </button>
+                    <!-- <div class="display-flex">
                         <AppButtonMenu 
                             :icon="'fa fa-lw fa-filter'"
                             :button="'btn btn-icon btn-white'"
                             :onChange="(data) => onChangeMenu(data)" 
                             :data="[{label: 'By ID'}, {label: 'By Title'}, {label: 'By Status'}]" />
                         <SearchField :placeholder="'Search notifications ..'" :enableResponsive="true" style="margin-left: 5px;" />
-                    </div>
+                    </div> -->
                 </div>
 
-                <div v-for="(dt, i) in datas" :key="i" class="card box-shadow" style="margin-top: 15px; margin-bottom: 15px; overflow: unset;">
-                    <div class="display-flex space-between" style="padding-top: 5px; padding-bottom: 5px;">
-                        <div style="width: 60px; margin-right: 15px;">
+                <div 
+                    v-for="(dt, i) in datas" 
+                    :key="i" 
+                    :class="`card box-shadow ${dt.is_read ? 'bg-white' : 'bg-white-grey'}`"
+                    style="margin-top: 15px; margin-bottom: 15px; overflow: unset;">
+                    <div class="display-flex" style="padding-top: 5px; padding-bottom: 5px;">
+                        <div style="width: 40px; margin-right: 10px;">
                             <div class="image image-padding border border-full">
                                 <img v-if="dt.image" :src="notificationImageThumbnailUrl + dt.image" alt="" class="post-center">
                                 <i v-else class="post-middle-absolute icn fa fa-lg fa-bell"></i>
                             </div>
                         </div>
-                        <div style="width: calc(100% - 185px);">
+                        <div style="width: calc(100% - 150px);">
                             <div class="display-flex" style="margin-bottom: 5px;">
                                 <div class="fonts fonts-11 semibold" style="margin-top: 3px;">{{ dt.title }}</div>
-                                <div 
-                                    :class="'card-capsule ' + (
-                                    dt.is_read 
-                                        ? 'active' 
-                                        : ''
-                                    )" 
-                                    style="margin-left: 10px; text-transform: capitalize;">
-                                    {{ dt.is_read ? 'Read' : 'Unread' }}
-                                </div>
                             </div>
                             <div>
                                 <div class="fonts fonts-10 grey">{{ dt.subtitle }}</div>
                                 <div class="fonts fonts-10 grey">{{ dt.created_at | moment("from", "now") }}</div>
                             </div>
                         </div>
-                        <div class="display-flex column space-between" style="width: 100px;">
+                        <div class="display-flex row align-right" style="width: 100px;">
                             <AppCapsuleMenu 
                                 :title="dt.is_read ? 'Read' : 'Unread'"
                                 :status="(
@@ -126,7 +124,7 @@ export default {
             currentPage: 1,
             totalPages: 0,
             dataUser: null,
-            limit: 4,
+            limit: 10,
             offset: 0
         }
     },
@@ -214,6 +212,9 @@ export default {
             }
 
             this.saveData(id, data)
+        },
+        refresh() {
+            this.getData(this.limit, 0)
         },
         async saveData (id, status) {
             this.visibleLoaderAction = true

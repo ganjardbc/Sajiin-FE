@@ -180,9 +180,6 @@ export default {
         }
     },
     mounted () {
-        this.getDataPayment()
-        this.getDataTable()
-
         const order = this.$cookies.get('orderItem')
         const cart = this.cartItems ? this.cartItems : order ? order : []
         this.items = cart && cart.details ? cart.details : []
@@ -191,6 +188,9 @@ export default {
         this.order = order ? order : payloadOrder
         this.dataUser = this.$cookies.get('user')
         this.dataShop = this.$cookies.get('shop')
+
+        this.getDataPayment()
+        this.getDataTable()
     },
     components: {
         CardPayment,
