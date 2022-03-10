@@ -152,7 +152,6 @@
     border-radius: 8px;
     @media (max-width: $min-width) {
         width: calc(100% - 30px);
-        height: calc(100% - 30px);
         border-radius: 0;
         border-top-left-radius: 8px;
         border-top-right-radius: 8px;
@@ -171,6 +170,9 @@
     }
     &.no-padding {
         padding: 0;
+        @media (max-width: $min-width) {
+            width: 100%;
+        }
     }
     .card-popoup-header {
         position: relative;
@@ -261,6 +263,7 @@
         top: 50px;
         left: unset;
         right: 0;
+        width: 280px;
     }
 }
 

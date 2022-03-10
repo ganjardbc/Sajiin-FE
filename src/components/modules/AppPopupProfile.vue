@@ -21,7 +21,7 @@
         <div 
             v-if="visiblePopup" 
             class="card-profile-menu">
-            <div class="card-popup mobile micro no-padding bg-white box-shadow">
+            <div class="card-popup micro no-padding bg-white box-shadow">
                 <div style="padding: 15px;">
                     <div style="padding-bottom: 10px;">
                         <ul class="menu-info">
