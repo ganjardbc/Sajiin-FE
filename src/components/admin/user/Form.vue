@@ -43,7 +43,7 @@
                         name="category_id" 
                         id="category_id" 
                         v-model="formData.role_id"
-                        :readonly="this.title === 'VIEW' ? true : false">
+                        :disabled="this.title === 'VIEW' ? true : false">
                         <option v-for="(ctr, index) in formRoles" :value="ctr.id" :key="index">
                             {{ ctr.role_name }}
                         </option>
@@ -118,7 +118,7 @@
                                 name="enabled" 
                                 id="enabled" 
                                 v-model="formData.enabled"
-                                :readonly="this.title === 'VIEW' ? true : false" />
+                                :disabled="this.title === 'VIEW' ? true : false" />
                             <span class="slider round" />
                         </label>
                     </div>
@@ -136,7 +136,7 @@
                                 id="active"
                                 value="active"
                                 v-model="formData.status"
-                                :readonly="this.title === 'VIEW' ? true : false" />
+                                :disabled="this.title === 'VIEW' ? true : false" />
                             <span class="checkmark" />
                             <span class="fonts micro">
                                 Active
@@ -150,7 +150,7 @@
                                 id="inactive"
                                 value="inactive"
                                 v-model="formData.status"
-                                :readonly="this.title === 'VIEW' ? true : false" />
+                                :disabled="this.title === 'VIEW' ? true : false" />
                             <span class="checkmark" />
                             <span class="fonts micro">
                                 Inactive

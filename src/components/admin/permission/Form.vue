@@ -56,7 +56,7 @@
                                 id="active"
                                 value="active"
                                 v-model="formData.status"
-                                :readonly="this.title === 'VIEW' ? true : false" />
+                                :disabled="this.title === 'VIEW' ? true : false" />
                             <span class="checkmark" />
                             <span class="fonts micro">
                                 Active
@@ -70,7 +70,7 @@
                                 id="inactive"
                                 value="inactive"
                                 v-model="formData.status"
-                                :readonly="this.title === 'VIEW' ? true : false" />
+                                :disabled="this.title === 'VIEW' ? true : false" />
                             <span class="checkmark" />
                             <span class="fonts micro">
                                 Inactive

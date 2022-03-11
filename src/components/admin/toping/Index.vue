@@ -137,7 +137,7 @@ export default {
             currentPage: 1,
             totalPages: 0,
             dataUser: null,
-            limit: 4,
+            limit: 10,
             offset: 0
         }
     },

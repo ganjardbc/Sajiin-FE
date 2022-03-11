@@ -111,21 +111,21 @@
             }
             .router-link-active {
                 border-radius: 8px;
-                background-color: $main-color;
-                box-shadow: $shadow;
+                background-color: #fff;
+                // box-shadow: $shadow;
                 .ml-icon {
-                    color: #fff;
+                    color: $main-color;
                 }
                 .ml-label {
-                    color: #fff;
+                    color: $main-color;
                 }
                 &:hover {
-                    background-color: $main-color;
+                    background-color: #f9f9f9;
                     .ml-icon {
-                        color: #fff;
+                        color: $main-color;
                     }
                     .ml-label {
-                        color: #fff;
+                        color: $main-color;
                     }
                 }
             }
@@ -178,21 +178,21 @@
                 }
             }
             .router-link-active {
-                background-color: $main-color;
-                box-shadow: $shadow;
+                background-color: #fff;
+                // box-shadow: $shadow;
                 .ml-icon {
-                    color: #fff;
+                    color: $main-color;
                 }
                 .ml-label {
-                    color: #fff;
+                    color: $main-color;
                 }
                 &:hover {
-                    background-color: $main-color;
+                    background-color: #f9f9f9;
                     .ml-icon {
-                        color: #fff;
+                        color: $main-color;
                     }
                     .ml-label {
-                        color: #fff;
+                        color: $main-color;
                     }
                 }
             }

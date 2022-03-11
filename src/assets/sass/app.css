@@ -877,23 +877,22 @@ a.btn {
 }
 .menu-list.with-icon .ml-list .router-link-active {
   border-radius: 8px;
-  background-color: #FB3640;
-  box-shadow: 3px 6px 18px #ededf1;
+  background-color: #fff;
 }
 .menu-list.with-icon .ml-list .router-link-active .ml-icon {
-  color: #fff;
+  color: #FB3640;
 }
 .menu-list.with-icon .ml-list .router-link-active .ml-label {
-  color: #fff;
+  color: #FB3640;
 }
 .menu-list.with-icon .ml-list .router-link-active:hover {
-  background-color: #FB3640;
+  background-color: #f9f9f9;
 }
 .menu-list.with-icon .ml-list .router-link-active:hover .ml-icon {
-  color: #fff;
+  color: #FB3640;
 }
 .menu-list.with-icon .ml-list .router-link-active:hover .ml-label {
-  color: #fff;
+  color: #FB3640;
 }
 .menu-list.with-big-icon .ml-list .ml-link {
   position: relative;
@@ -947,23 +946,22 @@ a.btn {
   overflow: hidden;
 }
 .menu-list.with-big-icon .ml-list .router-link-active {
-  background-color: #FB3640;
-  box-shadow: 3px 6px 18px #ededf1;
+  background-color: #fff;
 }
 .menu-list.with-big-icon .ml-list .router-link-active .ml-icon {
-  color: #fff;
+  color: #FB3640;
 }
 .menu-list.with-big-icon .ml-list .router-link-active .ml-label {
-  color: #fff;
+  color: #FB3640;
 }
 .menu-list.with-big-icon .ml-list .router-link-active:hover {
-  background-color: #FB3640;
+  background-color: #f9f9f9;
 }
 .menu-list.with-big-icon .ml-list .router-link-active:hover .ml-icon {
-  color: #fff;
+  color: #FB3640;
 }
 .menu-list.with-big-icon .ml-list .router-link-active:hover .ml-label {
-  color: #fff;
+  color: #FB3640;
 }
 .menu-list.with-big-icon .submenu {
   text-align: center;
@@ -76093,7 +76091,7 @@ table thead, table tbody tr {
 .table-container {
   position: relative;
   width: 100%;
-  height: calc(100vh - 185px);
+  height: calc(100vh - 210px);
   overflow: auto;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }

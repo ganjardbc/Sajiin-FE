@@ -136,7 +136,7 @@ export default {
             limitPage: 10,
             currentPage: 1,
             totalPages: 0,
-            limit: 4,
+            limit: 10,
             offset: 0,
             dataUser: null
         }
