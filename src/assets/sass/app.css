@@ -276,6 +276,11 @@ a.btn {
   justify-content: center;
   border-radius: 4px;
 }
+.btn:disabled {
+  background-color: #ededf1 !important;
+  cursor: not-allowed !important;
+  opacity: 0.5 !important;
+}
 .btn .notif {
   position: absolute;
   top: 0;
@@ -506,6 +511,9 @@ a.btn {
 .field:read-only {
   background-color: #ededf1 !important;
 }
+.field:disabled {
+  background-color: #ededf1 !important;
+}
 .field.field-main {
   background-color: #FB3640;
   color: #fff;
@@ -609,9 +617,6 @@ a.btn {
   background-color: #fff;
   color: #151f2d;
   border: 1px solid rgba(0, 0, 0, 0.1);
-}
-.slc:read-only {
-  background-color: #ededf1 !important;
 }
 .slc:disabled {
   background-color: #ededf1 !important;
@@ -877,7 +882,7 @@ a.btn {
 }
 .menu-list.with-icon .ml-list .router-link-active {
   border-radius: 8px;
-  background-color: #fff;
+  background-color: #f9f9f9;
 }
 .menu-list.with-icon .ml-list .router-link-active .ml-icon {
   color: #FB3640;
@@ -2294,6 +2299,88 @@ a.btn {
   width: 6px;
 }
 .display-flex.overflow-y:hover::-moz-scrollbar-thumb {
+  -webkit-transition: all 0.25s ease;
+  -moz-transition: all 0.25s ease;
+  -ms-transition: all 0.25s ease;
+  -o-transition: all 0.25s ease;
+  transition: all 0.25s ease;
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 6px;
+}
+.display-flex .horizontal-scroll {
+  position: relative;
+  width: 100%;
+  white-space: nowrap;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+.display-flex .horizontal-scroll::scrollbar {
+  width: 6px;
+  height: 6px;
+  background-color: rgba(0, 0, 0, 0);
+}
+.display-flex .horizontal-scroll::scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0);
+  border-radius: 1ex;
+  border-radius: 1ex;
+}
+.display-flex .horizontal-scroll::scrollbar-corner {
+  background-color: #fff;
+}
+.display-flex .horizontal-scroll::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  background-color: rgba(0, 0, 0, 0);
+}
+.display-flex .horizontal-scroll::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0);
+  -webkit-border-radius: 1ex;
+  border-radius: 1ex;
+}
+.display-flex .horizontal-scroll::-webkit-scrollbar-corner {
+  background-color: #fff;
+}
+.display-flex .horizontal-scroll::-moz-scrollbar {
+  width: 6px;
+  height: 6px;
+  background-color: rgba(0, 0, 0, 0);
+}
+.display-flex .horizontal-scroll::-moz-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0);
+  -moz-border-radius: 1ex;
+  border-radius: 1ex;
+}
+.display-flex .horizontal-scroll::-moz-scrollbar-corner {
+  background-color: #fff;
+}
+.display-flex .horizontal-scroll:hover::scrollbar {
+  width: 6px;
+}
+.display-flex .horizontal-scroll:hover::-webkit-scrollbar {
+  width: 6px;
+}
+.display-flex .horizontal-scroll:hover::-moz-scrollbar {
+  width: 6px;
+}
+.display-flex .horizontal-scroll:hover::scrollbar-thumb {
+  -webkit-transition: all 0.25s ease;
+  -moz-transition: all 0.25s ease;
+  -ms-transition: all 0.25s ease;
+  -o-transition: all 0.25s ease;
+  transition: all 0.25s ease;
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 6px;
+}
+.display-flex .horizontal-scroll:hover::-webkit-scrollbar-thumb {
+  -webkit-transition: all 0.25s ease;
+  -moz-transition: all 0.25s ease;
+  -ms-transition: all 0.25s ease;
+  -o-transition: all 0.25s ease;
+  transition: all 0.25s ease;
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 6px;
+}
+.display-flex .horizontal-scroll:hover::-moz-scrollbar-thumb {
   -webkit-transition: all 0.25s ease;
   -moz-transition: all 0.25s ease;
   -ms-transition: all 0.25s ease;
@@ -65927,6 +66014,15 @@ a.btn {
   cursor: pointer;
   text-decoration: underline;
 }
+.fonts.align-center {
+  text-align: center;
+}
+.fonts.align-left {
+  text-align: left;
+}
+.fonts.align-right {
+  text-align: right;
+}
 .fonts.fonts-0 {
   font-size: 0pt;
 }
@@ -76733,7 +76829,7 @@ a {
   position: fixed;
   bottom: 0;
   left: 0;
-  width: 120px;
+  width: 110px;
   height: 100vh;
   z-index: 100;
   background-color: #fff;
@@ -76840,7 +76936,7 @@ a {
   right: 0;
   width: calc(100% - 200px);
   padding: 40px;
-  padding-left: 160px;
+  padding-left: 150px;
 }
 @media (max-width: 720px) {
   #admin .main .main-content {

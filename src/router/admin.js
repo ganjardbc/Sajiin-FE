@@ -152,34 +152,34 @@ const routes = {
         },
 
         // layout
-        {
-            name: 'admin-product',
-            path: '/admin-product',
-            component: ProductLayout,
-            redirect: '/admin-product/listings',
-            children: [
-                {
-                    name: 'category',
-                    path: 'categories',
-                    component: Category
-                },
-                {
-                    name: 'toping',
-                    path: 'topings',
-                    component: Toping
-                },
-                {
-                    name: 'listing',
-                    path: 'listings',
-                    component: ProductAdmin
-                },
-                {
-                    name: 'catalog',
-                    path: 'catalogs',
-                    component: CatalogList
-                }
-            ]
-        },
+        // {
+        //     name: 'admin-product',
+        //     path: '/admin-product',
+        //     component: ProductLayout,
+        //     redirect: '/admin-product/listings',
+        //     children: [
+        //         {
+        //             name: 'category',
+        //             path: 'categories',
+        //             component: Category
+        //         },
+        //         {
+        //             name: 'toping',
+        //             path: 'topings',
+        //             component: Toping
+        //         },
+        //         {
+        //             name: 'listing',
+        //             path: 'listings',
+        //             component: ProductAdmin
+        //         },
+        //         {
+        //             name: 'catalog',
+        //             path: 'catalogs',
+        //             component: CatalogList
+        //         }
+        //     ]
+        // },
 
         // layout
         {
@@ -211,6 +211,21 @@ const routes = {
             component: ShopLayout,
             redirect: '/admin-shop/form',
             children: [
+                {
+                    name: 'category',
+                    path: 'categories',
+                    component: Category
+                },
+                {
+                    name: 'toping',
+                    path: 'topings',
+                    component: Toping
+                },
+                {
+                    name: 'listing',
+                    path: 'listings',
+                    component: ProductAdmin
+                },
                 {
                     name: 'shops',
                     path: 'shops',

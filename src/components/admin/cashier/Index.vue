@@ -17,8 +17,20 @@
         </div> -->
 
         <div>
+            <div class="display-flex left card-dashboard-container" style="padding-bottom: 20px;">
+                <h1 class="fonts big black bold">Cashier</h1>
+            </div>
+
+            <FormTableMonitoring 
+                :visibleLoader.sync="visibleLoaderTable"
+                :data.sync="dataAllTable"
+                :onRefresh="getDataTable"
+                :onChangeTable="onChangeMainTable"
+            />
+
             <FormProduct 
-                :onChange="(data) => onChange(data)" />
+                :onChange="(data) => onChange(data)" 
+            />
             
             <div style="padding: 45px;"></div>
         </div>
@@ -42,7 +54,6 @@
 
         <div :class="`content-form ${!visibleCheckOut ? 'hide' : ''}`">
             <div class="right">
-                <!-- :enableSaveButton="selectedTable && selectedPayment ?  true : false" -->
                 <AppSideForm
                     :title="'Check Out'"
                     :enableSaveButton="true"
@@ -73,7 +84,7 @@
         <FormTable
             v-if="visiblePopupTable"
             :selectedID="selectedTable && selectedTable.id ? selectedTable.id : 0"
-            :data.sync="dataTable"
+            :data.sync="dataActiveTable"
             :onClose="openTable"
             :onChange="(data) => onChangeTable(data)"
         />
@@ -112,6 +123,7 @@ import AppAlert from '../../modules/AppAlert'
 import AppSideForm from '../../modules/AppSideForm'
 import FormTable from './FormTable'
 import FormPayment from './FormPayment'
+import FormTableMonitoring from './FormTableMonitoring'
 
 const payloadOrder = {
     order: {
@@ -155,6 +167,7 @@ export default {
     data () {
         return {
             visibleCart: false,
+            visibleLoaderTable: false,
             visibleLoaderSave: false,
             visibleAlertSave: false,
             visibleAlertCancel: false,
@@ -203,12 +216,19 @@ export default {
         FormCartsSmall,
         FormCheckout,
         FormTable,
-        FormPayment
+        FormPayment,
+        FormTableMonitoring
     },
     computed: {
         ...mapGetters({
             cartItems: 'cart/data'
-        })
+        }),
+        dataAllTable() {
+            return this.dataTable
+        },
+        dataActiveTable() {
+            return this.dataTable.filter((dt) => dt.status === 'active')
+        }
     },
     methods: {
         ...mapActions({
@@ -271,6 +291,7 @@ export default {
                 this.visibleCheckOut = false
                 this.visibleCart = false
                 this.visibleAlertSave = false
+                this.getDataTable()
                 this.getLocalCartCount()
                 this.getLocalOrderCount()
                 this.makeToast('Your Order Created')
@@ -378,6 +399,17 @@ export default {
         openPayment () {
             this.visiblePopupPayment = !this.visiblePopupPayment
         },
+        onChangeMainTable(newData) {
+            const oldData = this.dataTable
+            let payload = oldData.map((dt, i) => {
+                if (dt.id === newData.id) {
+                    return {...newData}
+                } else {
+                    return {...dt}
+                }
+            })
+            this.dataTable = payload
+        },
         onChangePayment (data) {
             const payload = {
                 ...this.order,
@@ -412,11 +444,12 @@ export default {
             }
         },
         async getDataTable () {
+            this.visibleLoaderTable = true
             const token = 'Bearer '.concat(this.$cookies.get('token'))
             const payload = {
                 limit: 1000,
                 offset: 0,
-                status: 'active',
+                // status: 'active',
                 user_id: this.dataUser.id
             }
             const rest = await axios.post('/api/table/getAll', payload, { headers: { Authorization: token } })
@@ -424,6 +457,9 @@ export default {
             if (rest && rest.status === 200) {
                 const data = rest.data.data
                 this.dataTable = data
+                this.visibleLoaderTable = false
+            } else {
+                this.visibleLoaderTable = false
             }
         }
     },

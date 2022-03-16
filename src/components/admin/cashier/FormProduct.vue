@@ -8,9 +8,9 @@
             </div>
         </div> -->
 
-        <div class="display-flex space-between card-dashboard-container">
+        <div class="display-flex space-between align-center card-dashboard-container">
             <div>
-                <h1 class="fonts big black bold">Cashier</h1>
+                <h1 class="fonts fonts-16 black bold">Products</h1>
             </div>
             <button class="btn btn-icon btn-white" @click="refresh">
                 <i class="fa fa-lw fa-retweet"></i>
@@ -20,7 +20,10 @@
         <div style="padding-top: 15px;">
             <div class="display-flex wrap">
                 <div v-for="(dt, i) in datas" :key="i" class="column-4 mobile-column">
-                    <CardProduct :data="dt" :onCheckOut="(data) => onCheckOut(data)" />
+                    <CardProduct 
+                        :data="dt" 
+                        :onCheckOut="(data) => onCheckOut(data)"
+                        :onChangeStatus="(data) => saveData(data)" />
                 </div>
                 <AppLoader v-if="visibleLoader" />
             </div>
@@ -31,6 +34,11 @@
                 </button>
             </div>
         </div>
+
+        <AppAlert 
+            v-if="visibleLoaderAction" 
+            :isLoader="visibleLoaderAction"
+            :title="'Proceed this data ?'" />
     </div>
 </template>
 <script>
@@ -39,6 +47,7 @@ import AppLoader from '../../modules/AppLoader'
 import CardProduct from './CardProduct'
 import CardCategory from './CardCategory'
 import AppTabs from '../../modules/AppTabs'
+import AppAlert from '../../modules/AppAlert'
 
 export default {
     name: 'App',
@@ -48,6 +57,7 @@ export default {
                 {label: 'Available', status: 'active'},
                 {label: 'Unavailable', status: ''},
             ],
+            visibleLoaderAction: false,
             visibleLoaderCategory: false,
             visibleLoader: false,
             visibleLoadMore: false,
@@ -70,7 +80,8 @@ export default {
         CardCategory,
         CardProduct,
         AppLoader,
-        AppTabs
+        AppTabs,
+        AppAlert
     },
     props: {
         onChange: {
@@ -93,6 +104,22 @@ export default {
         },
         onChangeTabs (index) {
             this.selectedTabIndex = index
+        },
+        changeData(newData) {
+            const oldData = this.datas
+            let payload = oldData.map((dt, i) => {
+                if (dt.product.id === newData.id) {
+                    return {
+                        ...dt, 
+                        product: {
+                            ...newData
+                        }
+                    }
+                } else {
+                    return {...dt}
+                }
+            })
+            this.datas = payload
         },
         refresh () {
             this.datas = []
@@ -142,7 +169,7 @@ export default {
             const payload = {
                 limit: limit,
                 offset: offset,
-                status: 'active'
+                // status: 'active'
             }
             const rest = await axios.post('/api/product/getAll', payload, { headers: { Authorization: token } })
 
@@ -167,6 +194,29 @@ export default {
                 }
             } else {
                 this.visibleLoader = false 
+            }
+        },
+        async saveData (data) {
+            this.visibleLoaderAction = true
+
+            const token = 'Bearer '.concat(this.$cookies.get('token'))
+            const payload = {
+                ...data.product,
+                status: data.product.status === 'active' ? 'inactive' : 'active',
+                type: ""
+            }
+            const url = '/api/product/update' 
+
+            const rest = await axios.post(url, payload, { headers: { Authorization: token } })
+
+            if (rest && rest.status === 200) {
+                this.visibleLoaderAction = false
+
+                // this.getData(this.limit, 0)
+                this.changeData(payload)
+            } else {
+                alert('Proceed failed')
+                this.visibleLoaderAction = false
             }
         },
     }

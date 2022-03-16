@@ -50,10 +50,10 @@ import AppPopupProfile from '../modules/AppPopupProfile'
 
 const sidebarAdmin = [
     {icon: 'fa fa-lg fa-database', label: 'DASHBOARD', value: 0, menu: [
-        // {icon: 'fa fa-lg fa-tachometer-alt', label: 'Dashboard', value: 0, link: 'dashboard', permission: 'dashboard'},
+        {icon: 'fa fa-lg fa-tachometer-alt', label: 'Dashboard', value: 0, link: 'dashboard', permission: 'dashboard'},
         {icon: 'fa fa-lg fa-laptop', label: 'Cashier', value: 0, link: 'cashier', permission: 'cashier'},
         {icon: 'fa fa-lg fa-list-ul', label: 'Orders', value: 0, link: 'orderlist', permission: 'orders'},
-        {icon: 'fa fa-lg fa-utensils', label: 'Products', value: 0, link: 'admin-product', permission: 'products'},
+        // {icon: 'fa fa-lg fa-utensils', label: 'Products', value: 0, link: 'admin-product', permission: 'products'},
         {icon: 'fa fa-lg fa-store', label: 'Shop', value: 0, link: 'admin-shop', permission: 'shops'},
         {icon: 'fa fa-lg fa-bell', label: 'Notifications', value: 0, link: 'notification', permission: 'notifications'},
         // {icon: 'fa fa-lg fa-cogs', label: 'Settings', value: 0, link: 'admin-setting', permission: 'users'},

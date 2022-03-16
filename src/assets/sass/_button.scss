@@ -20,6 +20,11 @@ a {
     flex-wrap: nowrap;
     justify-content: center;
     border-radius: 4px;
+    &:disabled {
+        background-color: $white-grey !important;
+        cursor: not-allowed !important;
+        opacity: 0.5 !important;
+    }
     .notif {
         position: absolute;
         top: 0;

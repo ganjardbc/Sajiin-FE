@@ -7,6 +7,9 @@
     &:read-only {
         background-color: $white-grey !important;
     }
+	&:disabled {
+        background-color: $white-grey !important;
+    }
     &.field-main {
         background-color: $main-color;
         color: #fff;
@@ -111,9 +114,6 @@
 		color: $black;
 		border: $border;
 	}
-	&:read-only {
-        background-color: $white-grey !important;
-    }
 	&:disabled {
         background-color: $white-grey !important;
     }

@@ -47,6 +47,14 @@
         white-space: nowrap;
         @include transparantScrollBarHover();
     }
+    .horizontal-scroll {
+        position: relative;
+        width: 100%;
+        white-space: nowrap;
+        overflow-y: hidden;
+        overflow-x: hidden;
+        @include transparantScrollBarHover();
+    }
 }
 
 .display-popup-normal {

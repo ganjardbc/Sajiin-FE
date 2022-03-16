@@ -97,14 +97,14 @@
                         @click="onButtonDetail(dt)"
                         class="btn btn-primary"
                         style="margin-left: 15px;">
-                        View Order Detail
+                        Order Detail
                     </button>
                     <button 
                         v-if="dt.order.status != 'canceled' && !dt.order.payment_status"
                         @click="onCheckOut(dt.order.id)"
                         class="btn btn-main"
                         style="margin-left: 15px;">
-                        Check Out Order
+                        Check Out
                     </button>
                     <AppButtonMenu 
                         v-if="dt.order.status != 'canceled' && dt.order.status != 'done'"

@@ -15,9 +15,9 @@ import AppListDownMenu from '../modules/AppListDownMenu'
 
 const menus = [
     {label: 'Shop', icon: 'fa fa-lg fa-store', link: 'admin-shop-form'},
-    // {label: 'Categories', icon: 'fa fa-lg fa-list-alt', link: 'category'},
-    // {label: 'Toppings', icon: 'fa fa-lg fa-list-alt', link: 'toping'},
-    // {label: 'Products', icon: 'fa fa-lg fa-box', link: 'listing'},
+    {label: 'Products', icon: 'fa fa-lg fa-utensils', link: 'listing'},
+    {label: 'Toppings', icon: 'fa fa-lg fa-box', link: 'toping'},
+    {label: 'Categories', icon: 'fa fa-lg fa-list-alt', link: 'category'},
     // {label: 'Shipments', icon: 'fa fa-lg fa-truck', link: 'shipment'},
     {label: 'Payments', icon: 'fa fa-lg fa-calculator', link: 'admin-shop-payment'},
     {label: 'Tables', icon: 'fa fa-lg fa-th-large', link: 'admin-shop-table'},

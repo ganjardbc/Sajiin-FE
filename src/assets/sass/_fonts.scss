@@ -76,6 +76,15 @@
             text-decoration: underline;
         }
     }
+    &.align-center {
+        text-align: center;
+    }
+    &.align-left {
+        text-align: left;
+    }
+    &.align-right {
+        text-align: right;
+    }
     @for $var from 0 to 1000 {
         &.fonts-#{$var} {
             font-size: #{$var} + 'pt';

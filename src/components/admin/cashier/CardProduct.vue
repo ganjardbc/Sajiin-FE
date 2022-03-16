@@ -1,9 +1,16 @@
 <template>
     <div id="App" class="card-dashboard-container" style="padding-top: 10px; padding-bottom: 10px;">
-        <div class="card bg-white box-shadow" style="margin: 0; padding: 0; width: 100%;">
+        <div 
+            class="card bg-white box-shadow" 
+            :style="`
+                margin: 0; 
+                padding: 0; 
+                width: 100%; 
+                background-color: #fff;
+            `">
             <div style="padding: 15px;">
                 <div style="width: 100%;">
-                    <div class="image image-padding" style="cursor: pointer;" @click="openDetail">
+                    <div class="image image-padding">
                         <VueLoadImage v-if="data.images[0] && data.images[0].image">
                             <img slot="image" :src="productImageThumbnailUrl + data.images[0].image" alt="" class="post-center">
                             <div slot="preloader">
@@ -17,8 +24,17 @@
                     <div class="fonts fonts-10 semibold" style="margin-bottom: 3px;">{{ data.product.name }}</div>
                     <div v-if="data.details.length > 0" class="fonts fonts-10 grey">Rp. {{ data.details ? data.details[0].price : 0 }}</div>
                 </div>
-                <button class="btn btn-full btn-sekunder" style="margin-bottom: 10px;" @click="openDetail">
+                <button 
+                    class="btn btn-full btn-sekunder" 
+                    style="margin-bottom: 15px;" 
+                    :disabled="data.product.status === 'active' ? false : true"
+                    @click="openDetail">
                     Choose Product
+                </button>
+                <button 
+                    :class="`btn btn-full ${data.product.status === 'active' ? 'btn-green' : 'btn-sekunder'}`" 
+                    @click="onChangeStatus(data)">
+                    {{ data.product.status === 'active' ? 'Inactive' : 'Active' }}
                 </button>
             </div>
             <div v-if="visiblePopup" class="card-full">
@@ -60,15 +76,9 @@
                         </div>
                     </div>
                     <button 
-                        v-if="indexDetail"
-                        :class="'btn btn-full btn-main'" 
+                        :class="'btn btn-full btn-sekunder'" 
+                        :disabled="!indexDetail"
                         @click="addToCart(data)">
-                        Add To Cart
-                    </button>
-                    <button 
-                        v-else
-                        :class="'btn btn-full btn-primary'" 
-                        :disabled="true">
                         Add To Cart
                     </button>
                 </div>
@@ -125,6 +135,10 @@ export default {
             required: true
         },
         onCheckOut: {
+            type: Function,
+            required: false
+        },
+        onChangeStatus: {
             type: Function,
             required: false
         }
