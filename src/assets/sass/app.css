@@ -77226,4 +77226,13 @@ a {
   transition: all 0.25s ease;
 }
 
+.cashier-container {
+  padding-bottom: 50px;
+}
+@media (max-width: 720px) {
+  .cashier-container {
+    padding-bottom: 90px;
+  }
+}
+
 /*# sourceMappingURL=app.css.map */

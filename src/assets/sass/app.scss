@@ -892,3 +892,10 @@ a {
     display: none;
     @include animate_1();
 }
+
+.cashier-container {
+    padding-bottom: 50px;
+    @media (max-width: $min-width) {
+        padding-bottom: 90px;
+    }
+}

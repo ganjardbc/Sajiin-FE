@@ -16,7 +16,7 @@
             </div>
         </div> -->
 
-        <div>
+        <div class="cashier-container">
             <div class="display-flex left card-dashboard-container" style="padding-bottom: 20px;">
                 <h1 class="fonts big black bold">Cashier</h1>
             </div>
@@ -31,8 +31,6 @@
             <FormProduct 
                 :onChange="(data) => onChange(data)" 
             />
-            
-            <div style="padding: 45px;"></div>
         </div>
 
         <div :class="`content-form ${!visibleCart ? 'hide' : ''}`">
