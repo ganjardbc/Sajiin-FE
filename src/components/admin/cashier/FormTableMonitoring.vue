@@ -2,7 +2,7 @@
     <div id="App">
         <div class="display-flex space-between align-center card-dashboard-container">
             <div>
-                <h1 class="fonts fonts-16 black bold">Tables</h1>
+                <h1 class="fonts fonts-14 black semibold">Tables</h1>
             </div>
             <button class="btn btn-icon btn-white" @click="onRefresh">
                 <i class="fa fa-lw fa-retweet"></i>
@@ -14,7 +14,7 @@
         <div 
             v-if="!visibleLoader && data && data.length > 0" 
             class="card-dashboard-container"
-            style="padding-top: 15px; padding-bottom: 20px;">
+            style="padding-top: 5px; padding-bottom: 20px;">
             <AppHorizontalScrollable customHeight="120px">
                 <div v-for="(dt, i) in data" :key="i" style="min-width: 170px;">
                     <div style="padding: 10px;">

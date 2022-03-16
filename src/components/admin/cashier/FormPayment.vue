@@ -9,8 +9,9 @@
                 <div v-for="(dt, i) in datas" :key="i" class="card border-full" style="margin-top: 15px; margin-bottom: 15px;">
                     <div class="display-flex space-between" style="padding-top: 5px; padding-bottom: 5px;">
                         <div style="width: 60px; margin-right: 20px;">
-                            <div class="image image-padding" style="background-color: rgba(0, 0, 0, 0)">
-                                <img :src="paymentImageThumbnailUrl + dt.image" alt="" class="post-center">
+                            <div class="image image-padding border border-full">
+                                <img v-if="dt.image" :src="paymentImageThumbnailUrl + dt.image" alt="" class="post-center">
+                                <i v-else class="post-middle-absolute icn fa fa-lg fa-image"></i>
                             </div>
                         </div>
                         <div style="width: calc(100% - 110px);">

@@ -9,7 +9,7 @@
                 background-color: #fff;
             `">
             <div style="padding: 15px;">
-                <div style="width: 100%;">
+                <div class="width width-100">
                     <div class="image image-padding">
                         <VueLoadImage v-if="data.images[0] && data.images[0].image">
                             <img slot="image" :src="productImageThumbnailUrl + data.images[0].image" alt="" class="post-center">
@@ -21,7 +21,7 @@
                     </div>
                 </div>
                 <div style="width: 100%; text-align: center; padding-top: 15px; padding-bottom: 15px;">
-                    <div class="fonts fonts-10 semibold" style="margin-bottom: 3px;">{{ data.product.name }}</div>
+                    <div class="fonts fonts-11 semibold" style="margin-bottom: 3px;">{{ data.product.name }}</div>
                     <div v-if="data.details.length > 0" class="fonts fonts-10 grey">Rp. {{ data.details ? data.details[0].price : 0 }}</div>
                 </div>
                 <button 

@@ -8,25 +8,56 @@
             </div>
         </div> -->
 
-        <div class="display-flex space-between align-center card-dashboard-container">
-            <div>
-                <h1 class="fonts fonts-16 black bold">Products</h1>
+        <div class="card-dashboard-container">
+            <div class="display-flex space-between align-center">
+                <div>
+                    <h1 class="fonts fonts-14 black semibold">Products</h1>
+                </div>
+                <button class="btn btn-icon btn-white" @click="refresh">
+                    <i class="fa fa-lw fa-retweet"></i>
+                </button>
             </div>
-            <button class="btn btn-icon btn-white" @click="refresh">
-                <i class="fa fa-lw fa-retweet"></i>
-            </button>
+        </div>
+
+        <div class="card-dashboard-container" style="padding-top: 15px;">
+            <div class="display-flex left align-center border-bottom">
+                <AppTabs 
+                    :selectedIndex="selectedTabIndex" 
+                    :path="'main-topic'"
+                    :data="tabs" 
+                    :isScrollable="false" 
+                    :onChange="(data) => onChangeTabs(data)" 
+                    class="width width-300-px width-mobile" />
+            </div>
         </div>
 
         <div style="padding-top: 15px;">
-            <div class="display-flex wrap">
-                <div v-for="(dt, i) in datas" :key="i" class="column-4 mobile-column">
+            <div v-if="selectedTabIndex === 0" class="display-flex wrap">
+                <div v-for="(dt, i) in dataAll" :key="i" class="column-4 mobile-column">
                     <CardProduct 
                         :data="dt" 
                         :onCheckOut="(data) => onCheckOut(data)"
                         :onChangeStatus="(data) => saveData(data)" />
                 </div>
-                <AppLoader v-if="visibleLoader" />
             </div>
+            <div v-if="selectedTabIndex === 1" class="display-flex wrap">
+                <div v-for="(dt, i) in dataActive" :key="i" class="column-4 mobile-column">
+                    <CardProduct 
+                        :data="dt" 
+                        :onCheckOut="(data) => onCheckOut(data)"
+                        :onChangeStatus="(data) => saveData(data)" />
+                </div>
+            </div>
+            <div v-if="selectedTabIndex === 2" class="display-flex wrap">
+                <div v-for="(dt, i) in dataInactive" :key="i" class="column-4 mobile-column">
+                    <CardProduct 
+                        :data="dt" 
+                        :onCheckOut="(data) => onCheckOut(data)"
+                        :onChangeStatus="(data) => saveData(data)" />
+                </div>
+            </div>
+
+            <AppLoader v-if="visibleLoader" />
 
             <div v-if="!visibleLoader" class="display-flex center">
                 <button v-if="visibleLoadMore" class="btn btn-sekunder" style="margin-top: 20px; margin-bottom: 20px;" @click="getData(limit, offset)">
@@ -54,8 +85,9 @@ export default {
     data () {
         return {
             tabs: [
-                {label: 'Available', status: 'active'},
-                {label: 'Unavailable', status: ''},
+                {label: 'All', status: 'active'},
+                {label: 'Active', status: ''},
+                {label: 'Inactive', status: ''},
             ],
             visibleLoaderAction: false,
             visibleLoaderCategory: false,
@@ -88,6 +120,17 @@ export default {
             type: Function,
             required: false 
         }
+    },
+    computed: {
+        dataAll () {
+            return this.datas
+        },
+        dataActive () {
+            return this.datas.filter((dt) => dt.product.status === 'active')
+        },
+        dataInactive () {
+            return this.datas.filter((dt) => dt.product.status === 'inactive')
+        },
     },
     methods: {
         onCheckOut (data) {

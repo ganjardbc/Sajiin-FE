@@ -28,7 +28,7 @@
                             :data="tabs" 
                             :isScrollable="false" 
                             :onChange="(data) => onChangeTabs(data)" 
-                            class="width width-300-px" />
+                            class="width width-300-px width-mobile" />
                     </div>
                 </div>
                 
@@ -43,8 +43,9 @@
                             :onDelete="(id) => onShowHideDelete(id)"
                             :onChangeStatus="(data, id, status) => onChangeStatus(data, id, status)" 
                         />
-                        <AppLoader v-if="visibleLoader" />
                     </div>
+
+                    <AppLoader v-if="visibleLoader" />
 
                     <div v-if="!visibleLoader" class="display-flex center" style="margin-top: 20px; margin-bottom: 20px;">
                         <button v-if="visibleLoadMore" class="btn btn-sekunder" @click="onLoadMore">

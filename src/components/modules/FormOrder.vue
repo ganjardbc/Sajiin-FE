@@ -196,9 +196,9 @@
 import AppDote from './AppDote'
 
 const defaultPayloadOrderStatus = [
-    {title: 'Shop confirmed your order', subtitle: 'Lorem ipsum doler ismet', icon: 'fa fa-lg fa-check', color: '#38c172', iconColor: '#fff', isActive: false},
-    {title: 'Your order is being cooked', subtitle: 'Lorem ipsum doler ismet', icon: 'fa fa-lg fa-fire', color: '#f6993f', iconColor: '#fff', isActive: false},
-    {title: 'Delivering your order', subtitle: 'Lorem ipsum doler ismet', icon: 'fa fa-lg fa-utensils', color: '#e3342f', iconColor: '#fff', isActive: true}
+    {title: 'Shop confirmed this order', subtitle: 'Lorem ipsum doler ismet', icon: 'fa fa-lg fa-check', color: '#38c172', iconColor: '#fff', isActive: false},
+    {title: 'This order is being cooked', subtitle: 'Lorem ipsum doler ismet', icon: 'fa fa-lg fa-fire', color: '#f6993f', iconColor: '#fff', isActive: false},
+    {title: 'Delivering this order', subtitle: 'Lorem ipsum doler ismet', icon: 'fa fa-lg fa-utensils', color: '#e3342f', iconColor: '#fff', isActive: true}
 ]
 
 export default {
