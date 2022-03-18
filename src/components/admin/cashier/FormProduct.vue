@@ -39,7 +39,7 @@
                         :onCheckOut="(data) => onCheckOut(data)"
                         :onChangeStatus="(data) => saveData(data)" />
                 </div>
-                <AppEmpty v-if="dataAll.length === 0" />
+                <AppEmpty v-if="!visibleLoader && dataAll.length === 0" />
             </div>
             <div v-if="selectedTabIndex === 1" class="display-flex wrap">
                 <div v-for="(dt, i) in dataActive" :key="i" class="column-4 mobile-column">
@@ -48,7 +48,7 @@
                         :onCheckOut="(data) => onCheckOut(data)"
                         :onChangeStatus="(data) => saveData(data)" />
                 </div>
-                <AppEmpty v-if="dataActive.length === 0" />
+                <AppEmpty v-if="!visibleLoader && dataActive.length === 0" />
             </div>
             <div v-if="selectedTabIndex === 2" class="display-flex wrap">
                 <div v-for="(dt, i) in dataInactive" :key="i" class="column-4 mobile-column">
@@ -57,7 +57,7 @@
                         :onCheckOut="(data) => onCheckOut(data)"
                         :onChangeStatus="(data) => saveData(data)" />
                 </div>
-                <AppEmpty v-if="dataInactive.length === 0" />
+                <AppEmpty v-if="!visibleLoader && dataInactive.length === 0" />
             </div>
 
             <AppLoader v-if="visibleLoader" />
