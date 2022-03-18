@@ -217,7 +217,7 @@ export default {
             const payload = {
                 limit: limit,
                 offset: offset,
-                // status: 'active'
+                shop_id: this.dataShop.id
             }
             const rest = await axios.post('/api/product/getAll', payload, { headers: { Authorization: token } })
 

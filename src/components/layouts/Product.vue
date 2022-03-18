@@ -14,9 +14,9 @@
 import AppListDownMenu from '../modules/AppListDownMenu'
 
 const menus = [
-    {label: 'Products', icon: 'fa fa-lg fa-list-alt', link: 'listing'},
-    {label: 'Toppings', icon: 'fa fa-lg fa-list-alt', link: 'toping'},
-    {label: 'Categories', icon: 'fa fa-lg fa-list-alt', link: 'category'}
+    {label: 'Products', icon: 'fa fa-lg fa-utensils', link: 'listing', permission: 'products'},
+    {label: 'Toppings', icon: 'fa fa-lg fa-box', link: 'toping', permission: 'toppings'},
+    {label: 'Categories', icon: 'fa fa-lg fa-list-alt', link: 'category', permission: 'categories'},
 ]
 
 export default {

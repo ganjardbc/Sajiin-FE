@@ -143,8 +143,8 @@
                 .ml-icon {
                     margin: auto;
                     width: 40px;
-                    height: 60px;
-                    line-height: 60px;
+                    height: 50px;
+                    line-height: 50px;
                     text-align: center;
                     font-size: 16px;
                     color: $grey;
@@ -494,6 +494,10 @@
             .label {
                 color: $main-color;
             }
+        }
+        a {
+            display: block;
+            width: 100%;
         }
     }
 }

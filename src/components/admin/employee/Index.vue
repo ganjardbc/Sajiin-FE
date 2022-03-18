@@ -2,10 +2,9 @@
     <div id="App" :class="formClass ? 'content-form' : 'content-form hide'">
         <div class="left">
             <div class="bg-white">
-                <div class="display-flex row space-between padding padding-10-px" style="height: 40px;">
+                <div class="display-flex space-between" style="padding-bottom: 15px;">
                     <div>
-                        <h1 class="fonts small black">EMPLOYEES</h1>
-                        <p class="fonts micro grey no-line-height">controll your datas</p>
+                        <h1 class="fonts big black bold">Employees</h1>
                     </div>
                     <div class="display-flex">
                         <AppButtonMenu 

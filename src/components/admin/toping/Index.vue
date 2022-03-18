@@ -137,12 +137,14 @@ export default {
             currentPage: 1,
             totalPages: 0,
             dataUser: null,
+            dataShop: null,
             limit: 10,
             offset: 0
         }
     },
     mounted () {
         this.dataUser = this.$cookies.get('user')
+        this.dataShop = this.$cookies.get('shop')
         this.getData(this.limit, this.offset)
     },
     components: {
@@ -346,13 +348,9 @@ export default {
             }
 
             const token = 'Bearer '.concat(this.$cookies.get('token'))
-            const payload = this.dataUser.role_name === 'admin' ? {
+            const payload = {
                 limit: limit,
                 offset: offset
-            } : {
-                limit: limit,
-                offset: offset,
-                user_id: this.dataUser.id
             }
             const rest = await axios.post('/api/toping/getAll', payload, { headers: { Authorization: token } })
 

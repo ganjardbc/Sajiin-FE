@@ -1,7 +1,7 @@
 <template>
     <div id="App">
         <AppLoader v-if="visibleLoader" />
-        <div v-else style="padding-top: 0; padding-left: 15px; padding-right: 15px;">
+        <div v-else class="card-dashboard-container">
             <div class="display-flex display-mobile space-between">
                 <div class="fonts bold big margin" style="margin-top: 15px; margin-bottom: 15px;">Employee</div>
             </div>

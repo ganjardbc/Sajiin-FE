@@ -2,17 +2,16 @@
     <div id="App" :class="formClass ? 'content-form' : 'content-form hide'">
         <div class="left">
             <div class="bg-white">
-                <div class="display-flex row space-between padding padding-10-px" style="height: 40px;">
+                <div class="display-flex space-between" style="padding-bottom: 15px;">
                     <div>
-                        <h1 class="fonts small black">POSITIONS</h1>
-                        <p class="fonts micro grey no-line-height">controll your datas</p>
+                        <h1 class="fonts big black bold">Positions</h1>
                     </div>
                     <div class="display-flex">
                         <AppButtonMenu 
                             :icon="'fa fa-lw fa-filter'"
                             :button="'btn btn-icon btn-white'"
                             :onChange="(data) => onChangeMenu(data)" 
-                            :data="[{label: 'By ID'}, {label: 'By Title'}, {label: 'By Status'}]" />
+                            :data="[{label: 'By ID'}, {label: 'By Name'}, {label: 'By Status'}]" />
                         <button class="btn btn-icon btn-white" @click="onRefresh">
                             <i class="fa fa-lw fa-retweet"></i>
                         </button>

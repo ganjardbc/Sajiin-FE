@@ -347,13 +347,9 @@ export default {
             }
 
             const token = 'Bearer '.concat(this.$cookies.get('token'))
-            const payload = this.dataUser.role_name === 'admin' ? {
+            const payload = {
                 limit: limit,
                 offset: offset
-            } : {
-                limit: limit,
-                offset: offset,
-                user_id: this.dataUser.id
             }
             
             const rest = await axios.post('/api/category/getAll', payload, { headers: { Authorization: token } })

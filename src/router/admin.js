@@ -59,8 +59,8 @@ const routes = {
             component: ShopForm
         },
         {
-            name: 'employeeform',
-            path: '/admin-form-employee',
+            name: 'admin-employee-form',
+            path: '/admin-employee-form',
             component: EmployeeForm
         },
         {
@@ -139,7 +139,7 @@ const routes = {
             component: Notification
         },
         {
-            name: 'tasklist',
+            name: 'admin-tasklist',
             path: '/admin-tasklist',
             component: TaskList
         },
@@ -152,64 +152,11 @@ const routes = {
         },
 
         // layout
-        // {
-        //     name: 'admin-product',
-        //     path: '/admin-product',
-        //     component: ProductLayout,
-        //     redirect: '/admin-product/listings',
-        //     children: [
-        //         {
-        //             name: 'category',
-        //             path: 'categories',
-        //             component: Category
-        //         },
-        //         {
-        //             name: 'toping',
-        //             path: 'topings',
-        //             component: Toping
-        //         },
-        //         {
-        //             name: 'listing',
-        //             path: 'listings',
-        //             component: ProductAdmin
-        //         },
-        //         {
-        //             name: 'catalog',
-        //             path: 'catalogs',
-        //             component: CatalogList
-        //         }
-        //     ]
-        // },
-
-        // layout
         {
-            name: 'admin-employee',
-            path: '/admin-employee',
-            component: EmployeeLayout,
-            redirect: '/admin-employee/employees',
-            children: [
-                {
-                    name: 'employee',
-                    path: 'employees',
-                    component: EmployeeList
-                },
-                {
-                    name: 'shift',
-                    path: 'shifts',
-                    component: ShiftList
-                },
-                {
-                    name: 'position',
-                    path: 'positions',
-                    component: PositionList
-                }
-            ]
-        },
-        {
-            name: 'admin-shop',
-            path: '/admin-shop',
-            component: ShopLayout,
-            redirect: '/admin-shop/form',
+            name: 'admin-product',
+            path: '/admin-product',
+            component: ProductLayout,
+            redirect: '/admin-product/listings',
             children: [
                 {
                     name: 'category',
@@ -226,6 +173,46 @@ const routes = {
                     path: 'listings',
                     component: ProductAdmin
                 },
+                {
+                    name: 'catalog',
+                    path: 'catalogs',
+                    component: CatalogList
+                }
+            ]
+        },
+
+        // employee
+        {
+            name: 'admin-employee',
+            path: '/admin-employee',
+            component: EmployeeLayout,
+            redirect: '/admin-employee/employees',
+            children: [
+                {
+                    name: 'admin-employee-employee',
+                    path: 'employees',
+                    component: EmployeeList
+                },
+                {
+                    name: 'admin-employee-shift',
+                    path: 'shifts',
+                    component: ShiftList
+                },
+                {
+                    name: 'admin-employee-position',
+                    path: 'positions',
+                    component: PositionList
+                },
+            ]
+        },
+
+        // shop
+        {
+            name: 'admin-shop',
+            path: '/admin-shop',
+            component: ShopLayout,
+            redirect: '/admin-shop/form',
+            children: [
                 {
                     name: 'shops',
                     path: 'shops',

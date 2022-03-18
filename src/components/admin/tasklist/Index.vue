@@ -2,15 +2,9 @@
     <div id="App" :class="formClass ? 'content-form' : 'content-form hide'">
         <div class="left">
             <div class="bg-white">
-                <div class="display-flex row space-between padding padding-10-px" style="height: 40px;">
+                <div class="display-flex space-between" style="padding-bottom: 15px;">
                     <div>
-                        <AppTabs 
-                            :selectedIndex="selectedTabIndex" 
-                            :path="'main-topic'"
-                            :data.sync="tabs" 
-                            :isScrollable="false" 
-                            :onChange="(data) => onChangeTabs(data)" 
-                            class="margins margin-bottom-15-px" />
+                        <h1 class="fonts big black bold">Task Lists</h1>
                     </div>
                     <div class="display-flex">
                         <AppButtonMenu 
@@ -21,12 +15,24 @@
                         <button class="btn btn-icon btn-white" @click="onRefresh">
                             <i class="fa fa-lw fa-retweet"></i>
                         </button>
-                        <SearchField :placeholder="'Search taskslist ..'" :enableResponsive="true" style="margin-left: 5px;" />
+                        <SearchField :placeholder="'Search task lists ..'" :enableResponsive="true" style="margin-left: 5px;" />
+                    </div>
+                </div>
+
+                <div style="padding-bottom: 15px;">
+                    <div class="width width-100 border-bottom">
+                        <AppTabs 
+                            :selectedIndex="selectedTabIndex" 
+                            :path="'main-topic'"
+                            :data.sync="tabs" 
+                            :isScrollable="false" 
+                            :onChange="(data) => onChangeTabs(data)" 
+                            class="width width-300-px width-mobile" />
                     </div>
                 </div>
                 
                 <div class="content-body">
-                    <div class="display-flex wrap" style="padding-left: 15px; padding-right: 15px;">
+                    <div class="display-flex wrap">
                         <div v-for="(dt, i) in datas" :key="i" class="width width-row-3">
                             <div style="margin: 7.5px;">
                                 <div class="card box-shadow" style="overflow: unset; padding: 0; width: 100%;">

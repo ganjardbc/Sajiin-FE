@@ -138,11 +138,13 @@ export default {
             totalPages: 0,
             limit: 10,
             offset: 0,
-            dataUser: null
+            dataUser: null,
+            dataShop: null,
         }
     },
     mounted () {
         this.dataUser = this.$cookies.get('user')
+        this.dataShop = this.$cookies.get('shop')
         this.getData(this.limit, this.offset)
     },
     components: {
@@ -350,7 +352,7 @@ export default {
             const payload = {
                 limit: limit,
                 offset: offset,
-                user_id: this.dataUser.id
+                shop_id: this.dataShop ? this.dataShop.id : ''
             }
             
             const rest = await axios.post('/api/payment/getAll', payload, { headers: { Authorization: token } })

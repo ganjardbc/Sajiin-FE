@@ -24,13 +24,10 @@
             <div class="card-popup micro no-padding bg-white box-shadow">
                 <div style="padding: 15px;">
                     <div style="padding-bottom: 10px;">
-                        <ul class="menu-info">
-                            <li v-for="(dt, i) in menus" :key="i" @click="visiblePopup = !visiblePopup">
-                                <router-link :to="{name: dt.link}">
-                                    <div class="label">{{ dt.label }}</div>
-                                </router-link>
-                            </li>
-                        </ul>
+                        <AppListInfoMenu 
+                            :data.sync="menus" 
+                            :onClick="() => visiblePopup = !visiblePopup"
+                        />
                     </div>
 
                     <div class="border-top" style="padding-top: 15px;">
@@ -61,13 +58,13 @@
     </div>
 </template>
 <script>
-import AppListDownMenu from './AppListDownMenu'
+import AppListInfoMenu from './AppListInfoMenu'
 
 const menus = [
-    // {icon: 'fa fa-lg fa-tachometer-alt', label: 'Dashboard', link: 'dashboard'},
-    {icon: 'fa fa-lg fa-user', label: 'Profile', link: 'profile'},
-    {icon: 'fa fa-lg fa-calendar-alt', label: 'Reports', link: '404'},
-    {icon: 'fa fa-lg fa-cogs', label: 'Settings', link: 'admin-setting'},
+    {icon: 'fa fa-lg fa-user', label: 'Edit Profile', link: 'profile', permission: 'profile'},
+    {icon: 'fa fa-lg fa-user', label: 'Edit Employee', link: 'admin-employee-form', permission: 'employeeform'},
+    {icon: 'fa fa-lg fa-calendar-alt', label: 'Reports', link: '404', permission: 'reports'},
+    {icon: 'fa fa-lg fa-cogs', label: 'Settings', link: 'admin-setting', permission: 'bizpars'},
 ]
 
 export default {
@@ -88,7 +85,7 @@ export default {
         }
     },
     components: {
-        AppListDownMenu
+        AppListInfoMenu
     }
 }
 </script>

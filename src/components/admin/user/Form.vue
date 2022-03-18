@@ -6,11 +6,11 @@
             :onSave="onButtonSave"
             :onClose="onClose">
 
-            <!-- <AppTabs 
+            <AppTabs 
                 :selectedIndex="selectedIndex" 
                 :data="tabs" 
                 :onChange="(data) => onChangeTabs(data)" 
-                class="margin margin-bottom-15-px" /> -->
+                class="margin margin-bottom-15-px" />
 
             <div v-if="selectedIndex === 0">
                 <div v-if="this.title !== 'CREATE' ? true : false" class="field-group margin margin-bottom-15-px">

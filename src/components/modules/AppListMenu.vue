@@ -5,7 +5,7 @@
                 : 'content-scroll menu-list hover with-big-icon ' + (enableGridView ? 'display-flex wrap' : '')
             )">
             <li 
-                v-for="(dt, index) in data" 
+                v-for="(dt, index) in dataSideBar" 
                 :key="index" 
                 :class="'ml-list ' + (enableGridView ? 'fixed-column-3' : '')"
             >
@@ -55,7 +55,59 @@ export default {
     name: 'AppListDownMenu',
     data () {
         return {
-            datas: this.data
+            permissions: [],
+            sidebar: [],
+        }
+    },
+    mounted() {
+        const permissions = this.$cookies.get('permissions')
+        this.permissions = permissions.permissions
+    },
+    methods: {
+        onCheckSubmenus (data) {
+            let menu = []
+            data && data.map((dt) => {
+                const stt = this.onCheckPermission(dt.permission)
+                if (stt) {
+                    menu.push({
+                        ...dt
+                    })
+                }
+            })
+            return menu
+        },
+        onCheckPermission (prm) {
+            let stt = false
+            const data = this.permissions
+            data && data.map((dt) => {
+                if (dt.permission_name === prm) {
+                    stt = true
+                }
+            })
+            return stt
+        },
+    },
+    computed: {
+        dataSideBar() {
+            let menu = []
+            this.data && this.data.map((dt) => {
+                if (dt.menu) {
+                    let submenu = this.onCheckSubmenus(dt.menu)
+                    if (submenu.length > 0) {
+                        let submenuPayload = []
+                        submenu && submenu.map((sb) => {
+                            submenuPayload.push({...sb})
+                        })
+                        if (submenuPayload.length > 0) {
+                            menu.push({
+                                ...dt,
+                                menu: submenuPayload
+                            })
+                        }
+                    }
+                }
+            })
+            return menu
         }
     },
     props: {
@@ -77,15 +129,6 @@ export default {
         },
         data: {
             required: true
-        }
-    },
-    watch: {
-        data: function (props, prevProps) {
-            if (props) {
-                this.datas = props
-            } else {
-                this.datas = []
-            }
         }
     }
 }

@@ -4,7 +4,10 @@
                 ? 'content-scroll menu-list hover mobile-list with-icon small' 
                 : 'content-scroll menu-list hover mobile-list with-icon ' + (enableGridView ? 'display-flex wrap' : '')
             )">
-            <li v-for="(dt, index) in data" :key="index" :class="'ml-list ' + (enableGridView ? 'fixed-column-3' : '')">
+            <li 
+                v-for="(dt, index) in dataSideBar" 
+                :key="index" 
+                :class="`ml-list ${enableGridView ? 'fixed-column-3' : ''}`">
                 <router-link v-if="!dt.menu" :to="{name: dt.link}" class="ml-link">
                     <div class="ml-icon">
                         <i :class="dt.icon" />
@@ -53,7 +56,38 @@ export default {
     name: 'AppListDownMenu',
     data () {
         return {
-            datas: this.data
+            permissions: [],
+            sidebar: [],
+        }
+    },
+    mounted() {
+        const permissions = this.$cookies.get('permissions')
+        this.permissions = permissions.permissions
+    },
+    methods: {
+        onCheckPermission (prm) {
+            let stt = false
+            const data = this.permissions
+            data && data.map((dt) => {
+                if (dt.permission_name === prm) {
+                    stt = true
+                }
+            })
+            return stt
+        },
+    },
+    computed: {
+        dataSideBar() {
+            let menu = []
+            this.data && this.data.map((dt) => {
+                const stt = this.onCheckPermission(dt.permission)
+                if (stt) {
+                    menu.push({
+                        ...dt
+                    })
+                }
+            })
+            return menu
         }
     },
     props: {
@@ -71,15 +105,6 @@ export default {
         },
         data: {
             required: true
-        }
-    },
-    watch: {
-        data: function (props, prevProps) {
-            if (props) {
-                this.datas = props
-            } else {
-                this.datas = []
-            }
         }
     }
 }

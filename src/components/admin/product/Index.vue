@@ -141,12 +141,14 @@ export default {
             currentPage: 1,
             totalPages: 0,
             dataUser: null,
+            dataShop: null,
             limit: 10,
             offset: 0 
         }
     },
     mounted () {
         this.dataUser = this.$cookies.get('user')
+        this.dataShop = this.$cookies.get('shop')
         this.getData(this.limit, this.offset)
         this.getDataCategory()
     },

@@ -443,7 +443,7 @@ export default {
                 limit: 1000,
                 offset: 0,
                 status: 'active',
-                user_id: this.dataUser.id
+                shop_id: this.dataShop.id
             }
             const rest = await axios.post('/api/payment/getAll', payload, { headers: { Authorization: token } })
 
@@ -458,8 +458,7 @@ export default {
             const payload = {
                 limit: 1000,
                 offset: 0,
-                // status: 'active',
-                user_id: this.dataUser.id
+                shop_id: this.dataShop.id
             }
             const rest = await axios.post('/api/table/getAll', payload, { headers: { Authorization: token } })
 

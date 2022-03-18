@@ -53,10 +53,12 @@ const sidebarAdmin = [
         {icon: 'fa fa-lg fa-tachometer-alt', label: 'Dashboard', value: 0, link: 'dashboard', permission: 'dashboard'},
         {icon: 'fa fa-lg fa-laptop', label: 'Cashier', value: 0, link: 'cashier', permission: 'cashier'},
         {icon: 'fa fa-lg fa-list-ul', label: 'Orders', value: 0, link: 'orderlist', permission: 'orders'},
-        // {icon: 'fa fa-lg fa-utensils', label: 'Products', value: 0, link: 'admin-product', permission: 'products'},
+        {icon: 'fa fa-lg fa-calendar-check', label: 'Task Lists', value: 0, link: 'admin-tasklist', permission: 'tasklists'},
+        {icon: 'fa fa-lg fa-utensils', label: 'Products', value: 0, link: 'admin-product', permission: 'products'},
         {icon: 'fa fa-lg fa-store', label: 'Shop', value: 0, link: 'admin-shop', permission: 'shops'},
-        {icon: 'fa fa-lg fa-bell', label: 'Notifications', value: 0, link: 'notification', permission: 'notifications'},
         // {icon: 'fa fa-lg fa-cogs', label: 'Settings', value: 0, link: 'admin-setting', permission: 'users'},
+        {icon: 'fa fa-lg fa-users', label: 'Employees', value: 0, link: 'admin-employee', permission: 'employees'},
+        {icon: 'fa fa-lg fa-bell', label: 'Notifications', value: 0, link: 'notification', permission: 'notifications'},
     ]},
 ]
 
@@ -65,11 +67,10 @@ export default {
     data () {
         return {
             visibleLoader: false,
-            permissions: null,
             logo: logo,
             icon: icon,
             countNotif: 0,
-            sidebar: null,
+            sidebar: sidebarAdmin,
             showBar: false,
             classSidebar: 'sidebar smalls',
             classSidebarMenu: 'menu-list hover with-icon smalls',
@@ -96,12 +97,7 @@ export default {
         this.selectedShop = this.choosedShop ? this.choosedShop : this.$cookies.get('shop')
         this.selectedLabel = this.selectedShop ? this.selectedShop.name : 'CHOOSE SHOP'
         this.code = this.deployUrl + (this.$router.mode === 'hash' ? '#' : '') + '/generate-customer/' + (this.selectedShop ? this.selectedShop.shop_id : token)
-
-        const permissions = this.$cookies.get('permissions')
-        this.permissions = permissions.permissions
-
         this.countNotif = this.notif ? this.notif : 0
-        this.onCheckMenus(sidebarAdmin)
         this.getLocalOrderCount()
         this.getLocalNotifCount()
         this.getShop()
@@ -152,49 +148,6 @@ export default {
                 subtitle: subtitle
             }
             this.setMultipleToast(payload)
-        },
-        onCheckSubmenus (data) {
-            let menu = []
-            data && data.map((dt) => {
-                const stt = this.onCheckPermission(dt.permission)
-                if (stt) {
-                    menu.push({
-                        ...dt
-                    })
-                }
-            })
-            return menu
-        },
-        onCheckMenus (data) {
-            let menu = []
-            data && data.map((dt) => {
-                if (dt.menu) {
-                    let submenu = this.onCheckSubmenus(dt.menu)
-                    if (submenu.length > 0) {
-                        let submenuPayload = []
-                        submenu && submenu.map((sb) => {
-                            submenuPayload.push({...sb})
-                        })
-                        if (submenuPayload.length > 0) {
-                            menu.push({
-                                ...dt,
-                                menu: submenuPayload
-                            })
-                        }
-                    }
-                }
-            })
-            this.sidebar = menu
-        },
-        onCheckPermission (prm) {
-            let stt = false
-            const data = this.permissions
-            data && data.map((dt) => {
-                if (dt.permission_name === prm) {
-                    stt = true
-                }
-            })
-            return stt
         },
         onSetNotif (target, notif) {
             const data = this.sidebar
@@ -288,7 +241,6 @@ export default {
         orderList: function (data) {
             const lth = data.length
             const payload = data && data[lth - 1]
-            // this.saveNotif(payload.title, payload.subtitle)
             this.makeMultipleToast(payload.title, payload.subtitle)
             this.getLocalNotifCount()
             this.getLocalOrderCount()
