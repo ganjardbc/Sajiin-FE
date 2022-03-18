@@ -1,11 +1,22 @@
 <template>
     <div id="App">
         <!-- <div class="left-form">
+            <div class="display-flex left card-dashboard-container" style="padding-bottom: 20px;">
+                <h1 class="fonts big black bold">Cashier</h1>
+            </div>
+
+            <FormTableMonitoring 
+                :visibleLoader.sync="visibleLoaderTable"
+                :data.sync="dataAllTable"
+                :onRefresh="getDataTable"
+                :onChangeTable="onChangeMainTable"
+            />
+
             <FormProduct 
                 :onChange="(data) => onChange(data)" />
-        </div> -->
+        </div>
 
-        <!-- <div class="right-form">
+        <div class="right-form">
             <div style="padding: 15px;">
                 <FormCarts 
                     :data.sync="items"

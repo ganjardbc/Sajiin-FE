@@ -24,6 +24,8 @@ a {
         background-color: $white-grey !important;
         cursor: not-allowed !important;
         opacity: 0.5 !important;
+        color: $grey !important;
+        border-color: $grey !important;
     }
     .notif {
         position: absolute;

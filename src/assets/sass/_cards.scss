@@ -352,6 +352,7 @@
     border: 0.1px $light-grey solid;
     font-size: 13px;
     height: 18px;
+    text-align: left;
     &.no-height {
         height: auto;
     }
@@ -381,6 +382,13 @@
             color: $black;
             border: 0.1px $grey solid;
         }
+    }
+    &:disabled {
+        background-color: $white-grey !important;
+        cursor: not-allowed !important;
+        opacity: 0.5 !important;
+        color: $grey !important;
+        border-color: $grey !important;
     }
 }
 

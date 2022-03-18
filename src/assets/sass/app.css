@@ -280,6 +280,8 @@ a.btn {
   background-color: #ededf1 !important;
   cursor: not-allowed !important;
   opacity: 0.5 !important;
+  color: #555 !important;
+  border-color: #555 !important;
 }
 .btn .notif {
   position: absolute;
@@ -1716,6 +1718,7 @@ a.btn {
   border: 0.1px #999 solid;
   font-size: 13px;
   height: 18px;
+  text-align: left;
 }
 .card-capsule.no-height {
   height: auto;
@@ -1746,6 +1749,13 @@ a.btn {
 .card-capsule.normal:hover {
   color: #151f2d;
   border: 0.1px #555 solid;
+}
+.card-capsule:disabled {
+  background-color: #ededf1 !important;
+  cursor: not-allowed !important;
+  opacity: 0.5 !important;
+  color: #555 !important;
+  border-color: #555 !important;
 }
 
 .card-scanner {

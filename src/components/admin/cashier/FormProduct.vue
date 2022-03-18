@@ -39,6 +39,7 @@
                         :onCheckOut="(data) => onCheckOut(data)"
                         :onChangeStatus="(data) => saveData(data)" />
                 </div>
+                <AppEmpty v-if="dataAll.length === 0" />
             </div>
             <div v-if="selectedTabIndex === 1" class="display-flex wrap">
                 <div v-for="(dt, i) in dataActive" :key="i" class="column-4 mobile-column">
@@ -47,6 +48,7 @@
                         :onCheckOut="(data) => onCheckOut(data)"
                         :onChangeStatus="(data) => saveData(data)" />
                 </div>
+                <AppEmpty v-if="dataActive.length === 0" />
             </div>
             <div v-if="selectedTabIndex === 2" class="display-flex wrap">
                 <div v-for="(dt, i) in dataInactive" :key="i" class="column-4 mobile-column">
@@ -55,6 +57,7 @@
                         :onCheckOut="(data) => onCheckOut(data)"
                         :onChangeStatus="(data) => saveData(data)" />
                 </div>
+                <AppEmpty v-if="dataInactive.length === 0" />
             </div>
 
             <AppLoader v-if="visibleLoader" />
@@ -79,6 +82,7 @@ import CardProduct from './CardProduct'
 import CardCategory from './CardCategory'
 import AppTabs from '../../modules/AppTabs'
 import AppAlert from '../../modules/AppAlert'
+import AppEmpty from '../../modules/AppEmpty'
 
 export default {
     name: 'App',
@@ -113,7 +117,8 @@ export default {
         CardProduct,
         AppLoader,
         AppTabs,
-        AppAlert
+        AppAlert,
+        AppEmpty
     },
     props: {
         onChange: {

@@ -10,36 +10,36 @@
                 <div class="width width-row-4">
                     <AppCardDashboard height="210px">
                         <div class="post-top content-center">
+                            <div style="padding-top: 20px;"></div>
                             <div class="fonts fonts-48 teal semibold">{{ nowOrders ? (nowOrders.confirmed + nowOrders.unconfirmed) : 0 }}</div>
                             <div class="fonts fonts-10 grey">New Orders</div>
-                            <!-- <div style="padding: 20px;"></div> -->
                         </div>
                     </AppCardDashboard>
                 </div>
                 <div class="width width-row-4">
                     <AppCardDashboard height="210px">
                         <div class="post-top content-center">
+                            <div style="padding-top: 20px;"></div>
                             <div class="fonts fonts-48 teal semibold">{{ nowOrders ? nowOrders.cooking : 0 }}</div>
                             <div class="fonts fonts-10 grey">On Progress Orders</div>
-                            <!-- <div style="padding: 20px;"></div> -->
                         </div>
                     </AppCardDashboard>
                 </div>
                 <div class="width width-row-4">
                     <AppCardDashboard height="210px">
                         <div class="post-top content-center">
+                            <div style="padding-top: 20px;"></div>
                             <div class="fonts fonts-48 grey semibold">{{ nowOrders ? nowOrders.done : 0 }}</div>
                             <div class="fonts fonts-10 grey">Done Orders</div>
-                            <!-- <div style="padding: 20px;"></div> -->
                         </div>
                     </AppCardDashboard>
                 </div>
                 <div class="width width-row-4">
                     <AppCardDashboard height="210px">
                         <div class="post-top content-center">
+                            <div style="padding-top: 20px;"></div>
                             <div class="fonts fonts-48 grey semibold">{{ nowOrders ? nowOrders.canceled : 0 }}</div>
                             <div class="fonts fonts-10 grey">Canceled Orders</div>
-                            <!-- <div style="padding: 20px;"></div> -->
                         </div>
                     </AppCardDashboard>
                 </div>

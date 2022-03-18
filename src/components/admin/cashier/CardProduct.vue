@@ -1,5 +1,8 @@
 <template>
-    <div id="App" class="card-dashboard-container" style="padding-top: 10px; padding-bottom: 10px;">
+    <div 
+        id="App" 
+        class="card-dashboard-container" 
+        style="padding-top: 10px; padding-bottom: 10px;">
         <div 
             class="card bg-white box-shadow" 
             :style="`
@@ -9,77 +12,67 @@
                 background-color: #fff;
             `">
             <div style="padding: 15px;">
-                <div class="width width-100">
-                    <div class="image image-padding">
-                        <VueLoadImage v-if="data.images[0] && data.images[0].image">
-                            <img slot="image" :src="productImageThumbnailUrl + data.images[0].image" alt="" class="post-center">
-                            <div slot="preloader">
-                                <i class="post-middle-absolute fa fa-lg fa-spin fa-spinner" style="color: #999;"></i>
-                            </div>
-                        </VueLoadImage>
-                        <i v-else class="post-middle-absolute icn fa fa-lg fa-image"></i>
+                <div class="display-flex align-center" style="padding-bottom: 15px;">
+                    <div style="width: 50px; margin-right: 10px;">
+                        <div class="image image-padding">
+                            <VueLoadImage v-if="data.images[0] && data.images[0].image">
+                                <img slot="image" :src="productImageThumbnailUrl + data.images[0].image" alt="" class="post-center">
+                                <div slot="preloader">
+                                    <i class="post-middle-absolute fa fa-lg fa-spin fa-spinner" style="color: #999;"></i>
+                                </div>
+                            </VueLoadImage>
+                            <i v-else class="post-middle-absolute icn fa fa-lg fa-image"></i>
+                        </div>
+                    </div>
+                    <div style="width: calc(100% - 60px);">
+                        <div class="fonts fonts-11 semibold">{{ data.product.name }}</div>
+                        <div v-if="data.details.length > 0" class="fonts fonts-10 grey">Rp. {{ data.details ? data.details[0].price : 0 }}</div>
                     </div>
                 </div>
-                <div style="width: 100%; text-align: center; padding-top: 15px; padding-bottom: 15px;">
-                    <div class="fonts fonts-11 semibold" style="margin-bottom: 3px;">{{ data.product.name }}</div>
-                    <div v-if="data.details.length > 0" class="fonts fonts-10 grey">Rp. {{ data.details ? data.details[0].price : 0 }}</div>
-                </div>
-                <button 
-                    class="btn btn-full btn-sekunder" 
-                    style="margin-bottom: 15px;" 
-                    :disabled="data.product.status === 'active' ? false : true"
-                    @click="openDetail">
-                    Choose Product
-                </button>
-                <button 
-                    :class="`btn btn-full ${data.product.status === 'active' ? 'btn-green' : 'btn-sekunder'}`" 
-                    @click="onChangeStatus(data)">
-                    {{ data.product.status === 'active' ? 'Inactive' : 'Active' }}
-                </button>
-            </div>
-            <div v-if="visiblePopup" class="card-full">
-                <div class="card-info bg-white border-top">
-                    <div class="display-flex space-between" style="margin-bottom: 5px;">
-                        <div class="fonts fonts-10 semibold" style="margin-top: 4px;">Choose</div>
-                        <button class="btn btn-small-icon btn-white" @click="openDetail">
-                            <i class="fa fa-lw fa-times"></i>
-                        </button>
-                    </div>
-                    <div class="card-info-content">
+                <div>
+                    <div style="height: 160px; overflow-y: auto;" class="change-scrollbar">
                         <div v-if="data.details.length > 0" style="margin-bottom: 5px;">
                             <div class="fonts fonts-9 normal">Details</div>
                             <div class="display-flex wrap" style="margin-top: 5px;">
-                                <div 
+                                <button 
                                     v-for="(dt, i) in data.details" 
                                     :key="i" 
                                     :class="'card-capsule pointer no-height ' + (indexDetail === dt.id ? 'active' : 'normal')" 
-                                    @click="selectDetail(dt.id)"
-                                    style="margin-right: 5px; margin-bottom: 5px; padding-bottom: 4px; border-radius: 4px;">
+                                    style="margin-right: 5px; margin-bottom: 5px; padding-bottom: 4px; border-radius: 4px;"
+                                    :disabled="data.product.status === 'inactive'"
+                                    @click="selectDetail(dt.id)">
                                     <div class="fonts fonts-9 semibold">{{ dt.name }}</div>
                                     <div class="fonts fonts-8 grey">Rp. {{ dt.price ? dt.price : 0 }}</div>
-                                </div>
+                                </button>
                             </div>
                         </div>
                         <div v-if="data.topings.length > 0" style="margin-bottom: 10px;">
                             <div class="fonts fonts-9 normal">Topings</div>
                             <div class="display-flex wrap" style="margin-top: 5px;">
-                                <div 
+                                <button 
                                     v-for="(dt, i) in data.topings" 
                                     :key="i" 
                                     :class="'card-capsule pointer no-height ' + (indexToping === dt.id ? 'active' : 'normal')" 
-                                    @click="selectToping(dt.id)"
-                                    style="margin-right: 5px; margin-bottom: 5px; padding-bottom: 4px; border-radius: 4px;">
+                                    style="margin-right: 5px; margin-bottom: 5px; padding-bottom: 4px; border-radius: 4px;"
+                                    :disabled="data.product.status === 'inactive'"
+                                    @click="selectToping(dt.id)">
                                     <div class="fonts fonts-9 semibold">{{ dt.name }}</div>
                                     <div class="fonts fonts-8 grey">Rp. {{ dt.price ? dt.price : 0 }}</div>
-                                </div>
+                                </button>
                             </div>
                         </div>
                     </div>
                     <button 
                         :class="'btn btn-full btn-sekunder'" 
-                        :disabled="!indexDetail"
+                        :style="`margin-bottom: 15px;`"
+                        :disabled="!indexDetail || data.product.status === 'inactive'"
                         @click="addToCart(data)">
                         Add To Cart
+                    </button>
+                    <button 
+                        :class="`btn btn-full ${data.product.status === 'active' ? 'btn-green' : 'btn-sekunder'}`" 
+                        @click="onChangeStatus(data)">
+                        {{ data.product.status === 'active' ? 'Inactive' : 'Active' }}
                     </button>
                 </div>
             </div>
@@ -128,7 +121,7 @@ export default {
         this.dataShop = this.$cookies.get('shop')
     },
     components: {
-        VueLoadImage
+        VueLoadImage,
     },
     props: {
         data: {
@@ -210,7 +203,6 @@ export default {
             this.selectedDetail = null
             this.indexToping = null 
             this.selectedToping = null 
-            this.openDetail()
             this.onCheckOut(payload)
             this.makeToast('Product added to cart')
         }
