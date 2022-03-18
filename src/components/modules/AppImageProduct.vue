@@ -25,7 +25,7 @@
                     {{ detail.quantity }} {{ detail.product_toping }} x Rp. {{ detail.toping_price }}
                 </div>
             </div>
-            <!-- <div style="width: 100px;" class="display-flex align-right">
+            <div style="width: 100px;" class="display-flex align-right">
                 <div 
                     :class="'card-capsule ' + (
                     detail.status === 'waiting' 
@@ -45,7 +45,7 @@
                                 : detail.status 
                     }}
                 </div>
-            </div> -->
+            </div>
         </div>
     </div>
 </template>
