@@ -16,7 +16,7 @@
 import AppListDownMenu from '../modules/AppListDownMenu'
 
 const menus = [
-    {label: 'Shop', icon: 'fa fa-lg fa-store', link: 'admin-shop-form', permission: 'shops'},
+    {label: 'Shops', icon: 'fa fa-lg fa-store', link: 'admin-shop-shops', permission: 'shops'},
     {label: 'Payments', icon: 'fa fa-lg fa-calculator', link: 'admin-shop-payment', permission: 'payments'},
     {label: 'Tables', icon: 'fa fa-lg fa-th-large', link: 'admin-shop-table', permission: 'tables'},
 ]

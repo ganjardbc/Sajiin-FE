@@ -211,10 +211,10 @@ const routes = {
             name: 'admin-shop',
             path: '/admin-shop',
             component: ShopLayout,
-            redirect: '/admin-shop/form',
+            redirect: '/admin-shop/shops',
             children: [
                 {
-                    name: 'shops',
+                    name: 'admin-shop-shops',
                     path: 'shops',
                     component: Shops
                 },

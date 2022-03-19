@@ -9,14 +9,6 @@
                     <button class="btn btn-icon btn-white" @click="refresh">
                         <i class="fa fa-lw fa-retweet"></i>
                     </button>
-                    <!-- <div class="display-flex">
-                        <AppButtonMenu 
-                            :icon="'fa fa-lw fa-filter'"
-                            :button="'btn btn-icon btn-white'"
-                            :onChange="(data) => onChangeMenu(data)" 
-                            :data="[{label: 'By ID'}, {label: 'By Title'}, {label: 'By Status'}]" />
-                        <SearchField :placeholder="'Search notifications ..'" :enableResponsive="true" style="margin-left: 5px;" />
-                    </div> -->
                 </div>
 
                 <div 
@@ -56,6 +48,8 @@
                     </div>
                 </div>
 
+                <AppEmpty v-if="!visibleLoader && datas.length === 0" />
+
                 <AppLoader v-if="visibleLoader" />
 
                 <div v-if="!visibleLoader" class="display-flex center" style="margin-top: 20px; margin-bottom: 20px;">
@@ -90,6 +84,7 @@ import axios from 'axios'
 import { mapGetters, mapActions } from 'vuex'
 import AppLoader from '../../modules/AppLoader'
 import AppAlert from '../../modules/AppAlert'
+import AppEmpty from '../../modules/AppEmpty'
 import SearchField from '../../modules/SearchField'
 import AppButtonMenu from '../../modules/AppButtonMenu'
 import AppCapsuleMenu from '../../modules/AppCapsuleMenu'
@@ -133,6 +128,7 @@ export default {
         this.getData(this.limit, this.offset)
     },
     components: {
+        AppEmpty,
         AppAlert,
         AppLoader,
         AppButtonMenu,

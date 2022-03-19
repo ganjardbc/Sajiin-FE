@@ -61,10 +61,9 @@
 import AppListInfoMenu from './AppListInfoMenu'
 
 const menus = [
-    {icon: 'fa fa-lg fa-user', label: 'Edit Profile', link: 'profile', permission: 'profile'},
-    {icon: 'fa fa-lg fa-user', label: 'Edit Employee', link: 'admin-employee-form', permission: 'employeeform'},
+    {icon: 'fa fa-lg fa-user', label: 'User Profile', link: 'profile', permission: 'profile'},
+    {icon: 'fa fa-lg fa-user', label: 'Employee Profile', link: 'admin-employee-form', permission: 'employeeform'},
     {icon: 'fa fa-lg fa-calendar-alt', label: 'Reports', link: '404', permission: 'reports'},
-    {icon: 'fa fa-lg fa-cogs', label: 'Settings', link: 'admin-setting', permission: 'bizpars'},
 ]
 
 export default {

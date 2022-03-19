@@ -34,7 +34,7 @@
                 <div class="content-body">
                     <div class="display-flex wrap">
                         <div v-for="(dt, i) in datas" :key="i" class="width width-row-3">
-                            <div style="margin: 7.5px;">
+                            <div class="card-dashboard-container" style="padding-top: 7.5px; padding-bottom: 7.5px;">
                                 <div class="card box-shadow" style="overflow: unset; padding: 0; width: 100%;">
                                     <div class="border-bottom" style="padding: 10px;">
                                         <div class="display-flex align-center space-between">

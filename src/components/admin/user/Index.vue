@@ -32,6 +32,7 @@
                             <v-th sortKey="name">Name</v-th>
                             <v-th sortKey="email">Email</v-th>
                             <v-th sortKey="username">Username</v-th>
+                            <v-th sortKey="employee">Imployee</v-th>
                             <v-th sortKey="status" class="normal-col">Status</v-th>
                             <th class="medium-col"></th>
                         </thead>
@@ -43,6 +44,7 @@
                                 <td>{{ row.name }}</td>
                                 <td>{{ row.email }}</td>
                                 <td>{{ row.username }}</td>
+                                <td>{{ row.employee ? `${row.employee.employee_id} - ${row.employee.name}` : '' }}</td>
                                 <td class="normal-col">
                                     <div 
                                         :class="'card-capsule ' + (row.status === 'active' ? 'active' : '')" 

@@ -3,7 +3,7 @@
         <AppLoader v-if="visibleLoader" />
         <div v-else class="card-dashboard-container">
             <div class="display-flex display-mobile space-between">
-                <div class="fonts bold big margin" style="margin-top: 15px; margin-bottom: 15px;">Employee</div>
+                <div class="fonts bold big margin" style="margin-top: 15px; margin-bottom: 15px;">Employee Profile</div>
             </div>
 
             <div class="display-flex display-mobile space-between" style="padding-top: 10px; padding-bottom: 10px;">

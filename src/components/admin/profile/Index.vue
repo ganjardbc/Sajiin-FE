@@ -1,7 +1,7 @@
 <template>
     <div id="Profile" class="card-dashboard-container">
         <div style="padding-bottom: 15px;">
-            <h1 class="fonts big black bold">Profile</h1>
+            <h1 class="fonts big black bold">User Profile</h1>
         </div>
 
         <div class="display-flex display-mobile space-between" style="padding-top: 10px; padding-bottom: 10px;">
