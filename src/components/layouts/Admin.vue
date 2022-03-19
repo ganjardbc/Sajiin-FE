@@ -97,10 +97,11 @@ export default {
         this.selectedShop = this.choosedShop ? this.choosedShop : this.$cookies.get('shop')
         this.selectedLabel = this.selectedShop ? this.selectedShop.name : 'CHOOSE SHOP'
         this.code = this.deployUrl + (this.$router.mode === 'hash' ? '#' : '') + '/generate-customer/' + (this.selectedShop ? this.selectedShop.shop_id : token)
-        this.countNotif = this.notif ? this.notif : 0
-        this.getLocalOrderCount()
-        this.getLocalNotifCount()
+        this.countNotif = this.notifs ? this.notifs : 0
+        this.onSetNotif('notifications', this.countNotif)
         this.getShop()
+        this.getLocalNotifCount()
+        this.getLocalOrderCount()
     },
     components: {
         VueLoadImage,
@@ -207,35 +208,24 @@ export default {
             carts: 'cart/all',
             order: 'order/count',
             orders: 'order/all',
-            notif: 'notification/count',
+            notifs: 'notification/count',
             choosedShop: 'store/selected',
             totalToast: 'toastmessage/data'
         })
     },
     watch: {
-        orders (props) {
-            let val = 0
-            const data = this.$cookies.get('user')
-            const role = data && data.role_name
-            switch (role) {
-                case 'admin':
-                    val = props.allAdmin
-                    break;
-                default:
-                    val = props.all
-                    break;
-            }
-
-            this.onSetNotif('orders', val)
-        },
-        notif (props) {
+        notifs (props) {
             if (props) {
                 this.countNotif = props 
             } else {
                 this.countNotif = 0
             }
             this.onSetNotif('notifications', this.countNotif)
-        }
+        },
+        orders (props) {
+            let val = props.confirmed + props.unconfirmed + props.cooking
+            this.onSetNotif('orders', val)
+        },
     },
     sockets: {
         orderList: function (data) {
