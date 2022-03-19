@@ -21,29 +21,10 @@
 
                 <div v-for="(dt, i) in datas" :key="i" class="card box-shadow" style="margin-top: 15px; margin-bottom: 15px; overflow: unset;">
                     <div class="display-flex space-between" style="padding-top: 5px; padding-bottom: 5px;">
-                        <div style="width: 60px; margin-right: 20px;">
+                        <div style="width: 80px; margin-right: 20px;">
                             <div class="image image-padding border border-full">
                                 <img v-if="dt.shop.image" :src="shopImageThumbnailUrl + dt.shop.image" alt="" class="post-center">
                                 <i v-else class="post-middle-absolute icn fa fa-lg fa-image"></i>
-                            </div>
-                        </div>
-                        <div style="width: calc(100% - 260px);">
-                            <div class="display-flex" style="margin-bottom: 5px;">
-                                <div class="fonts fonts-11 semibold" style="margin-top: 3px;">{{ dt.shop.name }}</div>
-                                <div 
-                                    :class="'card-capsule ' + (
-                                    dt.shop.status === 'active' 
-                                        ? 'active' 
-                                        : ''
-                                    )" 
-                                    style="margin-left: 10px; text-transform: capitalize;">
-                                    {{ dt.shop.status }}
-                                </div>
-                            </div>
-                            <div>
-                                <div class="fonts fonts-10 grey">{{ dt.shop.about.substring(0, 50) }} ...</div>
-                                <div class="fonts fonts-10 grey">{{ dt.shop.open_day + ' - ' + dt.shop.close_day }}</div>
-                                <div class="fonts fonts-10 grey">{{ dt.shop.open_time + ' - ' + dt.shop.close_time }}</div>
                             </div>
                         </div>
                         <div class="display-flex column space-between" style="width: 180px;">
@@ -58,9 +39,27 @@
                             </div>
                         </div>
                     </div>
-                    <div class="display-flex space-between" style="padding-top: 5px; padding-bottom: 5px;">
-                        <div style="width: 80px;"></div>
-                        <div style="width: calc(100% - 80px);">
+                    <div style="padding-top: 5px; padding-bottom: 5px;">
+                        <div class="display-flex" style="margin-bottom: 5px;">
+                            <div class="fonts fonts-11 semibold" style="margin-top: 3px;">{{ dt.shop.name }}</div>
+                            <div 
+                                :class="'card-capsule ' + (
+                                dt.shop.status === 'active' 
+                                    ? 'active' 
+                                    : ''
+                                )" 
+                                style="margin-left: 10px; text-transform: capitalize;">
+                                {{ dt.shop.status }}
+                            </div>
+                        </div>
+                        
+                        <div style="margin-bottom: 5px;">
+                            <div class="fonts fonts-10 grey">{{ dt.shop.about.substring(0, 50) }} ...</div>
+                            <div class="fonts fonts-10 grey">{{ dt.shop.open_day + ' - ' + dt.shop.close_day }}</div>
+                            <div class="fonts fonts-10 grey">{{ dt.shop.open_time + ' - ' + dt.shop.close_time }}</div>
+                        </div>
+
+                        <div class="width width-100">
                             <AppShowHide 
                                 v-if="dt.tables.length > 0" 
                                 style="margin-bottom: 10px;"
