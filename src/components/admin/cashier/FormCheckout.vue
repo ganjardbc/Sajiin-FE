@@ -45,11 +45,12 @@
         <div class="width width-100 margin margin-bottom-20-px">
             <div class="fonts fonts-10 grey" style="margin-bottom: 5px;">Table</div>
             <div class="card border-full" style="padding: 10px; width: calc(100% - 20px);">
-                <div class="display-flex space-between">
+                <div class="display-flex space-between align-center">
                     <div v-if="selectedTable" class="display-flex">
                         <div style="width: 45px; margin-right: 15px">
-                            <div class="image image-padding" style="background-color: rgba(0, 0, 0, 0)">
-                                <img alt="" :src="selectedTable ? (tableImageThumbnailUrl + selectedTable.image) : ''" />
+                            <div class="image image-padding border border-full">
+                                <img v-if="selectedTable.image" :src="selectedTable ? (tableImageThumbnailUrl + selectedTable.image) : ''" alt="" class="post-center">
+                                <i v-else class="post-middle-absolute icn fa fa-lg fa-image"></i>
                             </div>
                         </div>
                         <div style="width: calc(100% - 60px);">
@@ -64,7 +65,7 @@
                         </div>
                     </div>
                     <div v-else>
-                        <div class="fonts fonts-10 semibold" style="margin-top: 10px; margin-left: 10px;">Choose visible table</div>
+                        <div class="fonts fonts-10 semibold" style="margin-left: 10px;">Choose visible table</div>
                     </div>
                     <div style="width: 40px;">
                         <button class="btn btn-icon btn-main-reverse with-hover" @click="onTable">
@@ -77,11 +78,12 @@
         <div class="width width-100 margin margin-bottom-20-px">
             <div class="fonts fonts-10 grey" style="margin-bottom: 5px;">Payment</div>
             <div class="card border-full" style="padding: 10px; width: calc(100% - 20px);">
-                <div class="display-flex space-between">
+                <div class="display-flex space-between align-center">
                     <div v-if="selectedPayment" class="display-flex">
                         <div style="width: 45px; margin-right: 15px">
-                            <div class="image image-padding" style="background-color: rgba(0, 0, 0, 0)">
-                                <img alt="" :src="selectedPayment ? (paymentImageThumbnailUrl + selectedPayment.image) : ''" />
+                            <div class="image image-padding border border-full">
+                                <img v-if="selectedPayment.image" :src="selectedPayment ? (paymentImageThumbnailUrl + selectedPayment.image) : ''" alt="" class="post-center">
+                                <i v-else class="post-middle-absolute icn fa fa-lg fa-image"></i>
                             </div>
                         </div>
                         <div class="display-flex space-between" style="width: calc(100% - 60px);">
@@ -94,7 +96,7 @@
                         </div>
                     </div>
                     <div v-else>
-                        <div class="fonts fonts-10 semibold" style="margin-top: 10px; margin-left: 10px;">Choose payment method</div>
+                        <div class="fonts fonts-10 semibold" style="margin-left: 10px;">Choose payment method</div>
                     </div>
                     <div style="width: 40px;">
                         <button class="btn btn-icon btn-main-reverse with-hover" @click="onPayment">
