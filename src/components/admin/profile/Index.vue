@@ -51,7 +51,7 @@
                                     readonly>
                             </div>
                         </div>
-                        <div class="width width-100 display-flex display-mobile margin margin-bottom-20-px">
+                        <div v-if="!isUserAdmin" class="width width-100 display-flex display-mobile margin margin-bottom-20-px">
                             <div class="width width-30 width-mobile fonts fonts-11">Employee ID</div>
                             <div class="width width-70 width-mobile">
                                 <div class="card-search full">
@@ -416,6 +416,7 @@ export default {
                 const data = rest.data.data
                 if (data.length !== 0) {
                     this.$cookies.set('user', data)
+                    this.$cookies.set('employee', this.dataEmployee)
                     this.makeToast('Profile Updated')
                 } else {
                     this.formMessage = rest.data.message
@@ -505,7 +506,10 @@ export default {
             authenticated: 'auth/authenticated',
             user: 'auth/user',
             token: 'auth/token'
-        })
+        }),
+        isUserAdmin() {
+            return this.$cookies.get('role_name') === 'admin'
+        }
     },
 }
 </script>

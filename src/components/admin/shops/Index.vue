@@ -12,6 +12,9 @@
                             :button="'btn btn-icon btn-white'"
                             :onChange="(data) => onChangeMenu(data)" 
                             :data="[{label: 'By ID'}, {label: 'By Name'}, {label: 'By Status'}]" />
+                        <button class="btn btn-icon btn-white" @click="onRefresh">
+                            <i class="fa fa-lw fa-retweet"></i>
+                        </button>
                         <button v-if="isCanCreate" class="btn btn-white btn-icon btn-radius" @click="onShow('CREATE')">
                             <i class="fa fa-lw fa-plus" />
                         </button>
@@ -249,6 +252,11 @@ export default {
             })
             return payload
         },
+        onRefresh () {
+            this.datas = []
+            this.offset = 0
+            this.getData(this.limit, 0)
+        },
         onSave () {
             this.visibleAlertDelete = false
             this.visibleAlertSave = false
@@ -421,14 +429,16 @@ export default {
                     this.offset += this.limit
                 }
 
-                if (this.$cookies.get('role_name') !== 'admin') {
+                if (this.$cookies.get('role_name') === 'admin') {
+                    this.isCanCreate = true 
+                } else {
                     if (newData.length > 0) {
                         this.isCanCreate = false 
                     } else {
                         this.isCanCreate = true 
                     }
-                } else {
-                    this.isCanCreate = true 
+                    const shop = this.datas ? this.datas[0].shop : null
+                    this.$cookies.set('shop', shop)
                 }
 
                 if (newData.length < this.limit) {
