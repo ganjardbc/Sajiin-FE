@@ -2,20 +2,20 @@
     <div id="App">
         <div class="main-screen">
             <div style="padding-top: 10px; padding-bottom: 20px;"> 
-                <div v-if="!selectedShop" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%;">
+                <div v-if="!selectedShop" class="display-popup bg-white">
                     <div class="post-center" style="padding: 15px;">
                         <div class="width width-400-px width-mobile width-center">
                             <div class="card box-shadow" style="padding-top: 30px; padding-bottom: 30px;">
                                 <div class="display-flex column align-center">
                                     <div class="content-center" style="margin-top: 10px; margin-bottom: 10px;">
                                         <div class="image image-circle image-130px" style="margin: auto;">
-                                            <i class="post-center fa fa-2x fa-store-alt" style="font-size: 32pt;"></i>
+                                            <i class="post-center fa fa-2x fa-store" style="font-size: 32pt;"></i>
                                         </div>
                                         <div class="fonts fonts-16 black semibold" style="margin-top: 30px;">
-                                            Make your orders
+                                            Make your Orders
                                         </div>
                                         <div class="fonts fonts-10 grey">
-                                            by scan the QR restaurant that have join with us
+                                            by scan the QR shop that have join with us
                                         </div>
                                     </div>
                                     <div style="margin-top: 10px; margin-bottom: 10px;">
@@ -30,6 +30,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div v-if="selectedShop">
                     <div style="width: 100%;">
                         <div style="padding-top: 0; padding-bottom: 0;">
