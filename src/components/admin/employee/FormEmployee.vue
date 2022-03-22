@@ -1,68 +1,70 @@
 <template>
     <div id="FormEmployee">
-        <div class="field-group margin margin-bottom-15-px">
-            <div class="field-label">EMPLOYEE ID</div>
-            <input 
-                type="text" 
-                placeholder="" 
-                class="field field-sekunder" 
-                name="employee_id" 
-                id="employee_id" 
-                v-model="data.employee_id"
-                readonly>
-        </div>
-        <div class="field-group margin margin-bottom-15-px">
-            <div class="field-label">NAME</div>
-            <input 
-                type="text" 
-                placeholder="" 
-                class="field field-sekunder" 
-                name="name" 
-                id="name" 
-                v-model="data.name"
-                readonly>
-        </div>
-        <div class="field-group margin margin-bottom-15-px">
-            <div class="field-label">EMAIL</div>
-            <input 
-                type="email" 
-                placeholder="" 
-                class="field field-sekunder" 
-                name="email" 
-                id="email" 
-                v-model="data.email"
-                readonly>
-        </div>
-        <div class="field-group margin margin-bottom-15-px">
-            <div class="field-label">PHONE</div>
-            <input 
-                type="text" 
-                placeholder="" 
-                class="field field-sekunder" 
-                name="phone" 
-                id="phone" 
-                v-model="data.phone"
-                readonly>
-        </div>
-        <div class="field-group margin margin-bottom-15-px">
-            <div class="field-label">STATUS</div>
-            <input 
-                type="text" 
-                placeholder="" 
-                class="field field-sekunder" 
-                name="status" 
-                id="status" 
-                v-model="data.status"
-                readonly>
-        </div>
-        <div class="field-group margin margin-bottom-15-px">
-            <div class="field-label">ABOUT</div>
-            <textarea 
-                name="about" 
-                id="about" 
-                class="field field-sekunder field-textarea" 
-                v-model="data.about"
-                readonly></textarea>
+        <div v-if="!disableForm">
+            <div class="field-group margin margin-bottom-15-px">
+                <div class="field-label">EMPLOYEE ID</div>
+                <input 
+                    type="text" 
+                    placeholder="" 
+                    class="field field-sekunder" 
+                    name="employee_id" 
+                    id="employee_id" 
+                    v-model="data.employee_id"
+                    readonly>
+            </div>
+            <div class="field-group margin margin-bottom-15-px">
+                <div class="field-label">NAME</div>
+                <input 
+                    type="text" 
+                    placeholder="" 
+                    class="field field-sekunder" 
+                    name="name" 
+                    id="name" 
+                    v-model="data.name"
+                    readonly>
+            </div>
+            <div class="field-group margin margin-bottom-15-px">
+                <div class="field-label">EMAIL</div>
+                <input 
+                    type="email" 
+                    placeholder="" 
+                    class="field field-sekunder" 
+                    name="email" 
+                    id="email" 
+                    v-model="data.email"
+                    readonly>
+            </div>
+            <div class="field-group margin margin-bottom-15-px">
+                <div class="field-label">PHONE</div>
+                <input 
+                    type="text" 
+                    placeholder="" 
+                    class="field field-sekunder" 
+                    name="phone" 
+                    id="phone" 
+                    v-model="data.phone"
+                    readonly>
+            </div>
+            <div class="field-group margin margin-bottom-15-px">
+                <div class="field-label">STATUS</div>
+                <input 
+                    type="text" 
+                    placeholder="" 
+                    class="field field-sekunder" 
+                    name="status" 
+                    id="status" 
+                    v-model="data.status"
+                    readonly>
+            </div>
+            <div class="field-group margin margin-bottom-15-px">
+                <div class="field-label">ABOUT</div>
+                <textarea 
+                    name="about" 
+                    id="about" 
+                    class="field field-sekunder field-textarea" 
+                    v-model="data.about"
+                    readonly></textarea>
+            </div>
         </div>
 
         <AppPopupForm
@@ -150,6 +152,10 @@ export default {
             requred: true
         },
         enablePopup: {
+            type: Boolean,
+            requred: false
+        },
+        disableForm: {
             type: Boolean,
             requred: false
         },

@@ -45,6 +45,8 @@
                         />
                     </div>
 
+                    <AppEmpty v-if="!visibleLoader && datas.length === 0" />
+
                     <AppLoader v-if="visibleLoader" />
 
                     <div v-if="!visibleLoader" class="display-flex center" style="margin-top: 20px; margin-bottom: 20px;">
@@ -117,6 +119,7 @@ import SearchField from '../../modules/SearchField'
 import AppButtonMenu from '../../modules/AppButtonMenu'
 import AppCapsuleMenu from '../../modules/AppCapsuleMenu'
 import AppCardOrder from '../../modules/AppCardOrder'
+import AppEmpty from '../../modules/AppEmpty'
 import Form from './Form'
 import FormCheckout from './FormCheckout'
 
@@ -172,6 +175,7 @@ export default {
         this.getBizpar()
     },
     components: {
+        AppEmpty,
         AppCardOrder,
         AppTabs,
         AppAlert,

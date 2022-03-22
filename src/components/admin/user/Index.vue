@@ -30,8 +30,8 @@
                         <thead slot="head">
                             <v-th class="small-col hide-icon">NO</v-th>
                             <v-th sortKey="name">Name</v-th>
-                            <v-th sortKey="email">Email</v-th>
                             <v-th sortKey="username">Username</v-th>
+                            <v-th sortKey="role">Role</v-th>
                             <v-th sortKey="employee">Imployee</v-th>
                             <v-th sortKey="status" class="normal-col">Status</v-th>
                             <th class="medium-col"></th>
@@ -42,9 +42,9 @@
                             <tr v-for="(row, index) in displayData" :key="index">
                                 <td class="small-col">{{ (index + 1) }}</td>
                                 <td>{{ row.name }}</td>
-                                <td>{{ row.email }}</td>
                                 <td>{{ row.username }}</td>
-                                <td>{{ row.employee ? `${row.employee.employee_id} - ${row.employee.name}` : '' }}</td>
+                                <td>{{ row.role ? row.role.role_name : '-' }}</td>
+                                <td>{{ row.employee ? `${row.employee.employee_id} - ${row.employee.name}` : '-' }}</td>
                                 <td class="normal-col">
                                     <div 
                                         :class="'card-capsule ' + (row.status === 'active' ? 'active' : '')" 

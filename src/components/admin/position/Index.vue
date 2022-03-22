@@ -58,6 +58,8 @@
                     </div>
                 </div>
 
+                <AppEmpty v-if="!visibleLoader && datas.length === 0" />
+
                 <AppLoader v-if="visibleLoader" />
 
                 <div v-if="!visibleLoader" class="display-flex center" style="margin-top: 20px; margin-bottom: 20px;">
@@ -103,6 +105,7 @@ import AppLoader from '../../modules/AppLoader'
 import AppAlert from '../../modules/AppAlert'
 import SearchField from '../../modules/SearchField'
 import AppButtonMenu from '../../modules/AppButtonMenu'
+import AppEmpty from '../../modules/AppEmpty'
 import Form from './Form'
 
 export default {
@@ -135,6 +138,7 @@ export default {
         this.getData(this.limit, this.offset)
     },
     components: {
+        AppEmpty,
         AppAlert,
         AppLoader,
         AppButtonMenu,

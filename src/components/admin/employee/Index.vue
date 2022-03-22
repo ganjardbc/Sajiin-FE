@@ -51,8 +51,8 @@
                                 </div>
                             </div>
                             <div>
-                                <div class="fonts fonts-10 grey">{{ dt.position.title }}</div>
-                                <div class="fonts fonts-10 grey">{{ dt.shop.name }}</div>
+                                <div class="fonts fonts-10 grey">{{ dt.position ? dt.position.title : '-' }}</div>
+                                <div class="fonts fonts-10 grey">{{ dt.shop ? dt.shop.name : '-' }}</div>
                             </div>
                         </div>
                         <div class="display-flex row space-between" style="width: 40px;">
@@ -66,6 +66,8 @@
                         </div>
                     </div>
                 </div>
+
+                <AppEmpty v-if="!visibleLoader && datas.length === 0" />
 
                 <AppLoader v-if="visibleLoader" />
 
@@ -113,6 +115,7 @@ import AppLoader from '../../modules/AppLoader'
 import AppAlert from '../../modules/AppAlert'
 import SearchField from '../../modules/SearchField'
 import AppButtonMenu from '../../modules/AppButtonMenu'
+import AppEmpty from '../../modules/AppEmpty'
 import Form from './Form'
 
 export default {
@@ -149,6 +152,7 @@ export default {
     },
     components: {
         VueLoadImage,
+        AppEmpty,
         AppAlert,
         AppLoader,
         AppButtonMenu,
@@ -354,7 +358,7 @@ export default {
             const payload = {
                 limit: limit,
                 offset: offset,
-                shop_id: this.dataShop ? this.dataShop.id : ''
+                shop_id: this.dataShop.id
             }
 
             const rest = await axios.post('/api/employee/getAll', payload, { headers: { Authorization: token } })

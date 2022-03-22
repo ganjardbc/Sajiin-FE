@@ -1,7 +1,10 @@
 <template>
     <div id="App">
         <AppLoader v-if="visibleLoader" />
-        <div v-else class="card-dashboard-container">
+        
+        <AppEmpty v-if="!visibleLoader && !formData.employee_id" />
+
+        <div v-if="!visibleLoader && formData.employee_id" class="card-dashboard-container">
             <div class="display-flex display-mobile space-between">
                 <div class="fonts bold big margin" style="margin-top: 15px; margin-bottom: 15px;">Employee Profile</div>
             </div>
@@ -283,6 +286,7 @@ import AppListDownMenu from '../../modules/AppListDownMenu'
 import AppButtonQR from '../../modules/AppButtonQR'
 import AppImage from '../../modules/AppImage'
 import AppPopupForm from '../../modules/AppPopupForm'
+import AppEmpty from '../../modules/AppEmpty'
 import Form from './Form'
 
 const payload = {
@@ -365,6 +369,7 @@ export default {
         this.getData()
     },
     components: {
+        AppEmpty,
         AppPopupForm,
         AppImage,
         AppButtonQR,

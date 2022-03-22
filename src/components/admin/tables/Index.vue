@@ -67,6 +67,8 @@
                     </div>
                 </div>
 
+                <AppEmpty v-if="!visibleLoader && datas.length === 0" />
+
                 <AppLoader v-if="visibleLoader" />
 
                 <div v-if="!visibleLoader" class="display-flex center" style="margin-top: 20px; margin-bottom: 20px;">
@@ -113,6 +115,7 @@ import AppLoader from '../../modules/AppLoader'
 import AppAlert from '../../modules/AppAlert'
 import SearchField from '../../modules/SearchField'
 import AppButtonMenu from '../../modules/AppButtonMenu'
+import AppEmpty from '../../modules/AppEmpty'
 import Form from './Form'
 
 export default {
@@ -149,6 +152,7 @@ export default {
     },
     components: {
         VueLoadImage,
+        AppEmpty,
         AppAlert,
         AppLoader,
         AppButtonMenu,
@@ -354,10 +358,10 @@ export default {
             const payload = {
                 limit: limit,
                 offset: offset,
-                shop_id: this.dataShop ? this.dataShop.id : ''
+                shop_id: this.dataShop.id
             }
 
-            const rest = await axios.post('/api/table/getAllWithShop', payload, { headers: { Authorization: token } })
+            const rest = await axios.post('/api/table/getAll', payload, { headers: { Authorization: token } })
 
             if (rest && rest.status === 200) {
                 const newData = rest.data.data

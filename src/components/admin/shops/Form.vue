@@ -287,6 +287,7 @@ const tabs = [
 const payload = {
     id: '',
     shop_id: '',
+    user_id: '',
     image: '',
     name: '',
     about: '',
@@ -315,7 +316,6 @@ export default {
     },
     mounted () {
         this.formData = {...payload}
-        console.log('formData', this.formData)
     },
     components: {
         AppTabs,
@@ -383,14 +383,14 @@ export default {
                     open_time: props.shop.open_time,
                     close_time: props.shop.close_time,
                     status: props.shop.status,
-                    is_available: props.shop.is_available
+                    is_available: props.shop.is_available,
+                    user_id: props.shop.user_id,
                 }
                 this.image = props.shop.image ? this.shopImageThumbnailUrl + props.shop.image : ''
             } else {
                 this.formData = {...payload}
                 this.image = ''
             }
-            console.log('formData', props)
         },
         message: function (props, prevProps) {
             if (props) {
@@ -398,7 +398,6 @@ export default {
             } else {
                 this.formMessage = []
             }
-            console.log('props', props)
         }
     }
 }

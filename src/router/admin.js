@@ -239,7 +239,7 @@ const routes = {
             name: 'admin-setting',
             path: '/admin-setting',
             component: SettingLayout,
-            redirect: '/admin-setting/bizpar',
+            redirect: '/admin-setting/user-list',
             children: [
                 // {
                 //     name: 'profile',

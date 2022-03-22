@@ -39,7 +39,7 @@
                             <div class="fonts fonts-10 black semibold">General Info</div>
                         </div>
                         <div class="width width-100 display-flex display-mobile margin margin-bottom-20-px">
-                            <div class="width width-30 width-mobile fonts fonts-11">ID</div>
+                            <div class="width width-30 width-mobile fonts fonts-11">User ID</div>
                             <div class="width width-70 width-mobile">
                                 <input 
                                     type="text" 
@@ -49,6 +49,33 @@
                                     id="id" 
                                     v-model="formData.id"
                                     readonly>
+                            </div>
+                        </div>
+                        <div class="width width-100 display-flex display-mobile margin margin-bottom-20-px">
+                            <div class="width width-30 width-mobile fonts fonts-11">Employee ID</div>
+                            <div class="width width-70 width-mobile">
+                                <div class="card-search full">
+                                    <input 
+                                        type="search" 
+                                        placeholder="" 
+                                        class="field"
+                                        name="owner_id" 
+                                        id="owner_id" 
+                                        v-model="formData.owner_id"
+                                        readonly>
+                                    <button class="btn btn-icon btn-white" @click="onButtonEmployee">
+                                        <i class="fa fa-1x fa-search" />
+                                    </button>
+                                </div>
+                                <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
+                                    {{ formMessage && formMessage.owner_id && formMessage.owner_id[0] }}
+                                </div>
+                                <FormEmployee
+                                    :data.sync="dataEmployee"
+                                    :disableForm="true"
+                                    :enablePopup="openCreateEmployee"
+                                    :onChange="(data) => onChangeEmployee(data)"
+                                />
                             </div>
                         </div>
                         <div class="width width-100 display-flex display-mobile margin margin-bottom-20-px">
@@ -158,6 +185,38 @@
                     </div>
                 </div>
 
+                <!-- <div class="card no-padding-mobile box-shadow bg-white" style="margin-bottom: 20px;">
+                    <div class="margin margin-bottom-20-px">
+                        <div class="fonts fonts-10 black semibold">Employee Info</div>
+                    </div>
+
+                    <div class="field-group margin margin-bottom-15-px">
+                        <div class="field-label">ID</div>
+                        <div v-if="this.title !== 'VIEW'" class="card-search full">
+                            <input 
+                                type="search" 
+                                placeholder="" 
+                                class="field"
+                                name="owner_id" 
+                                id="owner_id" 
+                                v-model="formData.owner_id"
+                                readonly>
+                            <button class="btn btn-icon btn-white" @click="onButtonEmployee">
+                                <i class="fa fa-1x fa-search" />
+                            </button>
+                        </div>
+                        <div v-if="formMessage" class="fonts micro bold" style="color: red; margin-top: 5px;">
+                            {{ formMessage && formMessage.owner_id && formMessage.owner_id[0] }}
+                        </div>
+                    </div>
+
+                    <FormEmployee
+                        :data.sync="dataEmployee"
+                        :enablePopup="openCreateEmployee"
+                        :onChange="(data) => onChangeEmployee(data)"
+                    />
+                </div> -->
+
                 <div class="width width-100 width-mobile">
                     <div class="display-flex space-between">
                         <div></div>
@@ -205,6 +264,7 @@ import AppButtonQR from '../../modules/AppButtonQR'
 import AppImage from '../../modules/AppImage'
 import AppPopupForm from '../../modules/AppPopupForm'
 import AppAlert from '../../modules/AppAlert'
+import FormEmployee from '../employee/FormEmployee'
 
 const payload = {
     id: '',
@@ -217,19 +277,37 @@ const payload = {
     provider: '',
     enabled: '',
     status: '',
+    owner_id: '',
     role_id: '',
     role_name: ''
+}
+
+const employee = {
+    id: '',
+    employee_id: '',
+    image: '',
+    name: '',
+    phone: '',
+    email: '',
+    status: '',
+    is_available: 0,
+    about: '',
+    address: '',
+    position_id: 0,
+    shop_id: 0
 }
 
 export default {
     name: 'Profile',
     data () {
         return {
+            openCreateEmployee: false,
             visibleAlertSave: false,
             visibleLoaderAction: false,
             visiblePopup: false,
             image: '',
             code: '',
+            dataEmployee: {...employee},
             formData: {...payload},
             formMessage: null,
             dataUser: null,
@@ -237,9 +315,10 @@ export default {
         }
     },
     mounted () {
+        const token = this.$cookies.get('token')
         this.dataUser = this.$cookies.get('user')
         this.dataShop = this.$cookies.get('shop')
-        const token = this.$cookies.get('token')
+        this.dataEmployee = this.$cookies.get('employee')
         this.formData = {
             ...payload,
             id: this.dataUser.id,
@@ -249,12 +328,14 @@ export default {
             enabled: this.dataUser.enabled,
             status: this.dataUser.status,
             email: this.dataUser.email,
-            image: this.dataUser.image
+            image: this.dataUser.image,
+            owner_id: this.dataEmployee.id,
         }
         this.image = this.dataUser.image ? this.adminImageThumbnailUrl + this.dataUser.image : ''
         this.code = this.deployUrl + (this.$router.mode === 'hash' ? '#' : '') + '/generate-customer/' + token
     },
     components: {
+        FormEmployee,
         AppPopupForm,
         AppImage,
         AppButtonQR,
@@ -272,6 +353,18 @@ export default {
             signOut: 'auth/signOut',
             setUser: 'auth/setUser'
         }),
+
+        onButtonEmployee () {
+            this.openCreateEmployee = !this.openCreateEmployee
+        },
+
+        onChangeEmployee (data) {
+            this.formData = {
+                ...this.formData,
+                owner_id: data.id
+            }
+            this.dataEmployee = data 
+        },
 
         makeToast (title) {
             const payload = {

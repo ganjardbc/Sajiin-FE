@@ -17,8 +17,8 @@ import AppListDownMenu from '../modules/AppListDownMenu'
 
 const menus = [
     {label: 'Employees', icon: 'fa fa-lg fa-users', link: 'admin-employee-employee', permission: 'employees'},
-    {label: 'Positions', icon: 'fa fa-lg fa-flag', link: 'admin-employee-position', permission: 'employees'},
-    {label: 'Shifts', icon: 'fa fa-lg fa-clock', link: 'admin-employee-shift', permission: 'employees'},
+    {label: 'Positions', icon: 'fa fa-lg fa-flag', link: 'admin-employee-position', permission: 'positions'},
+    {label: 'Shifts', icon: 'fa fa-lg fa-clock', link: 'admin-employee-shift', permission: 'shifts'},
 ]
 
 export default {

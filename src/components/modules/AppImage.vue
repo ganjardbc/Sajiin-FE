@@ -109,7 +109,6 @@ export default {
             const file = event.target.files[0]
             this.formImage = file
             this.visibleUploadButton = true
-            console.log('file', file)
         },
         onUploadImage() {
             this.onUpload(this.formImage)
@@ -119,12 +118,6 @@ export default {
     },
     watch: {
         image: function (props, prevProps) {
-            // if (props) {
-            //     this.formImage = props
-            // } else {
-            //     this.formImage = []
-            // }
-            // console.log('image', props)
             this.$refs.file.value = null
             this.visibleUploadButton = false
             this.visibleLoader = false

@@ -102,6 +102,8 @@
                     </div>
                 </div>
 
+                <AppEmpty v-if="!visibleLoader && datas.length === 0" />
+
                 <AppLoader v-if="visibleLoader" />
 
                 <div v-if="!visibleLoader" class="display-flex center">
@@ -150,6 +152,7 @@ import AppButtonMenu from '../../modules/AppButtonMenu'
 import AppListDownMenu from '../../modules/AppListDownMenu'
 import AppShowHide from '../../modules/AppShowHide'
 import AppButtonQR from '../../modules/AppButtonQR'
+import AppEmpty from '../../modules/AppEmpty'
 import Form from './Form'
 
 const menus = [
@@ -193,6 +196,7 @@ export default {
         this.getData(this.limit, this.offset)
     },
     components: {
+        AppEmpty,
         AppButtonQR,
         AppListDownMenu,
         AppShowHide,
@@ -208,10 +212,9 @@ export default {
             user: 'auth/user',
             token: 'auth/token'
         }),
-        isCanCreate() {
-            const dataShop = this.$cookies.get('shop')
-            return dataShop.length === 0
-        }
+        // isCanCreate() {
+        //     return this.$cookies.get('shop')
+        // }
     },
     methods: {
         onSearch (data) {
@@ -418,6 +421,16 @@ export default {
                     this.offset += this.limit
                 }
 
+                if (this.$cookies.get('role_name') !== 'admin') {
+                    if (newData.length > 0) {
+                        this.isCanCreate = false 
+                    } else {
+                        this.isCanCreate = true 
+                    }
+                } else {
+                    this.isCanCreate = true 
+                }
+
                 if (newData.length < this.limit) {
                     this.visibleLoadMore = false
                 } else {
@@ -425,6 +438,7 @@ export default {
                 }
             } else {
                 this.visibleLoader = false 
+                this.isCanCreate = false
             }
         }
     }

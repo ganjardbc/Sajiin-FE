@@ -56,8 +56,8 @@ const sidebarAdmin = [
         {icon: 'fa fa-lg fa-calendar-check', label: 'Task Lists', value: 0, link: 'admin-tasklist', permission: 'tasklists'},
         {icon: 'fa fa-lg fa-utensils', label: 'Products', value: 0, link: 'admin-product', permission: 'products'},
         {icon: 'fa fa-lg fa-store', label: 'Shop', value: 0, link: 'admin-shop', permission: 'shops'},
-        {icon: 'fa fa-lg fa-cogs', label: 'Settings', value: 0, link: 'admin-setting', permission: 'users'},
         {icon: 'fa fa-lg fa-users', label: 'Employees', value: 0, link: 'admin-employee', permission: 'employees'},
+        {icon: 'fa fa-lg fa-cogs', label: 'Settings', value: 0, link: 'admin-setting', permission: 'users'},
         {icon: 'fa fa-lg fa-bell', label: 'Notifications', value: 0, link: 'notification', permission: 'notifications'},
     ]},
 ]

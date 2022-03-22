@@ -304,8 +304,8 @@ const payload = {
     is_available: 0,
     about: '',
     address: '',
-    position_id: 0,
-    shop_id: 0
+    position_id: '',
+    shop_id: ''
 }
 
 const shop = {

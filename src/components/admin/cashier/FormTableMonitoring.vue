@@ -12,10 +12,16 @@
         <AppLoader v-if="visibleLoader" />
 
         <div 
-            v-if="!visibleLoader && data && data.length > 0" 
+            v-if="!visibleLoader" 
             class="card-dashboard-container"
             style="padding-top: 5px; padding-bottom: 20px;">
             <AppHorizontalScrollable customHeight="120px">
+                <div 
+                    v-if="!visibleLoader && data.length === 0" 
+                    style="width: 100%; height: 120px;" 
+                    class="display-flex center align-center">
+                    <div class="fonts fonts-11 center">No Data(s) Found</div>
+                </div>
                 <div v-for="(dt, i) in data" :key="i" style="min-width: 170px;">
                     <div style="padding: 10px;">
                         <div 
@@ -54,6 +60,7 @@
 import axios from 'axios'
 import AppLoader from '../../modules/AppLoader'
 import AppAlert from '../../modules/AppAlert'
+import AppEmpty from '../../modules/AppEmpty'
 import AppHorizontalScrollable from '../../modules/AppHorizontalScrollable'
 
 export default {
@@ -81,6 +88,7 @@ export default {
         }
     },
     components: {
+        AppEmpty,
         AppLoader,
         AppAlert,
         AppHorizontalScrollable
