@@ -26,7 +26,7 @@
                     <div class="display-flex space-between" style="padding-top: 5px; padding-bottom: 5px;">
                         <div style="width: 60px; margin-right: 15px;">
                             <div class="image image-padding border border-full">
-                                <VueLoadImage v-if="dt.table.image">
+                                <VueLoadImage v-if="dt.table && dt.table.image">
                                     <img slot="image" :src="tableImageThumbnailUrl + dt.table.image" alt="" class="post-center">
                                     <div slot="preloader">
                                         <div class="post-middle-absolute icn">
@@ -39,20 +39,20 @@
                         </div>
                         <div style="width: calc(100% - 115px);">
                             <div class="display-flex" style="margin-bottom: 5px;">
-                                <div class="fonts fonts-11 semibold" style="margin-top: 3px;">{{ dt.table.name }} | {{ dt.table.code }}</div>
+                                <div class="fonts fonts-11 semibold" style="margin-top: 3px;">{{ dt.table ? dt.table.name : '-' }} | {{ dt.table ? dt.table.code : '-' }}</div>
                                 <div 
                                     :class="'card-capsule ' + (
-                                    dt.table.status === 'active' 
+                                    dt.table && dt.table.status === 'active' 
                                         ? 'active' 
                                         : ''
                                     )" 
                                     style="margin-left: 10px; text-transform: capitalize;">
-                                    {{ dt.table.status }}
+                                    {{ dt.table ? dt.table.status : '-' }}
                                 </div>
                             </div>
                             <div>
-                                <div class="fonts fonts-10 grey">{{ dt.shop.name }}</div>
-                                <div class="fonts fonts-10 grey">{{ dt.table.created_at | moment("from", "now") }}</div>
+                                <div class="fonts fonts-10 grey">{{ dt.shop ? dt.shop.name : '-' }}</div>
+                                <div v-if="dt.table" class="fonts fonts-10 grey">{{ dt.table.created_at | moment("from", "now") }}</div>
                             </div>
                         </div>
                         <div class="display-flex row space-between" style="width: 40px;">
@@ -361,7 +361,7 @@ export default {
                 shop_id: this.dataShop.id
             }
 
-            const rest = await axios.post('/api/table/getAll', payload, { headers: { Authorization: token } })
+            const rest = await axios.post('/api/table/getAllWithShop', payload, { headers: { Authorization: token } })
 
             if (rest && rest.status === 200) {
                 const newData = rest.data.data

@@ -4,7 +4,7 @@
             <div class="bg-white">
                 <div class="display-flex space-between" style="padding-bottom: 15px;">
                     <div>
-                        <h1 class="fonts big black bold">Topings</h1>
+                        <h1 class="fonts big black bold">Toppings</h1>
                     </div>
                     <div class="display-flex">
                         <AppButtonMenu 
