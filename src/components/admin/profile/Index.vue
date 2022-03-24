@@ -51,7 +51,7 @@
                                     readonly>
                             </div>
                         </div>
-                        <div v-if="!isUserAdmin" class="width width-100 display-flex display-mobile margin margin-bottom-20-px">
+                        <!-- <div v-if="!isUserAdmin" class="width width-100 display-flex display-mobile margin margin-bottom-20-px">
                             <div class="width width-30 width-mobile fonts fonts-11">Employee ID</div>
                             <div class="width width-70 width-mobile">
                                 <div class="card-search full">
@@ -77,9 +77,9 @@
                                     :onChange="(data) => onChangeEmployee(data)"
                                 />
                             </div>
-                        </div>
+                        </div> -->
                         <div class="width width-100 display-flex display-mobile margin margin-bottom-20-px">
-                            <div class="width width-30 width-mobile fonts fonts-11">Nama</div>
+                            <div class="width width-30 width-mobile fonts fonts-11">Name</div>
                             <div class="width width-70 width-mobile">
                                 <input 
                                     type="text" 
